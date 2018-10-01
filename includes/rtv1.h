@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:40 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/09/27 13:10:23 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/01 16:15:43 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,41 +21,69 @@
 # define DIMX 900
 # define DIMY 700
 
-typedef struct	s_mlx
+typedef struct		s_mlx
 {
-	void		*ptr;
-	void		*win;
-	void		*iptr;
-	int			*img;
-	int			imgul[3];
-}				t_mlx;
+	void			*ptr;
+	void			*win;
+	void			*iptr;
+	int				*img;
+	int				imgul[3];
+}					t_mlx;
 
-typedef struct	s_wininfo
+typedef struct		s_wininfo
 {
-	int			x;
-	int			y;
-}				t_wininfo;
+	int				x;
+	int				y;
+}					t_wininfo;
 
-typedef struct	s_scene
+typedef struct		s_cam
 {
-	t_obj		*objs;
-	t_lit		*lits;
-	t_cam		cam;
-	int			nbrlit;
-}				t_scene;
+	t_pt			t;
+	t_vec			dir;
+	t_vec			x;
+	t_vec			y;
+	struct s_cam	*next;
+}					t_cam;
 
-typedef struct	s_env
+typedef struct		s_lit
 {
-	t_mlx		mlx;
-	t_wininfo	w;
-	t_scene		s;
-}				t_env;
+	t_pt			t;
+	float			power;
+	t_color			color;
+	struct s_lit	*next;
+}					t_lit;
 
-typedef struct	s_set
+typedef struct		s_obj
+{
+	t_geotype		type;
+	t_pt			t;
+	t_rot			r;
+	double			v;
+	t_color			color;
+	float			diff;
+	float			spec;
+	struct s_obj	*next;
+}					t_obj;
+
+typedef struct		s_scene
+{
+	t_obj			*objs;
+	t_lit			*lits;
+	t_cam			*cam;
+}					t_scene;
+
+typedef struct		s_env
+{
+	t_mlx			mlx;
+	t_wininfo		w;
+	t_scene			s;
+}					t_env;
+
+typedef struct		s_set
 {
 	double			t;
 	struct s_set	*next;
-}				t_set;
+}					t_set;
 
 void	parse(t_env *e, char *arg);
 
