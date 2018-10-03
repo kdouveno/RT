@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.h                                             :+:      :+:    :+:   */
+/*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/28 18:00:40 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/01 17:46:15 by gperez           ###   ########.fr       */
+/*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
+/*   Updated: 2018/10/03 13:30:44 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_H
-# define RTV1_H
+# define RT_H
 # include "mlx.h"
 # include "geo3d.h"
 # include "libft.h"
@@ -96,7 +95,6 @@ typedef struct		s_set
 	struct s_set	*next;
 }					t_set;
 
-void	parse(t_env *e, char *arg);
 
 typedef struct	s_objfx
 {
@@ -107,6 +105,7 @@ typedef struct	s_objfx
 	t_vec		(*norm)(t_pt pt, t_obj obj, t_vec v);
 }				t_objfx;
 
+void	parse(t_env *e, char *arg);
 void			cylinder_parse(t_env *e, char **line);
 void			cone_parse(t_env *e, char **line);
 void			sphere_parse(t_env *e, char **line);
