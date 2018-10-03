@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:40 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/01 16:15:43 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/01 17:46:15 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_cam
 	t_vec			dir;
 	t_vec			x;
 	t_vec			y;
+	char			*id;
 	struct s_cam	*next;
 }					t_cam;
 
@@ -50,8 +51,15 @@ typedef struct		s_lit
 	t_pt			t;
 	float			power;
 	t_color			color;
+	char			*id;
 	struct s_lit	*next;
 }					t_lit;
+
+typedef struct		s_list
+{
+	void			*
+	struct			*s_list;
+}					t_list;
 
 typedef struct		s_obj
 {
@@ -62,6 +70,9 @@ typedef struct		s_obj
 	t_color			color;
 	float			diff;
 	float			spec;
+	char			*id;
+	char			disp;
+	struct s_obj	*clips;
 	struct s_obj	*next;
 }					t_obj;
 
