@@ -6,10 +6,11 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/03 13:30:44 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/03 13:37:43 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RT_H
 # define RT_H
 # include "mlx.h"
 # include "geo3d.h"
