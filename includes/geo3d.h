@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/01 14:59:47 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/03 13:54:12 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,6 @@ typedef struct		s_polyres
 	double			b;
 }					t_polyres;
 
-typedef struct		s_insecres
-{
-	t_obj			*obj;
-	double			t;
-}					t_insecres;
-
 t_three_d			xrot(t_three_d td, double a);
 t_three_d			yrot(t_three_d td, double a);
 t_three_d			zrot(t_three_d td, double a);
@@ -89,11 +83,6 @@ double				sphere_line(t_line d, double r);
 double				cone_line(t_line d, double a);
 double				plane_line(t_line d, double empty);
 double				cylinder_line(t_line d, double r);
-
-t_vec				cylinder_norm(t_pt pt, t_obj obj, t_vec v);
-t_vec				cone_norm(t_pt pt, t_obj obj, t_vec v);
-t_vec				sphere_norm(t_pt pt, t_obj obj, t_vec v);
-t_vec				plane_norm(t_pt pt, t_obj obj, t_vec v);
 
 t_color				rgbpro(t_color c, double m);
 t_color				rgbadd(t_color c1, t_color c2);

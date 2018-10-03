@@ -6,7 +6,7 @@
 #    By: gperez <gperez@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/12 11:56:47 by gperez            #+#    #+#              #
-#    Updated: 2018/10/03 13:18:41 by gperez           ###   ########.fr        #
+#    Updated: 2018/10/03 14:07:54 by gperez           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ RED = \033[38;5;203m
 $(NAME) : $(OBJS)
 	@make -C libft
 	@gcc $(FLAG) -I $(MLXI) -L $(MLXL) -lmlx libft/libft.a $(GL) $(APP) $^ -o $(NAME)
-	@printf "$(BOLD)$(BLINK)$(MAGENTA)%15s : $(RS_BL)$(RS_BO)$(GREEN)succesfuly made!$(NC)\n" $(NAME)
+	@printf "$(BOLD)$(BLINK)$(MAGENTA)%20s : $(RS_BL)$(RS_BO)$(GREEN)succesfuly made!$(NC)\n" $(NAME)
 
 pain : $(OBJS) libft_gp/*.c
 	@make -C libft_gp
@@ -65,7 +65,7 @@ pain : $(OBJS) libft_gp/*.c
 %.o : $(SRC_DIR)%.c
 	@printf "$(BOLD)$(MAGENTA)%20s : $(RS_BO)$(CYAN)%-20s$(WHITE) ...$(NC)" $(NAME) $(<F)
 	@gcc $(FLAG) $(INCDIR) -o $@ -c $<
-	@printf "\r"
+	@printf "\r$(MAGENTA)%20s : $(CYAN)%-20s$(GREEN) done\n$(WHITE)" $(NAME) $(<F)
 clean :
 	@make -C libft fclean
 	@make -C libft_gp fclean

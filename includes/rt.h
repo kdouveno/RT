@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/03 13:37:43 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/03 13:54:42 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,6 @@ typedef struct		s_lit
 	struct s_lit	*next;
 }					t_lit;
 
-typedef struct		s_list
-{
-	void			*
-	struct			*s_list;
-}					t_list;
-
 typedef struct		s_obj
 {
 	t_geotype		type;
@@ -96,17 +90,18 @@ typedef struct		s_set
 	struct s_set	*next;
 }					t_set;
 
+typedef struct		s_insecres
+{
+	t_obj			*obj;
+	double			t;
+}					t_insecres;
 
 typedef struct	s_objfx
 {
 	t_geotype	type;
-	char		funcname[4];
-	void		(*parse)(t_env *e, char **line);
-	double		(*insec)(t_line d, double a);
-	t_vec		(*norm)(t_pt pt, t_obj obj, t_vec v);
 }				t_objfx;
 
-void	parse(t_env *e, char *arg);
+void			parse(t_env *e, char *arg);
 void			cylinder_parse(t_env *e, char **line);
 void			cone_parse(t_env *e, char **line);
 void			sphere_parse(t_env *e, char **line);
@@ -116,17 +111,6 @@ void			camera_parse(t_env *e, char **line);
 void			set_camera(t_env *e, t_vec t, t_rot r, double a);
 int				add_obj(t_env *e, t_obj obj);
 int				add_light(t_env *e, t_lit light);
-
-
-static const t_objfx	g_objfx[] = {
-	{CYLINDER, "cyl", &cylinder_parse, &cylinder_line, &cylinder_norm},
-	{CONE, "con", &cone_parse, &cone_line, &cone_norm},
-	{SPHERE, "sph", &sphere_parse, &sphere_line, &sphere_norm},
-	{PLANE, "pla", &plane_parse, &plane_line, &plane_norm},
-	{LIGHT, "lit", &light_parse, NULL, NULL},
-	{CAMERA, "cam", &camera_parse, NULL, NULL},
-	{TYPE_END, "none", NULL, NULL, NULL}
-};
 
 t_insecres		insec(t_env *e, t_line line);
 int				raytrace(t_env *e, t_line l);

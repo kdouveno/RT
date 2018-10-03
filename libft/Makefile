@@ -6,7 +6,7 @@
 #    By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/15 15:48:03 by kdouveno          #+#    #+#              #
-#    Updated: 2018/10/03 13:26:01 by gperez           ###   ########.fr        #
+#    Updated: 2018/10/03 14:08:21 by gperez           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,12 +95,12 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ar rc $@ $^
 	@ranlib $@
-	@printf "$(MAGENTA)%15s : $(GREEN)succesfuly made! %10.0d\n" $(NAME) 0
+	@printf "$(BOLD)$(BLINK)$(MAGENTA)%20s : $(RS_BL)$(RS_BO)$(GREEN)succesfuly made!$(NC)\n" $(NAME)
 
 %.o: %.c
-	@printf "$(MAGENTA)%15s : $(BLUE)%-20s$(WHITE) ...\r" $(NAME) $(<F)
-	@gcc $(FLAGS) -I includes -c $^
-	@printf "$(MAGENTA)%15s : $(BLUE)%-20s$(GREEN) done \n" $(NAME) $(<F)
+	@printf "$(MAGENTA)%20s : $(BLUE)%-20s$(WHITE) ..." $(NAME) $(<F)
+	@gcc $(FLAGS) -I includes -o $@ -c $<
+	@printf "\r$(MAGENTA)%20s : $(BLUE)%-20s$(GREEN) done\n$(WHITE)" $(NAME) $(<F)
 clean:
 	@rm -rf $(OBJS)
 
