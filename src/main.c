@@ -6,11 +6,20 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/03 14:45:15 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/03 16:15:36 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+void		error(t_env *e, char *msg)
+{
+	ft_putstr("\033[38;5;203m");
+	ft_putendl(msg);
+	ft_putstr("\033[37m");
+	free_geo(e->g);
+	exit(0);
+}
 
 /*static void	ft_window(t_env *e)
 {
