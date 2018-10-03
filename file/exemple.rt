@@ -16,5 +16,19 @@ sphere{
 	sz:1.4;
 
 	ray:0.5;
-	color:#00FF00;
+	color: .deg1;
+}
+
+deg {
+	id: deg1;
+	tx: 0;
+	ty: 0;
+	tz: 0;
+
+	vx: 10;
+	vy: 10;
+	vz: 10;
+
+	c1: #FF3030;
+	c2: #3030FF;
 }

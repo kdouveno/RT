@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/03 13:54:42 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/03 15:53:46 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,29 @@ typedef struct		s_wininfo
 	int				y;
 }					t_wininfo;
 
+typedef enum		e_objtype
+{
+	TYPE_END,
+	ENV,
+	CAMERA,
+	LIGHT,
+	SPHERE,
+	CONE,
+	CYLINDER,
+	PLANE,
+	PYRAMID,
+	TORUS,
+	CUBOID,
+	LIN_DEG
+}					t_objtype;
+
 typedef struct		s_cam
 {
 	t_pt			t;
 	t_vec			dir;
 	t_vec			x;
 	t_vec			y;
+	t_pt			vp_ul;
 	char			*id;
 	struct s_cam	*next;
 }					t_cam;
@@ -57,16 +74,17 @@ typedef struct		s_lit
 
 typedef struct		s_obj
 {
-	t_geotype		type;
+	t_objtype		type;
 	t_pt			t;
 	t_rot			r;
-	double			v;
+	double			v1;
 	t_color			color;
 	float			diff;
 	float			spec;
 	char			*id;
 	char			disp;
 	struct s_obj	*clips;
+	struct s_obj	*deg;
 	struct s_obj	*next;
 }					t_obj;
 
@@ -96,25 +114,48 @@ typedef struct		s_insecres
 	double			t;
 }					t_insecres;
 
-typedef struct	s_objfx
+typedef struct		s_objfx
 {
-	t_geotype	type;
-}				t_objfx;
+	t_objtype		type;
+	char			name[10];
+	void			(*parse)(t_env *e, char *line, int fd);
+}					t_objfx;
 
-void			parse(t_env *e, char *arg);
-void			cylinder_parse(t_env *e, char **line);
-void			cone_parse(t_env *e, char **line);
-void			sphere_parse(t_env *e, char **line);
-void			plane_parse(t_env *e, char **line);
-void			light_parse(t_env *e, char **line);
-void			camera_parse(t_env *e, char **line);
-void			set_camera(t_env *e, t_vec t, t_rot r, double a);
-int				add_obj(t_env *e, t_obj obj);
-int				add_light(t_env *e, t_lit light);
+typedef struct		s_objsprops
+{
+	char			prop[10];
+	void			(*putin)(t_obj *obj, char *value);
+}					t_objsprops;
 
-t_insecres		insec(t_env *e, t_line line);
-int				raytrace(t_env *e, t_line l);
-int				key_hook(int key, t_env *e);
-void			quit(t_env *e, char *msg);
+static const t_objfx	g_ref[] = {
+	{ENV, "env", NULL},
+	{CAMERA, "camera", NULL},
+	{LIGHT, "light", NULL},
+	{SPHERE, "sphere", NULL},
+	{CONE, "cone", NULL},
+	{CYLINDER, "cylinder", NULL},
+	{PLANE, "plane", NULL},
+	{PYRAMID, "pyramid", NULL},
+	{TORUS, "torus", NULL},
+	{CUBOID, "cuboid", NULL},
+	{LIN_DEG, "lin_deg", NULL},
+	{TYPE_END, "none", NULL}
+};
+
+void					parse(t_env *e, char *arg);
+void					cylinder_parse(t_env *e, char **line);
+void					cone_parse(t_env *e, char **line);
+void					sphere_parse(t_env *e, char **line);
+void					plane_parse(t_env *e, char **line);
+void					light_parse(t_env *e, char **line);
+void					camera_parse(t_env *e, char **line);
+void					set_camera(t_env *e, t_vec t, t_rot r, double a);
+int						add_obj(t_env *e, t_obj obj);
+int						add_light(t_env *e, t_lit light);
+
+t_insecres			insec(t_env *e, t_line line);
+int					raytrace(t_env *e, t_line l);
+int					key_hook(int key, t_env *e);
+void				quit(t_env *e, char *msg);
 
 #endif

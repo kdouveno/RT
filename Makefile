@@ -6,7 +6,7 @@
 #    By: gperez <gperez@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/12 11:56:47 by gperez            #+#    #+#              #
-#    Updated: 2018/10/03 14:07:54 by gperez           ###   ########.fr        #
+#    Updated: 2018/10/03 14:48:47 by gperez           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ APP = -framework AppKit
 
 SRC_DIR =	src/
 SRC_LIST =	main.c \
+			parser.c \
 
 INCDIR = -Ilibft/includes -Iincludes -Ilibft_gp
 

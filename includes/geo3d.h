@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/03 13:54:12 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/03 15:37:16 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ typedef t_three_d	t_vec;
 typedef t_three_d	t_pt;
 typedef t_three_d	t_rot;
 
-typedef enum		e_geotype
-{
-	TYPE_END, CAMERA, LIGHT, SPHERE, CONE, CYLINDER, PLANE
-}					t_geotype;
 
 typedef struct		s_rgb
 {
