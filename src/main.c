@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/03 16:15:36 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/04 14:00:19 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void		error(t_env *e, char *msg)
 {
+	(void)e;
 	ft_putstr("\033[38;5;203m");
 	ft_putendl(msg);
 	ft_putstr("\033[37m");
-	free_geo(e->g);
 	exit(0);
 }
 
@@ -47,7 +47,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 		error(&e, USAGE);
-	parser(&e, argv[1]);
+	parse(&e, argv[1]);
 //	ft_window(&e);
 	return (0);
 }

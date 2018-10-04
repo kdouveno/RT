@@ -6,13 +6,14 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/03 15:37:16 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/04 14:00:50 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GEO3D_H
 # define GEO3D_H
 # include <math.h>
+# include "msgs.h"
 
 typedef struct		s_three_d
 {
