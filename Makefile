@@ -6,7 +6,7 @@
 #    By: gperez <gperez@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/12 11:56:47 by gperez            #+#    #+#              #
-#    Updated: 2018/10/03 14:48:47 by gperez           ###   ########.fr        #
+#    Updated: 2018/10/04 16:57:57 by gperez           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,11 @@ APP = -framework AppKit
 SRC_DIR =	src/
 SRC_LIST =	main.c \
 			parser.c \
+			get_prop.c \
+			cam_parse.c \
+			is_ignored.c \
+			is_name_char.c \
+			wrong_type.c \
 
 INCDIR = -Ilibft/includes -Iincludes -Ilibft_gp
 

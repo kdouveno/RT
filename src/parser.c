@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/04 16:23:50 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/04 16:50:10 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,6 @@
 /*
 **	a foutre dans un autre fichier utilitaire
 */
-
-static int	is_name_char(char c)
-{
-	return (c == '_'
-	|| (c >= 'a' && c <= 'z')
-	|| (c >= 'A' && c <= 'Z')
-	|| (c >= '0' && c <= '9')
-	|| c == '.');
-}
-
-static int	is_ignored(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\r');
-}
 
 static char	*get_name(t_env *e, char *line, int i, int l)
 {
@@ -69,30 +55,6 @@ static int	link_name(const char *name)
 	while (ft_strcmp(g_ref[i].name, name) && *g_ref[i].name)
 		i++;
 	return (g_ref[i].name[0] != '\0' ? i : -1);
-}
-
-static void skip_block(t_env *e, int fd)
-{
-	int		check;
-	char	*line;
-
-	while ((check = get_next_line(fd, &line)) > 0 && line[0] != '}')
-		;
-	if (check == -1)
-	{
-		free(line);
-		error(e, READ_ERROR);
-	}
-	free(line);
-}
-
-void	wrong_type(t_env *e, char *l_type, int fd, int skip)
-{
-	ft_putstr(l_type);
-	ft_putendl(" is ignored.");
-	free(l_type);
-	if (skip)
-		skip_block(e, fd);
 }
 
 static void	parse_line(t_env *e, char *line, int fd)
@@ -141,77 +103,4 @@ void		parse(t_env *e, char *arg)
 		error(e, READ_ERROR);
 	if (close(fd) == -1)
 		error(e, CLOSE_ERROR);
-}
-
-void	get_prop2(char *line, char *l1, char *l2, int trio[3])
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	trio[2] = 0;
-	while (line[i])
-	{
-		if (is_name_char(line[i]))
-		{
-			if (trio[2])
-				l2[j] = line[i];
-			else
-				l1[j] = line[i];
-			j++;
-		}
-		else if (line[i] == ':')
-		{
-			trio[2] = 1;
-			j = 0;
-		}
-		i++;
-	}
-	l1[trio[0]] = '\0';
-	l2[trio[1]] = '\0';
-}
-
-int	get_prop(t_env *e, char *line, char **l1, char **l2)
-{
-	int i;
-	int	trio[3];
-
-	i = 0;
-	trio[0] = 0;
-	trio[1] = 0;
-	trio[2] = 0;
-	while (line[i])
-	{
-		if (is_name_char(line[i]))
-			trio[0 + trio[2]]++;
-		else if (line[i] == ':')
-			trio[2] = 1;
-		else if (line[i] == '}')
-			return 1;
-		i++;
-	}
-	if ((!trio[0] || !trio[1]) && (trio[2] || trio[0]))
-		wrong_type(e, line, 0, 0);
-	if (!(*l1 = (char*)malloc(sizeof(char) * (trio[0] + 1)))
-	|| !(*l2 = (char*)malloc(sizeof(char) * (trio[1] + 1))))
-		error(e, MALLOC_ERROR);
-	get_prop2(line, *l1, *l2, trio);
-	return 0;
-}
-
-void	cam_parse(t_env *e, int type, int fd)
-{
-	char	*line;
-	int		res;
-	char	*l1;
-	char	*l2;
-
-	(void)type;
-	while ((res = get_next_line(fd, &line)) > 0)
-	{
-		if (get_prop(e, line, &l1, &l2))
-			return ;
-		free(line);
-	}
 }
