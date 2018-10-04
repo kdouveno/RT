@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 09:43:49 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/03 13:23:50 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/04 11:07:26 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ char			*ft_strdup(const char *src);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
 double			ft_atod(const char *str);
 double			ft_sq(double a);
+char			*ft_str_tolower(char *s);
+char			*ft_str_toupper(char *s);
 
 typedef struct	s_list
 {

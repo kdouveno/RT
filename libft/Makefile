@@ -6,7 +6,7 @@
 #    By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/15 15:48:03 by kdouveno          #+#    #+#              #
-#    Updated: 2018/10/03 14:08:21 by gperez           ###   ########.fr        #
+#    Updated: 2018/10/04 11:06:19 by gperez           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,8 @@ SRCS = ft_atoi.c\
   get_next_line.c\
   ft_atod.c \
   ft_sq.c \
+  ft_str_tolower.c \
+  ft_str_toupper.c \
 
 OBJS = $(SRCS:.c=.o)
 

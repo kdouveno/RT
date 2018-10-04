@@ -3,32 +3,32 @@ env{
 }
 
 sphere{
-	tx:5;
-	ty:6;
-	tz:0.25;
+	tx:5
+	ty:6
+	tz:0.25
 
-	rx:30;
-	ry:70;
-	rz:0;
+	rx:30
+	ry:70
+	rz:0
 
-	sx:1.1;
-	sy:1.5;
-	sz:1.4;
+	sx:1.1
+	sy:1.5
+	sz:1.4
 
-	ray:0.5;
-	color: .deg1;
+	ray:0.5
+	color: .deg1
 }
 
 deg {
-	id: deg1;
-	tx: 0;
-	ty: 0;
-	tz: 0;
+	id: deg1
+	tx: 0
+	ty: 0
+	tz: 0
 
-	vx: 10;
-	vy: 10;
-	vz: 10;
+	vx: 10
+	vy: 10
+	vz: 10
 
-	c1: #FF3030;
-	c2: #3030FF;
+	c1: #FF3030
+	c2: #3030FF
 }

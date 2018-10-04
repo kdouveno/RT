@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/03 15:53:46 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/04 12:05:59 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct		s_objfx
 typedef struct		s_objsprops
 {
 	char			prop[10];
-	void			(*putin)(t_obj *obj, char *value);
+	void			(*putin)(t_env *e, t_objtype type, int fd);
 }					t_objsprops;
 
 static const t_objfx	g_ref[] = {
