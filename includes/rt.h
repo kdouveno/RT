@@ -121,7 +121,7 @@ void					deg_parse(t_env *e, int type, int fd);
 static const t_objfx	g_ref[] = {
 	{"env", NULL},
 	{"camera", &cam_parse},
-	{"light", NULL},
+	{"light", &light_parse},
 	{"sphere", NULL},
 	{"cone", NULL},
 	{"cylinder", NULL},

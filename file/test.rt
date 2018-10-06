@@ -3,8 +3,9 @@ camera{
 }
 
 pain{
-}
+	tx:1
+	ty:6
+	tz:6
 
-camera{
-	antialiasing:1
+	rx:6
 }

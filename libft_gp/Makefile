@@ -86,6 +86,7 @@ SRC =	ft_memset.c \
 		ft_free_tab.c \
 		get_next_line.c \
 		ft_sq.c \
+		ft_atod.c \
 
 OBJ = $(SRC:.c=.o)
 

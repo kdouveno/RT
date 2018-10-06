@@ -28,6 +28,7 @@ SRC_LIST =	main.c \
 			f_get_prop.c \
 			f_cam_parse.c \
 			f_wrong_type.c \
+			f_light_parse.c \
 			is_name_char.c \
 			is_ignored.c \
 
