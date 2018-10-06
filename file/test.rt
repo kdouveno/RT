@@ -4,3 +4,7 @@ camera{
 
 pain{
 }
+
+camera{
+	antialiasing:1
+}

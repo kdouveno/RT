@@ -24,12 +24,12 @@ APP = -framework AppKit
 
 SRC_DIR =	src/
 SRC_LIST =	main.c \
-			parser.c \
-			get_prop.c \
-			cam_parse.c \
-			is_ignored.c \
+			f_parser.c \
+			f_get_prop.c \
+			f_cam_parse.c \
+			f_wrong_type.c \
 			is_name_char.c \
-			wrong_type.c \
+			is_ignored.c \
 
 INCDIR = -Ilibft/includes -Iincludes -Ilibft_gp
 

@@ -89,13 +89,21 @@ SRC =	ft_memset.c \
 
 OBJ = $(SRC:.c=.o)
 
+BLUE = \033[38;5;117m
+RED = \033[38;5;203m
+GREEN = \033[38;5;120m
+MAGENTA = \033[38;5;135m
+WHITE = \033[37m
+
 all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@ar rcs $(NAME) $^
 
 %.o : %.c
+	@printf "$(MAGENTA)%20s : $(BLUE)%-20s$(WHITE) ..." $(NAME) $(<F)
 	@gcc $(FLAG) -o $@ -c $<
+	@printf "\r$(MAGENTA)%20s : $(BLUE)%-20s$(GREEN) done\n$(WHITE)" $(NAME) $(<F)
 
 test : fclean  $(NAME)
 	@gcc $(NAME) main_libft.c -o $(TEST)

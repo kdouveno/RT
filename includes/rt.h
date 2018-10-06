@@ -85,6 +85,7 @@ typedef struct			s_env
 	t_mlx				mlx;
 	t_wininfo			w;
 	t_scene				s;
+	int					antialiasing;
 }						t_env;
 
 typedef struct			s_set
