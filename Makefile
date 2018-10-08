@@ -6,7 +6,7 @@
 #    By: gperez <gperez@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/12 11:56:47 by gperez            #+#    #+#              #
-#    Updated: 2018/10/04 16:57:57 by gperez           ###   ########.fr        #
+#    Updated: 2018/10/08 16:29:35 by kdouveno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,14 @@ SRC_DIR =	src/
 SRC_LIST =	main.c \
 			f_parser.c \
 			f_get_prop.c \
-			f_cam_parse.c \
 			f_wrong_type.c \
+			\
+			f_env_parse.c \
+			f_cam_parse.c \
+			f_obj_parse.c \
 			f_light_parse.c \
+			f_deg_parse.c \
+			\
 			is_name_char.c \
 			is_ignored.c \
 

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/04 16:56:55 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/08 16:13:24 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,17 +119,17 @@ void					env_parse(t_env *e, int type, int fd);
 void					deg_parse(t_env *e, int type, int fd);
 
 static const t_objfx	g_ref[] = {
-	{"env", NULL},
+	{"env", &env_parse},
 	{"camera", &cam_parse},
 	{"light", &light_parse},
-	{"sphere", NULL},
-	{"cone", NULL},
-	{"cylinder", NULL},
-	{"plane", NULL},
-	{"pyramid", NULL},
-	{"torus", NULL},
-	{"cuboid", NULL},
-	{"deg", NULL},
+	{"sphere", &obj_parse},
+	{"cone", &obj_parse},
+	{"cylinder", &obj_parse},
+	{"plane", &obj_parse},
+	{"pyramid", &obj_parse},
+	{"torus", &obj_parse},
+	{"cuboid", &obj_parse},
+	{"deg", &deg_parse},
 	{"", NULL}
 };
 

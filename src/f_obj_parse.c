@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   f_obj_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/03 13:29:22 by gperez           ###   ########.fr       */
+/*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
+/*   Updated: 2018/10/08 16:28:23 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		main(int argc, char **argv)
+void	obj_parse(t_env *e, int type, int fd)
 {
-
-	return (0);
+	(void)fd;
+	(void)type;
+	(void)e;
 }

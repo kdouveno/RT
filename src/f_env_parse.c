@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_name_char.c                                     :+:      :+:    :+:   */
+/*   f_env_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/04 16:48:16 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/08 16:11:16 by kdouveno         ###   ########.fr       */
+/*   Created: 2018/10/08 16:15:50 by kdouveno          #+#    #+#             */
+/*   Updated: 2018/10/08 16:24:30 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int	is_name_char(char c)
+void	env_parse(t_env *e, int type, int fd)
 {
-	return (c == '_'
-	|| (c >= 'a' && c <= 'z')
-	|| (c >= 'A' && c <= 'Z')
-	|| (c >= '0' && c <= '9')
-	|| c == '.' || c == '#');
+	(void)fd;
+	(void)type;
+	(void)e;
 }

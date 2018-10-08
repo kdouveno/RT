@@ -15,7 +15,7 @@ sphere{
 	sy:1.5
 	sz:1.4
 
-	ray:0.5
+	ray: 0.5
 	color: .deg1
 }
 
