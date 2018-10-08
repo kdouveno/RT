@@ -29,8 +29,10 @@ static void skip_block(t_env *e, int fd)
 
 void	wrong_type(t_env *e, char *l_type, int fd, int skip)
 {
+	ft_putstr("\033[2;49;91m");
 	ft_putstr(l_type);
 	ft_putendl(" is ignored.");
+	ft_putstr("\033[0m");
 	free(l_type);
 	if (skip)
 		skip_block(e, fd);

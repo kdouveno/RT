@@ -75,8 +75,10 @@ static void	parse_line(t_env *e, char *line, int fd)
 	{
 		if ((t = link_name(l_type)) >= 0)
 		{
+			ft_putstr("\033[37m");
 			ft_putendl(g_ref[t].name);
 			g_ref[t].parse(e, t, fd);
+			ft_putstr("\033[0m");
 		}
 		else
 			wrong_type(e, l_type, fd, 1);

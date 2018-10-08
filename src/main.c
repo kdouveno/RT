@@ -17,7 +17,7 @@ void		error(t_env *e, char *msg)
 	(void)e;
 	ft_putstr("\033[38;5;203m");
 	ft_putendl(msg);
-	ft_putstr("\033[37m");
+	ft_putstr("\033[0m");
 	exit(0);
 }
 

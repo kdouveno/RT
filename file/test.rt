@@ -20,8 +20,9 @@ light{
 light{
 power:8
 	tx:1
+
+
 	ty:6
 	tz:6
 
-	rx:6
 }
