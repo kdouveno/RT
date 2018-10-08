@@ -76,7 +76,7 @@ pain : $(OBJS) libft_gp/*.c
 
 %.o : $(SRC_DIR)%.c
 	@printf "$(BOLD)$(MAGENTA)%20s : $(RS_BO)$(CYAN)%-20s$(WHITE) ...$(NC)" $(NAME) $(<F)
-	@gcc $(FLAG) $(INCDIR) -o $@ -c $<
+	@gcc  $(INCDIR) -o $@ -c $<
 	@printf "\r$(MAGENTA)%20s : $(CYAN)%-20s$(GREEN) done\n$(WHITE)" $(NAME) $(<F)
 clean :
 	@make -C libft fclean

@@ -52,7 +52,7 @@ static int	link_name(const char *name)
 	int	i;
 
 	i = 0;
-	while (ft_strcmp(g_ref[i].name, name) && *g_ref[i].name)
+	while (*g_ref[i].name && ft_strcmp(g_ref[i].name, name))
 		i++;
 	return (g_ref[i].name[0] != '\0' ? i : -1);
 }
@@ -99,6 +99,12 @@ void		parse(t_env *e, char *arg)
 		error(e, OPEN_ERROR);
 	while ((check = get_next_line(fd, &line)) > 0)
 		parse_line(e, line, fd);
+	while (e->s.lits != NULL)
+	{
+		printf("%f %f %f %f %d %s %s\n",
+		e->s.lits->t.x,e->s.lits->t.y,e->s.lits->t.z,e->s.lits->power,e->s.lits->color,e->s.lits->id,e->s.lits->next);
+		e->s.lits = e->s.lits->next;
+	}
 	if (check == -1)
 		error(e, READ_ERROR);
 	if (close(fd) == -1)

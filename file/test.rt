@@ -2,7 +2,23 @@ camera{
 	antialiasing:1
 }
 
-pain{
+camera{
+	antialiasing:1
+}
+
+light{
+	tx:1
+	id:azer
+	color:5
+	power:5
+	ty:6
+	tz:6
+
+	rx:6
+}
+
+light{
+power:8
 	tx:1
 	ty:6
 	tz:6

@@ -66,7 +66,7 @@ void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)
 
 	i = 0;
 	cp = ft_str_tolower(l1);
-	if (check_pt(lit, cp, l2) == 1)
+	if (check_pt(lit, cp, l2) == 1 && check_arg(lit, cp, l2 ) == 1)
 	{
 		while (is_ignored(l1[i]) == 1)
 			i++;
@@ -88,14 +88,14 @@ t_lit	*light_parse_2(t_env *e, int type, int fd)
 	if (!(lit = malloc(sizeof(t_lit))))
 		error(e, MALLOC_ERROR);
 	*lit = (t_lit){(t_pt){0, 0, 0}, 0, 0 , NULL, NULL};
-	while ((res = get_next_line(fd, &line)) > 0)
+	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
 	{
-		if (get_prop(e, line, &l1, &l2) != 1)
-			stock_light(e, lit, l1, l2);
+		stock_light(e, lit, l1, l2);
 		free(line);
 		if (res == -1)
 			error(e, READ_ERROR);
 	}
+	free(line);
 	return (lit);
 }
 
