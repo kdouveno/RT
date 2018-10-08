@@ -1,5 +1,5 @@
 #include "rt.h"
-/*
+
 int		check_pt(t_lit *lit, char* l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "tx")))
@@ -39,7 +39,7 @@ int		check_arg(t_lit *lit, char *l1, char *l2)
 	}
 	return(1);
 }
-*/
+
 /*void	check_rot(t_lit *lit, char* l1, char *l2)
 {
 	if (ft_strcmp(l1, "rx"))
@@ -57,7 +57,7 @@ int		check_arg(t_lit *lit, char *l1, char *l2)
 		lit->r.z = ft_atod(l2);
 		return;
 	}
-}
+}*/
 
 void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)
 {
@@ -75,10 +75,10 @@ void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)
 	}
 	free(cp);
 }
-*/
-void	light_parse(t_env *e, int type, int fd)
+
+t_lit	*light_parse_2(t_env *e, int type, int fd)
 {
-/*	char	*line;
+	char	*line;
 	int		res;
 	char	*l1;
 	char	*l2;
@@ -90,23 +90,28 @@ void	light_parse(t_env *e, int type, int fd)
 	*lit = (t_lit){(t_pt){0, 0, 0}, 0, 0 , NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0)
 	{
-		if (get_prop(e, line, &l1, &l2))
-		{
-			free(line);
-			return ;
-		}
-		stock_light(e, lit, l1, l2);
+		if (get_prop(e, line, &l1, &l2) != 1)
+			stock_light(e, lit, l1, l2);
 		free(line);
+		if (res == -1)
+			error(e, READ_ERROR);
 	}
-	if (res == -1)
-		error(e, READ_ERROR);
-	if (e->s.lits != NULL)
+	return (lit);
+}
+
+void	light_parse(t_env *e, int type, int fd)
+{
+	t_lit	*save;
+
+	save = e->s.lits;
+	if (save != NULL)
 	{
-		while(e->s.lits != NULL)
-			e->s.lits = e->s.lits->next;
+		while(save->next != NULL)
+			save = save->next;
+		save->next = light_parse_2(e, type, fd);
 	}
-	e->s.lits = lit;*/
-	(void)e;
-	(void)type;
-	(void)fd;
+	else
+	{
+		e->s.lits = light_parse_2(e, type, fd);
+	}
 }
