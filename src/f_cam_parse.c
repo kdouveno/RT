@@ -97,7 +97,8 @@ t_cam	*cam_parse_2(t_env *e, int fd)
 		error(e, MALLOC_ERROR);
 	*cam = (t_cam){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, (t_vec){0, 0, 0},
 	(t_vec){0, 0, 0}, (t_pt){0,0,0}, 0, NULL, NULL};
-	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
+	while ((res = get_next_line(fd, &line)) > 0 &&
+		get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_cam(e, cam, l1, l2);
 		free(line);
