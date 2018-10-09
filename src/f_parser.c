@@ -96,17 +96,35 @@ void		parse(t_env *e, char *arg)
 
 	e->s.objs = NULL;
 	e->s.lits = NULL;
-	e->s.cam = NULL;
+	e->s.cams = NULL;
 	if ((fd = open(arg, O_RDONLY)) == -1)
 		error(e, OPEN_ERROR);
 	while ((check = get_next_line(fd, &line)) > 0)
 		parse_line(e, line, fd);
+	while (e->s.cams != NULL)
+	{
+		ft_putstr("\033[38;5;31m");
+		printf("t:%f %f %f\nr:%f %f %f\nantial: %d\nid: %s\n",
+		e->s.cams->t.x, e->s.cams->t.y, e->s.cams->t.z, e->s.cams->dir.x, e->s.cams->dir.y, e->s.cams->dir.z, e->s.cams->antialia, e->s.cams->id, e->s.cams->next);
+		e->s.cams = e->s.cams->next;
+	}
 	while (e->s.lits != NULL)
 	{
-		printf("%f %f %f %f %d %s %s\n",
+		ft_putstr("\033[38;5;46m");
+		printf("%f %f %f\n%f\n%d\n%s\n%s\n",
 		e->s.lits->t.x,e->s.lits->t.y,e->s.lits->t.z,e->s.lits->power,e->s.lits->color,e->s.lits->id,e->s.lits->next);
 		e->s.lits = e->s.lits->next;
 	}
+	while (e->s.objs != NULL)
+	{
+		ft_putstr("\033[38;5;208m");
+		printf("type: %d\nt:%f %f %f\nr:%f %f %f\nv1:%f\ncolor:%d\ndiff:%f\nspec:%f\nid:%s\ndisp:%c\n%s\n%s\n%s\n",
+		e->s.objs->type, e->s.objs->t.x, e->s.objs->t.y, e->s.objs->t.z,e->s.objs->r.x, e->s.objs->r.y, e->s.objs->r.z,
+		e->s.objs->v1, e->s.objs->color, e->s.objs->diff, e->s.objs->spec, e->s.objs->id, e->s.objs->disp,
+		e->s.objs->clips, e->s.objs->deg, e->s.objs->next);
+		e->s.objs = e->s.objs->next;
+	}
+	ft_putstr("\033[0m");
 	if (check == -1)
 		error(e, READ_ERROR);
 	if (close(fd) == -1)

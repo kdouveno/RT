@@ -76,7 +76,7 @@ void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)
 	free(cp);
 }
 
-t_lit	*light_parse_2(t_env *e, int type, int fd)
+t_lit	*light_parse_2(t_env *e, int fd)
 {
 	char	*line;
 	int		res;
@@ -84,7 +84,6 @@ t_lit	*light_parse_2(t_env *e, int type, int fd)
 	char	*l2;
 	t_lit	*lit;
 
-	(void)type;
 	if (!(lit = malloc(sizeof(t_lit))))
 		error(e, MALLOC_ERROR);
 	*lit = (t_lit){(t_pt){0, 0, 0}, 0, 0 , NULL, NULL};
@@ -103,15 +102,14 @@ void	light_parse(t_env *e, int type, int fd)
 {
 	t_lit	*save;
 
+	(void)type;
 	save = e->s.lits;
 	if (save != NULL)
 	{
 		while(save->next != NULL)
 			save = save->next;
-		save->next = light_parse_2(e, type, fd);
+		save->next = light_parse_2(e, fd);
 	}
 	else
-	{
-		e->s.lits = light_parse_2(e, type, fd);
-	}
+		e->s.lits = light_parse_2(e, fd);
 }

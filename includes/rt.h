@@ -44,6 +44,7 @@ typedef struct			s_cam
 	t_vec				x;
 	t_vec				y;
 	t_pt				vp_ul;
+	int					antialia;
 	char				*id;
 	struct s_cam		*next;
 }						t_cam;
@@ -77,7 +78,7 @@ typedef struct			s_scene
 {
 	t_obj				*objs;
 	t_lit				*lits;
-	t_cam				*cam;
+	t_cam				*cams;
 }						t_scene;
 
 typedef struct			s_env
@@ -85,7 +86,6 @@ typedef struct			s_env
 	t_mlx				mlx;
 	t_wininfo			w;
 	t_scene				s;
-	int					antialiasing;
 }						t_env;
 
 typedef struct			s_set
