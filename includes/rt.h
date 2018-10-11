@@ -74,11 +74,22 @@ typedef struct			s_obj
 	struct s_obj		*next;
 }						t_obj;
 
+typedef struct			s_deg
+{
+	t_pt				t;
+	t_vec				dir;
+	char				*id;
+	t_color				color1;
+	t_color				color2;
+	struct s_deg		*next;
+}						t_deg;
+
 typedef struct			s_scene
 {
 	t_obj				*objs;
 	t_lit				*lits;
 	t_cam				*cams;
+	t_deg				*degs;
 }						t_scene;
 
 typedef struct			s_env

@@ -13,6 +13,7 @@ tx:7
 ty:7
 tz:7
 dirz:50
+id:azer
 }
 
 light{
@@ -27,8 +28,8 @@ power:8
 }
 
 {
-	tx:1
 
+tx:1
 
 	ty:6
 	tz:6
@@ -53,4 +54,29 @@ pyramid{
 	disp:a
 	diff:9
 	spec:0.35
+}
+
+deg{
+	tx:5
+	ty:8
+	tz:1
+	dirx:50
+	diry:96
+	dirz:45
+	id:ceci_est_un_id
+	color1:50
+	color2:70
+
+}
+deg{
+	tx:5
+	ty:8
+	tz:1
+	dirx:50
+	diry:96
+	dirz:45
+	id:ceci_est_un_pain
+	color1:50
+	color2:70
+
 }

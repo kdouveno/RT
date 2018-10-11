@@ -37,7 +37,7 @@ int		check_arg(t_lit *lit, char *l1, char *l2)
 		lit->id = l2;
 		return (0);
 	}
-	return(1);
+	return (1);
 }
 
 /*void	check_rot(t_lit *lit, char* l1, char *l2)

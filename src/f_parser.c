@@ -97,6 +97,7 @@ void		parse(t_env *e, char *arg)
 	e->s.objs = NULL;
 	e->s.lits = NULL;
 	e->s.cams = NULL;
+	e->s.degs = NULL;
 	if ((fd = open(arg, O_RDONLY)) == -1)
 		error(e, OPEN_ERROR);
 	while ((check = get_next_line(fd, &line)) > 0)
@@ -123,6 +124,14 @@ void		parse(t_env *e, char *arg)
 		e->s.objs->v1, e->s.objs->color, e->s.objs->diff, e->s.objs->spec, e->s.objs->id, e->s.objs->disp,
 		e->s.objs->clips, e->s.objs->deg, e->s.objs->next);
 		e->s.objs = e->s.objs->next;
+	}
+	while (e->s.degs != NULL)
+	{
+		ft_putstr("\033[38;5;142m");
+		printf("t:%f %f %f\ndir:%f %f %f\nc1:%d\nc2:%d\nid:%s\n",
+		e->s.degs->t.x, e->s.degs->t.y, e->s.degs->t.z,e->s.degs->dir.x, e->s.degs->dir.y, e->s.degs->dir.z,
+		e->s.degs->color1,e->s.degs->color2, e->s.degs->id);
+		e->s.degs = e->s.degs->next;
 	}
 	ft_putstr("\033[0m");
 	if (check == -1)

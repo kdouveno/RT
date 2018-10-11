@@ -89,7 +89,7 @@ static int		check_mat(t_obj *obj, char* l1, char *l2)
 		obj->spec = ft_atod(l2);
 		return (0);
 	}
-	return(1);
+	return (1);
  }
 
 void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2, int type)
