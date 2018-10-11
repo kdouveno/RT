@@ -1,6 +1,7 @@
 camera{
 	antialiasing:1
 	tx:5
+	
 	ty:6
 	tz:7
 	dirx:50

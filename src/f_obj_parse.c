@@ -106,8 +106,8 @@ void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2, int type)
 			i++;
 		if (l1[i] != '\0')
 			wrong_type(e, l1, 0, 0);
+		free(cp);
 	}
-	free(cp);
 }
 
 t_obj	*obj_parse_2(t_env *e, int type, int fd)
@@ -129,6 +129,8 @@ t_obj	*obj_parse_2(t_env *e, int type, int fd)
 		if (res == -1)
 			error(e, READ_ERROR);
 	}
+	free(l1);
+	free(l2);
 	free(line);
 	return (obj);
 }

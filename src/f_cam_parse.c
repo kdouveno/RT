@@ -105,6 +105,8 @@ t_cam	*cam_parse_2(t_env *e, int fd)
 		if (res == -1)
 			error(e, READ_ERROR);
 	}
+	free(l1);
+	free(l2);
 	free(line);
 	return (cam);
 }

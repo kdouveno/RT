@@ -1,6 +1,6 @@
 {
-	tx:1
 
+tx:1
 
 	ty:6
 	tz:6
@@ -10,8 +10,4 @@
 	disp:a
 	diff:9
 	spec:0.35
-}
-camera{
-ty:6
-tz:6
 }

@@ -16,7 +16,7 @@
 **	a foutre dans un autre fichier utilitaire
 */
 
-static char	*get_name(t_env *e, char *line, int i, int l)
+static char	*get_name(t_env *e, char *line, int i, int *l)
 {
 	char	*cp;
 	int		i_cp;
@@ -24,12 +24,17 @@ static char	*get_name(t_env *e, char *line, int i, int l)
 	while (line[i] != '{' && line[i] != '\0')
 	{
 		if (is_ignored(line[i]) == 0)
-			l++;
+			(*l)++;
 		i++;
+	}
+	if (*l == 0 && line[i] == '{')
+	{
+		*l = -1;
+		return (NULL);
 	}
 	i = 0;
 	i_cp = 0;
-	if (!(cp = malloc(sizeof(char) * l + 1)))
+	if (!(cp = malloc(sizeof(char) * *l + 1)))
 	{
 		free(line);
 		error(e, MALLOC_ERROR);
@@ -68,7 +73,12 @@ static void	parse_line(t_env *e, char *line, int fd)
 	(void)fd;
 	i = 0;
 	l = 0;
-	type = get_name(e, line, i, l);
+	type = get_name(e, line, i, &l);
+	if (type == NULL && l == -1)
+	{
+		wrong_type(e, type, fd, 1);
+		return ;
+	}
 	l_type = ft_str_tolower(type);
 	free(type);
 	if (l_type[0] != '\0')

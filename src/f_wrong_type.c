@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static void skip_block(t_env *e, int fd)
+static void skip_block(t_env *e, int fd, char *l_type)
 {
 	int		check;
 	char	*line;
@@ -30,8 +30,8 @@ static void skip_block(t_env *e, int fd)
 void	wrong_type(t_env *e, char *l_type, int fd, int skip)
 {
 	ft_putstr("\033[2;49;91m");
-	if (l_type[0] == '\0')
-		ft_putendl("The block is empty.");
+	if (l_type == NULL)
+		ft_putendl("A block is empty.");
 	else
 	{
 		ft_putstr(l_type);
@@ -40,5 +40,5 @@ void	wrong_type(t_env *e, char *l_type, int fd, int skip)
 	}
 	ft_putstr("\033[0m");
 	if (skip)
-		skip_block(e, fd);
+		skip_block(e, fd, l_type);
 }
