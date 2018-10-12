@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/12 13:45:09 by mac              ###   ########.fr       */
+/*   Updated: 2018/10/12 14:05:00 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,17 +122,17 @@ void		parse(t_env *e, char *arg)
 	while (e->s.lits != NULL)
 	{
 		ft_putstr("\033[38;5;46m");
-		printf("%f %f %f\n%f\n%d\n%s\n%s\n",
-		e->s.lits->t.x,e->s.lits->t.y,e->s.lits->t.z,e->s.lits->power,e->s.lits->color.i,e->s.lits->id,e->s.lits->next);
+		printf("%f %f %f\n%f\n%d\n%s\n",
+		e->s.lits->t.x,e->s.lits->t.y,e->s.lits->t.z,e->s.lits->power,e->s.lits->color.i,e->s.lits->id);
 		e->s.lits = e->s.lits->next;
 	}
 	while (e->s.objs != NULL)
 	{
 		ft_putstr("\033[38;5;208m");
-		printf("type: %d\nt:%f %f %f\nr:%f %f %f\nv1:%f\ncolor:%d\ndiff:%f\nspec:%f\nid:%s\ndisp:%c\n%s\n%s\n%s\n",
+		printf("type: %d\nt:%f %f %f\nr:%f %f %f\nv1:%f\ncolor:%d\ndiff:%f\nspec:%f\nid:%s\ndisp:%c\n%s\n%s\n",
 		e->s.objs->type, e->s.objs->t.x, e->s.objs->t.y, e->s.objs->t.z,e->s.objs->r.x, e->s.objs->r.y, e->s.objs->r.z,
 		e->s.objs->v1, e->s.objs->color.i, e->s.objs->diff, e->s.objs->spec, e->s.objs->id, e->s.objs->disp,
-		e->s.objs->clips, e->s.objs->deg, e->s.objs->next);
+		e->s.objs->clips->id, e->s.objs->deg->id);
 		e->s.objs = e->s.objs->next;
 	}
 	while (e->s.degs != NULL)

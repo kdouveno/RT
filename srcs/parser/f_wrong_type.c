@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wrong_type.c                                       :+:      :+:    :+:   */
+/*   f_wrong_type.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:46:05 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/04 16:47:22 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/12 14:06:02 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void skip_block(t_env *e, int fd, char *l_type)
+static void skip_block(t_env *e, int fd)
 {
 	int		check;
 	char	*line;
@@ -40,5 +40,5 @@ void	wrong_type(t_env *e, char *l_type, int fd, int skip)
 	}
 	ft_putstr("\033[0m");
 	if (skip)
-		skip_block(e, fd, l_type);
+		skip_block(e, fd);
 }
