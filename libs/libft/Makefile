@@ -1,6 +1,6 @@
-#LIB? =
+LIB? = d
 ifndef LIB?
-NAME = rt
+NAME = rtone
 else
 NAME = $(notdir $(shell pwd))
 endif
