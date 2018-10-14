@@ -36,7 +36,7 @@ static int		check_arg(t_deg *deg, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "id")))
 	{
-		deg->id = l2;
+		deg->id = ft_strdup(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "color1")))

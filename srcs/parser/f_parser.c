@@ -116,32 +116,37 @@ void		parse(t_env *e, char *arg)
 	{
 		ft_putstr("\033[38;5;31m");
 		printf("t:%f %f %f\nr:%f %f %f\nantial: %d\nid: %s\n",
-		e->s.cams->t.x, e->s.cams->t.y, e->s.cams->t.z, e->s.cams->dir.x, e->s.cams->dir.y, e->s.cams->dir.z, e->s.cams->antialia, e->s.cams->id);
+		e->s.cams->t.x, e->s.cams->t.y, e->s.cams->t.z,
+		e->s.cams->dir.x, e->s.cams->dir.y, e->s.cams->dir.z,
+		e->s.cams->antialia, e->s.cams->id);
 		e->s.cams = e->s.cams->next;
 	}
 	while (e->s.lits != NULL)
 	{
 		ft_putstr("\033[38;5;46m");
 		printf("%f %f %f\n%f\n%d\n%s\n",
-		e->s.lits->t.x,e->s.lits->t.y,e->s.lits->t.z,e->s.lits->power,e->s.lits->color.i,e->s.lits->id);
+		e->s.lits->t.x,e->s.lits->t.y,e->s.lits->t.z,
+		e->s.lits->power,e->s.lits->color.i,e->s.lits->id);
 		e->s.lits = e->s.lits->next;
-	}
-	while (e->s.objs != NULL)
-	{
-		ft_putstr("\033[38;5;208m");
-		printf("type: %d\nt:%f %f %f\nr:%f %f %f\nv1:%f\ncolor:%d\ndiff:%f\nspec:%f\nid:%s\ndisp:%c\n%s\n%s\n",
-		e->s.objs->type, e->s.objs->t.x, e->s.objs->t.y, e->s.objs->t.z,e->s.objs->r.x, e->s.objs->r.y, e->s.objs->r.z,
-		e->s.objs->v1, e->s.objs->color.i, e->s.objs->diff, e->s.objs->spec, e->s.objs->id, e->s.objs->disp,
-		e->s.objs->clips->id, e->s.objs->deg->id);
-		e->s.objs = e->s.objs->next;
 	}
 	while (e->s.degs != NULL)
 	{
 		ft_putstr("\033[38;5;142m");
 		printf("t:%f %f %f\ndir:%f %f %f\nc1:%d\nc2:%d\nid:%s\n",
-		e->s.degs->t.x, e->s.degs->t.y, e->s.degs->t.z,e->s.degs->dir.x, e->s.degs->dir.y, e->s.degs->dir.z,
+		e->s.degs->t.x, e->s.degs->t.y, e->s.degs->t.z,
+		e->s.degs->dir.x, e->s.degs->dir.y, e->s.degs->dir.z,
 		e->s.degs->color1.i,e->s.degs->color2.i, e->s.degs->id);
 		e->s.degs = e->s.degs->next;
+	}
+	while (e->s.objs != NULL)
+	{
+		ft_putstr("\033[38;5;208m");
+		printf("type: %d\nt:%f %f %f\nr:%f %f %f\nv1:%f\ncolor:%d\ndiff:%f\nspec:%f\nid:%s\ndisp:%c\n",
+		e->s.objs->type, e->s.objs->t.x, e->s.objs->t.y, e->s.objs->t.z,
+		e->s.objs->r.x, e->s.objs->r.y, e->s.objs->r.z,
+		e->s.objs->v1, e->s.objs->color.i, e->s.objs->diff,
+		e->s.objs->spec, e->s.objs->id, e->s.objs->disp);
+		e->s.objs = e->s.objs->next;
 	}
 	ft_putstr("\033[0m");
 	if (check == -1)

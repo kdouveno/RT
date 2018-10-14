@@ -41,7 +41,7 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	}
 	if (!(ft_strcmp(l1, "id")))
 	{
-		cam->id = l2;
+		cam->id = ft_strdup(l2);
 		return (0);
 	}
 	return(1);

@@ -1,0 +1,19 @@
+camera{
+	antialiasing:1
+	tx:5
+
+	ty:6
+	tz:7
+	id:asdf
+	dirx:50
+	diry:40
+	dirz:9
+}
+
+camera{
+tx:7
+ty:7
+tz:7
+dirz:50
+id:azer
+}

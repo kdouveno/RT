@@ -39,7 +39,7 @@ ifdef LIB?
 	@printf "$(VIOLET)%15s : $(GREEN)succesfuly made! %10.0d\n" $@ 0
 endif
 ifndef LIB?
-	@$(CC) $(FLAGS) $(FWL) $(ARCF) $^ -o $@
+	@$(CC) $(FLAGS) $(ARCF) $^ -o $@
 	@printf "$(VIOLET)%15s : $(GREEN)succesfuly made!%20.0d\n" $(TARGET) 0
 endif
 

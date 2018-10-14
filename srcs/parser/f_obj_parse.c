@@ -46,7 +46,7 @@ static int		check_arg(t_obj *obj, char *l1, char *l2)
 	}
 	if (!(ft_strcmp(l1, "id")))
 	{
-		obj->id = l2;
+		obj->id = ft_strdup(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "disp")))
@@ -121,7 +121,7 @@ t_obj	*obj_parse_2(t_env *e, int type, int fd)
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
 	*obj = (t_obj){type,(t_pt){0, 0, 0}, (t_rot){0, 0, 0},
-		0, (t_color)0, 0, 0, 0, '\0', 0, 0, 0};
+		0, (t_color)0, 0, 0, 0, '\0', NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_obj(e, obj, l1, l2);
