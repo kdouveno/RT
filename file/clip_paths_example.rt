@@ -1,0 +1,56 @@
+camera{
+	antialiasing:1
+	tx:5
+
+	ty:6
+	tz:7
+	dirx:50
+	diry:40
+	dirz:9
+	id:355
+}
+
+light{
+	power:8
+	tx:1
+	ty:6
+	tz:6
+	id:520
+}
+
+pyramid{
+	tx:1
+	ty:6
+	tz:6
+	rx:5
+	ry:60
+	rz:70
+	disp:a
+	diff:9
+	spec:0.35
+	id:786
+	clip:355
+
+}
+
+sphere{
+	id:1
+	tx:1
+	ty:6
+	tz:6
+	disp:a
+	diff:9
+	spec:0.35
+	id:355
+}
+
+cuboid{
+	id:1
+	tx:1
+	ty:6
+	tz:6
+	disp:a
+	diff:9
+	spec:0.35
+	id:pain
+}

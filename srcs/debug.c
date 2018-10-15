@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/15 14:19:17 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/15 16:02:49 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	debug_grad(t_grad *save)
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nDirection: %f %f %f\nColor1: %d\n"
-		"Color2: %d\nID: %s\n\n",
+		"Color2: %d\nID: %d\n\n",
 		save->t.x, save->t.y, save->t.z,
 		save->r.x, save->r.y, save->r.z,
 		save->color1.i,save->color2.i, save->id);
@@ -34,12 +34,12 @@ static void	debug_objs(t_obj *save)
 	while (save != NULL)
 	{
 		printf("Type: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
-		"Variable: %f\nColor: %d\nDiffuse: %f\nSpecular: %f\nID: %s\n"
-		"Display: %c\n\n",
+		"Variable: %f\nColor: %d\nDiffuse: %f\nSpecular: %f\nID: %d\n"
+		"Display: %c\nLinked to %p\n",
 		g_ref[save->type].name, save->t.x, save->t.y, save->t.z,
 		save->r.x, save->r.y, save->r.z,
 		save->v1, save->color.i, save->diff,
-		save->spec, save->id, save->disp);
+		save->spec, save->id, save->disp, save->grad);
 		save = save->next;
 	}
 }
@@ -50,7 +50,7 @@ static void	debug_lits(t_lit *save)
 		ft_putstr("\n\033[38;5;46mLights :\n\n");
 	while (save != NULL)
 	{
-		printf("Translation: %f %f %f\nPower: %f\nColor: %d\nID: %s\n\n",
+		printf("Translation: %f %f %f\nPower: %f\nColor: %d\nID: %d\n\n",
 		save->t.x, save->t.y, save->t.z,
 		save->power, save->color.i, save->id);
 		save = save->next;
@@ -64,7 +64,7 @@ static void	debug_cams(t_cam *save)
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nDirection: %f %f %f\n"
-		"Antialiasing: %d\nID: %s\n\n",
+		"Antialiasing: %d\nID: %d\n\n",
 		save->t.x, save->t.y, save->t.z,
 		save->r.x, save->r.y, save->r.z,
 		save->antialia, save->id);

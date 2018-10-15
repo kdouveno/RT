@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/15 14:16:39 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/15 16:18:56 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct			s_cam
 	t_vec				y;
 	t_pt				vp_ul;
 	int					antialia;
-	char				*id;
+	int					id;
 	struct s_cam		*next;
 }						t_cam;
 
@@ -54,9 +54,19 @@ typedef struct			s_lit
 	t_pt				t;
 	float				power;
 	t_color				color;
-	char				*id;
+	int					id;
 	struct s_lit		*next;
 }						t_lit;
+
+typedef struct			s_grad
+{
+	t_pt				t;
+	t_rot				r;
+	int					id;
+	t_color				color1;
+	t_color				color2;
+	struct s_grad		*next;
+}						t_grad;
 
 typedef struct			s_obj
 {
@@ -67,22 +77,18 @@ typedef struct			s_obj
 	t_color				color;
 	float				diff;
 	float				spec;
-	char				*id;
+	int					id;
 	char				disp;
 	struct s_obj		*clips;
-	struct s_obj		*grad;
+	t_grad				*grad;
 	struct s_obj		*next;
 }						t_obj;
 
-typedef struct			s_grad
+typedef struct			s_clip
 {
-	t_pt				t;
-	t_rot				r;
-	char				*id;
-	t_color				color1;
-	t_color				color2;
-	struct s_grad		*next;
-}						t_grad;
+	t_obj				*obj;
+	struct s_clip		*next;
+}						t_clip;
 
 typedef struct			s_scene
 {
@@ -128,6 +134,7 @@ void					light_parse(t_env *e, int type, int fd);
 void					cam_parse(t_env *e, int type, int fd);
 void					env_parse(t_env *e, int type, int fd);
 void					grad_parse(t_env *e, int type, int fd);
+void					link_obj(t_env *e);
 int						check_pt(void *cam, char* l1, char *l2);
 int						check_rot(void *cam, char* l1, char *l2);
 

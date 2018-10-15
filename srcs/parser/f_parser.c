@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/15 14:20:24 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/15 14:54:07 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		parse(t_env *e, char *arg)
 		error(e, OPEN_ERROR);
 	while ((check = get_next_line(fd, &line)) > 0)
 		parse_line(e, line, fd);
+	link_obj(e);
 	if (check == -1)
 		error(e, READ_ERROR);
 	if (close(fd) == -1)

@@ -7,7 +7,7 @@ camera{
 	dirx:50
 	diry:40
 	dirz:9
-	id:asdf
+	id:20
 }
 
 camera{
@@ -15,7 +15,7 @@ tx:7
 ty:7
 tz:7
 dirz:50
-id:azer
+id:96
 }
 
 light{
@@ -25,7 +25,7 @@ power:8
 
 	ty:6
 	tz:6
-	id:pain
+	id:69
 
 }
 
@@ -56,7 +56,7 @@ pyramid{
 	disp:a
 	diff:9
 	spec:0.35
-	id:tgyhy
+	id:78
 }
 
 grad{
@@ -68,7 +68,7 @@ grad{
 	dirz:45
 	color1:50
 	color2:70
-	id:ceci_est_un_id
+	id:78
 }
 grad{
 	tx:5
@@ -79,5 +79,5 @@ grad{
 	dirz:45
 	color1:50
 	color2:70
-	id:ceci_est_un_pain
+	id:57
 }

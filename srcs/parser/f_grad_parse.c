@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_deg_parse.c                                      :+:      :+:    :+:   */
+/*   f_grad_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:15:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/15 14:17:13 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/15 16:02:10 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int		check_arg(t_grad *grad, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "id")))
 	{
-		grad->id = ft_strdup(l2);
+		grad->id = ft_atoi(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "color1")))
@@ -60,7 +60,8 @@ t_grad			*grad_parse_2(t_env *e, int fd)
 
 	if (!(grad = malloc(sizeof(t_grad))))
 		error(e, MALLOC_ERROR);
-	*grad = (t_grad){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, NULL, (t_color)0, (t_color)0, NULL};
+	*grad = (t_grad){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, 0,
+		(t_color)0, (t_color)0, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{

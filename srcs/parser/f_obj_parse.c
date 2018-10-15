@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/15 12:39:18 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/15 15:57:03 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		check_arg(t_obj *obj, char *l1, char *l2)
 	}
 	if (!(ft_strcmp(l1, "id")))
 	{
-		obj->id = ft_strdup(l2);
+		obj->id = ft_atoi(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "disp")))
