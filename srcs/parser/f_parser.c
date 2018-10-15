@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/15 12:41:02 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/15 14:20:24 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void		parse(t_env *e, char *arg)
 	e->s.objs = NULL;
 	e->s.lits = NULL;
 	e->s.cams = NULL;
-	e->s.degs = NULL;
+	e->s.grads = NULL;
 	if ((fd = open(arg, O_RDONLY)) == -1)
 		error(e, OPEN_ERROR);
 	while ((check = get_next_line(fd, &line)) > 0)

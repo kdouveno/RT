@@ -6,16 +6,16 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/15 12:41:24 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/15 14:19:17 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	debug_degs(t_deg *save)
+static void	debug_grad(t_grad *save)
 {
 	if (save != NULL)
-		ft_putstr("\n\033[38;5;204mDegrates :\n\n");
+		ft_putstr("\n\033[38;5;204mGradients :\n\n");
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nDirection: %f %f %f\nColor1: %d\n"
@@ -76,16 +76,16 @@ void		debug(t_env *e)
 {
 	t_cam	*cams;
 	t_lit	*lits;
-	t_deg	*degs;
+	t_grad	*grad;
 	t_obj	*objs;
 
 	cams = e->s.cams;
 	lits = e->s.lits;
-	degs = e->s.degs;
+	grad = e->s.grads;
 	objs = e->s.objs;
 	debug_cams(cams);
 	debug_lits(lits);
-	debug_degs(degs);
+	debug_grad(grad);
 	debug_objs(objs);
 	ft_putstr("\033[0m");
 }

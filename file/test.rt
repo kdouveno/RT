@@ -59,7 +59,7 @@ pyramid{
 	id:tgyhy
 }
 
-deg{
+grad{
 	tx:5
 	ty:8
 	tz:1
@@ -70,7 +70,7 @@ deg{
 	color2:70
 	id:ceci_est_un_id
 }
-deg{
+grad{
 	tx:5
 	ty:8
 	tz:1
