@@ -1,24 +1,16 @@
-#include "rt.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_light_parse.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
+/*   Updated: 2018/10/15 12:41:14 by gperez           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int		check_pt(t_lit *lit, char* l1, char *l2)
-{
-	if (!(ft_strcmp(l1, "tx")))
-	{
-		lit->t.x = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "ty")))
-	{
-		lit->t.y = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "tz")))
-	{
-		lit->t.z = ft_atod(l2);
-		return (0);
-	}
-	return (1);
-}
+#include "rt.h"
 
 int		check_arg(t_lit *lit, char *l1, char *l2)
 {
@@ -39,25 +31,6 @@ int		check_arg(t_lit *lit, char *l1, char *l2)
 	}
 	return (1);
 }
-
-/*void	check_rot(t_lit *lit, char* l1, char *l2)
-{
-	if (ft_strcmp(l1, "rx"))
-	{
-		lit->r.x = ft_atod(l2);
-		return;
-	}
-	if (ft_strcmp(l1, "ry"))
-	{
-		lit->r.y = ft_atod(l2);
-		return;
-	}
-	if (ft_strcmp(l1, "rz"))
-	{
-		lit->r.z = ft_atod(l2);
-		return;
-	}
-}*/
 
 void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)
 {

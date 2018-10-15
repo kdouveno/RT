@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/08 16:13:24 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/15 12:37:59 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct			s_wininfo
 typedef struct			s_cam
 {
 	t_pt				t;
-	t_vec				dir;
+	t_vec				r;
 	t_vec				x;
 	t_vec				y;
 	t_pt				vp_ul;
@@ -60,9 +60,9 @@ typedef struct			s_lit
 
 typedef struct			s_obj
 {
-	int					type;
 	t_pt				t;
 	t_rot				r;
+	int					type;
 	double				v1;
 	t_color				color;
 	float				diff;
@@ -77,7 +77,7 @@ typedef struct			s_obj
 typedef struct			s_deg
 {
 	t_pt				t;
-	t_vec				dir;
+	t_rot				r;
 	char				*id;
 	t_color				color1;
 	t_color				color2;
@@ -128,6 +128,8 @@ void					light_parse(t_env *e, int type, int fd);
 void					cam_parse(t_env *e, int type, int fd);
 void					env_parse(t_env *e, int type, int fd);
 void					deg_parse(t_env *e, int type, int fd);
+int						check_pt(void *cam, char* l1, char *l2);
+int						check_rot(void *cam, char* l1, char *l2);
 
 static const t_objfx	g_ref[] = {
 	{"env", &env_parse},

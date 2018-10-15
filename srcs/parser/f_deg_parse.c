@@ -6,31 +6,11 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:15:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/12 13:26:22 by mac              ###   ########.fr       */
+/*   Updated: 2018/10/15 12:38:43 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static int		check_pt(t_deg *deg, char* l1, char *l2)
-{
-	if (!(ft_strcmp(l1, "tx")))
-	{
-		deg->t.x = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "ty")))
-	{
-		deg->t.y = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "tz")))
-	{
-		deg->t.z = ft_atod(l2);
-		return (0);
-	}
-	return (1);
-}
 
 static int		check_arg(t_deg *deg, char *l1, char *l2)
 {
@@ -47,26 +27,6 @@ static int		check_arg(t_deg *deg, char *l1, char *l2)
 	if (!(ft_strcmp(l1, "color2")))
 	{
 		deg->color2 = (t_color)ft_atoi(l2);
-		return (0);
-	}
-	return (1);
-}
-
-static int		check_rot(t_deg *deg, char* l1, char *l2)
-{
-	if (!(ft_strcmp(l1, "dirx")))
-	{
-		deg->dir.x = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "diry")))
-	{
-		deg->dir.y = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "dirz")))
-	{
-		deg->dir.z = ft_atod(l2);
 		return (0);
 	}
 	return (1);
@@ -100,7 +60,7 @@ t_deg			*deg_parse_2(t_env *e, int fd)
 
 	if (!(deg = malloc(sizeof(t_deg))))
 		error(e, MALLOC_ERROR);
-	*deg = (t_deg){{0, 0, 0}, {0, 0, 0}, NULL, (t_color)0, (t_color)0, NULL};
+	*deg = (t_deg){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, NULL, (t_color)0, (t_color)0, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{

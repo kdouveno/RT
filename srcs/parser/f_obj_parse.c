@@ -6,31 +6,11 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/12 13:40:24 by mac              ###   ########.fr       */
+/*   Updated: 2018/10/15 12:39:18 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static int		check_pt(t_obj *obj, char* l1, char *l2)
-{
-	if (!(ft_strcmp(l1, "tx")))
-	{
-		obj->t.x = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "ty")))
-	{
-		obj->t.y = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "tz")))
-	{
-		obj->t.z = ft_atod(l2);
-		return (0);
-	}
-	return (1);
-}
 
 static int		check_arg(t_obj *obj, char *l1, char *l2)
 {
@@ -52,26 +32,6 @@ static int		check_arg(t_obj *obj, char *l1, char *l2)
 	if (!(ft_strcmp(l1, "disp")))
 	{
 		obj->disp = l2[0];
-		return (0);
-	}
-	return(1);
-}
-
-static int		check_rot(t_obj *obj, char* l1, char *l2)
-{
-	if (!(ft_strcmp(l1, "rx")))
-	{
-		obj->r.x = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "ry")))
-	{
-		obj->r.y = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "rz")))
-	{
-		obj->r.z = ft_atod(l2);
 		return (0);
 	}
 	return(1);
@@ -120,7 +80,7 @@ t_obj	*obj_parse_2(t_env *e, int type, int fd)
 
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
-	*obj = (t_obj){type,(t_pt){0, 0, 0}, (t_rot){0, 0, 0},
+	*obj = (t_obj){(t_pt){0, 0, 0}, (t_rot){0, 0, 0}, type,
 		0, (t_color)0, 0, 0, 0, '\0', NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
 	{

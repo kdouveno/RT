@@ -6,15 +6,11 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/12 14:05:00 by mac              ###   ########.fr       */
+/*   Updated: 2018/10/15 12:41:02 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-/*
-**	a foutre dans un autre fichier utilitaire
-*/
 
 static char	*get_name(t_env *e, char *line, int i, int *l)
 {
@@ -87,8 +83,7 @@ static void	parse_line(t_env *e, char *line, int fd)
 		else
 			wrong_type(e, l_type, fd, 1);
 	}
-	else
-		free(l_type);
+	free(l_type);
 	free(line);
 }
 

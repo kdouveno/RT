@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cam_parse.c                                        :+:      :+:    :+:   */
+/*   f_cam_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/04 16:56:23 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/15 12:36:04 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int		check_pt(t_cam *cam, char* l1, char *l2)
+int		check_pt(void *cam, char* l1, char *l2)
 {
+	t_obj *obj;
+
+	obj = (t_obj*)cam;
 	if (!(ft_strcmp(l1, "tx")))
 	{
-		cam->t.x = ft_atod(l2);
+		obj->t.x = ft_atod(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "ty")))
 	{
-		cam->t.y = ft_atod(l2);
+		obj->t.y = ft_atod(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "tz")))
 	{
-		cam->t.z = ft_atod(l2);
+		obj->t.z = ft_atod(l2);
 		return (0);
 	}
 	return (1);
@@ -47,21 +50,24 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	return(1);
 }
 
-static int	check_rot(t_cam *cam, char* l1, char *l2)
+int		check_rot(void *cam, char* l1, char *l2)
 {
+	t_obj *obj;
+
+	obj = (t_obj*)cam;
 	if (!(ft_strcmp(l1, "dirx")))
 	{
-		cam->dir.x = ft_atod(l2);
+		obj->r.x = ft_atod(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "diry")))
 	{
-		cam->dir.y = ft_atod(l2);
+		obj->r.y = ft_atod(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "dirz")))
 	{
-		cam->dir.z = ft_atod(l2);
+		obj->r.z = ft_atod(l2);
 		return (0);
 	}
 	return (1);
