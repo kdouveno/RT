@@ -47,7 +47,7 @@ endif
 	@make -C $^
 
 objs/%.o: srcs/%.c
-	@[ -d $(dir $@) ] || (mkdir $(dir $@) && printf "$(VIOLET)%15s : $(WHITE)mkdir: %s\n" $(NAME) $(dir $@))
+	@[ -d $(dir $@) ] || (mkdir -p $(dir $@) && printf "$(VIOLET)%15s : $(WHITE)mkdir: %s\n" $(NAME) $(dir $@))
 	@printf "$(VIOLET)%15s : $(BLUE)%-20s$(WHITE) ...\r" $(NAME) $(<F)
 	@gcc -c -o $@ $(FLAGS) $(INCS) $^
 	@printf "$(VIOLET)%15s : $(BLUE)%-20s$(GREEN) done$(WHITE)\n" $(NAME) $(<F)
