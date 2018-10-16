@@ -27,7 +27,7 @@ static void	debug_grad(t_grad *save)
 	}
 }
 
-static void	debug_objs(t_obj *save)
+static void	debug_objs(t_obj *save, t_clip *clips)
 {
 	if (save != NULL)
 		ft_putstr("\n\033[38;5;208mObjects :\n\n");
@@ -41,13 +41,14 @@ static void	debug_objs(t_obj *save)
 		save->v1, save->color.i, save->diff,
 		save->spec, save->id, save->disp, save->grad);
 		ft_putstr("\n\033[38;5;136m");
-		while (save->clips != NULL)
+		clips = save->clips;
+		while (clips != NULL)
 		{
-			printf("Clip : %d\n", save->clips->id);
-			if (save->clips->obj != NULL)
+			printf("Clip : %d\n", clips->id);
+			if (clips->obj != NULL)
 				printf("Linked to %s:%d\n",
-					g_ref[save->clips->obj->type].name, save->clips->obj->id);
-			save->clips = save->clips->next;
+					g_ref[clips->obj->type].name, clips->obj->id);
+			clips = clips->next;
 		}
 		ft_putstr("\n\033[38;5;208m");
 		save = save->next;
@@ -88,7 +89,9 @@ void		debug(t_env *e)
 	t_lit	*lits;
 	t_grad	*grad;
 	t_obj	*objs;
+	t_clip	*clips;
 
+	clips = NULL;
 	cams = e->s.cams;
 	lits = e->s.lits;
 	grad = e->s.grads;
@@ -96,6 +99,6 @@ void		debug(t_env *e)
 	debug_cams(cams);
 	debug_lits(lits);
 	debug_grad(grad);
-	debug_objs(objs);
+	debug_objs(objs, clips);
 	ft_putstr("\033[0m");
 }

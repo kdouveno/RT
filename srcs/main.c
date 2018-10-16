@@ -51,5 +51,6 @@ int		main(int argc, char **argv)
 	if (argc == 3 && ft_strcmp(argv[2], "debug") == 0)
 		debug(&e);
 //	ft_window(&e);
+	free_env(&e);
 	return (0);
 }

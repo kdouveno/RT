@@ -163,6 +163,7 @@ t_insecres				insec(t_env *e, t_line line);
 int						raytrace(t_env *e, t_line l);
 int						key_hook(int key, t_env *e);
 
+void					free_env(t_env *e);
 void					debug(t_env *e);
 void					error(t_env *e, char *msg);
 void					quit(t_env *e, char *msg);
