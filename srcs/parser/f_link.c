@@ -68,12 +68,10 @@ static void	link_clips(t_env *e)
 			check = e->s.objs;
 			while ((check != NULL)
 				&& (clips->id != check->id && -clips->id != check->id))
-			{
 				check = check->next;
-				if ((check != NULL)
-					&& (clips->id == check->id || -clips->id == check->id))
+			if ((check != NULL)
+				&& (clips->id == check->id || -clips->id == check->id))
 					clips->obj = check;
-			}
 			clips = clips->next;
 		}
 		objs = objs->next;
