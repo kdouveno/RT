@@ -33,9 +33,9 @@ static void	debug_objs(t_obj *save)
 		ft_putstr("\n\033[38;5;208mObjects :\n\n");
 	while (save != NULL)
 	{
-		printf("Type: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
+		printf("\nType: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
 		"Variable: %f\nColor: %d\nDiffuse: %f\nSpecular: %f\nID: %d\n"
-		"Display: %c\nLinked to %p\n\n",
+		"Display: %c\nLinked to %p\n",
 		g_ref[save->type].name, save->t.x, save->t.y, save->t.z,
 		save->r.x, save->r.y, save->r.z,
 		save->v1, save->color.i, save->diff,
