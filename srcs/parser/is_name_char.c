@@ -14,7 +14,7 @@
 
 int	is_name_char(char c)
 {
-	return (c == '_'
+	return (c == '_' || c == '-'
 	|| (c >= 'a' && c <= 'z')
 	|| (c >= 'A' && c <= 'Z')
 	|| (c >= '0' && c <= '9')

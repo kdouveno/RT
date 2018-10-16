@@ -79,13 +79,14 @@ typedef struct			s_obj
 	float				spec;
 	int					id;
 	char				disp;
-	struct s_obj		*clips;
+	struct s_clip		*clips;
 	t_grad				*grad;
 	struct s_obj		*next;
 }						t_obj;
 
 typedef struct			s_clip
 {
+	int					id;
 	t_obj				*obj;
 	struct s_clip		*next;
 }						t_clip;
@@ -135,6 +136,7 @@ void					cam_parse(t_env *e, int type, int fd);
 void					env_parse(t_env *e, int type, int fd);
 void					grad_parse(t_env *e, int type, int fd);
 void					link_obj(t_env *e);
+void					creat_clips(t_env *e, t_obj *obj, char *l2);
 int						check_pt(void *cam, char* l1, char *l2);
 int						check_rot(void *cam, char* l1, char *l2);
 

@@ -33,16 +33,55 @@ static void		link_grad(t_env *e)
 	}
 }
 
-void static		link_lst_clips(t_env *e)
+void		creat_clips(t_env *e, t_obj *obj, char *l2)
 {
-	t_clip	*save;
+	t_clip	*new;
+	t_clip	*cp;
 
-	(void)save;
-	(void)e;
+	cp = obj->clips;
+	if (!(new = malloc(sizeof(t_clip))))
+		error(e, MALLOC_ERROR);
+	*new = (t_clip){atoi(l2), NULL, NULL};
+	if (cp != NULL)
+	{
+		while (cp->next != NULL)
+			cp = cp->next;
+		cp->next = new;
+	}
+	else
+		obj->clips = new;
 }
 
-void			link_obj(t_env *e)
+static void	link_clips(t_env *e)
+{
+	t_obj	*objs;
+	t_obj	*check;
+	t_clip	*clips;
+
+	objs = e->s.objs;
+	while (objs != NULL)
+	{
+		check = e->s.objs;
+		clips = objs->clips;
+		while (clips != NULL)
+		{
+			check = e->s.objs;
+			while ((check != NULL)
+				&& (clips->id != check->id && -clips->id != check->id))
+			{
+				check = check->next;
+				if ((check != NULL)
+					&& (clips->id == check->id || -clips->id == check->id))
+					clips->obj = check;
+			}
+			clips = clips->next;
+		}
+		objs = objs->next;
+	}
+}
+
+void		link_obj(t_env *e)
 {
 	link_grad(e);
-	link_lst_clips(e);
+	link_clips(e);
 }

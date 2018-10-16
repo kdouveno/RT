@@ -17,6 +17,7 @@ static int		check_arg(t_grad *grad, char *l1, char *l2)
 	if (!(ft_strcmp(l1, "id")))
 	{
 		grad->id = ft_atoi(l2);
+		grad->id = grad->id < 0 ? -grad->id : grad->id;
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "color1")))

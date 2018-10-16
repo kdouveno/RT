@@ -35,11 +35,21 @@ static void	debug_objs(t_obj *save)
 	{
 		printf("Type: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
 		"Variable: %f\nColor: %d\nDiffuse: %f\nSpecular: %f\nID: %d\n"
-		"Display: %c\nLinked to %p\n",
+		"Display: %c\nLinked to %p\n\n",
 		g_ref[save->type].name, save->t.x, save->t.y, save->t.z,
 		save->r.x, save->r.y, save->r.z,
 		save->v1, save->color.i, save->diff,
 		save->spec, save->id, save->disp, save->grad);
+		ft_putstr("\n\033[38;5;136m");
+		while (save->clips != NULL)
+		{
+			printf("Clip : %d\n", save->clips->id);
+			if (save->clips->obj != NULL)
+				printf("Linked to %s:%d\n",
+					g_ref[save->clips->obj->type].name, save->clips->obj->id);
+			save->clips = save->clips->next;
+		}
+		ft_putstr("\n\033[38;5;208m");
 		save = save->next;
 	}
 }

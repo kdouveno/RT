@@ -27,6 +27,7 @@ static int		check_arg(t_obj *obj, char *l1, char *l2)
 	if (!(ft_strcmp(l1, "id")))
 	{
 		obj->id = ft_atoi(l2);
+		obj->id = obj->id < 0 ? -obj->id : obj->id;
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "disp")))
@@ -37,7 +38,7 @@ static int		check_arg(t_obj *obj, char *l1, char *l2)
 	return(1);
 }
 
-static int		check_mat(t_obj *obj, char* l1, char *l2)
+static int		check_arg_2(t_env *e, t_obj *obj, char* l1, char *l2)
  {
 	 if (!(ft_strcmp(l1, "diff")))
  	{
@@ -47,6 +48,11 @@ static int		check_mat(t_obj *obj, char* l1, char *l2)
 	if (!(ft_strcmp(l1, "spec")))
 	{
 		obj->spec = ft_atod(l2);
+		return (0);
+	}
+	if (!(ft_strcmp(l1, "clip")))
+	{
+		creat_clips(e, obj, l2);
 		return (0);
 	}
 	return (1);
@@ -60,7 +66,7 @@ void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 	i = 0;
 	cp = ft_str_tolower(l1);
 	if (check_pt(obj, cp, l2) == 1 && check_arg(obj, cp, l2 ) == 1 &&
-		check_rot(obj, cp, l2) == 1 && check_mat(obj, cp, l2) == 1)
+		check_rot(obj, cp, l2) == 1 && check_arg_2(e, obj, cp, l2) == 1)
 	{
 		while (is_ignored(l1[i]) == 1)
 			i++;
@@ -82,7 +88,8 @@ t_obj	*obj_parse_2(t_env *e, int type, int fd)
 		error(e, MALLOC_ERROR);
 	*obj = (t_obj){(t_pt){0, 0, 0}, (t_rot){0, 0, 0}, type,
 		0, (t_color)0, 0, 0, 0, '\0', NULL, NULL, NULL};
-	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
+	while ((res = get_next_line(fd, &line)) > 0
+		&& get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_obj(e, obj, l1, l2);
 		free(line);

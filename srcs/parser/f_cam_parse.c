@@ -22,6 +22,7 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	if (!(ft_strcmp(l1, "id")))
 	{
 		cam->id = ft_atoi(l2);
+		cam->id = cam->id < 0 ? -cam->id : cam->id;
 		return (0);
 	}
 	return(1);

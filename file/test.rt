@@ -43,13 +43,53 @@ tx:1
 	spec:0.35
 }
 
+cuboid{
+	tx:1
+	ty:-6
+	tz:6
+	rx:-5
+	ry:-60
+	rz:70
+	disp:a
+	diff:9
+	id:79
+	spec:0.35
+}
+
+sphere{
+	tx:1
+	ty:-6
+	tz:6
+	rx:-5
+	ry:-60
+	rz:70
+	disp:a
+	diff:9
+	id:36
+	spec:0.35
+	clip:-78
+}
+
+
+cylinder{
+	tx:1
+	ty:-6
+	tz:6
+	rx:-5
+	ry:-60
+	rz:70
+	disp:a
+	diff:9
+	id:52
+	spec:0.35
+}
 
 pyramid{
 	tx:1
 
-
 	ty:6
 	tz:6
+
 	rx:5
 	ry:60
 	rz:70
@@ -57,6 +97,9 @@ pyramid{
 	diff:9
 	spec:0.35
 	id:78
+	clip:79
+	clip:36
+	clip:-52
 }
 
 grad{
