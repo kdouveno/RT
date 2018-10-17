@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/15 15:57:03 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/17 11:16:51 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int		check_arg(t_obj *obj, char *l1, char *l2)
 
 static int		check_arg_2(t_env *e, t_obj *obj, char* l1, char *l2)
  {
-	 if (!(ft_strcmp(l1, "diff")))
+	if (!(ft_strcmp(l1, "diff")))
  	{
  		obj->diff = ft_atod(l2);
  		return (0);
@@ -72,8 +72,8 @@ void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 			i++;
 		if (l1[i] != '\0')
 			wrong_type(e, l1, 0, 0);
-		free(cp);
 	}
+	free(cp);
 }
 
 t_obj	*obj_parse_2(t_env *e, int type, int fd)
@@ -92,12 +92,12 @@ t_obj	*obj_parse_2(t_env *e, int type, int fd)
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_obj(e, obj, l1, l2);
+		free(l1);
+		free(l2);
 		free(line);
 		if (res == -1)
 			error(e, READ_ERROR);
 	}
-	free(l1);
-	free(l2);
 	free(line);
 	return (obj);
 }

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/15 16:02:27 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/17 11:19:09 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ t_cam	*cam_parse_2(t_env *e, int fd)
 		get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_cam(e, cam, l1, l2);
+		free(l1);
+		free(l2);
 		free(line);
 		if (res == -1)
 			error(e, READ_ERROR);
 	}
-	free(l1);
-	free(l2);
 	free(line);
 	return (cam);
 }

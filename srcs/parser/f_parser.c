@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/15 14:54:07 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/17 12:03:58 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,31 @@ static char	*get_name(t_env *e, char *line, int i, int *l)
 	return (cp);
 }
 
-static int	link_name(const char *name)
+static int	link_name(char *name)
 {
 	int	i;
+	int out;
 
 	i = 0;
 	while (*g_ref[i].name && ft_strcmp(g_ref[i].name, name))
 		i++;
-	return (g_ref[i].name[0] != '\0' ? i : -1);
+	if ((out = g_ref[i].name[0] != '\0' ? i : -1) >= 0)
+		free(name);
+	return (out);
 }
 
 static void	parse_line(t_env *e, char *line, int fd)
 {
-	int			i;
 	int			l;
 	int			t;
 	char		*type;
 	char		*l_type;
 
-	i = 0;
 	l = 0;
-	type = get_name(e, line, i, &l);
+	type = get_name(e, line, 0, &l);
 	if (type == NULL && l == -1)
 	{
+		free(line);
 		wrong_type(e, type, fd, 1);
 		return ;
 	}
@@ -83,7 +85,8 @@ static void	parse_line(t_env *e, char *line, int fd)
 		else
 			wrong_type(e, l_type, fd, 1);
 	}
-	free(l_type);
+	else
+		free(l_type);
 	free(line);
 }
 
@@ -101,6 +104,7 @@ void		parse(t_env *e, char *arg)
 		error(e, OPEN_ERROR);
 	while ((check = get_next_line(fd, &line)) > 0)
 		parse_line(e, line, fd);
+	free(line);
 	link_obj(e);
 	if (check == -1)
 		error(e, READ_ERROR);

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:46:05 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/12 14:06:02 by mac              ###   ########.fr       */
+/*   Updated: 2018/10/17 11:23:04 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void skip_block(t_env *e, int fd)
 	char	*line;
 
 	while ((check = get_next_line(fd, &line)) > 0 && line[0] != '}')
-		;
+		free(line);
 	if (check == -1)
 	{
 		free(line);

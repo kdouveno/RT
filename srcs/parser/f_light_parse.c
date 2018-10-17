@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/15 16:01:49 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/17 11:18:28 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ t_lit	*light_parse_2(t_env *e, int fd)
 	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_light(e, lit, l1, l2);
+		free(l1);
+		free(l2);
 		free(line);
 		if (res == -1)
 			error(e, READ_ERROR);
 	}
-	free(l1);
-	free(l2);
 	free(line);
 	return (lit);
 }
