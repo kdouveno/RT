@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/15 16:18:56 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/17 16:58:21 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,9 @@ int						key_hook(int key, t_env *e);
 void					free_env(t_env *e);
 void					debug(t_env *e);
 void					error(t_env *e, char *msg);
+
+int						my_key(int key, t_env *e);
+void					k_escape(t_env *e);
 void					quit(t_env *e, char *msg);
 
 #endif
