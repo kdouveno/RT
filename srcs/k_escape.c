@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 12:27:53 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/17 16:57:21 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/18 16:22:28 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	k_escape(t_env *e)
 {
-	mlx_destroy_window(e->mlx.ptr, e->mlx.win);
+	(void)e;
+//	mlx_destroy_window(e->mlx.ptr, e->mlx.win);
 	exit(4);
 }

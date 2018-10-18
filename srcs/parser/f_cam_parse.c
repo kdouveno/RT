@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/17 11:19:09 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/18 16:15:17 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	stock_cam(t_env *e, t_cam *cam, char *l1, char *l2)
 	i = 0;
 	cp = ft_str_tolower(l1);
 	if (check_pt(cam, cp, l2) == 1 && check_rot(cam, cp, l2) == 1
-		&& check_arg(cam, cp, l2 ) == 1)
+		&& check_arg(cam, cp, l2 ) == 1 && check_dir(cam, cp, l2) == 1)
 	{
 		while (is_ignored(l1[i]) == 1)
 			i++;
@@ -56,8 +56,8 @@ t_cam	*cam_parse_2(t_env *e, int fd)
 
 	if (!(cam = malloc(sizeof(t_cam))))
 		error(e, MALLOC_ERROR);
-	*cam = (t_cam){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, (t_vec){0, 0, 0},
-	(t_vec){0, 0, 0}, (t_pt){0,0,0}, 0, 0, NULL};
+	*cam = (t_cam){(t_pt){0, 0, 0},(t_vec){0, 0, 0}, 0, (t_pt){0,0,0},
+		0, 0, 0, NULL};
 	while ((res = get_next_line(fd, &line)) > 0 &&
 		get_prop(e, line, &l1, &l2) != 1)
 	{
