@@ -6,11 +6,11 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 15:49:54 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/01 11:47:16 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/18 16:56:47 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "geo3d.h"
 
 t_color	rgbpro(t_color c, double m)
 {
