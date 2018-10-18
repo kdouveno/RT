@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:15:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/17 11:18:15 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/18 16:15:24 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void			stock_grad(t_env *e, t_grad *grad, char *l1, char *l2)
 	i = 0;
 	cp = ft_str_tolower(l1);
 	if (check_pt(grad, cp, l2) == 1 && check_arg(grad, cp, l2) == 1
-	 && check_rot(grad, cp, l2) == 1)
+	 && check_dir(grad, cp, l2) == 1)
 	{
 		while (is_ignored(l1[i]) == 1)
 			i++;

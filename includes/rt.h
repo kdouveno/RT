@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/15 16:18:56 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/18 16:16:04 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # define DIMX 900
 # define DIMY 700
+# define FOV 60
 
 typedef struct			s_mlx
 {
@@ -40,10 +41,10 @@ typedef struct			s_wininfo
 typedef struct			s_cam
 {
 	t_pt				t;
-	t_vec				r;
-	t_vec				x;
-	t_vec				y;
+	t_three_d			dir;
+	double				r;
 	t_pt				vp_ul;
+	double				fov;
 	int					antialia;
 	int					id;
 	struct s_cam		*next;
@@ -61,7 +62,7 @@ typedef struct			s_lit
 typedef struct			s_grad
 {
 	t_pt				t;
-	t_rot				r;
+	t_three_d			dir;
 	int					id;
 	t_color				color1;
 	t_color				color2;
@@ -71,7 +72,8 @@ typedef struct			s_grad
 typedef struct			s_obj
 {
 	t_pt				t;
-	t_rot				r;
+	t_three_d			dir;
+	double				r;
 	int					type;
 	double				v1;
 	t_color				color;
@@ -137,8 +139,10 @@ void					env_parse(t_env *e, int type, int fd);
 void					grad_parse(t_env *e, int type, int fd);
 void					link_obj(t_env *e);
 void					creat_clips(t_env *e, t_obj *obj, char *l2);
+
 int						check_pt(void *cam, char* l1, char *l2);
-int						check_rot(void *cam, char* l1, char *l2);
+int						check_dir(void *cam, char* l1, char *l2);
+int						check_rot(void *cam, char *l1, char *l2);
 
 static const t_objfx	g_ref[] = {
 	{"env", &env_parse},
@@ -166,6 +170,9 @@ int						key_hook(int key, t_env *e);
 void					free_env(t_env *e);
 void					debug(t_env *e);
 void					error(t_env *e, char *msg);
+
+int						my_key(int key, t_env *e);
+void					k_escape(t_env *e);
 void					quit(t_env *e, char *msg);
 
 #endif
