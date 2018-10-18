@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:15:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/18 16:15:24 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/18 17:38:46 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			stock_grad(t_env *e, t_grad *grad, char *l1, char *l2)
 		if (l1[i] != '\0')
 			wrong_type(e, l1, 0, 0);
 	}
-	free(cp);
+	ft_memdel((void**)&cp);
 }
 
 t_grad			*grad_parse_2(t_env *e, int fd)
@@ -67,13 +67,13 @@ t_grad			*grad_parse_2(t_env *e, int fd)
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_grad(e, grad, l1, l2);
-		free(l1);
-		free(l2);
-		free(line);
+		ft_memdel((void**)&l1);
+		ft_memdel((void**)&l2);
+		ft_memdel((void**)&line);
 		if (res == -1)
 			error(e, READ_ERROR);
 	}
-	free(line);
+	ft_memdel((void**)&line);
 	return (grad);
 }
 

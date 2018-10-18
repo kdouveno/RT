@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/18 16:15:17 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/18 17:37:51 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	stock_cam(t_env *e, t_cam *cam, char *l1, char *l2)
 		if (l1[i] != '\0')
 			wrong_type(e, l1, 0, 0);
 	}
-	free(cp);
+	ft_memdel((void**)&cp);
 }
 
 t_cam	*cam_parse_2(t_env *e, int fd)
@@ -62,13 +62,13 @@ t_cam	*cam_parse_2(t_env *e, int fd)
 		get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_cam(e, cam, l1, l2);
-		free(l1);
-		free(l2);
-		free(line);
+		ft_memdel((void**)&l1);
+		ft_memdel((void**)&l2);
+		ft_memdel((void**)&line);
 		if (res == -1)
 			error(e, READ_ERROR);
 	}
-	free(line);
+	ft_memdel((void**)&line);
 	return (cam);
 }
 

@@ -7,7 +7,7 @@ static void	free_clip(t_clip *clip)
 	while (clip != NULL)
 	{
 		next = clip->next;
-		free(clip);
+		ft_memdel((void**)&clip);
 		printf("\033[38;5;164mClip clean\n");
 		clip = next;
 	}
@@ -16,25 +16,15 @@ static void	free_clip(t_clip *clip)
 static void	free_obj(t_obj *obj)
 {
 	t_obj 	*next;
-	//t_clip	*next_clip;
 
 	while (obj != NULL)
 	{
 		next = obj->next;
-		/*while (obj->clips != NULL)
-		{
-			next_clip = obj->clips->next;
-			free(obj->clips);
-			printf("\033[38;5;164mClip clean\n");
-			obj->clips = next_clip;
-		}*/
 		free_clip(obj->clips);
-		free(obj);
+		ft_memdel((void**)&obj);
 		printf("\033[38;5;164mObj clean\n");
 		obj = next;
 	}
-
-
 }
 
 static void	free_lit(t_lit *lit)
@@ -44,7 +34,7 @@ static void	free_lit(t_lit *lit)
 	while (lit != NULL)
 	{
 		next = lit->next;
-		free(lit);
+		ft_memdel((void**)&lit);
 		printf("\033[38;5;164mLit clean\n");
 		lit = next;
 	}
@@ -57,7 +47,7 @@ static void	free_cam(t_cam *cam)
 	while (cam != NULL)
 	{
 		next = cam->next;
-		free(cam);
+		ft_memdel((void**)&cam);
 		printf("\033[38;5;164mCam clean\n");
 		cam = next;
 	}
@@ -70,7 +60,7 @@ static void	free_grad(t_grad *grad)
 	while (grad != NULL)
 	{
 		next = grad->next;
-		free(grad);
+		ft_memdel((void**)&grad);
 		printf("\033[38;5;164mGrad clean\n");
 		grad = next;
 	}
@@ -82,4 +72,5 @@ void		free_env(t_env *e)
 	free_lit(e->s.lits);
 	free_cam(e->s.cams);
 	free_grad(e->s.grads);
+	printf("\033[0m\n");
 }

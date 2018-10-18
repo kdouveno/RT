@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/18 16:17:54 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/18 18:13:19 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 		if (l1[i] != '\0')
 			wrong_type(e, l1, 0, 0);
 	}
-	free(cp);
+	ft_memdel((void**)&cp);
 }
 
 t_obj	*obj_parse_2(t_env *e, int type, int fd)
@@ -87,19 +87,19 @@ t_obj	*obj_parse_2(t_env *e, int type, int fd)
 
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
-	*obj = (t_obj){(t_pt){0, 0, 0}, (t_rot){0, 0, 0}, 0, type,
+	*obj = (t_obj){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, 0, type,
 		0, (t_color)0, 0, 0, 0, '\0', NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_obj(e, obj, l1, l2);
-		free(l1);
-		free(l2);
-		free(line);
+		ft_memdel((void**)&l1);
+		ft_memdel((void**)&l2);
+		ft_memdel((void**)&line);
 		if (res == -1)
 			error(e, READ_ERROR);
 	}
-	free(line);
+	ft_memdel((void**)&line);
 	return (obj);
 }
 

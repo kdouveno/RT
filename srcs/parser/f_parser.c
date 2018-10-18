@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/17 12:03:58 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/18 17:23:37 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*get_name(t_env *e, char *line, int i, int *l)
 	i_cp = 0;
 	if (!(cp = malloc(sizeof(char) * *l + 1)))
 	{
-		free(line);
+		ft_memdel((void**)&line);
 		error(e, MALLOC_ERROR);
 	}
 	while (line[i] != '{' && line[i] != '\0')
@@ -57,7 +57,7 @@ static int	link_name(char *name)
 	while (*g_ref[i].name && ft_strcmp(g_ref[i].name, name))
 		i++;
 	if ((out = g_ref[i].name[0] != '\0' ? i : -1) >= 0)
-		free(name);
+		ft_memdel((void**)&name);
 	return (out);
 }
 
@@ -72,12 +72,12 @@ static void	parse_line(t_env *e, char *line, int fd)
 	type = get_name(e, line, 0, &l);
 	if (type == NULL && l == -1)
 	{
-		free(line);
+		ft_memdel((void**)&line);
 		wrong_type(e, type, fd, 1);
 		return ;
 	}
 	l_type = ft_str_tolower(type);
-	free(type);
+	ft_memdel((void**)&type);
 	if (l_type[0] != '\0')
 	{
 		if ((t = link_name(l_type)) >= 0)
@@ -86,8 +86,8 @@ static void	parse_line(t_env *e, char *line, int fd)
 			wrong_type(e, l_type, fd, 1);
 	}
 	else
-		free(l_type);
-	free(line);
+		ft_memdel((void**)&l_type);
+	ft_memdel((void**)&line);
 }
 
 void		parse(t_env *e, char *arg)
@@ -104,7 +104,7 @@ void		parse(t_env *e, char *arg)
 		error(e, OPEN_ERROR);
 	while ((check = get_next_line(fd, &line)) > 0)
 		parse_line(e, line, fd);
-	free(line);
+	ft_memdel((void**)&line);
 	link_obj(e);
 	if (check == -1)
 		error(e, READ_ERROR);

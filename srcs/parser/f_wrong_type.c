@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:46:05 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/17 11:23:04 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/18 18:13:12 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void skip_block(t_env *e, int fd)
 	char	*line;
 
 	while ((check = get_next_line(fd, &line)) > 0 && line[0] != '}')
-		free(line);
+		ft_memdel((void**)&line);
 	if (check == -1)
 	{
-		free(line);
+		ft_memdel((void**)&line);
 		error(e, READ_ERROR);
 	}
-	free(line);
+	ft_memdel((void**)&line);
 }
 
 void	wrong_type(t_env *e, char *l_type, int fd, int skip)
@@ -36,9 +36,11 @@ void	wrong_type(t_env *e, char *l_type, int fd, int skip)
 	{
 		ft_putstr(l_type);
 		ft_putendl(" is ignored.");
-		free(l_type);
 	}
 	ft_putstr("\033[0m");
 	if (skip)
+	{
+		ft_memdel((void**)&l_type);
 		skip_block(e, fd);
+	}
 }

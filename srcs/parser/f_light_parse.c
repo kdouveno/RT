@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/17 11:18:28 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/18 17:39:17 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)
 		if (l1[i] != '\0')
 			wrong_type(e, l1, 0, 0);
 	}
-	free(cp);
+	ft_memdel((void**)&cp);
 }
 
 t_lit	*light_parse_2(t_env *e, int fd)
@@ -64,13 +64,13 @@ t_lit	*light_parse_2(t_env *e, int fd)
 	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_light(e, lit, l1, l2);
-		free(l1);
-		free(l2);
-		free(line);
+		ft_memdel((void**)&l1);
+		ft_memdel((void**)&l2);
+		ft_memdel((void**)&line);
 		if (res == -1)
 			error(e, READ_ERROR);
 	}
-	free(line);
+	ft_memdel((void**)&line);
 	return (lit);
 }
 
