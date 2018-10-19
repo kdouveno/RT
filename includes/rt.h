@@ -50,6 +50,12 @@ typedef struct			s_cam
 	struct s_cam		*next;
 }						t_cam;
 
+typedef struct			s_fd
+{
+	int					fd;
+	char*				file;
+}						t_fd;
+
 typedef struct			s_lit
 {
 	t_pt				t;
@@ -131,6 +137,7 @@ int						is_ignored(char c);
 void					wrong_type(t_env *e, char *l_type, int fd, int skip);
 
 int						get_prop(t_env *e, char *line, char **l1, char **l2);
+char					*get_name(t_env *e, char *line, int i, int *l);
 void					parse(t_env *e, char *arg);
 void					obj_parse(t_env *e, int type, int fd);
 void					light_parse(t_env *e, int type, int fd);
@@ -139,10 +146,16 @@ void					env_parse(t_env *e, int type, int fd);
 void					grad_parse(t_env *e, int type, int fd);
 void					link_obj(t_env *e);
 void					creat_clips(t_env *e, t_obj *obj, char *l2);
+void					link_mat(t_env *e, t_obj *obj, char *file);
+void					stock_obj(t_env *e, t_obj *obj, char *l1, char *l2);
 
 int						check_pt(void *cam, char* l1, char *l2);
 int						check_dir(void *cam, char* l1, char *l2);
 int						check_rot(void *cam, char *l1, char *l2);
+int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
+
+int						check_file_mat(const char *str);
+char					*file_name(char *str);
 
 static const t_objfx	g_ref[] = {
 	{"env", &env_parse},

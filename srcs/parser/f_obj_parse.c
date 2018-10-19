@@ -12,16 +12,16 @@
 
 #include "rt.h"
 
-static int		check_arg(t_obj *obj, char *l1, char *l2)
+static int		check_arg(t_env *e, t_obj *obj, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "v")))
 	{
 		obj->v1 = ft_atod(l2);
 		return (0);
 	}
-	if (!(ft_strcmp(l1, "color")))
+	if (!(ft_strcmp(l1, "clip")))
 	{
-		obj->color = (t_color)ft_atoi(l2);
+		creat_clips(e, obj, l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "id")))
@@ -38,7 +38,7 @@ static int		check_arg(t_obj *obj, char *l1, char *l2)
 	return(1);
 }
 
-static int		check_arg_2(t_env *e, t_obj *obj, char* l1, char *l2)
+int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
  {
 	if (!(ft_strcmp(l1, "diff")))
  	{
@@ -50,9 +50,14 @@ static int		check_arg_2(t_env *e, t_obj *obj, char* l1, char *l2)
 		obj->spec = ft_atod(l2);
 		return (0);
 	}
-	if (!(ft_strcmp(l1, "clip")))
+	if (!(ft_strcmp(l1, "color")))
 	{
-		creat_clips(e, obj, l2);
+		obj->color = (t_color)ft_atoi(l2);
+		return (0);
+	}
+	if (!(ft_strcmp(l1, "mat")) && check_file_mat(l2))
+	{
+		link_mat(e, obj, ft_strjoin("mat/", l2));
 		return (0);
 	}
 	return (1);
@@ -65,8 +70,8 @@ void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 
 	i = 0;
 	cp = ft_str_tolower(l1);
-	if (check_pt(obj, cp, l2) == 1 && check_arg(obj, cp, l2 ) == 1 &&
-		check_rot(obj, cp, l2) == 1 && check_arg_2(e, obj, cp, l2) == 1
+	if (check_pt(obj, cp, l2) == 1 && check_arg(e, obj, cp, l2 ) == 1 &&
+		check_rot(obj, cp, l2) == 1 && check_mat(e, obj, cp, l2) == 1
 		&& check_dir(obj, cp, l2) == 1)
 	{
 		while (is_ignored(l1[i]) == 1)

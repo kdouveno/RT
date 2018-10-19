@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static char	*get_name(t_env *e, char *line, int i, int *l)
+char	*get_name(t_env *e, char *line, int i, int *l)
 {
 	char	*cp;
 	int		i_cp;

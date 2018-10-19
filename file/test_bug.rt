@@ -1,3 +1,4 @@
 cuboid{
-	pain:6
+	tx:6
+	mat:iron.mat
 }

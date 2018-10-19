@@ -67,6 +67,7 @@ sphere{
 	id:36
 	spec:0.35
 	clip:-78
+	mat:iron.mat
 }
 
 
