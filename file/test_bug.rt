@@ -1,4 +1,5 @@
 cuboid{
 	tx:6
-	mat:iron.mat
+	mat:iron
+	ty:8
 }

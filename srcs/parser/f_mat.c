@@ -71,7 +71,14 @@ void	link_mat(t_env *e, t_obj *obj, char *file)
 	char		*line;
 
 	if ((fd.fd = open(file, O_RDONLY)) == -1)
-		error(e, OPEN_ERROR);
+	{
+		ft_putstr("");
+		ft_putstr("\033[38;5;203mFail to open the file ");
+		ft_putstr(file);
+		ft_putstr("\033[0m");
+		ft_putchar('\n');
+		return;
+	}
 	while ((check = get_next_line(fd.fd, &line)) > 0)
 		parse_line(e, obj, line, fd);
 	ft_memdel((void**)&line);
