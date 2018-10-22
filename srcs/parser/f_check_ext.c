@@ -39,6 +39,7 @@ char	*file_name(char *str)
 	check_last(str, &last, '/');
 	name = str;
 	len = ft_strlen(name);
+	out = NULL;
 	if (len > 4)
 	{
 		if(!(out = malloc(sizeof(char) * len - last - 4 + 1)))
@@ -50,7 +51,7 @@ char	*file_name(char *str)
 			last++;
 			i++;
 		}
+		out[i] = '\0';
 	}
-	out[i] = '\0';
 	return (out);
 }
