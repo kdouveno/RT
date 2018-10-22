@@ -14,20 +14,20 @@
 
 int		check_arg(t_lit *lit, char *l1, char *l2)
 {
-	if (!(ft_strcmp(l1, "power")))
-	{
-		lit->power = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "color")))
-	{
-		lit->color = (t_color)ft_atoi(l2);
-		return (0);
-	}
 	if (!(ft_strcmp(l1, "id")))
 	{
 		lit->id = ft_atoi(l2);
 		lit->id = lit->id < 0 ? -lit->id : lit->id;
+		return (0);
+	}
+	else if (!(ft_strcmp(l1, "power")))
+	{
+		lit->power = ft_atod(l2);
+		return (0);
+	}
+	else if (!(ft_strcmp(l1, "color")))
+	{
+		lit->color = (t_color)ft_atoi(l2);
 		return (0);
 	}
 	return (1);

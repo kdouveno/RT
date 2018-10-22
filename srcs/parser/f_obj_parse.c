@@ -19,48 +19,48 @@ static int		check_arg(t_env *e, t_obj *obj, char *l1, char *l2)
 		obj->v1 = ft_atod(l2);
 		return (0);
 	}
-	if (!(ft_strcmp(l1, "clip")))
-	{
-		creat_clips(e, obj, l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "id")))
+	else if (!(ft_strcmp(l1, "id")))
 	{
 		obj->id = ft_atoi(l2);
 		obj->id = obj->id < 0 ? -obj->id : obj->id;
 		return (0);
 	}
-	if (!(ft_strcmp(l1, "disp")))
+	else if (!(ft_strcmp(l1, "clip")))
+	{
+		creat_clips(e, obj, l2);
+		return (0);
+	}
+	else if (!(ft_strcmp(l1, "disp")))
 	{
 		obj->disp = l2[0];
 		return (0);
 	}
-	return(1);
+	return (1);
 }
 
 int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
  {
-	if (!(ft_strcmp(l1, "diff")))
+	if (!(ft_strcmp(l1, "mat")))
+ 	{
+ 		if (check_file_mat(l2) && l2[0])
+ 			wrong_type(e, l1, 0, 0);
+ 		else if (l2[0])
+ 			link_mat(e, obj, ft_strjoin("mat/", l2));
+ 		return (0);
+ 	}
+	else if (!(ft_strcmp(l1, "diff")))
  	{
  		obj->diff = ft_atod(l2);
  		return (0);
  	}
-	if (!(ft_strcmp(l1, "spec")))
+	else if (!(ft_strcmp(l1, "spec")))
 	{
 		obj->spec = ft_atod(l2);
 		return (0);
 	}
-	if (!(ft_strcmp(l1, "color")))
+	else if (!(ft_strcmp(l1, "color")))
 	{
 		obj->color = (t_color)ft_atoi(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "mat")))
-	{
-		if (check_file_mat(l2) && l2[0])
-			wrong_type(e, l1, 0, 0);
-		else if (l2[0])
-			link_mat(e, obj, ft_strjoin("mat/", l2));
 		return (0);
 	}
 	return (1);
