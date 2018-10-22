@@ -70,9 +70,9 @@ void	link_mat(t_env *e, t_obj *obj, char *file)
 	int			check;
 	char		*line;
 
+	fd.file = file;
 	if ((fd.fd = open(file, O_RDONLY)) == -1)
 	{
-		ft_putstr("");
 		ft_putstr("\033[38;5;203mFail to open the file ");
 		ft_putstr(file);
 		ft_putstr("\033[0m");
@@ -86,4 +86,5 @@ void	link_mat(t_env *e, t_obj *obj, char *file)
 		error(e, READ_ERROR);
 	if (close(fd.fd) == -1)
 		error(e, CLOSE_ERROR);
+	ft_memdel((void**)&file);
 }

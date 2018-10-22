@@ -7,7 +7,7 @@ int		check_file_mat(const char *str)
 	len = ft_strlen(str);
 	if (len > 4)
 	{
-		if (ft_strcmp(&(str[len - 4]), ".mat"))
+		if (!(ft_strcmp(&(str[len - 4]), ".mat")))
 			return (0);
 		else
 			return (1);
