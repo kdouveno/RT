@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/18 16:16:04 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/22 15:22:34 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # define DIMX 900
 # define DIMY 700
-# define FOV 60
+# define FOV 85
 
 typedef struct			s_mlx
 {

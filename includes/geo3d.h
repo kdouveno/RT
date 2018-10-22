@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/18 14:34:06 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/22 15:18:52 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_vec				vec_rev(t_vec v);
 t_pt				apply(t_vec v, t_pt p);
 double				angle(t_vec a, t_vec b);
 double				scalar_product(t_vec a, t_vec b);
+t_rot				get_rot(t_vec a, double x);
 
 double				sphere_line(t_line d, double r);
 double				cone_line(t_line d, double a);

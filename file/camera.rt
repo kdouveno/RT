@@ -1,13 +1,14 @@
 camera{
 	antialiasing:1
 	tx:5
-
+	fov:60
 	ty:6
 	tz:7
 	id:asdf
+	r:0
 	dirx:50
-	diry:40
-	dirz:9
+	diry:50
+	dirz:0
 }
 
 camera{

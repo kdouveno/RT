@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/18 18:28:51 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/22 15:59:47 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ static void	init_cam(t_env *e)
 	dist = (double)(DIMX / 2) / tan(rad(FOV / 2));
 	while (cams != NULL)
 	{
-		cams->fov = FOV;
-		cams->dir = (t_vec){0, 0, dist};
-		cams->vp_ul = apply(cams->t, apply(cams->dir,
-			(t_vec){-DIMX / 2, DIMY / 2, 0}));
+		if (cams->r >= 0)
+			cams->dir = get_rot(cams->dir, cams->r);
+		else
+			cams->dir = (t_three_d){rad(cams->dir.x), rad(cams->dir.y), rad(cams->dir.z)};
+		cams->vp_ul = (t_vec){(DIMX / 2) / tan(cams->fov / 2), -DIMX / 2, -DIMY / 2};
+		cams->vp_ul = rot(cams->vp_ul, cams->dir);
 		cams = cams->next;
 	}
 }
