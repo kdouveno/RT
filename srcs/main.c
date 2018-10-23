@@ -62,11 +62,7 @@ int		main(int argc, char **argv)
 {
 	t_env		e;
 
-	if (argc != 2 && argc != 3)
-		error(&e, USAGE);
-	parse(&e, argv[1]);
-	if (argc == 3 && ft_strcmp(argv[2], "debug") == 0)
-		debug(&e);
+	arg(&e, argc, argv);
 	ft_window(&e);
 	free_env(&e);
 	return (0);

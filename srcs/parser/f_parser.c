@@ -96,10 +96,6 @@ void		parse(t_env *e, char *arg)
 	int		check;
 	char	*line;
 
-	e->s.objs = NULL;
-	e->s.lits = NULL;
-	e->s.cams = NULL;
-	e->s.grads = NULL;
 	if ((fd = open(arg, O_RDONLY)) == -1)
 		error(e, OPEN_ERROR);
 	while ((check = get_next_line(fd, &line)) > 0)
