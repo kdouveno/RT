@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 10:49:38 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/22 16:13:27 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/23 14:01:46 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ t_rot	get_rot(t_vec a, double x)
 
 	y = (t_vec){a.x, 0, a.z};
 	z = (t_vec){a.x, a.y, 0};
-	printf("a (%f %f %f)", z.x, z.y, z.z);
 	out.x = x;
 	out.y = angle(y, (t_vec){1, 0, 0});
 	out.z = angle(z, (t_vec){1, 0, 0});
-	printf("out (%f %f %f)", out.x, out.y, out.z);
 	return (out);
 }
