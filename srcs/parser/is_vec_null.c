@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   is_vec_null.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 15:46:22 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/18 18:33:12 by gperez           ###   ########.fr       */
+/*   Created: 2018/10/23 17:40:03 by gperez            #+#    #+#             */
+/*   Updated: 2018/10/23 17:41:14 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "rt.h"
 
-void	ft_memdel(void **ap)
+int	is_vec_null(t_vec vec)
 {
-	if (ap != NULL && *ap != NULL)
-	{
-		free(*ap);
-		*ap = NULL;
-	}
+	return (vec.x == 0 && vec.y == 0 && vec.z == 0);
 }

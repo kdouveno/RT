@@ -16,11 +16,12 @@ sphere{
 	sz:1.4
 
 	ray: 0.5
-	color: .deg1
+	color: 78
+	id:5
 }
 
-deg {
-	id: deg1
+grad{
+	id: 78
 	tx: 0
 	ty: 0
 	tz: 0
@@ -31,4 +32,9 @@ deg {
 
 	c1: #FF3030
 	c2: #3030FF
+}
+
+grad{
+	c1: 15
+	id: 30
 }
