@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/22 15:22:34 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/24 15:53:13 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,39 @@
 # include "geo3d.h"
 # include "libft.h"
 # include "gnl.h"
+# include "X.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
 # define DIMX 900
 # define DIMY 700
 # define FOV 85
+# define THRD_CNT 100
+# define TEMP_IMG
 
-typedef struct			s_mlx
+typedef struct			s_global
 {
 	void				*ptr;
 	void				*win;
 	void				*iptr;
 	int					*img;
-	int					imgul[3];
-}						t_mlx;
+	int					iarg[3];
+	int					thread_count;
+}						t_global;
 
 typedef struct			s_wininfo
 {
 	int					x;
 	int					y;
 }						t_wininfo;
+
+typedef struct			s_cam_render
+{
+	t_vec				x;
+	t_vec				y;
+	int					ix;
+	int					iy;
+}						t_cam_render;
 
 typedef struct			s_cam
 {
@@ -47,6 +59,7 @@ typedef struct			s_cam
 	double				fov;
 	int					antialia;
 	int					id;
+	t_cam_render		data;
 	struct s_cam		*next;
 }						t_cam;
 
@@ -107,9 +120,16 @@ typedef struct			s_scene
 	t_grad				*grads;
 }						t_scene;
 
+typedef struct			s_rendering
+{
+	t_env				*e;
+	t_cam				*c;
+}						t_rendering;
+
+
 typedef struct			s_env
 {
-	t_mlx				mlx;
+	t_global			glb;
 	t_wininfo			w;
 	t_scene				s;
 }						t_env;

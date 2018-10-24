@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/23 18:33:29 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/24 15:58:39 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,52 @@ static void	init_cam(t_env *e)
 	}
 }
 
-start_rendering(t_env *e, int i)
+void	render(t_env *e)
+{
+	
+}
+
+void	start_rendering(t_env *e, int ncam)
+{
+	pthread_t	thds[THRD_CNT];
+	int			i;
+	t_cam		*c;
+
+	i = 0;
+	while (i < ncam && c)
+	{
+		c = c->next;
+		i++;
+	}
+	!c ? return :;
+	while (i < THRD_CNT)
+	{
+		if (pthread_create(thds + i, NULL, &render, &(t_rendering){e, c}))
+			error(e, PTHR_ERROR);
+		i++;
+	}
+	while (i >= 0)
+	{
+		pthread_join(thds + i, NULL);
+		i--;
+	}
+}
 
 static void	ft_window(t_env *e)
 {
-	if ((e->mlx.ptr = mlx_init()) == NULL
-	|| (e->mlx.win = mlx_new_window(e->mlx.ptr, DIMX,
+	if ((e->glb.ptr = mlx_init()) == NULL
+	|| (e->glb.win = mlx_new_window(e->glb.ptr, DIMX,
 		DIMY, "RT")) == NULL
-	|| (e->mlx.imgptr = mlx_new_image(e->mlx.ptr, DIMX, DIMY)) == NULL
-	|| (e->mlx.img = (int*)mlx_get_data_addr(e->mlx.imgptr, e->mlx.imgarg,
-		e->mlx.imgarg + 1, e->mlx.imgarg + 2)) == NULL)
+	|| (e->glb.iptr = mlx_new_image(e->glb.ptr, DIMX, DIMY)) == NULL
+	|| (e->glb.img = (int*)mlx_get_data_addr(e->glb.iptr, e->glb.iarg,
+		e->glb.iarg + 1, e->glb.iarg + 2)) == NULL)
 		error(e, MLX_ERROR);
 
 	init_cam(e);
-	rendering()
-	mlx_put_image_to_window(e->mlx.ptr, e->mlx.win, e->mlx.imgptr, 0, 0);
-	mlx_hook(e->mlx.win, KeyPress, KeyPressMask, my_key, e);
-	mlx_loop(e->mlx.ptr);
+	start_rendering(e, 0);
+	mlx_put_image_to_window(e->glb.ptr, e->glb.win, e->glb.iptr, 0, 0);
+	mlx_hook(e->glb.win, KeyPress, KeyPressMask, my_key, e);
+	mlx_loop(e->glb.ptr);
 }
 
 int		main(int argc, char **argv)
