@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/22 15:22:34 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/24 15:14:19 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,18 @@ typedef struct			s_fd
 	char*				file;
 }						t_fd;
 
+typedef struct			s_bool
+{
+	unsigned char		c1 : 1;
+	unsigned char		c2 : 1;
+}						t_bool;
+
 typedef struct			s_lit
 {
 	t_pt				t;
 	float				power;
 	t_color				color;
+	t_bool				b;
 	int					id;
 	struct s_lit		*next;
 }						t_lit;
@@ -72,6 +79,7 @@ typedef struct			s_grad
 	int					id;
 	t_color				color1;
 	t_color				color2;
+	t_bool				b;
 	struct s_grad		*next;
 }						t_grad;
 
@@ -83,6 +91,7 @@ typedef struct			s_obj
 	int					type;
 	double				v1;
 	t_color				color;
+	t_bool				b;
 	float				diff;
 	float				spec;
 	int					id;
@@ -134,6 +143,7 @@ typedef struct			s_objfx
 
 int						is_name_char(char c);
 int						is_ignored(char c);
+int						is_vec_null(t_vec vec);
 void					wrong_type(t_env *e, char *l_type, int fd, int skip);
 
 int						get_prop(t_env *e, char *line, char **l1, char **l2);
@@ -144,6 +154,7 @@ void					light_parse(t_env *e, int type, int fd);
 void					cam_parse(t_env *e, int type, int fd);
 void					env_parse(t_env *e, int type, int fd);
 void					grad_parse(t_env *e, int type, int fd);
+void					parse_color(t_obj *obj, char *l2, t_grad *grad, int nb);
 void					link_obj(t_env *e);
 void					creat_clips(t_env *e, t_obj *obj, char *l2);
 void					link_mat(t_env *e, t_obj *obj, char *file);

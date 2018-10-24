@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 12:55:48 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/01 16:14:49 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/23 16:28:58 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	exachar(char c)
 	i = 0;
 	if (c >= 'a' && c <= 'f')
 		c -= 32;
+	else if (c >= 'A' && c <= 'F')
+		c -= 16;
 	while (g_exachar[i])
 	{
 		if (g_exachar[i] == c)
