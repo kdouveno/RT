@@ -100,6 +100,7 @@ pyramid{
 	clip:79
 	clip:36
 	clip:-52
+	color:89
 }
 
 grad{
@@ -109,8 +110,8 @@ grad{
 	dirx:50
 	diry:96
 	dirz:45
-	color1:50
-	color2:70
+	color1:#787878
+	color2:#585696
 	id:78
 }
 grad{
@@ -120,7 +121,12 @@ grad{
 	dirx:50
 	diry:96
 	dirz:45
-	color1:50
-	color2:70
+	c1:#896532
+	c2:#741414
 	id:57
+}
+
+grad{
+	id: 89
+	c1:#999999
 }

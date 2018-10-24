@@ -1,4 +1,4 @@
-env{
+camera{
 	antialiasing:1
 }
 
@@ -7,15 +7,11 @@ sphere{
 	ty:6
 	tz:0.25
 
-	rx:30
-	ry:70
-	rz:0
+	dirx:30
+	diry:70
+	dirz:0
 
-	sx:1.1
-	sy:1.5
-	sz:1.4
-
-	ray: 0.5
+	v: 0.5
 	color: 78
 	id:5
 }
@@ -26,9 +22,9 @@ grad{
 	ty: 0
 	tz: 0
 
-	vx: 10
-	vy: 10
-	vz: 10
+	dirx: 10
+	diry: 10
+	dirz: 10
 
 	c1: 85
 	c2: #3030FF

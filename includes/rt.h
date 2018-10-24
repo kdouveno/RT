@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/24 15:14:19 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/24 15:44:47 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,10 @@ void					env_parse(t_env *e, int type, int fd);
 void					grad_parse(t_env *e, int type, int fd);
 void					parse_color(t_obj *obj, char *l2, t_grad *grad, int nb);
 void					link_obj(t_env *e);
-void					creat_clips(t_env *e, t_obj *obj, char *l2);
+void					link_color_obj(t_env *e);
+void					link_color_grad(t_env *e);
 void					link_mat(t_env *e, t_obj *obj, char *file);
+void					creat_clips(t_env *e, t_obj *obj, char *l2);
 void					stock_obj(t_env *e, t_obj *obj, char *l1, char *l2);
 
 int						check_pt(void *cam, char* l1, char *l2);
