@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/23 17:41:39 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/24 11:16:56 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ typedef struct			s_scene
 	t_lit				*lits;
 	t_cam				*cams;
 	t_grad				*grads;
-	t_
 }						t_scene;
 
 typedef struct			s_env

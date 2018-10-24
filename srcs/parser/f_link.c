@@ -6,17 +6,63 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/23 18:05:19 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/24 11:30:58 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void		search_id(t_grad *grad, int id)
+static void		grad_vec_nonull(t_grad *grads, t_grad *save_g)
 {
-	t_grad	*save;
+	while (save_g)
+	{
+		if (is_vec_null(save_g->dir) ==  && (save_g->id == grads->color1 ||
+			save_g->id == grads->color2))
+		{
+			if (save_g->id == grads->color1)
+				grads->color1 = save_g->color1;
+			else
+				grads->color2 = save_g->color1;
+			return ;
+		}
+		else if (save_g->id == grads->color1 || save_g->id == grads->color2)
+		{
+			if (save_g->b.c1 == 0)
+			{
+				if (save_g->id == grads->color1)
+					grads->color1 = save_g->color1;
+				else
+					grads->color2 = save_g->color1;
+			}
+			else
+				grads->color1 = 0;
+			return ;
+		}
+		save_g = save_g->next;
+	}
+	grads->color1 = 0;
+}
 
-	save = e->s.grads;
+static void		grad_vec_null(t_grad *grads, t_grad *save_g)
+{
+	while (save_g)
+	{
+		if (save_g->id == grads->color1 && is_vec_null(save_g->dir) == 1)
+		{
+			grads->color1 = save_g->color1;
+			return ;
+		}
+		else if (save_g->id == grads->color1)
+		{
+			if (save_g->b.c1 == 0)
+				grads->color1 = save_g->color1;
+			else
+				grads->color1 = 0;
+			return ;
+		}
+		save_g = save_g->next;
+	}
+	grads->color1 = 0;
 }
 
 static void		link_grad(t_env *e)
@@ -29,22 +75,11 @@ static void		link_grad(t_env *e)
 	grads = e->s.grads;
 	while (grads)
 	{
-		if (is_vec_null(grads->dir) == 1)
-		{
-			if (grads->b.c1 == 1)
-			{
-				while (save_g)
-				{
-					if (save_g->id == grads->color &&
-						is_vec_null(save_g->dir) == 1)
-						grads->color = save_g->color;
-					else if (save_g->id == grads->color)
-					{
-
-					}
-				}
-			}
-		}
+		if (grads->b.c1 == 1 && is_vec_null(grads->dir) == 1)
+			grad_vec_null(grads, e->s.grads);
+		else if (grads->b.c1 == 1)
+			grad_vec_nonull(grads, e->s.grads);
+		grads = grads->next;
 	}
 }
 
@@ -98,6 +133,6 @@ void	link_clips(t_env *e)
 
 void		link_obj(t_env *e)
 {
-	link_color(e);
+	link_grad(e);
 	link_clips(e);
 }
