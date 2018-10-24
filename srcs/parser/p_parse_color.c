@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 17:10:28 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/23 18:37:39 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/24 12:42:39 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static void		parse_color_obj(t_obj *obj, char *l2)
 {
 	obj->b.c1 = l2[0] == '#' ? 0 : 1;
 	if (l2[0] == '#')
-		obj->color = ft_extoi(l2);
+		obj->color.i = ft_extoi(&(l2[1]));
 	else
-		obj->color = ft_atoi(l2);
+		obj->color.i = ft_atoi(l2);
 }
 static void		parse_color_grad(t_grad *grad, char *l2, int nb)
 {
@@ -26,17 +26,17 @@ static void		parse_color_grad(t_grad *grad, char *l2, int nb)
 	{
 		grad->b.c1 = l2[0] == '#' ? 0 : 1;
 		if (l2[0] == '#')
-			grad->color = ft_extoi(l2);
+			grad->color1.i = ft_extoi(&l2[1]);
 		else
-			grad->color = ft_atoi(l2);
+			grad->color1.i = ft_atoi(l2);
 	}
 	else
 	{
 		grad->b.c2 = l2[0] == '#' ? 0 : 1;
 		if (l2[0] == '#')
-			grad->color = ft_extoi(l2);
+			grad->color2.i = ft_extoi(&l2[1]);
 		else
-			grad->color = ft_atoi(l2);
+			grad->color2.i = ft_atoi(l2);
 	}
 }
 
