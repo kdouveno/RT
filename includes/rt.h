@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/24 15:44:47 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/26 14:41:41 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,13 @@ typedef struct			s_grad
 	struct s_grad		*next;
 }						t_grad;
 
+typedef struct			s_mat
+{
+	t_color				color;
+	float				diff;
+	float				spec;
+}						t_mat;
+
 typedef struct			s_obj
 {
 	t_pt				t;
@@ -90,10 +97,8 @@ typedef struct			s_obj
 	double				r;
 	int					type;
 	double				v1;
-	t_color				color;
+	t_mat				mat;
 	t_bool				b;
-	float				diff;
-	float				spec;
 	int					id;
 	char				disp;
 	struct s_clip		*clips;
