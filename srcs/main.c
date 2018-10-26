@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/24 15:58:39 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/26 17:56:04 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	init_cam(t_env *e)
 {
 	t_cam	*cams;
 	double	dist;
+	t_vec	vp_ul;
 
 	cams = e->s.cams;
 	dist = (double)(DIMX / 2) / tan(rad(FOV / 2));
@@ -35,23 +36,41 @@ static void	init_cam(t_env *e)
 			cams->dir = get_rot(cams->dir, cams->r);
 		else
 			cams->dir = (t_three_d){rad(cams->dir.x), rad(cams->dir.y), rad(cams->dir.z)};
-		cams->vp_ul = (t_vec){(DIMX / 2) / tan(cams->fov / 2), -DIMX / 2, -DIMY / 2};
-		cams->vp_ul = rot(cams->vp_ul, cams->dir);
+		vp_ul = (t_vec){dist, -DIMX *  / 2, -DIMY / 2};
+		vp_ul = rot(vp_ul, cams->dir);
+		cams->data = (t_cam_render){vp_ul,
+			rot((t_vec){0, -1, 0}, cams->dir),
+			rot((t_vec){0, 0, -1}, cams->dir), 0, 0};
 		cams = cams->next;
 	}
 }
 
-void	render(t_env *e)
+raytrace(t_rendering *e, t_line l, int aa, double m)
 {
-	
+	if (aa)
+	{
+		return (apply(l, vec_pro(e->c->)))
+	}
+}
+
+void	render(t_rendering *r)
+{
+	int		ix;
+	int		iy;
+
+	pthread_mutex_lock(&r->lock);
+	raytrace();
 }
 
 void	start_rendering(t_env *e, int ncam)
 {
-	pthread_t	thds[THRD_CNT];
-	int			i;
-	t_cam		*c;
+	t_rendering		r;
+	pthread_t		thds[THRD_CNT];
+	int				i;
+	t_cam			*c;
 
+	r.lock = PTHREAD_MUTEX_INITIALIZER;
+	r.e = e;
 	i = 0;
 	while (i < ncam && c)
 	{
@@ -59,9 +78,10 @@ void	start_rendering(t_env *e, int ncam)
 		i++;
 	}
 	!c ? return :;
+	r.c = c;
 	while (i < THRD_CNT)
 	{
-		if (pthread_create(thds + i, NULL, &render, &(t_rendering){e, c}))
+		if (pthread_create(thds + i, NULL, &render, &(ncam)))
 			error(e, PTHR_ERROR);
 		i++;
 	}

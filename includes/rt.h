@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/24 15:53:13 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/26 17:55:50 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,15 @@ typedef struct			s_wininfo
 
 typedef struct			s_cam_render
 {
+	t_pt				vp_ul;
 	t_vec				x;
 	t_vec				y;
+	double				fov;
 	int					ix;
 	int					iy;
+	int					dimx;
+	int					dimy;
+	int					antialia;
 }						t_cam_render;
 
 typedef struct			s_cam
@@ -55,9 +60,7 @@ typedef struct			s_cam
 	t_pt				t;
 	t_three_d			dir;
 	double				r;
-	t_pt				vp_ul;
-	double				fov;
-	int					antialia;
+
 	int					id;
 	t_cam_render		data;
 	struct s_cam		*next;
@@ -122,6 +125,7 @@ typedef struct			s_scene
 
 typedef struct			s_rendering
 {
+	p_thread_mutex		lock;
 	t_env				*e;
 	t_cam				*c;
 }						t_rendering;
