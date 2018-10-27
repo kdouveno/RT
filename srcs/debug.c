@@ -78,7 +78,7 @@ static void	debug_cams(t_cam *save)
 		"Antialiasing: %d\nID: %d\n\n",
 		save->t.x, save->t.y, save->t.z,
 		save->dir.x, save->dir.y, save->dir.z,
-		save->antialia, save->id);
+		save->data.antialia, save->id);
 		save = save->next;
 	}
 }

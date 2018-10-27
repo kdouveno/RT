@@ -16,6 +16,7 @@
 # include "geo3d.h"
 # include "libft.h"
 # include "gnl.h"
+# include <pthread.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -23,14 +24,15 @@
 # define DIMY 700
 # define FOV 85
 
-typedef struct			s_mlx
+typedef struct			s_global
 {
 	void				*ptr;
 	void				*win;
 	void				*iptr;
 	int					*img;
-	int					imgul[3];
-}						t_mlx;
+	int					iarg[3];
+	int					thread_count;
+}						t_global;
 
 typedef struct			s_wininfo
 {
@@ -38,15 +40,26 @@ typedef struct			s_wininfo
 	int					y;
 }						t_wininfo;
 
+typedef struct			s_cam_render
+{
+	t_pt				vp_ul;
+	t_vec				x;
+	t_vec				y;
+	double				fov;
+	int					ix;
+	int					iy;
+	int					dimx;
+	int					dimy;
+	int					antialia;
+}						t_cam_render;
+
 typedef struct			s_cam
 {
 	t_pt				t;
 	t_three_d			dir;
 	double				r;
-	t_pt				vp_ul;
-	double				fov;
-	int					antialia;
 	int					id;
+	t_cam_render		data;
 	struct s_cam		*next;
 }						t_cam;
 
@@ -106,6 +119,12 @@ typedef struct			s_obj
 	struct s_obj		*next;
 }						t_obj;
 
+typedef struct			s_set
+{
+	double				t;
+	struct s_set		*next;
+}						t_set;
+
 typedef struct			s_clip
 {
 	int					id;
@@ -123,16 +142,17 @@ typedef struct			s_scene
 
 typedef struct			s_env
 {
-	t_mlx				mlx;
+	t_global			glb;
 	t_wininfo			w;
 	t_scene				s;
 }						t_env;
 
-typedef struct			s_set
+typedef struct			s_rendering
 {
-	double				t;
-	struct s_set		*next;
-}						t_set;
+	pthread_mutex_t		lock;
+	t_env				*e;
+	t_cam				*c;
+}						t_rendering;
 
 typedef struct			s_insecres
 {

@@ -22,7 +22,7 @@ void		error(t_env *e, char *msg)
 	exit(0);
 }
 
-static void	init_cam(t_env *e)
+/*static void	init_cam(t_env *e)
 {
 	t_cam	*cams;
 
@@ -37,31 +37,32 @@ static void	init_cam(t_env *e)
 		cams->vp_ul = rot(cams->vp_ul, cams->dir);
 		cams = cams->next;
 	}
-}
+}*/
 
-static void	ft_window(t_env *e)
+/*static void	ft_window(t_env *e)
 {
-	/*if ((e->mlx.ptr = mlx_init()) == NULL
+	if ((e->mlx.ptr = mlx_init()) == NULL
 	|| (e->mlx.win = mlx_new_window(e->mlx.ptr, DIMX,
 		DIMY, "RT")) == NULL
 	|| (e->mlx.imgptr = mlx_new_image(e->mlx.ptr, DIMX, DIMY)) == NULL
 	|| (e->mlx.img = (int*)mlx_get_data_addr(e->mlx.imgptr, e->mlx.imgarg,
 		e->mlx.imgarg + 1, e->mlx.imgarg + 2)) == NULL)
 		error(e, MLX_ERROR);
-	*/
+
 	init_cam(e);
-	/*
+
 	mlx_put_image_to_window(e->mlx.ptr, e->mlx.win, e->mlx.imgptr, 0, 0);
 	mlx_hook(e->mlx.win, KeyPress, KeyPressMask, my_key, e);
 	mlx_loop(e->mlx.ptr);
-*/}
+}*/
 
 int		main(int argc, char **argv)
 {
 	t_env		e;
 
+	e.glb.thread_count = 100;
 	arg(&e, argc, argv);
-	ft_window(&e);
+	//ft_window(&e);
 	free_env(&e);
 	return (0);
 }
