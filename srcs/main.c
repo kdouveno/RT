@@ -25,10 +25,8 @@ void		error(t_env *e, char *msg)
 static void	init_cam(t_env *e)
 {
 	t_cam	*cams;
-	double	dist;
 
 	cams = e->s.cams;
-	dist = (double)(DIMX / 2) / tan(rad(FOV / 2));
 	while (cams != NULL)
 	{
 		if (cams->r >= 0)

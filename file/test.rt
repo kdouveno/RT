@@ -46,9 +46,9 @@ cuboid{
 	tx:1
 	ty:-6
 	tz:6
-	rx:-5
-	ry:-60
-	rz:70
+	dirx:-5
+	diry:-60
+	dirz:70
 	disp:a
 	diff:9
 	id:79
@@ -59,9 +59,9 @@ sphere{
 	tx:1
 	ty:-6
 	tz:6
-	rx:-5
-	ry:-60
-	rz:70
+	dirx:-5
+	diry:-60
+	dirz:70
 	disp:a
 	diff:9
 	id:36
@@ -75,9 +75,9 @@ cylinder{
 	tx:1
 	ty:-6
 	tz:6
-	rx:-5
-	ry:-60
-	rz:70
+	dirx:-5
+	diry:-60
+	dirz:70
 	disp:a
 	diff:9
 	id:52
@@ -90,9 +90,9 @@ pyramid{
 	ty:6
 	tz:6
 
-	rx:5
-	ry:60
-	rz:70
+	dirx:5
+	diry:60
+	dirz:70
 	disp:a
 	diff:9
 	spec:0.35

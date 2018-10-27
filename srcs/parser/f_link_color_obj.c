@@ -16,25 +16,23 @@ static void		color_obj(t_obj *objs, t_grad *save_g)
 {
 	while (save_g)
 	{
-		if (save_g->id == objs->color.i)
+		if (save_g->id == objs->mat.color.i)
 		{
 			if (save_g->b.c1 == 0)
-				objs->color.i = save_g->color1.i;
+				objs->mat.color.i = save_g->color1.i;
 			else
-				objs->color.i = 0;
+				objs->mat.color.i = 0;
 			return ;
 		}
 		save_g = save_g->next;
 	}
-	objs->color.i = 0;
+	objs->mat.color.i = 0;
 }
 
 void		link_color_obj(t_env *e)
 {
 	t_obj	*objs;
-	int		check;
 
-	check = 0;
 	objs = e->s.objs;
 	while (objs)
 	{

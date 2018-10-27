@@ -38,8 +38,8 @@ static void	debug_objs(t_obj *save, t_clip *clips)
 		"Display: %c\nLinked to %p\n",
 		g_ref[save->type].name, save->t.x, save->t.y, save->t.z,
 		save->dir.x, save->dir.y, save->dir.z,
-		save->v1, save->color.i, save->diff,
-		save->spec, save->id, save->disp, save->grad);
+		save->v1, save->mat.color.i, save->mat.diff,
+		save->mat.spec, save->id, save->disp, save->grad);
 		ft_putstr("\n\033[38;5;136m");
 		clips = save->clips;
 		while (clips != NULL)
