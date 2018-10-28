@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/26 17:56:04 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/28 20:03:03 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,43 +24,72 @@ void		error(t_env *e, char *msg)
 
 static void	init_cam(t_env *e)
 {
-	t_cam	*cams;
-	double	dist;
-	t_vec	vp_ul;
+	t_cam			*cams;
+	t_cam_render	*d;
 
 	cams = e->s.cams;
-	dist = (double)(DIMX / 2) / tan(rad(FOV / 2));
 	while (cams != NULL)
 	{
+		d = &cams->data;
 		if (cams->r >= 0)
 			cams->dir = get_rot(cams->dir, cams->r);
 		else
-			cams->dir = (t_three_d){rad(cams->dir.x), rad(cams->dir.y), rad(cams->dir.z)};
-		vp_ul = (t_vec){dist, -DIMX *  / 2, -DIMY / 2};
-		vp_ul = rot(vp_ul, cams->dir);
-		cams->data = (t_cam_render){vp_ul,
-			rot((t_vec){0, -1, 0}, cams->dir),
-			rot((t_vec){0, 0, -1}, cams->dir), 0, 0};
+			cams->dir = (t_three_d){rad(cams->dir.x),
+			rad(cams->dir.y), rad(cams->dir.z)};
+		d->xmax = d->dimx * d->antialia;
+		d->ymax = d->dimy * d->antialia;
+		d->vp_ul = rot((t_vec){(double)(d->xmax / 2) / tan(rad(d->fov / 2)),
+			-d->xmax / 2, -d->ymax / 2}, cams->dir);
+		d->x = rot((t_vec){0, -1, 0}, cams->dir);
+		d->y = rot((t_vec){0, d->xmax - 1, -1}, cams->dir);
+		if (!(d->win = mlx_new_window(e->glb.ptr, d->dimx, d->dimy, "RT"))
+		|| !(d->iptr = mlx_new_image(e->glb.ptr, d->xmax * d->antialia,
+		d->ymax * d->antialia))
+		|| !(d->img = (int*)mlx_get_data_addr(d->iptr, d->iarg, d->iarg + 1,
+		d->iarg + 2)))
+			error(e, MALLOC_ERROR);
 		cams = cams->next;
 	}
 }
 
-raytrace(t_rendering *e, t_line l, int aa, double m)
+t_color	raytrace(t_rendering *r, t_line l)
 {
-	if (aa)
-	{
-		return (apply(l, vec_pro(e->c->)))
-	}
+	(void)r;
+	(void)l;
+	pthread_mutex_unlock(&r->lock);
+	return ((t_color)0);
 }
 
 void	render(t_rendering *r)
 {
-	int		ix;
-	int		iy;
+	int				ix;
+	int				iy;
+	t_line			l;
+	t_cam_render	*d;
 
+	d = &r->c->data;
 	pthread_mutex_lock(&r->lock);
-	raytrace();
+	ix = d->ix++;
+	iy = d->iy;
+	l = (t_line){r->c->t, d->vp_ul};
+	if (d->ix >= d->xmax)
+	{
+		d->ix = 0;
+		d->iy++;
+		d->vp_ul = apply(d->y, d->vp_ul);
+	}
+	else
+		d->vp_ul = apply(d->x, d->vp_ul);
+	d->img[d->xmax * iy + ix] = raytrace(r, l).i;
+	if (iy < d->ymax - 1)
+		render(r);
+	pthread_exit(NULL);
 }
+
+void	symvoid(void)
+{
+}
+
 
 void	start_rendering(t_env *e, int ncam)
 {
@@ -69,7 +98,7 @@ void	start_rendering(t_env *e, int ncam)
 	int				i;
 	t_cam			*c;
 
-	r.lock = PTHREAD_MUTEX_INITIALIZER;
+	r.lock = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	r.e = e;
 	i = 0;
 	while (i < ncam && c)
@@ -77,7 +106,8 @@ void	start_rendering(t_env *e, int ncam)
 		c = c->next;
 		i++;
 	}
-	!c ? return :;
+	if (!c)
+		return ;
 	r.c = c;
 	while (i < THRD_CNT)
 	{
@@ -94,14 +124,9 @@ void	start_rendering(t_env *e, int ncam)
 
 static void	ft_window(t_env *e)
 {
-	if ((e->glb.ptr = mlx_init()) == NULL
-	|| (e->glb.win = mlx_new_window(e->glb.ptr, DIMX,
-		DIMY, "RT")) == NULL
-	|| (e->glb.iptr = mlx_new_image(e->glb.ptr, DIMX, DIMY)) == NULL
-	|| (e->glb.img = (int*)mlx_get_data_addr(e->glb.iptr, e->glb.iarg,
-		e->glb.iarg + 1, e->glb.iarg + 2)) == NULL)
-		error(e, MLX_ERROR);
+	if ((e->glb.ptr = mlx_init()) == NULL)
 
+		error(e, MLX_ERROR);
 	init_cam(e);
 	start_rendering(e, 0);
 	mlx_put_image_to_window(e->glb.ptr, e->glb.win, e->glb.iptr, 0, 0);

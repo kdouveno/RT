@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/18 16:03:30 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/28 19:39:35 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	debug_cams(t_cam *save)
 		"Antialiasing: %d\nID: %d\n\n",
 		save->t.x, save->t.y, save->t.z,
 		save->dir.x, save->dir.y, save->dir.z,
-		save->antialia, save->id);
+		save->data.antialia, save->id);
 		save = save->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/26 17:55:50 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/28 19:53:46 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "gnl.h"
 # include "X.h"
 # include <stdlib.h>
+# include <pthread.h>
 # include <stdio.h>
 # include <fcntl.h>
 # define DIMX 900
@@ -29,10 +30,7 @@
 typedef struct			s_global
 {
 	void				*ptr;
-	void				*win;
-	void				*iptr;
-	int					*img;
-	int					iarg[3];
+
 	int					thread_count;
 }						t_global;
 
@@ -44,12 +42,18 @@ typedef struct			s_wininfo
 
 typedef struct			s_cam_render
 {
+	void				*iptr;
+	void				*win;
 	t_pt				vp_ul;
 	t_vec				x;
 	t_vec				y;
 	double				fov;
+	int					*img;
+	int					iarg[3];
 	int					ix;
 	int					iy;
+	int					xmax;
+	int					ymax;
 	int					dimx;
 	int					dimy;
 	int					antialia;
@@ -123,20 +127,19 @@ typedef struct			s_scene
 	t_grad				*grads;
 }						t_scene;
 
-typedef struct			s_rendering
-{
-	p_thread_mutex		lock;
-	t_env				*e;
-	t_cam				*c;
-}						t_rendering;
-
-
 typedef struct			s_env
 {
 	t_global			glb;
 	t_wininfo			w;
 	t_scene				s;
 }						t_env;
+
+typedef struct			s_rendering
+{
+	pthread_mutex_t		lock;
+	t_env				*e;
+	t_cam				*c;
+}						t_rendering;
 
 typedef struct			s_set
 {
@@ -201,7 +204,7 @@ int						add_obj(t_env *e, t_obj obj);
 int						add_light(t_env *e, t_lit light);
 
 t_insecres				insec(t_env *e, t_line line);
-int						raytrace(t_env *e, t_line l);
+t_color					raytrace(t_rendering *r, t_line l);
 int						key_hook(int key, t_env *e);
 
 void					arg(t_env *e, int argc, char **argv);
