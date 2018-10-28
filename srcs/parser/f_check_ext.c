@@ -1,13 +1,13 @@
 # include "rt.h"
 
-int		check_file_mat(const char *str)
+int		check_file_ext(const char *str, const char *ext)
 {
 	int	len;
 
 	len = ft_strlen(str);
-	if (len > 4)
+	if (len > ft_strlen(ext))
 	{
-		if (!(ft_strcmp(&(str[len - 4]), ".mat")))
+		if (!(ft_strcmp(&(str[len - ft_strlen(ext)]), ext)))
 			return (0);
 		else
 			return (1);

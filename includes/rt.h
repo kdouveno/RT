@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/26 14:41:41 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/28 19:27:34 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,11 +140,19 @@ typedef struct			s_scene
 	t_grad				*grads;
 }						t_scene;
 
+typedef struct			s_prst
+{
+	t_pt				t;
+	t_three_d			dir;
+	t_scene				s;
+}						t_prst;
+
 typedef struct			s_env
 {
 	t_global			glb;
 	t_wininfo			w;
 	t_scene				s;
+	t_prst				*p;
 }						t_env;
 
 typedef struct			s_rendering
@@ -179,6 +187,7 @@ void					light_parse(t_env *e, int type, int fd);
 void					cam_parse(t_env *e, int type, int fd);
 void					env_parse(t_env *e, int type, int fd);
 void					grad_parse(t_env *e, int type, int fd);
+void					prst_parse(t_env *e, int type, int fd);
 void					parse_color(t_obj *obj, char *l2, t_grad *grad, int nb);
 void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);
@@ -207,6 +216,7 @@ static const t_objfx	g_ref[] = {
 	{"torus", &obj_parse},
 	{"cuboid", &obj_parse},
 	{"grad", &grad_parse},
+	{"preset", &prst_parse},
 	{"", NULL}
 };
 

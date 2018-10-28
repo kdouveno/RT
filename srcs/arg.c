@@ -65,10 +65,7 @@ void	arg(t_env *e, int argc, char **argv)
 
 	i = 2;
 	d = 0;
-	e->s.objs = NULL;
-	e->s.lits = NULL;
-	e->s.cams = NULL;
-	e->s.grads = NULL;
+	*e = (t_env){NULL, NULL, NULL, NULL};
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')
@@ -77,7 +74,7 @@ void	arg(t_env *e, int argc, char **argv)
 			error(e, USAGE);
 		i++;
 	}
-	parse(e, argv[1]);
+	parse(e, argv[1], 0);
 	if (d == 1)
 		debug(e);
 }

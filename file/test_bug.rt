@@ -1,5 +1,9 @@
 cuboid{
 	tx:6
-	mat:iron
+	mat:iron.mat
 	ty:8
+}
+preset{
+	src: exemple.rt
+	tx:5
 }

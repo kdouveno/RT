@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/24 15:16:08 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/28 14:30:28 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int		check_arg(t_cam *cam, char *l1, char *l2)
 {
-
 	if (!(ft_strcmp(l1, "id")))
 	{
 		cam->id = ft_atoi(l2);
@@ -29,7 +28,7 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	}
 	else if (!(ft_strcmp(l1, "antialiasing")))
 	{
-		cam->data.antialia = atoi(l2);
+		cam->data.antialia = ft_atoi(l2) > 0 ? ft_atoi(l2) : cam->data.antialia;
 		return (0);
 	}
 	return(1);
@@ -64,7 +63,7 @@ t_cam	*cam_parse_2(t_env *e, int fd)
 	if (!(cam = malloc(sizeof(t_cam))))
 		error(e, MALLOC_ERROR);
 	*cam = (t_cam){(t_pt){0, 0, 0},(t_vec){0, 0, 0}, -1, -1,
-		{{0,0,0}, {0,0,0}, {0,0,0}, rad(FOV), 0, 0, 0, 0, 0}, NULL};
+		{{0,0,0}, {0,0,0}, {0,0,0}, rad(FOV), 0, 0, DIMX, DIMY, 1}, NULL};
 	while ((res = get_next_line(fd, &line)) > 0 &&
 		get_prop(e, line, &l1, &l2) != 1)
 	{

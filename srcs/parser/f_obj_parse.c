@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/26 14:44:45 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/28 19:43:53 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
  {
 	if (!(ft_strcmp(l1, "mat")))
  	{
- 		if (check_file_mat(l2) && l2[0])
+ 		if (check_file_ext(l2, ".mat") && l2[0])
  			wrong_type(e, l1, 0, 0);
  		else if (l2[0])
  			link_mat(e, obj, ft_strjoin("mat/", l2));
@@ -73,9 +73,9 @@ void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 
 	i = 0;
 	cp = ft_str_tolower(l1);
-	if (check_pt(obj, cp, l2) == 1 && check_arg(e, obj, cp, l2 ) == 1 &&
-		check_rot(obj, cp, l2) == 1 && check_mat(e, obj, cp, l2) == 1 &&
-		check_dir(obj, cp, l2) == 1)
+	if (check_pt(obj, cp, l2) == 1 && check_arg(e, obj, cp, l2 ) == 1
+			&& check_rot(obj, cp, l2) == 1 && check_mat(e, obj, cp, l2) == 1
+					&& check_dir(obj, cp, l2) == 1)
 	{
 		while (is_ignored(l1[i]) == 1)
 			i++;

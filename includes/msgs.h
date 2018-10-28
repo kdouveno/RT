@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 17:14:10 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/04 16:00:25 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/28 19:16:05 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@
 # define READ_ERROR "Fail to read the file"
 # define CLOSE_ERROR "Fail to close the file"
 # define MALLOC_ERROR "Dynamic allocation failed"
+# define PRST_ERROR "A preset were not loaded"
 #endif
