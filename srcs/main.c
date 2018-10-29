@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/28 19:17:34 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 13:26:28 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,28 @@ void		error(t_env *e, char *msg)
 	ft_putstr("\033[38;5;203m");
 	ft_putendl(msg);
 	ft_putstr("\033[0m");
-	free_env(e);
+	free_scene(&(e->s));
 	exit(0);
 }
 
 void		error_prst(t_prst *p, char *msg)
 {
-	(void)p;
 	ft_putstr("\033[38;5;203m");
 	ft_putendl(msg);
 	ft_putstr("\033[0m");
-//	free_prst(e);
+	if (p->next)
+		error_prst(p->next, msg);
+	free_scene(&(p->s));
+	ft_memdel((void**)&p);
 }
 
+void	free_prst(t_prst *p)
+{
+	if (p->next)
+		free_prst(p->next);
+	free_scene(&(p->s));
+	ft_memdel((void**)&p);
+}
 
 /*static void	init_cam(t_env *e)
 {
@@ -73,6 +82,7 @@ int		main(int argc, char **argv)
 	e.glb.thread_count = 100;
 	arg(&e, argc, argv);
 	//ft_window(&e);
-	free_env(&e);
+	free_scene((&e.s));
+	free_prst(e.p);
 	return (0);
 }

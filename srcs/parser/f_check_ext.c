@@ -5,7 +5,7 @@ int		check_file_ext(const char *str, const char *ext)
 	int	len;
 
 	len = ft_strlen(str);
-	if (len > ft_strlen(ext))
+	if (len > (int)ft_strlen(ext))
 	{
 		if (!(ft_strcmp(&(str[len - ft_strlen(ext)]), ext)))
 			return (0);

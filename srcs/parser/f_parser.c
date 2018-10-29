@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/28 20:02:51 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 13:16:55 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	link_name(char *name)
 	return (out);
 }
 
-static void	parse_line(t_env *e, char *line, int fd)
+static void	parse_line(t_env *e, char *line, int fd, t_scene *s)
 {
 	int			l;
 	int			t;
@@ -81,7 +81,7 @@ static void	parse_line(t_env *e, char *line, int fd)
 	if (l_type[0] != '\0')
 	{
 		if ((t = link_name(l_type)) >= 0)
-			g_ref[t].parse(e, t, fd);
+			g_ref[t].parse(e, t, fd, s);
 		else
 			wrong_type(e, l_type, fd, 1);
 	}
@@ -90,20 +90,21 @@ static void	parse_line(t_env *e, char *line, int fd)
 	ft_memdel((void**)&line);
 }
 
-void		parse(t_env *e, char *arg, int prst)
+void		parse(t_env *e, char *arg, t_prst *p)
 {
 	int		fd;
 	int		check;
 	char	*line;
 
 	if ((fd = open(arg, O_RDONLY)) == -1)
-		prst == 1 ? return (error(NULL, PRST_ERROR)) : error(e, OPEN_ERROR);
+		return (p == NULL ? error(e, OPEN_ERROR) : error_prst(p, PRST_ERROR));
 	while ((check = get_next_line(fd, &line)) > 0)
-		parse_line(e, line, fd);
+		p == NULL ? parse_line(e, line, fd, &(e->s))
+			: parse_line(e, line, fd, &(p->s));
 	ft_memdel((void**)&line);
 	link_obj(e);
 	if (check == -1)
-		prst == 1 ? return (error(e->p, PRST_ERROR)) : error(e, READ_ERROR);
+		return (p == NULL ? error(e, READ_ERROR) : error_prst(p, PRST_ERROR));
 	if (close(fd) == -1)
-		prst == 1 ? return (error(e->p, PRST_ERROR)) : error(e, CLOSE_ERROR);
+		return (p == NULL ? error(e, CLOSE_ERROR) : error_prst(p, PRST_ERROR));
 }

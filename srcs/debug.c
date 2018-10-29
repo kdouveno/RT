@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/18 16:03:30 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 11:49:05 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,27 @@ static void	debug_cams(t_cam *save)
 	}
 }
 
+void		debug_prst(t_prst *p)
+{
+	while (p != NULL)
+	{
+		ft_putstr("\n\n\n\033[38;5;96mPRESET :\n");
+		printf("Translation: %f %f %f\nDirection: %f %f %f\n",
+		p->t.x, p->t.y, p->t.z, p->dir.x, p->dir.y, p->dir.z);
+		debug_cams(p->s.cams);
+		debug_lits(p->s.lits);
+		debug_grad(p->s.grads);
+		debug_objs(p->s.objs, NULL);
+		p = p->next;
+	}
+}
+
 void		debug(t_env *e)
 {
-	t_cam	*cams;
-	t_lit	*lits;
-	t_grad	*grad;
-	t_obj	*objs;
-	t_clip	*clips;
-
-	clips = NULL;
-	cams = e->s.cams;
-	lits = e->s.lits;
-	grad = e->s.grads;
-	objs = e->s.objs;
-	debug_cams(cams);
-	debug_lits(lits);
-	debug_grad(grad);
-	debug_objs(objs, clips);
+	debug_cams(e->s.cams);
+	debug_lits(e->s.lits);
+	debug_grad(e->s.grads);
+	debug_objs(e->s.objs, NULL);
+	debug_prst(e->p);
 	ft_putstr("\033[0m");
 }

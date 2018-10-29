@@ -66,11 +66,11 @@ static void	free_grad(t_grad *grad)
 	}
 }
 
-void		free_env(t_env *e)
+void		free_scene(t_scene *s)
 {
-	free_obj(e->s.objs);
-	free_lit(e->s.lits);
-	free_cam(e->s.cams);
-	free_grad(e->s.grads);
+	free_obj(s->objs);
+	free_lit(s->lits);
+	free_cam(s->cams);
+	free_grad(s->grads);
 //	printf("\033[0m\n");
 }

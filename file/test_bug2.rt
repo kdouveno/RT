@@ -1,9 +1,8 @@
-cuboid{
+sphere{
 	tx:6
 	mat:iron.mat
 	ty:8
 }
 preset{
-	src: test_bug2.rt
-	tx:5
+	src:test_bug3.rt
 }

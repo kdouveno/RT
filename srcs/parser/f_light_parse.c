@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/24 13:03:04 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 09:54:13 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ t_lit	*light_parse_2(t_env *e, int fd)
 	return (lit);
 }
 
-void	light_parse(t_env *e, int type, int fd)
+void	light_parse(t_env *e, int type, int fd, t_scene *s)
 {
 	t_lit	*save;
 
 	(void)type;
-	save = e->s.lits;
+	save = s->lits;
 	if (save != NULL)
 	{
 		while(save->next != NULL)
@@ -87,5 +87,5 @@ void	light_parse(t_env *e, int type, int fd)
 		save->next = light_parse_2(e, fd);
 	}
 	else
-		e->s.lits = light_parse_2(e, fd);
+		s->lits = light_parse_2(e, fd);
 }

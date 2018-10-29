@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:15:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/24 12:57:12 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 09:54:42 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ t_grad			*grad_parse_2(t_env *e, int fd)
 	return (grad);
 }
 
-void			grad_parse(t_env *e, int type, int fd)
+void			grad_parse(t_env *e, int type, int fd, t_scene *s)
 {
 	t_grad	*save;
 
 	(void)type;
-	save = e->s.grads;
+	save = s->grads;
 	if (save != NULL)
 	{
 		while(save->next != NULL)
@@ -90,5 +90,5 @@ void			grad_parse(t_env *e, int type, int fd)
 		save->next = grad_parse_2(e, fd);
 	}
 	else
-		e->s.grads = grad_parse_2(e, fd);
+		s->grads = grad_parse_2(e, fd);
 }

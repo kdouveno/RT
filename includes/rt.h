@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/28 19:27:34 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 13:22:16 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ typedef struct			s_prst
 	t_pt				t;
 	t_three_d			dir;
 	t_scene				s;
+	struct s_prst		*next;
 }						t_prst;
 
 typedef struct			s_env
@@ -171,7 +172,7 @@ typedef struct			s_insecres
 typedef struct			s_objfx
 {
 	char				name[10];
-	void				(*parse)(t_env *e, int type, int fd);
+	void				(*parse)(t_env *e, int type, int fd, t_scene *s);
 }						t_objfx;
 
 int						is_name_char(char c);
@@ -181,13 +182,13 @@ void					wrong_type(t_env *e, char *l_type, int fd, int skip);
 
 int						get_prop(t_env *e, char *line, char **l1, char **l2);
 char					*get_name(t_env *e, char *line, int i, int *l);
-void					parse(t_env *e, char *arg);
-void					obj_parse(t_env *e, int type, int fd);
-void					light_parse(t_env *e, int type, int fd);
-void					cam_parse(t_env *e, int type, int fd);
-void					env_parse(t_env *e, int type, int fd);
-void					grad_parse(t_env *e, int type, int fd);
-void					prst_parse(t_env *e, int type, int fd);
+void					parse(t_env *e, char *arg, t_prst *p);
+void					obj_parse(t_env *e, int type, int fd, t_scene *s);
+void					light_parse(t_env *e, int type, int fd, t_scene *s);
+void					cam_parse(t_env *e, int type, int fd, t_scene *s);
+void					env_parse(t_env *e, int type, int fd, t_scene *s);
+void					grad_parse(t_env *e, int type, int fd, t_scene *s);
+void					prst_parse(t_env *e, int type, int fd, t_scene *s);
 void					parse_color(t_obj *obj, char *l2, t_grad *grad, int nb);
 void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);
@@ -201,7 +202,7 @@ int						check_dir(void *cam, char* l1, char *l2);
 int						check_rot(void *cam, char *l1, char *l2);
 int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
 
-int						check_file_mat(const char *str);
+int						check_file_ext(const char *str, const char *ext);
 char					*file_name(char *str);
 
 static const t_objfx	g_ref[] = {
@@ -229,9 +230,10 @@ int						raytrace(t_env *e, t_line l);
 int						key_hook(int key, t_env *e);
 
 void					arg(t_env *e, int argc, char **argv);
-void					free_env(t_env *e);
+void					free_scene(t_scene *s);
 void					debug(t_env *e);
 void					error(t_env *e, char *msg);
+void					error_prst(t_prst *p, char *msg);
 
 int						my_key(int key, t_env *e);
 void					k_escape(t_env *e);

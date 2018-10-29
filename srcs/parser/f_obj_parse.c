@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/28 19:43:53 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 09:51:59 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,11 @@ t_obj	*obj_parse_2(t_env *e, int type, int fd)
 	return (obj);
 }
 
-void	obj_parse(t_env *e, int type, int fd)
+void	obj_parse(t_env *e, int type, int fd, t_scene *s)
 {
 	t_obj	*save;
 
-	save = e->s.objs;
+	save = s->objs;
 	if (save != NULL)
 	{
 		while(save->next != NULL)
@@ -123,5 +123,5 @@ void	obj_parse(t_env *e, int type, int fd)
 		save->next = obj_parse_2(e, type, fd);
 	}
 	else
-		e->s.objs = obj_parse_2(e, type, fd);
+		s->objs = obj_parse_2(e, type, fd);
 }

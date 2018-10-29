@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/28 14:30:28 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 09:55:08 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ t_cam	*cam_parse_2(t_env *e, int fd)
 	return (cam);
 }
 
-void	cam_parse(t_env *e, int type, int fd)
+void	cam_parse(t_env *e, int type, int fd, t_scene *s)
 {
 	t_cam	*save;
 
 	(void)type;
-	save = e->s.cams;
+	save = s->cams;
 	if (save != NULL)
 	{
 		while(save->next != NULL)
@@ -91,5 +91,5 @@ void	cam_parse(t_env *e, int type, int fd)
 		save->next = cam_parse_2(e, fd);
 	}
 	else
-		e->s.cams = cam_parse_2(e, fd);
+		s->cams = cam_parse_2(e, fd);
 }
