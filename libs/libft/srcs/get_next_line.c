@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:16:46 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/29 13:32:51 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/29 13:35:26 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ int		get_next_line(const int fd, char **line)
 	}
 	if (out == -1 || ret == -1)
 		return (-1);
-	!**line && !ret ? free() : 0;
+	!**line && !ret ? free(data) : 0;
 	return (!**line && !ret ? 0 : 1);
 }
