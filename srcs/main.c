@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/28 20:03:03 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/29 11:11:53 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,6 @@ void	render(t_rendering *r)
 	pthread_exit(NULL);
 }
 
-void	symvoid(void)
-{
-}
-
-
 void	start_rendering(t_env *e, int ncam)
 {
 	t_rendering		r;
@@ -101,36 +96,26 @@ void	start_rendering(t_env *e, int ncam)
 	r.lock = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	r.e = e;
 	i = 0;
-	while (i < ncam && c)
-	{
+	while (i++ < ncam && c)
 		c = c->next;
-		i++;
-	}
 	if (!c)
 		return ;
 	r.c = c;
 	while (i < THRD_CNT)
-	{
-		if (pthread_create(thds + i, NULL, &render, &(ncam)))
+		if (pthread_create(thds + i++, NULL, (void*)&r, &(ncam)))
 			error(e, PTHR_ERROR);
-		i++;
-	}
 	while (i >= 0)
-	{
-		pthread_join(thds + i, NULL);
-		i--;
-	}
+		pthread_join(thds[i--], NULL);
 }
 
 static void	ft_window(t_env *e)
 {
 	if ((e->glb.ptr = mlx_init()) == NULL)
-
 		error(e, MLX_ERROR);
 	init_cam(e);
 	start_rendering(e, 0);
-	mlx_put_image_to_window(e->glb.ptr, e->glb.win, e->glb.iptr, 0, 0);
-	mlx_hook(e->glb.win, KeyPress, KeyPressMask, my_key, e);
+	mlx_put_image_to_window(e->glb.ptr, e->s.cams->data.win, e->s.cams->data.iptr, 0, 0);
+	mlx_hook(e->s.cams->data.win, KeyPress, KeyPressMask, my_key, e);
 	mlx_loop(e->glb.ptr);
 }
 

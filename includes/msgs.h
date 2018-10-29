@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 17:14:10 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/24 15:55:51 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/29 10:55:17 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@
 # define READ_ERROR "Fail to read the file"
 # define CLOSE_ERROR "Fail to close the file"
 # define MALLOC_ERROR "Dynamic allocation failed"
-# define PTHR_ERROR
+# define PTHR_ERROR "Thread creation failed"
 #endif
