@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:16:46 by kdouveno          #+#    #+#             */
-/*   Updated: 2017/12/18 15:01:34 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/29 13:32:51 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int		get_next_line(const int fd, char **line)
 	}
 	if (out == -1 || ret == -1)
 		return (-1);
-	if (!**line && !ret)
-		return (0);
-	return (1);
+	!**line && !ret ? free() : 0;
+	return (!**line && !ret ? 0 : 1);
 }
