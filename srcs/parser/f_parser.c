@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 13:16:55 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 13:57:44 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void		parse(t_env *e, char *arg, t_prst *p)
 			: parse_line(e, line, fd, &(p->s));
 	ft_memdel((void**)&line);
 	link_obj(e);
+	if (p)
+		ft_memdel((void**)&arg);
 	if (check == -1)
 		return (p == NULL ? error(e, READ_ERROR) : error_prst(p, PRST_ERROR));
 	if (close(fd) == -1)
