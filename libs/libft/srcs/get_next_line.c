@@ -6,12 +6,25 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:16:46 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/29 13:35:26 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/29 14:10:02 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gnl.h"
 #include <stdio.h>
+
+void	free_static(int fd, t_gnl *data)
+{
+	t_gnl	*last;
+
+	while (data && data->fd != fd)
+	{
+		last = data;
+		data = data->next;
+	}
+	last->next = data->next;
+	free(data);
+}
 
 t_gnl	*fetch(t_gnl **data, const int fd)
 {
@@ -89,6 +102,6 @@ int		get_next_line(const int fd, char **line)
 	}
 	if (out == -1 || ret == -1)
 		return (-1);
-	!**line && !ret ? free(data) : 0;
+	!**line && !ret ? free_static(fd, data) : 0;
 	return (!**line && !ret ? 0 : 1);
 }
