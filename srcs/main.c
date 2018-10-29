@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 14:26:14 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 16:23:24 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	free_prst(t_prst *p)
 	ft_memdel((void**)&p);
 }
 
-/*static void	init_cam(t_env *e)
+static void	init_cam(t_env *e)
 {
 	t_cam			*cams;
 	t_cam_render	*d;
@@ -69,7 +69,7 @@ void	free_prst(t_prst *p)
 			error(e, MALLOC_ERROR);
 		cams = cams->next;
 	}
-}*/
+}
 
 t_color	raytrace(t_rendering *r, t_line l)
 {
@@ -142,9 +142,8 @@ int		main(int argc, char **argv)
 {
 	t_env		e;
 
-	e.glb.thread_count = 100;
 	arg(&e, argc, argv);
-	//ft_window(&e);
+	ft_window(&e);
 	free_scene((&e.s));
 	free_prst(e.p);
 	return (0);

@@ -6,11 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/10/29 09:55:08 by gperez           ###   ########.fr       */
-=======
-/*   Updated: 2018/10/29 13:24:32 by kdouveno         ###   ########.fr       */
->>>>>>> kdouveno
+/*   Updated: 2018/10/29 16:24:46 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +28,7 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	}
 	else if (!(ft_strcmp(l1, "antialiasing")))
 	{
-<<<<<<< HEAD
 		cam->data.antialia = ft_atoi(l2) > 0 ? ft_atoi(l2) : cam->data.antialia;
-=======
-		cam->data.antialia = atoi(l2);
->>>>>>> kdouveno
 		return (0);
 	}
 	return(1);
@@ -70,14 +62,9 @@ t_cam	*cam_parse_2(t_env *e, int fd)
 
 	if (!(cam = malloc(sizeof(t_cam))))
 		error(e, MALLOC_ERROR);
-<<<<<<< HEAD
 	*cam = (t_cam){(t_pt){0, 0, 0},(t_vec){0, 0, 0}, -1, -1,
-		{{0,0,0}, {0,0,0}, {0,0,0}, rad(FOV), 0, 0, DIMX, DIMY, 1}, NULL};
-=======
-	*cam = (t_cam){(t_pt){0, 0, 0},(t_vec){0, 0, 0}, -1, 0,
 		{NULL, NULL, {0,0,0}, {}, {}, rad(FOV), NULL, {}, 0, 0, 0, 0, 0, 0, 1},
 		NULL};
->>>>>>> kdouveno
 	while ((res = get_next_line(fd, &line)) > 0 &&
 		get_prop(e, line, &l1, &l2) != 1)
 	{

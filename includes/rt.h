@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 14:28:29 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 16:20:46 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,13 +162,6 @@ typedef struct			s_env
 }						t_env;
 
 typedef struct			s_rendering
-{
-	pthread_mutex_t		lock;
-	t_env				*e;
-	t_cam				*c;
-}						t_rendering;
-
-typedef struct			s_set
 {
 	pthread_mutex_t		lock;
 	t_env				*e;

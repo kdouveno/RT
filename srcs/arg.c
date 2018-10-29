@@ -65,8 +65,7 @@ void	arg(t_env *e, int argc, char **argv)
 
 	i = 2;
 	d = 0;
-	*e = (t_env){{NULL, NULL, NULL, NULL, {}, 0},
-			{0,0}, {NULL, NULL, NULL, NULL}, NULL};
+	*e = (t_env){{NULL, 100}, {0,0}, {NULL, NULL, NULL, NULL}, NULL};
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')
