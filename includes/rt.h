@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 13:22:16 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/29 14:28:29 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,20 @@
 # include "geo3d.h"
 # include "libft.h"
 # include "gnl.h"
-# include <pthread.h>
+# include "X.h"
 # include <stdlib.h>
+# include <pthread.h>
 # include <stdio.h>
 # include <fcntl.h>
 # define DIMX 900
 # define DIMY 700
 # define FOV 85
+# define THRD_CNT 100
+# define TEMP_IMG
 
 typedef struct			s_global
 {
 	void				*ptr;
-	void				*win;
-	void				*iptr;
-	int					*img;
-	int					iarg[3];
 	int					thread_count;
 }						t_global;
 
@@ -42,12 +41,18 @@ typedef struct			s_wininfo
 
 typedef struct			s_cam_render
 {
+	void				*iptr;
+	void				*win;
 	t_pt				vp_ul;
 	t_vec				x;
 	t_vec				y;
 	double				fov;
+	int					*img;
+	int					iarg[3];
 	int					ix;
 	int					iy;
+	int					xmax;
+	int					ymax;
 	int					dimx;
 	int					dimy;
 	int					antialia;
@@ -163,6 +168,13 @@ typedef struct			s_rendering
 	t_cam				*c;
 }						t_rendering;
 
+typedef struct			s_set
+{
+	pthread_mutex_t		lock;
+	t_env				*e;
+	t_cam				*c;
+}						t_rendering;
+
 typedef struct			s_insecres
 {
 	t_obj				*obj;
@@ -226,7 +238,7 @@ int						add_obj(t_env *e, t_obj obj);
 int						add_light(t_env *e, t_lit light);
 
 t_insecres				insec(t_env *e, t_line line);
-int						raytrace(t_env *e, t_line l);
+t_color					raytrace(t_rendering *r, t_line l);
 int						key_hook(int key, t_env *e);
 
 void					arg(t_env *e, int argc, char **argv);

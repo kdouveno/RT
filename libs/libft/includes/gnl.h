@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   gnl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 17:36:22 by kdouveno          #+#    #+#             */
-/*   Updated: 2017/12/22 14:35:41 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/29 14:08:29 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GNL_H
 # define GNL_H
-# define BUFF_SIZE 1
+# define BUFF_SIZE 80
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>
