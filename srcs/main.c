@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 11:11:53 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/30 17:14:28 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@ void		error(t_env *e, char *msg)
 	ft_putendl(msg);
 	ft_putstr("\033[0m");
 	free_env(e);
+	SDL_Quit();
 	exit(0);
 }
+
+/*
+**	to protect
+*/
 
 static void	init_cam(t_env *e)
 {
@@ -42,12 +47,9 @@ static void	init_cam(t_env *e)
 			-d->xmax / 2, -d->ymax / 2}, cams->dir);
 		d->x = rot((t_vec){0, -1, 0}, cams->dir);
 		d->y = rot((t_vec){0, d->xmax - 1, -1}, cams->dir);
-		if (!(d->win = mlx_new_window(e->glb.ptr, d->dimx, d->dimy, "RT"))
-		|| !(d->iptr = mlx_new_image(e->glb.ptr, d->xmax * d->antialia,
-		d->ymax * d->antialia))
-		|| !(d->img = (int*)mlx_get_data_addr(d->iptr, d->iarg, d->iarg + 1,
-		d->iarg + 2)))
-			error(e, MALLOC_ERROR);
+		if (!(d->render = SDL_CreateRGBSurfaceWithFormat(0, d->xmax, d->ymax,
+		32, SDL_PIXELFORMAT_ARGB32)))
+			error(e, SDL_GetError());
 		cams = cams->next;
 	}
 }
@@ -57,7 +59,7 @@ t_color	raytrace(t_rendering *r, t_line l)
 	(void)r;
 	(void)l;
 	pthread_mutex_unlock(&r->lock);
-	return ((t_color)0);
+	return ((t_color)(r->c->d.iy * r->c->d.xmax + r->c->d->ix));
 }
 
 void	render(t_rendering *r)
@@ -80,13 +82,13 @@ void	render(t_rendering *r)
 	}
 	else
 		d->vp_ul = apply(d->x, d->vp_ul);
-	d->img[d->xmax * iy + ix] = raytrace(r, l).i;
+	d->img->pixels[d->xmax * iy + ix] = raytrace(r, l).i;
 	if (iy < d->ymax - 1)
 		render(r);
 	pthread_exit(NULL);
 }
 
-void	start_rendering(t_env *e, int ncam)
+t_cam	render_cam(t_env *e, int ncam)
 {
 	t_rendering		r;
 	pthread_t		thds[THRD_CNT];
@@ -99,24 +101,25 @@ void	start_rendering(t_env *e, int ncam)
 	while (i++ < ncam && c)
 		c = c->next;
 	if (!c)
-		return ;
+		return (NULL);
 	r.c = c;
 	while (i < THRD_CNT)
 		if (pthread_create(thds + i++, NULL, (void*)&r, &(ncam)))
 			error(e, PTHR_ERROR);
 	while (i >= 0)
 		pthread_join(thds[i--], NULL);
+	return (c);
 }
 
 static void	ft_window(t_env *e)
 {
-	if ((e->glb.ptr = mlx_init()) == NULL)
-		error(e, MLX_ERROR);
+	if (!SDL_Init(SDL_INIT_VIDEO))
+		error(e, SDL_ERROR);
+	e->glb.win = SDL_CreateWindow("RT - UI",
+		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+		1600, 900, SDL_WINDOW_SHOWN);
 	init_cam(e);
-	start_rendering(e, 0);
-	mlx_put_image_to_window(e->glb.ptr, e->s.cams->data.win, e->s.cams->data.iptr, 0, 0);
-	mlx_hook(e->s.cams->data.win, KeyPress, KeyPressMask, my_key, e);
-	mlx_loop(e->glb.ptr);
+	render_cam(e, 0);
 }
 
 int		main(int argc, char **argv)

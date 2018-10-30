@@ -5,9 +5,9 @@ endif
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
 FW =	openGL\
-		appKit
+		appKit\
+		SDL2
 DL = pthread
-
 
 ifdef LIB?
 NAME = $(notdir $(shell pwd))
@@ -15,13 +15,14 @@ endif
 FWL = $(addprefix -framework ,$(FW))
 rwildcard = $(if $1,$(if $(wildcard $1/*),$(foreach p,$(wildcard $1/*),$(call rwildcard,$(filter-out $(subst *,%,$2),$p),$2)$(filter $(subst *,%,$2),$p))))
 SRCS = $(call rwildcard,srcs,*.c)
-INCS = ./includes $(call rwildcard,libs,*/includes)
-INCSDIR = $(addprefix -I,$(INCS))
-INCSFILE = $(foreach d,$(INCS),$(wildcard $d/*.h))
-OBJS = $(patsubst srcs/%.c,objs/%.o,$(SRCS))
+INCS = ./includes /Library/Frameworks/SDL2.framework/Headers $(call rwildcard,libs,*/includes)
 MKES = $(dir $(wildcard libs/*/Makefile))
 ARCH = $(addsuffix .a, $(patsubst %/,%,$(MKES)))
 ARCF = $(filter-out $(ARCH), $(wildcard libs/*.a))
+INCSDIR = $(addprefix -I,$(INCS))
+INCSFILE = $(foreach d,$(INCS),$(wildcard $d/*.h))
+OBJS = $(patsubst srcs/%.c,objs/%.o,$(SRCS))
+
 DLLIST = $(addprefix -l,$(DL))
 TARGET = $(if $(LIB?),../)$(NAME)$(if $(LIB?),.a)
 

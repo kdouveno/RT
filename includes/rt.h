@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/28 19:53:46 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/30 17:13:54 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "gnl.h"
 # include "X.h"
 # include <stdlib.h>
+# include "SDL.h"
 # include <pthread.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -27,10 +28,21 @@
 # define THRD_CNT 100
 # define TEMP_IMG
 
+# if SDL_BYTEORDER == SDL_BIG_ENDIAN
+#  define RT_SDL_RMASK			0x00ff0000
+#  define RT_SDL_GMASK			0x0000ff00
+#  define RT_SDL_BMASK			0x000000ff
+#  define RT_SDL_AMASK			0xff000000
+# else
+#  define RT_SDL_RMASK			0x00ff0000
+#  define RT_SDL_GMASK			0x0000ff00
+#  define RT_SDL_BMASK			0x000000ff
+#  define RT_SDL_AMASK			0xff000000
+# endif
+
 typedef struct			s_global
 {
-	void				*ptr;
-
+	SDL_Window			*win;
 	int					thread_count;
 }						t_global;
 
@@ -42,14 +54,11 @@ typedef struct			s_wininfo
 
 typedef struct			s_cam_render
 {
-	void				*iptr;
-	void				*win;
 	t_pt				vp_ul;
 	t_vec				x;
 	t_vec				y;
 	double				fov;
-	int					*img;
-	int					iarg[3];
+	SDL_Surface			*render;
 	int					ix;
 	int					iy;
 	int					xmax;
@@ -73,7 +82,7 @@ typedef struct			s_cam
 typedef struct			s_fd
 {
 	int					fd;
-	char*				file;
+	char				*file;
 }						t_fd;
 
 typedef struct			s_lit
@@ -139,6 +148,7 @@ typedef struct			s_rendering
 	pthread_mutex_t		lock;
 	t_env				*e;
 	t_cam				*c;
+	SDL_Surface			*s;
 }						t_rendering;
 
 typedef struct			s_set
