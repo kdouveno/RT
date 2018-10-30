@@ -43,9 +43,11 @@ static void	parameter_extended(t_env *e, char *argv, int *d)
 		i++;
 	if (!(ft_strcmp(argv, "debug")) && i == (int)ft_strlen("threads"))
 		*d = 1;
-	else if (!(ft_strncmp(argv, "threads", i)) && i == (int)ft_strlen("threads"))
+	else if (!(ft_strncmp(argv, "threads", i))
+		&& i == (int)ft_strlen("threads"))
 		parameter_thread_rec(e, argv, i, 0);
-	else if (!(ft_strncmp(argv, "recursive", i)) && i == (int)ft_strlen("recursive"))
+	else if (!(ft_strncmp(argv, "recursive", i))
+		&& i == (int)ft_strlen("recursive"))
 		parameter_thread_rec(e, argv, i, 1);
 	else
 		error(e, USAGE);
