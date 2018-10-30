@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 13:57:44 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/30 13:21:49 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	parse_line(t_env *e, char *line, int fd, t_scene *s)
 	}
 	l_type = ft_str_tolower(type);
 	ft_memdel((void**)&type);
-	if (l_type[0] != '\0')
+	if (l_type != NULL && l_type[0] != '\0')
 	{
 		if ((t = link_name(l_type)) >= 0)
 			g_ref[t].parse(e, t, fd, s);

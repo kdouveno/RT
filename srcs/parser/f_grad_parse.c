@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:15:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/29 09:54:42 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/30 13:26:21 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void			stock_grad(t_env *e, t_grad *grad, char *l1, char *l2)
 
 	i = 0;
 	cp = ft_str_tolower(l1);
+	if (!cp)
+		error(e, MALLOC_ERROR);
 	if (check_pt(grad, cp, l2) == 1 && check_arg(grad, cp, l2) == 1
 	 && check_dir(grad, cp, l2) == 1)
 	{

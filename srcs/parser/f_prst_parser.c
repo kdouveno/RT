@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prst_parser.c                                      :+:      :+:    :+:   */
+/*   f_prst_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 18:54:01 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 13:11:42 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/30 13:37:54 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,21 @@
 
 static int		check_arg(t_env *e, t_prst *prst, char *l1, char *l2)
 {
+	char	*join;
+
 	if (!(ft_strcmp(l1, "src")))
  	{
  		if (check_file_ext(l2, ".rt") && l2[0])
  			wrong_type(e, l1, 0, 0);
  		else if (l2[0])
- 			parse(e, ft_strjoin("file/", l2), prst);
- 		return (0);
+		{
+			join = ft_strjoin("file/", l2);
+			if (join != NULL)
+ 				parse(e, join, prst);
+			else
+				error(e, MALLOC_ERROR);
+		}
+		return (0);
  	}
 	return (1);
 }

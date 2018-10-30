@@ -6,13 +6,13 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 17:36:22 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/29 14:08:29 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/10/30 14:23:03 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GNL_H
 # define GNL_H
-# define BUFF_SIZE 80
+# define BUFF_SIZE	1000
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>
@@ -20,13 +20,12 @@
 # include "libft.h"
 
 int					get_next_line(const int fd, char **line);
+char				*ft_strjoin_free(char const *s1, char const *s2);
 
-typedef struct		s_gnl
+typedef struct 		s_sline
 {
-	char			c[BUFF_SIZE + 1];
-	int				pos;
 	int				fd;
-	struct s_gnl	*next;
-}					t_gnl;
-
+	char			*content;
+	struct s_sline	*next;
+}					t_sline;
 #endif
