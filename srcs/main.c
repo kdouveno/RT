@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 16:23:24 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/30 13:38:30 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	free_prst(t_prst *p)
 	free_scene(&(p->s));
 	ft_memdel((void**)&p);
 }
-
+/*
 static void	init_cam(t_env *e)
 {
 	t_cam			*cams;
@@ -137,13 +137,13 @@ static void	ft_window(t_env *e)
 	mlx_hook(e->s.cams->data.win, KeyPress, KeyPressMask, my_key, e);
 	mlx_loop(e->glb.ptr);
 }
-
+*/
 int		main(int argc, char **argv)
 {
 	t_env		e;
 
 	arg(&e, argc, argv);
-	ft_window(&e);
+	//ft_window(&e);
 	free_scene((&e.s));
 	free_prst(e.p);
 	return (0);

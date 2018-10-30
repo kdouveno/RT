@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/30 13:21:49 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/30 15:39:57 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,12 @@ void		parse(t_env *e, char *arg, t_prst *p)
 	int		check;
 	char	*line;
 
+	if (e->glb.rec_nb_file >= e->glb.rec_lim_file)
+	{
+		ft_memdel((void**)&arg);
+		return ;
+	}
+	e->glb.rec_nb_file++;
 	if ((fd = open(arg, O_RDONLY)) == -1)
 		return (p == NULL ? error(e, OPEN_ERROR) : error_prst(p, PRST_ERROR));
 	while ((check = get_next_line(fd, &line)) > 0)
@@ -109,4 +115,5 @@ void		parse(t_env *e, char *arg, t_prst *p)
 		return (p == NULL ? error(e, READ_ERROR) : error_prst(p, PRST_ERROR));
 	if (close(fd) == -1)
 		return (p == NULL ? error(e, CLOSE_ERROR) : error_prst(p, PRST_ERROR));
+	e->glb.rec_nb_file--;
 }

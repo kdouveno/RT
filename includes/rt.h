@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 16:20:46 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/30 16:15:53 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@
 # define FOV 85
 # define THRD_CNT 100
 # define TEMP_IMG
+# define REC_FILE 100
 
 typedef struct			s_global
 {
 	void				*ptr;
+	int					rec_lim_file;
+	int					rec_nb_file;
 	int					thread_count;
 }						t_global;
 

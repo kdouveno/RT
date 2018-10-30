@@ -4,6 +4,6 @@ cuboid{
 	ty:8
 }
 preset{
-	src: test_bug2.rt
+	src: test_bug.rt
 	tx:5
 }

@@ -4,5 +4,5 @@ sphere{
 	ty:8
 }
 preset{
-	src:test_bug3.rt
+	src:test_bug.rt
 }

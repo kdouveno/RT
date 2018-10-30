@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 14:26:32 by gperez           ###   ########.fr       */
+/*   Updated: 2018/10/30 15:34:04 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	debug_cams(t_cam *save)
 
 void		debug_prst(t_prst *p)
 {
-	while (p != NULL)
+	while (p && (p->s.cams || p->s.lits || p->s.objs || p->s.grads))
 	{
 		ft_putstr("\n\n\n\033[38;5;96mPRESET :\n");
 		printf("Translation: %f %f %f\nDirection: %f %f %f\n",
