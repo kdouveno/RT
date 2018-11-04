@@ -14,7 +14,10 @@
 # define MSGS_H
 # define FILE_ERROR "Wrong file format, aborting"
 # define MLX_ERROR "An error occured while attempting to intiate MLX"
-# define USAGE "usage : ./rt <rt file> <args>\nargs: --debug"
+# define USAGE "usage : ./rt <rt file> <args>\nargs:"
+	"--debug\n"
+	"\t--threads\n"
+	"\t--recursive\n"
 # define OPEN_ERROR "Fail to open the file"
 # define READ_ERROR "Fail to read the file"
 # define CLOSE_ERROR "Fail to close the file"
