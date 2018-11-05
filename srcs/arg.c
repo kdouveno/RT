@@ -78,6 +78,8 @@ void	arg(t_env *e, int argc, char **argv)
 			error(e, USAGE);
 		i++;
 	}
+	if (check_file_ext(argv[1], ".rt"))
+		error(e, EXT_ERROR);
 	parse(e, argv[1], 0);
 	if (d == 1)
 		debug(e);

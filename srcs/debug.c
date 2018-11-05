@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/05 12:08:58 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/05 16:12:12 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,7 @@ void		debug(t_env *e)
 	debug_grad(e->s.grads);
 	debug_objs(e->s.objs, NULL);
 	debug_prst(e->p);
+	if (!e->s.cams && !e->s.lits && !e->s.grads && !e->s.objs && !e->p)
+		printf("\033[38;5;203m%s\n", EMPTY_SCENE);
 	printf("\033[0m");
 }
