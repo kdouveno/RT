@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/05 17:48:19 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/05 19:53:37 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,8 @@ t_color		raytrace(t_rendering *r, t_line l)
 	t_insecres	res;
 	t_color		out;
 
-	// printf("v : (%.2f %.2f %.2f)\n", l.v.x, l.v.y, l.v.z);
 	pthread_mutex_unlock(&r->lock);
-	out = (t_color) (unsigned)AMASK;
+	out = (t_color)(unsigned)AMASK;
 	res = intersec(r->e, l);
 	if (res.obj)
 		out.i |= lites(r, get_linept(l, res.t), *res.obj).i;

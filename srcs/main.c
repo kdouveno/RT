@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/05 17:51:18 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/05 20:09:30 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	init_cam(t_env *e)
 		d->dimy = DIMY;
 		d->xmax = d->dimx * d->antialia;
 		d->ymax = d->dimy * d->antialia;
-		d->vp_ul = rot((t_vec){(double)(d->xmax / 2) / tan(rad(d->fov / 2)),
+		d->vp_ul = rot((t_vec){(double)(d->xmax / 2) / tan(d->fov / 2),
 			d->xmax / 2, d->ymax / 2}, cams->dir);
 		d->x = rot((t_vec){0, -1, 0}, cams->dir);
 		d->y = rot((t_vec){0, d->xmax - 1, -1}, cams->dir);
@@ -53,6 +53,19 @@ static void	init_cam(t_env *e)
 		32, RMASK, GMASK, BMASK, AMASK)))
 			error(e, SDL_GetError());
 		cams = cams->next;
+
+	}
+}
+
+static void init_objs(t_env *e) {
+	t_obj	*objs;
+
+	objs = e->s.objs;
+	while (objs)
+	{
+		if (objs->type == CONE)
+			objs->v1 = rad(objs->v1);
+		objs = objs->next;
 	}
 }
 
@@ -121,13 +134,14 @@ void print_surface_pixels(SDL_Surface *s)
 	int i = 0;
 	while (i < length)
 	{
+		if (pixels[i].i & 0x11111100)
 		printf("argb(%hhu, %hhu, %hhu, %hhu)\n", pixels[i].p.a, pixels[i].p.r, pixels[i].p.g, pixels[i].p.b);
 		i++;
 	}
 	printf("Surface (%d, %d; %d)\n\n", s->w, s->h, length);
 }
 
-static void	ft_window(t_env *e)
+void	ft_window(t_env *e)
 {
 	SDL_Surface	*sur;
 	SDL_Surface	*sur1;
@@ -138,9 +152,10 @@ static void	ft_window(t_env *e)
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		DIMX, DIMY, SDL_WINDOW_SHOWN);
 	init_cam(e);
+	init_objs(e);
 	sur = render_cam(e, 0)->data.render;
 	sur1 = SDL_GetWindowSurface(e->glb.win);
-	//print_surface_pixels(sur);
+	print_surface_pixels(sur);
 	SDL_BlitSurface(sur, NULL, sur1, &((SDL_Rect){0,0,DIMX,DIMY}));
 	SDL_UpdateWindowSurface(e->glb.win);
 }
@@ -155,3 +170,9 @@ int		main(int argc, char **argv)
 	free_env(&e);
 	return (0);
 }
+// int main(void) {
+// 	t_color a = (t_color)(unsigned)0x110000;
+//
+// 	printf("%hhu", a.p.r);
+// 	return 0;
+// }
