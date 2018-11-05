@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/05 10:06:09 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/05 17:48:19 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
 	t_vec		lnc[3];
 	int			i;
 
-	out = (t_color)0;
+	out = (t_color) (unsigned)AMASK;
 	l = r->e->s.lits;
 	while (l)
 	{
@@ -81,9 +81,9 @@ t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
 			lnc[2] = normalise(get_line(pt, r->c->t).v);
 			lnc[1] = normalise(g_ref[obj.type].norm(unrot(apply(vecpro(obj.t, -1),
 			pt), obj.dir), obj, lnc[2]));
-			out = rgbadd(rgbadd(out, rgbpro(rgbmin(l->color, rgbneg(obj.color)),
+			out.i |= rgbadd(rgbadd(out, rgbpro(rgbmin(l->color, rgbneg(obj.color)),
 			l->power * diffuse_light(lnc))), rgbpro(l->color, l->power *
-			spec_light(lnc) * obj.spec));
+			spec_light(lnc) * obj.spec)).i;
 		}
 		l = l->next;
 	}
@@ -97,13 +97,13 @@ t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
 t_color		raytrace(t_rendering *r, t_line l)
 {
 	t_insecres	res;
-	t_color			out;
+	t_color		out;
 
-	printf("v : (%.2f %.2f %.2f)\n", l.v.x, l.v.y, l.v.z);
+	// printf("v : (%.2f %.2f %.2f)\n", l.v.x, l.v.y, l.v.z);
 	pthread_mutex_unlock(&r->lock);
-	out = (t_color)0;
+	out = (t_color) (unsigned)AMASK;
 	res = intersec(r->e, l);
 	if (res.obj)
-		out = lites(r, get_linept(l, res.t), *res.obj);
+		out.i |= lites(r, get_linept(l, res.t), *res.obj).i;
 	return (out);
 }

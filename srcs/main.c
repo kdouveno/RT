@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/05 10:01:24 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/05 17:51:18 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static void	init_cam(t_env *e)
 			d->xmax / 2, d->ymax / 2}, cams->dir);
 		d->x = rot((t_vec){0, -1, 0}, cams->dir);
 		d->y = rot((t_vec){0, d->xmax - 1, -1}, cams->dir);
-		if (!(d->render = SDL_CreateRGBSurfaceWithFormat(0, d->xmax, d->ymax,
-		32, SDL_PIXELFORMAT_ARGB32)))
+		if (!(d->render = SDL_CreateRGBSurface(0, d->xmax, d->ymax,
+		32, RMASK, GMASK, BMASK, AMASK)))
 			error(e, SDL_GetError());
 		cams = cams->next;
 	}
@@ -114,20 +114,35 @@ t_cam	*render_cam(t_env *e, int ncam)
 	return (c);
 }
 
+void print_surface_pixels(SDL_Surface *s)
+{
+	t_color	*pixels = (t_color*)s->pixels;
+	int	length = s->w * s->h;
+	int i = 0;
+	while (i < length)
+	{
+		printf("argb(%hhu, %hhu, %hhu, %hhu)\n", pixels[i].p.a, pixels[i].p.r, pixels[i].p.g, pixels[i].p.b);
+		i++;
+	}
+	printf("Surface (%d, %d; %d)\n\n", s->w, s->h, length);
+}
+
 static void	ft_window(t_env *e)
 {
+	SDL_Surface	*sur;
+	SDL_Surface	*sur1;
+
 	if (SDL_Init(SDL_INIT_EVERYTHING))
 		error(e, SDL_ERROR);
 	e->glb.win = SDL_CreateWindow("RT - UI",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		DIMX, DIMY, SDL_WINDOW_SHOWN);
 	init_cam(e);
-
-
-	SDL_BlitSurface(render_cam(e, 0)->data.render, NULL, SDL_GetWindowSurface(e->glb.win), &((SDL_Rect){0,0,DIMX,DIMY}));
+	sur = render_cam(e, 0)->data.render;
+	sur1 = SDL_GetWindowSurface(e->glb.win);
+	//print_surface_pixels(sur);
+	SDL_BlitSurface(sur, NULL, sur1, &((SDL_Rect){0,0,DIMX,DIMY}));
 	SDL_UpdateWindowSurface(e->glb.win);
-	SDL_ShowWindow(e->glb.win);
-
 }
 
 int		main(int argc, char **argv)

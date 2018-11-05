@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/04 17:39:43 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/05 17:35:40 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,22 @@
 # define DIMY 700
 # define FOV 85
 # define THRD_CNT 1
+# if SDL_BYTEORDER == SDL_BIG_ENDIAN
+#  define RMASK 0x00ff0000
+#  define GMASK 0x0000ff00
+#  define BMASK 0x000000ff
+#  define AMASK 0xff000000
+# else
+#  define RMASK 0x0000ff00
+#  define GMASK 0x00ff0000
+#  define BMASK 0xff000000
+#  define AMASK 0x000000ff
+# endif
 
 typedef struct			s_global
 {
 	SDL_Window			*win;
+	SDL_Renderer		*ren;
 	int					thread_count;
 }						t_global;
 

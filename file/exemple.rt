@@ -4,6 +4,7 @@ camera{
 
 sphere{
 	v:20
+	color:0
 }
 
 light{

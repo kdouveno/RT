@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/18 18:13:19 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/05 17:40:21 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
 	}
 	else if (!(ft_strcmp(l1, "color")))
 	{
-		obj->color = (t_color)ft_atoi(l2);
+		obj->color = (t_color)(unsigned int)ft_atoi(l2);
 		return (0);
 	}
 	return (1);
@@ -96,7 +96,7 @@ t_obj	*obj_parse_2(t_env *e, int type, int fd)
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
 	*obj = (t_obj){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, 0, type,
-		0, (t_color)0, 0, 0, 0, '\0', NULL, NULL, NULL};
+		0, (t_color){(t_rgb){255,255,255,255}}, 0, 0, 0, '\0', NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{
