@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/30 13:38:30 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/05 12:08:25 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ void		error_prst(t_prst *p, char *msg)
 
 void	free_prst(t_prst *p)
 {
-	if (p->next)
-		free_prst(p->next);
-	free_scene(&(p->s));
-	ft_memdel((void**)&p);
+	if (p)
+	{
+		if (p->next)
+			free_prst(p->next);
+		free_scene(&(p->s));
+		ft_memdel((void**)&p);
+	}
 }
 /*
 static void	init_cam(t_env *e)

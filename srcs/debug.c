@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/30 15:34:04 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/05 12:08:58 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	debug_grad(t_grad *save)
 {
 	if (save != NULL)
-		ft_putstr("\n\033[38;5;204mGradients :\n\n");
+		printf("\n\033[38;5;204mGradients :\n\n");
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nDirection: %f %f %f\nColor1: %d\n"
@@ -30,17 +30,17 @@ static void	debug_grad(t_grad *save)
 static void	debug_objs(t_obj *save, t_clip *clips)
 {
 	if (save != NULL)
-		ft_putstr("\n\033[38;5;208mObjects :\n\n");
+		printf("\n\033[38;5;208mObjects : \n\n");
 	while (save != NULL)
 	{
-		printf("\nType: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
+		printf("\n\033[38;5;208m\nType: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
 		"Variable: %f\nColor: %d\nDiffuse: %f\nSpecular: %f\nID: %d\n"
 		"Display: %c\nLinked to %p\n",
 		g_ref[save->type].name, save->t.x, save->t.y, save->t.z,
 		save->dir.x, save->dir.y, save->dir.z,
 		save->v1, save->mat.color.i, save->mat.diff,
 		save->mat.spec, save->id, save->disp, save->grad);
-		ft_putstr("\n\033[38;5;136m");
+		printf("\n\033[38;5;136m");
 		clips = save->clips;
 		while (clips != NULL)
 		{
@@ -50,7 +50,7 @@ static void	debug_objs(t_obj *save, t_clip *clips)
 					g_ref[clips->obj->type].name, clips->obj->id);
 			clips = clips->next;
 		}
-		ft_putstr("\n\033[38;5;208m");
+		printf("\n\033[38;5;208m");
 		save = save->next;
 	}
 }
@@ -58,7 +58,7 @@ static void	debug_objs(t_obj *save, t_clip *clips)
 static void	debug_lits(t_lit *save)
 {
 	if (save != NULL)
-		ft_putstr("\n\033[38;5;46mLights :\n\n");
+		printf("\n\033[38;5;46mLights :\n\n");
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nPower: %f\nColor: %d\nID: %d\n\n",
@@ -71,7 +71,7 @@ static void	debug_lits(t_lit *save)
 static void	debug_cams(t_cam *save)
 {
 	if (save != NULL)
-		ft_putstr("\n\033[38;5;31mCameras :\n\n");
+		printf("\n\033[38;5;31mCameras :\n\n");
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nDirection: %f %f %f\n"
@@ -87,7 +87,7 @@ void		debug_prst(t_prst *p)
 {
 	while (p && (p->s.cams || p->s.lits || p->s.objs || p->s.grads))
 	{
-		ft_putstr("\n\n\n\033[38;5;96mPRESET :\n");
+		printf("\n\n\n\033[38;5;96mPRESET :\n");
 		printf("Translation: %f %f %f\nDirection: %f %f %f\n",
 		p->t.x, p->t.y, p->t.z, p->dir.x, p->dir.y, p->dir.z);
 		debug_cams(p->s.cams);
@@ -105,5 +105,5 @@ void		debug(t_env *e)
 	debug_grad(e->s.grads);
 	debug_objs(e->s.objs, NULL);
 	debug_prst(e->p);
-	ft_putstr("\033[0m");
+	printf("\033[0m");
 }

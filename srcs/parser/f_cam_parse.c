@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 16:24:46 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/05 12:03:04 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static int check_dimx_dimy(t_cam *cam, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "dimx")))
 	{
-		cam->data.dimx = ft_atoi(l2)
+		cam->data.dimx = ft_atoi(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "dimy")))
 	{
-		cam->data.dimy = ft_atoi(l2)
+		cam->data.dimy = ft_atoi(l2);
 		return (0);
 	}
 	return (1);
