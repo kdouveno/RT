@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/30 17:13:54 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/04 17:39:43 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,7 @@
 # define DIMX 900
 # define DIMY 700
 # define FOV 85
-# define THRD_CNT 100
-# define TEMP_IMG
-
-# if SDL_BYTEORDER == SDL_BIG_ENDIAN
-#  define RT_SDL_RMASK			0x00ff0000
-#  define RT_SDL_GMASK			0x0000ff00
-#  define RT_SDL_BMASK			0x000000ff
-#  define RT_SDL_AMASK			0xff000000
-# else
-#  define RT_SDL_RMASK			0x00ff0000
-#  define RT_SDL_GMASK			0x0000ff00
-#  define RT_SDL_BMASK			0x000000ff
-#  define RT_SDL_AMASK			0xff000000
-# endif
+# define THRD_CNT 1
 
 typedef struct			s_global
 {
@@ -73,7 +60,6 @@ typedef struct			s_cam
 	t_pt				t;
 	t_three_d			dir;
 	double				r;
-
 	int					id;
 	t_cam_render		data;
 	struct s_cam		*next;
@@ -167,6 +153,9 @@ typedef struct			s_objfx
 {
 	char				name[10];
 	void				(*parse)(t_env *e, int type, int fd);
+	double				(*intersec)(t_line d, double r);
+	t_vec				(*norm)(t_pt pt, t_obj obj, t_vec v);
+
 }						t_objfx;
 
 int						is_name_char(char c);
@@ -194,19 +183,29 @@ int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
 int						check_file_mat(const char *str);
 char					*file_name(char *str);
 
+double					sphere_line(t_line d, double r);
+double					cone_line(t_line d, double r);
+double					cylinder_line(t_line d, double r);
+double					plane_line(t_line d, double r);
+
+t_vec					sphere_norm(t_pt pt, t_obj obj, t_vec v);
+t_vec					cone_norm(t_pt pt, t_obj obj, t_vec v);
+t_vec					cylinder_norm(t_pt pt, t_obj obj, t_vec v);
+t_vec					plane_norm(t_pt pt, t_obj obj, t_vec v);
+
 static const t_objfx	g_ref[] = {
-	{"env", &env_parse},
-	{"camera", &cam_parse},
-	{"light", &light_parse},
-	{"sphere", &obj_parse},
-	{"cone", &obj_parse},
-	{"cylinder", &obj_parse},
-	{"plane", &obj_parse},
-	{"pyramid", &obj_parse},
-	{"torus", &obj_parse},
-	{"cuboid", &obj_parse},
-	{"grad", &grad_parse},
-	{"", NULL}
+	{"env", &env_parse, NULL, NULL},
+	{"camera", &cam_parse, NULL, NULL},
+	{"light", &light_parse, NULL, NULL},
+	{"sphere", &obj_parse, &sphere_line, &sphere_norm},
+	{"cone", &obj_parse, &cone_line, &cone_norm},
+	{"cylinder", &obj_parse, &cylinder_line, &cylinder_norm},
+	{"plane", &obj_parse, &plane_line, &plane_norm},
+	{"pyramid", &obj_parse, NULL, NULL},
+	{"torus", &obj_parse, NULL, NULL},
+	{"cuboid", &obj_parse, NULL, NULL},
+	{"grad", &grad_parse, NULL, NULL},
+	{"", NULL, NULL, NULL}
 };
 
 void					set_camera(t_env *e, t_vec t, t_rot r, double a);
@@ -220,7 +219,7 @@ int						key_hook(int key, t_env *e);
 void					arg(t_env *e, int argc, char **argv);
 void					free_env(t_env *e);
 void					debug(t_env *e);
-void					error(t_env *e, char *msg);
+void					error(t_env *e, const char *msg);
 
 int						my_key(int key, t_env *e);
 void					k_escape(t_env *e);

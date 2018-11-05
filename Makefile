@@ -56,9 +56,7 @@ objs/%.o: srcs/%.c $(INCSFILE)
 	@printf "$(VIOLET)%15s : $(BLUE)%-20s$(GREEN) done$(WHITE)\n" $(NAME) $(<F)
 
 debug:
-ifneq ($(strip $(MKES)),)
 	@printf "%s\n" $(MKES)
-endif
 
 clean:
 	@$(foreach p,$(MKES),make -C $(p) clean;)
