@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/05 19:56:44 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/06 16:57:47 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,6 @@ t_pt				apply(t_vec v, t_pt p);
 double				angle(t_vec a, t_vec b);
 double				scalar_product(t_vec a, t_vec b);
 t_rot				get_rot(t_vec a, double x);
-
-double				sphere_line(t_line d, double r);
-double				cone_line(t_line d, double a);
-double				plane_line(t_line d, double empty);
-double				cylinder_line(t_line d, double r);
 
 t_color				rgbpro(t_color c, double m);
 t_color				rgbadd(t_color c1, t_color c2);
