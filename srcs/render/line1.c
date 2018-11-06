@@ -1,44 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intercections.c                                    :+:      :+:    :+:   */
+/*   line1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/06 16:36:07 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/04 15:21:14 by kdouveno         ###   ########.fr       */
+/*   Created: 2018/11/06 12:59:31 by kdouveno          #+#    #+#             */
+/*   Updated: 2018/11/06 16:42:15 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_polyres	solve_polynome(double a, double b, double c)
-{
-	t_polyres	out;
-	double		delta;
-
-	out.type = NORES;
-	if (a != 0)
-	{
-		a *= 2;
-		delta = b * b - 2 * a * c;
-		if (delta > 0)
-		{
-			delta = sqrt(delta);
-			out.type = TWORES;
-			out.a = (-b - delta) / a;
-			out.b = (-b + delta) / a;
-		}
-		else if (!delta)
-		{
-			out.type = ONERES;
-			out.a = -b / a;
-		}
-	}
-	return (out);
-}
-
-double		cone_line(t_line d, double a)
+void	cone_line(t_env *e, t_line d, t_obj *o, t_insecres **res)
 {
 	double		out;
 	t_polyres	res;
@@ -50,14 +24,14 @@ double		cone_line(t_line d, double a)
 		2 * (d.v.x * d.m.x + d.v.y * d.m.y - d.v.z * d.m.z * ta),
 		sq(d.m.x) + sq(d.m.y) - sq(d.m.z) * ta);
 	if (res.type == NORES)
-		return (-1);
-	out = res.a;
-	if (res.type == TWORES && (res.b < res.a || res.a < 0) && res.b >= 0)
-		out = res.b;
+		return ;
+	add_res(e, res, (t_reslist){res.a, o, NULL});
+	if (res.type == TWORES)
+		add_res(e, res, (t_reslist){res.b, o, NULL});
 	return (out);
 }
 
-double		cylinder_line(t_line d, double r)
+void	cylinder_line(t_env *e, t_line d, t_obj *o, t_insecres **res)
 {
 	double		out;
 	t_polyres	res;
@@ -67,14 +41,14 @@ double		cylinder_line(t_line d, double r)
 		2 * (d.v.x * d.m.x + d.v.y * d.m.y),
 		sq(d.m.x) + sq(d.m.y) - r * r);
 	if (res.type == NORES)
-		return (-1);
-	out = res.a;
-	if (res.type == TWORES && (res.b < res.a || res.a < 0) && res.b >= 0)
-		out = res.b;
+		return ;
+	add_res(e, res, (t_reslist){res.a, o, NULL});
+	if (res.type == TWORES)
+		add_res(e, res, (t_reslist){res.b, o, NULL});
 	return (out);
 }
 
-double		sphere_line(t_line d, double r)
+void	sphere_line(t_env *e, t_line d, t_obj *o, t_insecres **res)
 {
 	double		out;
 	t_polyres	res;
@@ -84,17 +58,16 @@ double		sphere_line(t_line d, double r)
 		2 * (d.v.x * d.m.x + d.v.y * d.m.y + d.v.z * d.m.z),
 		sq(d.m.x) + sq(d.m.y) + sq(d.m.z) - r * r);
 	if (res.type == NORES)
-		return (-1);
-	out = res.a;
-	if (res.type == TWORES && (res.b < res.a || res.a < 0) && res.b >= 0)
-		out = res.b;
+		return ;
+	add_res(e, res, (t_reslist){res.a, o, NULL});
+	if (res.type == TWORES)
+		add_res(e, res, (t_reslist){res.b, o, NULL});
 	return (out);
 }
 
-double		plane_line(t_line d, double empty)
+void	plane_line(t_env *e, t_line d, t_obj *o, t_insecres **res)
 {
-	(void)empty;
 	if (!d.v.x)
-		return (-1);
+		return ;
 	return (-d.m.x / d.v.x);
 }
