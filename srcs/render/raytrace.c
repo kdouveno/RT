@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/05 19:53:37 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/06 16:50:24 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@
 **		directeur de la droite line (l.v)
 */
 
-t_insecres	intersec(t_env *e, t_line line)
+t_reslist	*intersec(t_env *e, t_line line)
 {
 	t_obj		*b;
-	t_insecres	out;
+	t_reslist	*out;
 	double		tmp;
 	t_line		l;
 
-	out = (t_insecres){NULL, 0};
+	out = NULL;
 	b = e->s.objs;
 	while (b)
 	{
 		l.m = apply(vecpro(b->t, -1), line.m);
 		l.m = unrot(l.m, b->dir);
 		l.v = unrot(line.v, b->dir);
-		if ((tmp = g_ref[b->type].intersec(l, b->v1)) > 0
+		if ((tmp = g_ref[b->type].intersec(e, l, b, &out)) > 0
 		&& (tmp < out.t || !out.obj))
 			out = (t_insecres){b, tmp};
 		b = b->next;
@@ -70,12 +70,13 @@ t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
 	t_color		out;
 	t_vec		lnc[3];
 	int			i;
+	t_reslist	*res;
 
 	out = (t_color) (unsigned)AMASK;
 	l = r->e->s.lits;
 	while (l)
 	{
-		if (intersec(r->e, get_line(l->t, pt)).t > 0.999999 && (i = 0) == 0)
+		if ((res = intersec(r->e, get_line(l->t, pt)))->t > 0.999999 && (i = 0) == 0)
 		{
 			lnc[0] = normalise(get_line(pt, l->t).v);
 			lnc[2] = normalise(get_line(pt, r->c->t).v);
@@ -85,6 +86,7 @@ t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
 			l->power * diffuse_light(lnc))), rgbpro(l->color, l->power *
 			spec_light(lnc) * obj.spec)).i;
 		}
+		free_res(res);
 		l = l->next;
 	}
 	return (out);
@@ -96,13 +98,14 @@ t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
 
 t_color		raytrace(t_rendering *r, t_line l)
 {
-	t_insecres	res;
+	t_reslist	*res;
 	t_color		out;
 
 	pthread_mutex_unlock(&r->lock);
 	out = (t_color)(unsigned)AMASK;
 	res = intersec(r->e, l);
-	if (res.obj)
-		out.i |= lites(r, get_linept(l, res.t), *res.obj).i;
+	if (res)
+		out.i |= lites(r, get_linept(l, res->t), *res->obj).i;
+	free_res(res);
 	return (out);
 }

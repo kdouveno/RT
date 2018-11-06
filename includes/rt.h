@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/05 20:09:21 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/06 16:56:42 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include "libft.h"
 # include "gnl.h"
 # include "X.h"
+# include "reslist.h"
 # include <stdlib.h>
-# include "SDL.h"
+# include <SDL.h>
 # include <pthread.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -166,7 +167,8 @@ typedef struct			s_objfx
 {
 	char				name[10];
 	void				(*parse)(t_env *e, int type, int fd);
-	double				(*intersec)(t_line d, double r);
+	double				(*intersec)(t_env *e, t_line d, t_obj *o,
+		t_reslist **res);
 	t_vec				(*norm)(t_pt pt, t_obj obj, t_vec v);
 
 }						t_objfx;
@@ -196,10 +198,14 @@ int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
 int						check_file_mat(const char *str);
 char					*file_name(char *str);
 
-double					sphere_line(t_line d, double r);
-double					cone_line(t_line d, double r);
-double					cylinder_line(t_line d, double r);
-double					plane_line(t_line d, double r);
+double					sphere_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **res);
+double					cone_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **res);
+double					cylinder_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **res);
+double					plane_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **res);
 
 t_vec					sphere_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					cone_norm(t_pt pt, t_obj obj, t_vec v);
