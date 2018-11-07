@@ -6,11 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/10/30 16:15:53 by gperez           ###   ########.fr       */
-=======
 /*   Updated: 2018/11/05 20:09:21 by kdouveno         ###   ########.fr       */
->>>>>>> texture
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +26,14 @@
 # define DIMY 700
 # define FOV 85
 # define THRD_CNT 100
-<<<<<<< HEAD
-# define TEMP_IMG
 # define REC_FILE 100
-
-typedef struct			s_global
-{
-	void				*ptr;
-	int					rec_lim_file;
-	int					rec_nb_file;
-=======
 # define CONE 4
-# define RMASK 0x00ff0000
-# define GMASK 0x0000ff00
-# define BMASK 0x000000ff
-# define AMASK 0xff000000
 
 typedef struct			s_global
 {
 	SDL_Window			*win;
-	SDL_Renderer		*ren;
->>>>>>> texture
+	int					rec_lim_file;
+	int					rec_nb_file;
 	int					thread_count;
 }						t_global;
 
@@ -132,7 +115,7 @@ typedef struct			s_obj
 	t_three_d			dir;
 	double				r;
 	int					type;
-	double				v1;
+	double				v[4];
 	t_mat				mat;
 	t_bool				b;
 	int					id;
@@ -196,14 +179,9 @@ typedef struct			s_insecres
 typedef struct			s_objfx
 {
 	char				name[10];
-<<<<<<< HEAD
 	void				(*parse)(t_env *e, int type, int fd, t_scene *s);
-=======
-	void				(*parse)(t_env *e, int type, int fd);
 	double				(*intersec)(t_line d, double r);
 	t_vec				(*norm)(t_pt pt, t_obj obj, t_vec v);
-
->>>>>>> texture
 }						t_objfx;
 
 int						is_name_char(char c);
@@ -247,21 +225,6 @@ t_vec					cylinder_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					plane_norm(t_pt pt, t_obj obj, t_vec v);
 
 static const t_objfx	g_ref[] = {
-<<<<<<< HEAD
-	{"env", &env_parse},
-	{"camera", &cam_parse},
-	{"light", &light_parse},
-	{"sphere", &obj_parse},
-	{"cone", &obj_parse},
-	{"cylinder", &obj_parse},
-	{"plane", &obj_parse},
-	{"pyramid", &obj_parse},
-	{"torus", &obj_parse},
-	{"cuboid", &obj_parse},
-	{"grad", &grad_parse},
-	{"preset", &prst_parse},
-	{"", NULL}
-=======
 	{"env", &env_parse, NULL, NULL},
 	{"camera", &cam_parse, NULL, NULL},
 	{"light", &light_parse, NULL, NULL},
@@ -274,7 +237,6 @@ static const t_objfx	g_ref[] = {
 	{"cuboid", &obj_parse, NULL, NULL},
 	{"grad", &grad_parse, NULL, NULL},
 	{"", NULL, NULL, NULL}
->>>>>>> texture
 };
 
 void					set_camera(t_env *e, t_vec t, t_rot r, double a);
@@ -288,12 +250,8 @@ int						key_hook(int key, t_env *e);
 void					arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);
 void					debug(t_env *e);
-<<<<<<< HEAD
 void					error(t_env *e, char *msg);
 void					error_prst(t_prst *p, char *msg);
-=======
-void					error(t_env *e, const char *msg);
->>>>>>> texture
 
 int						my_key(int key, t_env *e);
 void					k_escape(t_env *e);

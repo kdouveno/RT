@@ -16,7 +16,7 @@ static void		parse_color_obj(t_obj *obj, char *l2)
 {
 	obj->b.c1 = l2[0] == '#' ? 0 : 1;
 	if (l2[0] == '#')
-		obj->mat.color.i = ft_extoi(&(l2[1]));
+		obj->mat.color.i = (unsigned)ft_extoi(&(l2[1]));
 	else
 		obj->mat.color.i = ft_atoi(l2);
 }
@@ -26,7 +26,7 @@ static void		parse_color_grad(t_grad *grad, char *l2, int nb)
 	{
 		grad->b.c1 = l2[0] == '#' ? 0 : 1;
 		if (l2[0] == '#')
-			grad->color1.i = ft_extoi(&l2[1]);
+			grad->color1.i = (unsigned)ft_extoi(&l2[1]);
 		else
 			grad->color1.i = ft_atoi(l2);
 	}
@@ -34,7 +34,7 @@ static void		parse_color_grad(t_grad *grad, char *l2, int nb)
 	{
 		grad->b.c2 = l2[0] == '#' ? 0 : 1;
 		if (l2[0] == '#')
-			grad->color2.i = ft_extoi(&l2[1]);
+			grad->color2.i = (unsigned)ft_extoi(&l2[1]);
 		else
 			grad->color2.i = ft_atoi(l2);
 	}

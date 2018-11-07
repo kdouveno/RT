@@ -16,7 +16,7 @@ static void		color_obj(t_obj *objs, t_grad *save_g)
 {
 	while (save_g)
 	{
-		if (save_g->id == objs->mat.color.i)
+		if (save_g->id == (signed)objs->mat.color.i)
 		{
 			if (save_g->b.c1 == 0)
 				objs->mat.color.i = save_g->color1.i;

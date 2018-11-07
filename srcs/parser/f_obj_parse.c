@@ -16,7 +16,7 @@ static int		check_arg(t_env *e, t_obj *obj, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "v")))
 	{
-		obj->v1 = ft_atod(l2);
+		obj->v[0] = ft_atod(l2);
 		return (0);
 	}
 	else if (!(ft_strcmp(l1, "id")))
@@ -95,8 +95,9 @@ t_obj	*obj_parse_2(t_env *e, int type, int fd)
 
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
-	*obj = (t_obj){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, 0, type,
-		0, (t_color){(t_rgb){255,255,255,255}}, 0, -1, 0, '\0', NULL, NULL, NULL};
+	*obj = (t_obj){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, 0, type, {},
+		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 0, 0}, 0, -1,
+		'\0', NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{

@@ -104,7 +104,7 @@ t_cam	*cam_parse_2(t_env *e, int fd)
 	if (!(cam = malloc(sizeof(t_cam))))
 		error(e, MALLOC_ERROR);
 	*cam = (t_cam){(t_pt){0, 0, 0},(t_vec){0, 0, 0}, -1, -1,
-		{{0,0,0}, {}, {}, rad(FOV), NULL, {}, 0, 0, 0, 0, 0, 0, 1},
+		{{0,0,0}, {}, {}, rad(FOV), NULL, 0, 0, 0, 0, 0, 0, 1},
 		NULL};
 	while ((res = get_next_line(fd, &line)) > 0 &&
 		get_prop(e, line, &l1, &l2) != 1)
