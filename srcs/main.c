@@ -6,11 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/11/05 12:08:25 by gperez           ###   ########.fr       */
-=======
-/*   Updated: 2018/11/05 20:09:30 by kdouveno         ###   ########.fr       */
->>>>>>> texture
+/*   Updated: 2018/11/07 15:30:40 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +18,8 @@ void		error(t_env *e, const char *msg)
 	ft_putstr("\033[38;5;203m");
 	ft_putendl(msg);
 	ft_putstr("\033[0m");
-<<<<<<< HEAD
 	free_scene(&(e->s));
+	free_prst(e->p);
 	exit(0);
 }
 
@@ -48,18 +44,7 @@ void	free_prst(t_prst *p)
 		ft_memdel((void**)&p);
 	}
 }
-/*
-=======
-	free_env(e);
-	SDL_Quit();
-	exit(0);
-}
 
-/*
-**	to protect
-*/
-
->>>>>>> texture
 static void	init_cam(t_env *e)
 {
 	t_cam			*cams;
@@ -97,7 +82,7 @@ static void init_objs(t_env *e) {
 	while (objs)
 	{
 		if (objs->type == CONE)
-			objs->v1 = rad(objs->v1);
+			objs->v[0] = rad(objs->v[0]);
 		objs = objs->next;
 	}
 }
@@ -198,7 +183,7 @@ t_cam	*render_cam(t_env *e, int ncam)
 	return (c);
 }
 
-/*void print_surface_pixels(SDL_Surface *s)
+void print_surface_pixels(SDL_Surface *s)
 {
 	t_color	*pixels = (t_color*)s->pixels;
 	int	length = s->w * s->h;
@@ -210,7 +195,7 @@ t_cam	*render_cam(t_env *e, int ncam)
 		i++;
 	}
 	printf("Surface (%d, %d; %d)\n\n", s->w, s->h, length);
-}*/
+}
 
 void	ft_window(t_env *e)
 {
@@ -230,20 +215,15 @@ void	ft_window(t_env *e)
 	SDL_BlitSurface(sur, NULL, sur1, &((SDL_Rect){0, 0, DIMX, DIMY}));
 	SDL_UpdateWindowSurface(e->glb.win);
 }
-*/
+
 int		main(int argc, char **argv)
 {
 	t_env		e;
 
 	arg(&e, argc, argv);
-<<<<<<< HEAD
-	//ft_window(&e);
+	ft_window(&e);
 	free_scene((&e.s));
 	free_prst(e.p);
-=======
-	ft_window(&e);
 	getchar();
-	free_env(&e);
->>>>>>> texture
 	return (0);
 }

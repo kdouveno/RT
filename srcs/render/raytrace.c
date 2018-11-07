@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/05 19:53:37 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/07 15:39:52 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_insecres	intersec(t_env *e, t_line line)
 		l.m = apply(vecpro(b->t, -1), line.m);
 		l.m = unrot(l.m, b->dir);
 		l.v = unrot(line.v, b->dir);
-		if ((tmp = g_ref[b->type].intersec(l, b->v1)) > 0
+		if ((tmp = g_ref[b->type].intersec(l, b->v[0])) > 0
 		&& (tmp < out.t || !out.obj))
 			out = (t_insecres){b, tmp};
 		b = b->next;
@@ -81,9 +81,9 @@ t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
 			lnc[2] = normalise(get_line(pt, r->c->t).v);
 			lnc[1] = normalise(g_ref[obj.type].norm(unrot(apply(vecpro(obj.t, -1),
 			pt), obj.dir), obj, lnc[2]));
-			out.i |= rgbadd(rgbadd(out, rgbpro(rgbmin(l->color, rgbneg(obj.color)),
+			out.i |= rgbadd(rgbadd(out, rgbpro(rgbmin(l->color, rgbneg(obj.mat.color)),
 			l->power * diffuse_light(lnc))), rgbpro(l->color, l->power *
-			spec_light(lnc) * obj.spec)).i;
+			spec_light(lnc) * obj.mat.spec)).i;
 		}
 		l = l->next;
 	}

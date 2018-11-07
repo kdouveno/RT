@@ -1,35 +1,4 @@
 camera{
-<<<<<<< HEAD
-	antialiasing:-5
-}
-
-sphere{
-	tx:5
-	ty:6
-	tz:0.25
-
-	dirx:30
-	diry:70
-	dirz:0
-
-	v: 0.5
-	color: 78
-	id:5
-}
-
-grad{
-	id: 78
-	tx: 0
-	ty: 0
-	tz: 0
-
-	dirx: 10
-	diry: 10
-	dirz: 10
-
-	c1: 85
-	c2: #3030FF
-=======
 	tx: -100
 }
 
@@ -51,15 +20,8 @@ light{
 	tx: -50
 	ty: 50
 	tz: 20
->>>>>>> texture
 }
 
-grad{
-	c1: 78
-	id: 30
-}
-
-grad{
-	c1:#FF3030
-	id: 85
+preset{
+	src:exemple.rt
 }

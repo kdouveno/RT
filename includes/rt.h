@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/05 20:09:21 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/07 15:44:26 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@
 # define THRD_CNT 100
 # define REC_FILE 100
 # define CONE 4
-
+# define AMASK 0xFF000000
+# define RMASK 0xFF0000
+# define GMASK 0xFF00
+# define BMASK 0xFF
 typedef struct			s_global
 {
 	SDL_Window			*win;
@@ -236,6 +239,7 @@ static const t_objfx	g_ref[] = {
 	{"torus", &obj_parse, NULL, NULL},
 	{"cuboid", &obj_parse, NULL, NULL},
 	{"grad", &grad_parse, NULL, NULL},
+	{"preset", &prst_parse, NULL, NULL},
 	{"", NULL, NULL, NULL}
 };
 
@@ -250,8 +254,9 @@ int						key_hook(int key, t_env *e);
 void					arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);
 void					debug(t_env *e);
-void					error(t_env *e, char *msg);
+void					error(t_env *e, const char *msg);
 void					error_prst(t_prst *p, char *msg);
+void					free_prst(t_prst *p);
 
 int						my_key(int key, t_env *e);
 void					k_escape(t_env *e);
