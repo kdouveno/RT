@@ -68,7 +68,7 @@ static void init_objs(t_env *e) {
 		objs = objs->next;
 	}
 }
-
+/*
 static Uint32        s_get_rgba(Uint32 base_color, t_cam_render *rt)
 {
 	return (SDL_MapRGBA(rt->render->format,
@@ -106,7 +106,7 @@ static void            ft_put_pixel(int x, int y, Uint32 c, t_cam_render *rt)
 		}
 	}
 }
-
+*/
 void	*render(void *r)
 {
 	int				ix;
@@ -131,7 +131,7 @@ void	*render(void *r)
 		else
 			d->vp_ul = apply(d->x, d->vp_ul);
 		t_color c = raytrace(r, l);
-		ft_put_pixel(ix, iy, c.i, d);
+		((int*)d->render->pixels)[iy * d->xmax + ix] = c.i;
 	}
 	pthread_exit(NULL);
 	return (NULL);
