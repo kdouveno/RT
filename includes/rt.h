@@ -212,7 +212,11 @@ void					stock_obj(t_env *e, t_obj *obj, char *l1, char *l2);
 int						check_pt(void *cam, char* l1, char *l2);
 int						check_dir(void *cam, char* l1, char *l2);
 int						check_rot(void *cam, char *l1, char *l2);
+int						check_value(t_obj *obj, char *l1, char *l2);
 int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
+
+void					*render(void *r);
+t_cam					*render_cam(t_env *e, int ncam);
 
 int						check_file_ext(const char *str, const char *ext);
 char					*file_name(char *str);
