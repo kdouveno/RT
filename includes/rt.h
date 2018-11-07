@@ -25,19 +25,12 @@
 # define DIMX 900
 # define DIMY 700
 # define FOV 85
-# define THRD_CNT 1
+# define THRD_CNT 100
 # define CONE 4
-# if SDL_BYTEORDER != SDL_BIG_ENDIAN
 #  define RMASK 0x00ff0000
 #  define GMASK 0x0000ff00
 #  define BMASK 0x000000ff
 #  define AMASK 0xff000000
-# else
-#  define RMASK 0x0000ff00
-#  define GMASK 0x00ff0000
-#  define BMASK 0xff000000
-#  define AMASK 0x000000ff
-# endif
 
 typedef struct			s_global
 {

@@ -69,6 +69,44 @@ static void init_objs(t_env *e) {
 	}
 }
 
+static Uint32        s_get_rgba(Uint32 base_color, t_cam_render *rt)
+{
+	return (SDL_MapRGBA(rt->render->format,
+		(base_color & 0xff0000) >> 16,
+		(base_color & 0xff00) >> 8,
+		(base_color & 0xff),
+		(base_color & 0xff000000) >> 24));
+}
+
+static void            ft_put_pixel(int x, int y, Uint32 c, t_cam_render *rt)
+{
+	Uint8 *p;
+
+	c = s_get_rgba(c, rt);
+	p = (Uint8*)rt->render->pixels + y * rt->render->pitch
+	+ x * rt->render->format->BytesPerPixel;
+	*(Uint32*)p = c;
+	if (rt->render->format->BytesPerPixel == 1)
+	*p = c;
+	else if (rt->render->format->BytesPerPixel == 2)
+	*(Uint16*)p = c;
+	else if (rt->render->format->BytesPerPixel == 3)
+	{
+		if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		{
+			p[0] = (c >> 16) & 0xff;
+			p[1] = (c >> 8) & 0xff;
+			p[2] = c & 0xff;
+		}
+		else
+		{
+			p[0] = c & 0xff;
+			p[1] = (c >> 8) & 0xff;
+			p[2] = (c >> 16) & 0xff;
+		}
+	}
+}
+
 void	*render(void *r)
 {
 	int				ix;
@@ -93,7 +131,7 @@ void	*render(void *r)
 		else
 			d->vp_ul = apply(d->x, d->vp_ul);
 		t_color c = raytrace(r, l);
-		((int*)d->render->pixels)[iy * d->xmax + ix] = c.i;
+		ft_put_pixel(ix, iy, c.i, d);
 	}
 	pthread_exit(NULL);
 	return (NULL);
@@ -127,20 +165,6 @@ t_cam	*render_cam(t_env *e, int ncam)
 	return (c);
 }
 
-void print_surface_pixels(SDL_Surface *s)
-{
-	t_color	*pixels = (t_color*)s->pixels;
-	int	length = s->w * s->h;
-	int i = 0;
-	while (i < length)
-	{
-		if (pixels[i].i & 0x11111100)
-		printf("argb(%hhu, %hhu, %hhu, %hhu)\n", pixels[i].p.a, pixels[i].p.r, pixels[i].p.g, pixels[i].p.b);
-		i++;
-	}
-	printf("Surface (%d, %d; %d)\n\n", s->w, s->h, length);
-}
-
 void	ft_window(t_env *e)
 {
 	SDL_Surface	*sur;
@@ -155,8 +179,7 @@ void	ft_window(t_env *e)
 	init_objs(e);
 	sur = render_cam(e, 0)->data.render;
 	sur1 = SDL_GetWindowSurface(e->glb.win);
-	print_surface_pixels(sur);
-	SDL_BlitSurface(sur, NULL, sur1, &((SDL_Rect){0,0,DIMX,DIMY}));
+	SDL_BlitSurface(sur, NULL, sur1, &((SDL_Rect){0, 0, DIMX, DIMY}));
 	SDL_UpdateWindowSurface(e->glb.win);
 }
 
@@ -170,9 +193,3 @@ int		main(int argc, char **argv)
 	free_env(&e);
 	return (0);
 }
-// int main(void) {
-// 	t_color a = (t_color)(unsigned)0x110000;
-//
-// 	printf("%hhu", a.p.r);
-// 	return 0;
-// }
