@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:15:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/30 13:26:21 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/05 17:04:56 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ t_grad			*grad_parse_2(t_env *e, int fd)
 
 	if (!(grad = malloc(sizeof(t_grad))))
 		error(e, MALLOC_ERROR);
-	*grad = (t_grad){{0, 0, 0}, {0, 0, 0}, -1,
-		(t_color)0, (t_color)0, {0,0}, NULL};
+	*grad = (t_grad){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, -1,
+		(t_color)(unsigned)0, (t_color)(unsigned)0, 0, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{

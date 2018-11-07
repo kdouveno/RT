@@ -6,7 +6,11 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/30 16:15:53 by gperez           ###   ########.fr       */
+=======
+/*   Updated: 2018/11/05 20:09:21 by kdouveno         ###   ########.fr       */
+>>>>>>> texture
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +22,7 @@
 # include "gnl.h"
 # include "X.h"
 # include <stdlib.h>
+# include "SDL.h"
 # include <pthread.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -25,6 +30,7 @@
 # define DIMY 700
 # define FOV 85
 # define THRD_CNT 100
+<<<<<<< HEAD
 # define TEMP_IMG
 # define REC_FILE 100
 
@@ -33,6 +39,18 @@ typedef struct			s_global
 	void				*ptr;
 	int					rec_lim_file;
 	int					rec_nb_file;
+=======
+# define CONE 4
+# define RMASK 0x00ff0000
+# define GMASK 0x0000ff00
+# define BMASK 0x000000ff
+# define AMASK 0xff000000
+
+typedef struct			s_global
+{
+	SDL_Window			*win;
+	SDL_Renderer		*ren;
+>>>>>>> texture
 	int					thread_count;
 }						t_global;
 
@@ -44,14 +62,11 @@ typedef struct			s_wininfo
 
 typedef struct			s_cam_render
 {
-	void				*iptr;
-	void				*win;
 	t_pt				vp_ul;
 	t_vec				x;
 	t_vec				y;
 	double				fov;
-	int					*img;
-	int					iarg[3];
+	SDL_Surface			*render;
 	int					ix;
 	int					iy;
 	int					xmax;
@@ -74,7 +89,7 @@ typedef struct			s_cam
 typedef struct			s_fd
 {
 	int					fd;
-	char*				file;
+	char				*file;
 }						t_fd;
 
 typedef struct			s_bool
@@ -169,6 +184,7 @@ typedef struct			s_rendering
 	pthread_mutex_t		lock;
 	t_env				*e;
 	t_cam				*c;
+	SDL_Surface			*s;
 }						t_rendering;
 
 typedef struct			s_insecres
@@ -180,7 +196,14 @@ typedef struct			s_insecres
 typedef struct			s_objfx
 {
 	char				name[10];
+<<<<<<< HEAD
 	void				(*parse)(t_env *e, int type, int fd, t_scene *s);
+=======
+	void				(*parse)(t_env *e, int type, int fd);
+	double				(*intersec)(t_line d, double r);
+	t_vec				(*norm)(t_pt pt, t_obj obj, t_vec v);
+
+>>>>>>> texture
 }						t_objfx;
 
 int						is_name_char(char c);
@@ -213,7 +236,18 @@ int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
 int						check_file_ext(const char *str, const char *ext);
 char					*file_name(char *str);
 
+double					sphere_line(t_line d, double r);
+double					cone_line(t_line d, double r);
+double					cylinder_line(t_line d, double r);
+double					plane_line(t_line d, double r);
+
+t_vec					sphere_norm(t_pt pt, t_obj obj, t_vec v);
+t_vec					cone_norm(t_pt pt, t_obj obj, t_vec v);
+t_vec					cylinder_norm(t_pt pt, t_obj obj, t_vec v);
+t_vec					plane_norm(t_pt pt, t_obj obj, t_vec v);
+
 static const t_objfx	g_ref[] = {
+<<<<<<< HEAD
 	{"env", &env_parse},
 	{"camera", &cam_parse},
 	{"light", &light_parse},
@@ -227,6 +261,20 @@ static const t_objfx	g_ref[] = {
 	{"grad", &grad_parse},
 	{"preset", &prst_parse},
 	{"", NULL}
+=======
+	{"env", &env_parse, NULL, NULL},
+	{"camera", &cam_parse, NULL, NULL},
+	{"light", &light_parse, NULL, NULL},
+	{"sphere", &obj_parse, &sphere_line, &sphere_norm},
+	{"cone", &obj_parse, &cone_line, &cone_norm},
+	{"cylinder", &obj_parse, &cylinder_line, &cylinder_norm},
+	{"plane", &obj_parse, &plane_line, &plane_norm},
+	{"pyramid", &obj_parse, NULL, NULL},
+	{"torus", &obj_parse, NULL, NULL},
+	{"cuboid", &obj_parse, NULL, NULL},
+	{"grad", &grad_parse, NULL, NULL},
+	{"", NULL, NULL, NULL}
+>>>>>>> texture
 };
 
 void					set_camera(t_env *e, t_vec t, t_rot r, double a);
@@ -240,8 +288,12 @@ int						key_hook(int key, t_env *e);
 void					arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);
 void					debug(t_env *e);
+<<<<<<< HEAD
 void					error(t_env *e, char *msg);
 void					error_prst(t_prst *p, char *msg);
+=======
+void					error(t_env *e, const char *msg);
+>>>>>>> texture
 
 int						my_key(int key, t_env *e);
 void					k_escape(t_env *e);

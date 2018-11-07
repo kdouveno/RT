@@ -6,7 +6,11 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/11/05 16:12:12 by gperez           ###   ########.fr       */
+=======
+/*   Updated: 2018/11/05 19:17:29 by kdouveno         ###   ########.fr       */
+>>>>>>> texture
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +22,7 @@ static void	debug_grad(t_grad *save)
 		printf("\n\033[38;5;204mGradients :\n\n");
 	while (save != NULL)
 	{
-		printf("Translation: %f %f %f\nDirection: %f %f %f\nColor1: %d\n"
+		printf("Translation: %f %f %f\nDirection: %f %f %f\nColor1: %x\n"
 		"Color2: %d\nID: %d\n\n",
 		save->t.x, save->t.y, save->t.z,
 		save->dir.x, save->dir.y, save->dir.z,
@@ -33,8 +37,13 @@ static void	debug_objs(t_obj *save, t_clip *clips)
 		printf("\n\033[38;5;208mObjects : \n\n");
 	while (save != NULL)
 	{
+<<<<<<< HEAD
 		printf("\n\033[38;5;208m\nType: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
 		"Variable: %f\nColor: %d\nDiffuse: %f\nSpecular: %f\nID: %d\n"
+=======
+		printf("\nType: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
+		"Variable: %f\nColor: %x\nDiffuse: %f\nSpecular: %f\nID: %d\n"
+>>>>>>> texture
 		"Display: %c\nLinked to %p\n",
 		g_ref[save->type].name, save->t.x, save->t.y, save->t.z,
 		save->dir.x, save->dir.y, save->dir.z,
@@ -61,7 +70,7 @@ static void	debug_lits(t_lit *save)
 		printf("\n\033[38;5;46mLights :\n\n");
 	while (save != NULL)
 	{
-		printf("Translation: %f %f %f\nPower: %f\nColor: %d\nID: %d\n\n",
+		printf("Translation: %f %f %f\nPower: %f\nColor: %x\nID: %d\n\n",
 		save->t.x, save->t.y, save->t.z,
 		save->power, save->color.i, save->id);
 		save = save->next;

@@ -6,18 +6,23 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/11/05 12:08:25 by gperez           ###   ########.fr       */
+=======
+/*   Updated: 2018/11/05 20:09:30 by kdouveno         ###   ########.fr       */
+>>>>>>> texture
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		error(t_env *e, char *msg)
+void		error(t_env *e, const char *msg)
 {
 	(void)e;
 	ft_putstr("\033[38;5;203m");
 	ft_putendl(msg);
 	ft_putstr("\033[0m");
+<<<<<<< HEAD
 	free_scene(&(e->s));
 	exit(0);
 }
@@ -44,6 +49,17 @@ void	free_prst(t_prst *p)
 	}
 }
 /*
+=======
+	free_env(e);
+	SDL_Quit();
+	exit(0);
+}
+
+/*
+**	to protect
+*/
+
+>>>>>>> texture
 static void	init_cam(t_env *e)
 {
 	t_cam			*cams;
@@ -58,57 +74,103 @@ static void	init_cam(t_env *e)
 		else
 			cams->dir = (t_three_d){rad(cams->dir.x),
 			rad(cams->dir.y), rad(cams->dir.z)};
+		d->dimx = DIMX;
+		d->dimy = DIMY;
 		d->xmax = d->dimx * d->antialia;
 		d->ymax = d->dimy * d->antialia;
-		d->vp_ul = rot((t_vec){(double)(d->xmax / 2) / tan(rad(d->fov / 2)),
-			-d->xmax / 2, -d->ymax / 2}, cams->dir);
+		d->vp_ul = rot((t_vec){(double)(d->xmax / 2) / tan(d->fov / 2),
+			d->xmax / 2, d->ymax / 2}, cams->dir);
 		d->x = rot((t_vec){0, -1, 0}, cams->dir);
 		d->y = rot((t_vec){0, d->xmax - 1, -1}, cams->dir);
-		if (!(d->win = mlx_new_window(e->glb.ptr, d->dimx, d->dimy, "RT"))
-		|| !(d->iptr = mlx_new_image(e->glb.ptr, d->xmax * d->antialia,
-		d->ymax * d->antialia))
-		|| !(d->img = (int*)mlx_get_data_addr(d->iptr, d->iarg, d->iarg + 1,
-		d->iarg + 2)))
-			error(e, MALLOC_ERROR);
+		if (!(d->render = SDL_CreateRGBSurface(0, d->xmax, d->ymax,
+		32, RMASK, GMASK, BMASK, AMASK)))
+			error(e, SDL_GetError());
 		cams = cams->next;
+
 	}
 }
 
-t_color	raytrace(t_rendering *r, t_line l)
+static void init_objs(t_env *e) {
+	t_obj	*objs;
+
+	objs = e->s.objs;
+	while (objs)
+	{
+		if (objs->type == CONE)
+			objs->v1 = rad(objs->v1);
+		objs = objs->next;
+	}
+}
+/*
+static Uint32        s_get_rgba(Uint32 base_color, t_cam_render *rt)
 {
-	(void)r;
-	(void)l;
-	pthread_mutex_unlock(&r->lock);
-	return ((t_color)0);
+	return (SDL_MapRGBA(rt->render->format,
+		(base_color & 0xff0000) >> 16,
+		(base_color & 0xff00) >> 8,
+		(base_color & 0xff),
+		(base_color & 0xff000000) >> 24));
 }
 
-void	render(t_rendering *r)
+static void            ft_put_pixel(int x, int y, Uint32 c, t_cam_render *rt)
+{
+	Uint8 *p;
+
+	c = s_get_rgba(c, rt);
+	p = (Uint8*)rt->render->pixels + y * rt->render->pitch
+	+ x * rt->render->format->BytesPerPixel;
+	*(Uint32*)p = c;
+	if (rt->render->format->BytesPerPixel == 1)
+	*p = c;
+	else if (rt->render->format->BytesPerPixel == 2)
+	*(Uint16*)p = c;
+	else if (rt->render->format->BytesPerPixel == 3)
+	{
+		if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		{
+			p[0] = (c >> 16) & 0xff;
+			p[1] = (c >> 8) & 0xff;
+			p[2] = c & 0xff;
+		}
+		else
+		{
+			p[0] = c & 0xff;
+			p[1] = (c >> 8) & 0xff;
+			p[2] = (c >> 16) & 0xff;
+		}
+	}
+}
+*/
+void	*render(void *r)
 {
 	int				ix;
 	int				iy;
 	t_line			l;
 	t_cam_render	*d;
 
-	d = &r->c->data;
-	pthread_mutex_lock(&r->lock);
-	ix = d->ix++;
-	iy = d->iy;
-	l = (t_line){r->c->t, d->vp_ul};
-	if (d->ix >= d->xmax)
+	iy = 0;
+	d = &((t_rendering*)r)->c->data;
+	while (d->iy < d->ymax - 1)
 	{
-		d->ix = 0;
-		d->iy++;
-		d->vp_ul = apply(d->y, d->vp_ul);
+		pthread_mutex_lock(&((t_rendering*)r)->lock);
+		ix = d->ix++;
+		iy = d->iy;
+		l = (t_line){((t_rendering*)r)->c->t, d->vp_ul};
+		if (d->ix >= d->xmax)
+		{
+			d->ix = 0;
+			d->iy++;
+			d->vp_ul = apply(d->y, d->vp_ul);
+		}
+		else
+			d->vp_ul = apply(d->x, d->vp_ul);
+		t_color c = raytrace(r, l);
+		((int*)d->render->pixels)[iy * d->xmax + ix] = c.i;
 	}
-	else
-		d->vp_ul = apply(d->x, d->vp_ul);
-	d->img[d->xmax * iy + ix] = raytrace(r, l).i;
-	if (iy < d->ymax - 1)
-		render(r);
 	pthread_exit(NULL);
+	return (NULL);
 }
 
-void	start_rendering(t_env *e, int ncam)
+t_cam	*render_cam(t_env *e, int ncam)
 {
 	t_rendering		r;
 	pthread_t		thds[THRD_CNT];
@@ -118,27 +180,55 @@ void	start_rendering(t_env *e, int ncam)
 	r.lock = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	r.e = e;
 	i = 0;
+	c = e->s.cams;
 	while (i++ < ncam && c)
 		c = c->next;
 	if (!c)
-		return ;
+		return (NULL);
 	r.c = c;
+	i = 0;
 	while (i < THRD_CNT)
-		if (pthread_create(thds + i++, NULL, (void*)&r, &(ncam)))
+	{
+		if (pthread_create(thds + i, NULL, &render, &r))
 			error(e, PTHR_ERROR);
+		i++;
+	}
 	while (i >= 0)
 		pthread_join(thds[i--], NULL);
+	return (c);
 }
 
-static void	ft_window(t_env *e)
+/*void print_surface_pixels(SDL_Surface *s)
 {
-	if ((e->glb.ptr = mlx_init()) == NULL)
-		error(e, MLX_ERROR);
+	t_color	*pixels = (t_color*)s->pixels;
+	int	length = s->w * s->h;
+	int i = 0;
+	while (i < length)
+	{
+		if (pixels[i].i & 0x11111100)
+		printf("argb(%hhu, %hhu, %hhu, %hhu)\n", pixels[i].p.a, pixels[i].p.r, pixels[i].p.g, pixels[i].p.b);
+		i++;
+	}
+	printf("Surface (%d, %d; %d)\n\n", s->w, s->h, length);
+}*/
+
+void	ft_window(t_env *e)
+{
+	SDL_Surface	*sur;
+	SDL_Surface	*sur1;
+
+	if (SDL_Init(SDL_INIT_EVERYTHING))
+		error(e, SDL_ERROR);
+	e->glb.win = SDL_CreateWindow("RT - UI",
+		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+		DIMX, DIMY, SDL_WINDOW_SHOWN);
 	init_cam(e);
-	start_rendering(e, 0);
-	mlx_put_image_to_window(e->glb.ptr, e->s.cams->data.win, e->s.cams->data.iptr, 0, 0);
-	mlx_hook(e->s.cams->data.win, KeyPress, KeyPressMask, my_key, e);
-	mlx_loop(e->glb.ptr);
+	init_objs(e);
+	sur = render_cam(e, 0)->data.render;
+	sur1 = SDL_GetWindowSurface(e->glb.win);
+	//print_surface_pixels(sur);
+	SDL_BlitSurface(sur, NULL, sur1, &((SDL_Rect){0, 0, DIMX, DIMY}));
+	SDL_UpdateWindowSurface(e->glb.win);
 }
 */
 int		main(int argc, char **argv)
@@ -146,8 +236,14 @@ int		main(int argc, char **argv)
 	t_env		e;
 
 	arg(&e, argc, argv);
+<<<<<<< HEAD
 	//ft_window(&e);
 	free_scene((&e.s));
 	free_prst(e.p);
+=======
+	ft_window(&e);
+	getchar();
+	free_env(&e);
+>>>>>>> texture
 	return (0);
 }

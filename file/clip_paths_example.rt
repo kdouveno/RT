@@ -1,3 +1,11 @@
+camera{
+tx:-100
+}
+
+light{
+tx:8
+}
+
 pyramid{
 	tx:1
 	ty:6

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/29 09:54:13 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/05 17:17:28 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		check_arg(t_lit *lit, char *l1, char *l2)
 	}
 	else if (!(ft_strcmp(l1, "color")))
 	{
-		lit->color = (t_color)ft_atoi(l2);
+		lit->color = (t_color)(unsigned int)ft_atoi(l2);
 		return (0);
 	}
 	return (1);
@@ -60,7 +60,7 @@ t_lit	*light_parse_2(t_env *e, int fd)
 
 	if (!(lit = malloc(sizeof(t_lit))))
 		error(e, MALLOC_ERROR);
-	*lit = (t_lit){(t_pt){0, 0, 0}, 0, (t_color)0, (t_bool){0,0}, -1, NULL};
+	*lit = (t_lit){(t_pt){0, 0, 0}, 1, (t_color){(t_rgb){255,255,255,255}}, 0, -1, NULL};
 	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_light(e, lit, l1, l2);

@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/22 15:18:52 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/05 19:56:44 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ typedef t_three_d	t_rot;
 
 typedef struct		s_rgb
 {
-	unsigned char	r;
-	unsigned char	g;
 	unsigned char	b;
+	unsigned char	g;
+	unsigned char	r;
 	unsigned char	a;
 }					t_rgb;
 
 typedef	union		u_color
 {
 	t_rgb			p;
-	int				i;
+	unsigned int	i;
 }					t_color;
 
 typedef struct		s_line

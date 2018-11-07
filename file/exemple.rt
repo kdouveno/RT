@@ -1,4 +1,5 @@
 camera{
+<<<<<<< HEAD
 	antialiasing:-5
 }
 
@@ -28,6 +29,29 @@ grad{
 
 	c1: 85
 	c2: #3030FF
+=======
+	tx: -100
+}
+
+sphere{
+	v:20
+}
+
+cone{
+	ty: 30
+	v:20
+}
+
+cone{
+	ty:-30
+	v:20
+}
+
+light{
+	tx: -50
+	ty: 50
+	tz: 20
+>>>>>>> texture
 }
 
 grad{
