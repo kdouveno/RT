@@ -68,7 +68,7 @@ void	arg(t_env *e, int argc, char **argv)
 
 	i = 2;
 	d = 0;
-	*e = (t_env){{NULL, REC_FILE, -1, THRD_CNT},
+	*e = (t_env){{NULL, 3, -1, THRD_CNT},
 		{0,0}, {NULL, NULL, NULL, NULL}, NULL};
 	while (i < argc)
 	{
