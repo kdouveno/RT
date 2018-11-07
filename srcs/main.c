@@ -165,6 +165,20 @@ t_cam	*render_cam(t_env *e, int ncam)
 	return (c);
 }
 
+/*void print_surface_pixels(SDL_Surface *s)
+{
+	t_color	*pixels = (t_color*)s->pixels;
+	int	length = s->w * s->h;
+	int i = 0;
+	while (i < length)
+	{
+		if (pixels[i].i & 0x11111100)
+		printf("argb(%hhu, %hhu, %hhu, %hhu)\n", pixels[i].p.a, pixels[i].p.r, pixels[i].p.g, pixels[i].p.b);
+		i++;
+	}
+	printf("Surface (%d, %d; %d)\n\n", s->w, s->h, length);
+}*/
+
 void	ft_window(t_env *e)
 {
 	SDL_Surface	*sur;
@@ -179,6 +193,7 @@ void	ft_window(t_env *e)
 	init_objs(e);
 	sur = render_cam(e, 0)->data.render;
 	sur1 = SDL_GetWindowSurface(e->glb.win);
+	//print_surface_pixels(sur);
 	SDL_BlitSurface(sur, NULL, sur1, &((SDL_Rect){0, 0, DIMX, DIMY}));
 	SDL_UpdateWindowSurface(e->glb.win);
 }
