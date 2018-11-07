@@ -3,6 +3,7 @@ camera{
 }
 
 sphere{
+	tz:-20
 	v:20
 }
 
@@ -19,9 +20,5 @@ cone{
 light{
 	tx: -50
 	ty: 50
-	tz: 20
-}
-
-preset{
-	src:exemple.rt
+	tz: -20
 }

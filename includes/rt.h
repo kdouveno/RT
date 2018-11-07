@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/07 15:44:26 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/07 19:43:48 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,13 @@ typedef struct			s_obj
 	struct s_obj		*next;
 }						t_obj;
 
+typedef struct			s_reslist
+{
+	double				t;
+	t_obj				*o;
+	struct s_reslist	*next;
+}						t_reslist;
+
 typedef struct			s_set
 {
 	double				t;
@@ -148,6 +155,8 @@ typedef struct			s_scene
 	t_cam				*cams;
 	t_grad				*grads;
 }						t_scene;
+
+
 
 typedef struct			s_prst
 {
@@ -179,14 +188,6 @@ typedef struct			s_insecres
 	double				t;
 }						t_insecres;
 
-typedef struct			s_objfx
-{
-	char				name[10];
-	void				(*parse)(t_env *e, int type, int fd, t_scene *s);
-	double				(*intersec)(t_line d, double r);
-	t_vec				(*norm)(t_pt pt, t_obj obj, t_vec v);
-}						t_objfx;
-
 int						is_name_char(char c);
 int						is_ignored(char c);
 int						is_vec_null(t_vec vec);
@@ -217,15 +218,28 @@ int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
 int						check_file_ext(const char *str, const char *ext);
 char					*file_name(char *str);
 
-double					sphere_line(t_line d, double r);
-double					cone_line(t_line d, double r);
-double					cylinder_line(t_line d, double r);
-double					plane_line(t_line d, double r);
+void					sphere_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **rlist);
+void					cone_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **rlist);
+void					cylinder_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **rlist);
+void					plane_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **rlist);
 
 t_vec					sphere_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					cone_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					cylinder_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					plane_norm(t_pt pt, t_obj obj, t_vec v);
+
+typedef struct			s_objfx
+{
+	char				name[10];
+	void				(*parse)(t_env *e, int type, int fd, t_scene *s);
+	void				(*intersec)(t_env *e, t_line d, t_obj *o,
+		t_reslist **rlist);
+	t_vec				(*norm)(t_pt pt, t_obj obj, t_vec v);
+}						t_objfx;
 
 static const t_objfx	g_ref[] = {
 	{"env", &env_parse, NULL, NULL},
@@ -250,6 +264,10 @@ int						add_light(t_env *e, t_lit light);
 t_insecres				insec(t_env *e, t_line line);
 t_color					raytrace(t_rendering *r, t_line l);
 int						key_hook(int key, t_env *e);
+
+t_polyres				solve_polynome(double a, double b, double c);
+void					add_res(t_env *e, t_reslist **cur, t_reslist t);
+void					free_res(t_reslist *list);
 
 void					arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);

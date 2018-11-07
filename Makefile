@@ -38,7 +38,7 @@ ifneq ($(strip $(MKES)),)
 endif
 	@make $(TARGET)
 
-$(TARGET): $(ARCH) $(OBJS)
+$(TARGET): $(OBJS) $(ARCH)
 ifdef LIB?
 	@ar rc $@ $^
 	@ranlib $@
@@ -50,7 +50,7 @@ ifndef LIB?
 endif
 
 objs/%.o: srcs/%.c $(INCSFILE)
-	@[ -d $(dir $@) ] || (mkdir $(dir $@) && printf "$(VIOLET)%15s : $(WHITE)mkdir: %s\n" $(NAME) $(dir $@))
+	@[ -d $(dir $@) ] || (mkdir -p $(dir $@) && printf "$(VIOLET)%15s : $(WHITE)mkdir: %s\n" $(NAME) $(dir $@))
 	@printf "$(VIOLET)%15s : $(BLUE)%-20s$(WHITE) ...\r" $(NAME) $(<F)
 	@$(CC) -c -o $@ $(FLAGS) $(INCSDIR) $<
 	@printf "$(VIOLET)%15s : $(BLUE)%-20s$(GREEN) done$(WHITE)\n" $(NAME) $(<F)

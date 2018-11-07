@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/07 15:39:52 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/07 21:41:01 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ t_insecres	intersec(t_env *e, t_line line)
 {
 	t_obj		*b;
 	t_insecres	out;
-	double		tmp;
 	t_line		l;
+	t_reslist	*list;
 
+	list = NULL;
 	out = (t_insecres){NULL, 0};
 	b = e->s.objs;
 	while (b)
@@ -34,11 +35,11 @@ t_insecres	intersec(t_env *e, t_line line)
 		l.m = apply(vecpro(b->t, -1), line.m);
 		l.m = unrot(l.m, b->dir);
 		l.v = unrot(line.v, b->dir);
-		if ((tmp = g_ref[b->type].intersec(l, b->v[0])) > 0
-		&& (tmp < out.t || !out.obj))
-			out = (t_insecres){b, tmp};
+		g_ref[b->type].intersec(e, l, b, &list);
 		b = b->next;
 	}
+	if (list)
+		out = (t_insecres){list->o, list->t};
 	return (out);
 }
 
@@ -71,11 +72,13 @@ t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
 	t_vec		lnc[3];
 	int			i;
 
+	printf("(%f, %f, %f)\n", pt.x, pt.y, pt.z);
+
 	out = (t_color) (unsigned)AMASK;
 	l = r->e->s.lits;
 	while (l)
 	{
-		if (intersec(r->e, get_line(l->t, pt)).t > 0.999999 && (i = 0) == 0)
+		if (intersec(r->e, get_line(l->t, pt)).t > 0.9999 && (i = 0) == 0)
 		{
 			lnc[0] = normalise(get_line(pt, l->t).v);
 			lnc[2] = normalise(get_line(pt, r->c->t).v);
