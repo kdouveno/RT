@@ -27,10 +27,10 @@
 # define FOV 85
 # define THRD_CNT 100
 # define CONE 4
-#  define RMASK 0x00ff0000
-#  define GMASK 0x0000ff00
-#  define BMASK 0x000000ff
-#  define AMASK 0xff000000
+# define RMASK 0x00ff0000
+# define GMASK 0x0000ff00
+# define BMASK 0x000000ff
+# define AMASK 0xff000000
 
 typedef struct			s_global
 {
