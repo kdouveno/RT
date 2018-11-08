@@ -4,6 +4,7 @@ camera{
 
 sphere{
 	v:20
+	texture:test3.bmp
 }
 
 cone{

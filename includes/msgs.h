@@ -23,4 +23,5 @@
 # define PRST_ERROR "A preset were not loaded"
 # define PTHR_ERROR "Thread creation failed"
 # define EMPTY_SCENE "The scene is empty"
+# define TEXT_ERROR "A texture can't be load"
 #endif
