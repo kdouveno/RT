@@ -30,11 +30,6 @@ static int		check_arg(t_env *e, t_obj *obj, char *l1, char *l2)
 		obj->disp = l2[0];
 		return (0);
 	}
-	if (!(ft_strcmp(l1, "texture")))
-	{
-		link_texture(e, obj, ft_strjoin("textures/", l2));
-		return (0);
-	}
 	return (1);
 }
 
@@ -48,11 +43,6 @@ int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
  			link_mat(e, obj, ft_strjoin("mat/", l2));
  		return (0);
  	}
-	else if (!(ft_strcmp(l1, "diff")))
- 	{
- 		obj->mat.diff = ft_atod(l2);
- 		return (0);
- 	}
 	else if (!(ft_strcmp(l1, "spec")))
 	{
 		obj->mat.spec = ft_atod(l2);
@@ -61,6 +51,11 @@ int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
 	else if (!(ft_strcmp(l1, "color")))
 	{
 		parse_color(obj, l2, NULL, 0);
+		return (0);
+	}
+	if (!(ft_strcmp(l1, "texture")))
+	{
+		link_texture(e, obj, ft_strjoin("textures/", l2));
 		return (0);
 	}
 	return (1);

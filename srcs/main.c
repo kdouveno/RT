@@ -122,7 +122,7 @@ void	ft_window(t_env *e)
 	sur = render_cam(e, 0)->data.render;
 	sur1 = SDL_GetWindowSurface(e->glb.win);
 	//print_surface_pixels(sur);
-	SDL_BlitSurface(sur, NULL, sur1, &((SDL_Rect){0, 0, DIMX, DIMY}));
+	SDL_BlitSurface(sur, NULL, sur1, 0);
 	SDL_UpdateWindowSurface(e->glb.win);
 }
 

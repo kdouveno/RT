@@ -8,5 +8,5 @@ void	link_texture(t_env *e, t_obj *obj, char *file)
 	if (!(obj->mat.txt = SDL_LoadBMP(file)))
 		ft_putendl("\033[38;5;203m"TEXT_ERROR);
 	else
-		printf("Ca marche \n");
+		printf("Texture stock\n");
 }
