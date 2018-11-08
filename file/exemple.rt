@@ -21,7 +21,9 @@ light{
 	tx: -50
 	ty: 50
 	tz: 20
+	color: #FFFFFFFF
 }
+
 
 preset{
 	src:exemple.rt

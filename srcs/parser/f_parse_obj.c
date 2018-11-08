@@ -53,7 +53,7 @@ int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
 		parse_color(obj, l2, NULL, 0);
 		return (0);
 	}
-	if (!(ft_strcmp(l1, "texture")))
+	else if (!(ft_strcmp(l1, "texture")))
 	{
 		link_texture(e, obj, ft_strjoin("textures/", l2));
 		return (0);

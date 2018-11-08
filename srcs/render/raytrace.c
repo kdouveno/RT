@@ -64,23 +64,49 @@ double		spec_light(t_vec lnc[3])
 	return (out);
 }
 
+t_color texture_color(t_obj obj, t_pt pt)
+{
+	(void)obj;
+	(void)pt;
+	return (obj.mat.color);
+}
+
+t_color get_pt_color(t_obj obj, t_pt pt)
+{
+	if (obj.mat.txt)
+		return (texture_color(obj, pt));
+	else
+		return (obj.mat.color);
+
+}
+
+t_color		ambiant_light(t_color amb_lit_c, t_color obj_color)
+{
+	t_color	out;
+
+	out = (t_color)rgbadd(obj_color, amb_lit_c);
+	return ((t_color)rgbpro(out, AMB_L));
+}
+
 t_color		phong(t_rendering *r, t_pt pt, t_lit l, t_obj o)
 {
 	t_vec		lnc[3];
 	t_color		diffuse;
 	t_color		specular;
 	t_color		ambient;
+	t_color		obj_color;
 
+	obj_color = get_pt_color(o, pt);
 	lnc[0] = normalise(get_line(pt, l.t).v);
 	lnc[2] = normalise(get_line(pt, r->c->t).v);
 	lnc[1] = normalise(g_ref[o.type].norm(unrot(apply(vecpro(o.t, -1),
 	pt), o.dir), o, lnc[2]));
-
-	diffuse = rgbpro(rgbmin(l.color, rgbneg(o.mat.color)),
+	diffuse = rgbpro(rgbmin(l.color, rgbneg(obj_color)),
 		l.power * diffuse_light(lnc));
 	specular = rgbpro(l.color, l.power * spec_light(lnc) * o.mat.spec);
-	ambient = (t_color)0x0U;
-	return (rgbadd(rgbadd(rgbadd((t_color)AMASK, specular), diffuse), ambient));
+	//ambient = ambiant_light(r->e->s.amb_lit_c, obj_color);
+	ambient.i = 0;
+	return (rgbadd(rgbadd(rgbadd((t_color)AMASK, specular), diffuse),ambient));
 }
 
 t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
@@ -94,7 +120,10 @@ t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
 	while (l)
 	{
 		if (intersec(r->e, get_line(l->t, pt)).t > 0.9999 && (i = 0) == 0)
-			out.i |= phong(r, pt, *l, obj).i;
+			out = rgbadd(out, phong(r, pt, *l, obj));
+		//else
+			//out = rgbadd(out,
+				//	ambiant_light(r->e->s.amb_lit_c, get_pt_color(obj, pt)));
 		l = l->next;
 	}
 	return (out);

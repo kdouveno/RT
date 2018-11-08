@@ -79,7 +79,8 @@ void	prst_parse(t_env *e, int type, int fd, t_scene *s)
 	if (!(prst = malloc(sizeof(t_prst))))
 		error(e, MALLOC_ERROR);
 	prst_parse_2(e, prst);
-	*prst = (t_prst){{0, 0, 0}, {0, 0, 0}, {NULL, NULL, NULL, NULL}, NULL};
+	*prst = (t_prst){{0, 0, 0}, {0, 0, 0}, {NULL, NULL, NULL, NULL,
+		(t_color){(t_rgb){0,0,0,0}}}, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{

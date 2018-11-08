@@ -28,6 +28,7 @@
 # define THRD_CNT 100
 # define REC_FILE 15
 # define CONE 4
+# define AMB_L 0.2
 # define AMASK 0xFF000000
 # define RMASK 0xFF0000
 # define GMASK 0xFF00
@@ -148,6 +149,7 @@ typedef struct			s_scene
 	t_lit				*lits;
 	t_cam				*cams;
 	t_grad				*grads;
+	t_color				amb_lit_c;
 }						t_scene;
 
 typedef struct			s_prst
@@ -203,10 +205,6 @@ void					env_parse(t_env *e, int type, int fd, t_scene *s);
 void					grad_parse(t_env *e, int type, int fd, t_scene *s);
 void					prst_parse(t_env *e, int type, int fd, t_scene *s);
 void					parse_color(t_obj *obj, char *l2, t_grad *grad, int nb);
-void					link_obj(t_env *e);
-void					link_color_obj(t_env *e);
-void					link_color_grad(t_env *e);
-void					link_mat(t_env *e, t_obj *obj, char *file);
 void					creat_clips(t_env *e, t_obj *obj, char *l2);
 void					stock_obj(t_env *e, t_obj *obj, char *l1, char *l2);
 
@@ -219,8 +217,15 @@ int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
 void					*render(void *r);
 t_cam					*render_cam(t_env *e, int ncam);
 
+void					init(t_env *e);
+t_color					init_lit_scene(t_scene *s);
+void					init_objs(t_env *e);
+void					init_cam(t_env *e);
 void					link_texture(t_env *e, t_obj *obj, char *file);
-
+void					link_obj(t_env *e);
+void					link_color_obj(t_env *e);
+void					link_color_grad(t_env *e);
+void					link_mat(t_env *e, t_obj *obj, char *file);
 
 int						check_file_ext(const char *str, const char *ext);
 char					*file_name(char *str);

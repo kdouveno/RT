@@ -69,7 +69,7 @@ void	arg(t_env *e, int argc, char **argv)
 	i = 2;
 	d = 0;
 	*e = (t_env){{NULL, 3, -1, THRD_CNT},
-		{0,0}, {NULL, NULL, NULL, NULL}, NULL};
+		{0,0}, {NULL, NULL, NULL, NULL, (t_color){(t_rgb){0,0,0,0}}}, NULL};
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')
