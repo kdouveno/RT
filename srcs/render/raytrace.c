@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/07 15:39:52 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/08 15:25:41 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,37 @@ double		spec_light(t_vec lnc[3])
 	return (out);
 }
 
+t_color		phong(t_rendering *r, t_pt pt, t_lit l, t_obj o)
+{
+	t_vec		lnc[3];
+	t_color		diffuse;
+	t_color		specular;
+	t_color		ambient;
+
+	lnc[0] = normalise(get_line(pt, l.t).v);
+	lnc[2] = normalise(get_line(pt, r->c->t).v);
+	lnc[1] = normalise(g_ref[o.type].norm(unrot(apply(vecpro(o.t, -1),
+	pt), o.dir), o, lnc[2]));
+
+	diffuse = rgbpro(rgbmin(l.color, rgbneg(o.mat.color)),
+		l.power * diffuse_light(lnc));
+	specular = rgbpro(l.color, l.power * spec_light(lnc) * o.mat.spec);
+	ambient = (t_color)0x0U;
+	return (rgbadd(rgbadd(rgbadd((t_color)AMASK, specular), diffuse), ambient));
+}
+
 t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
 {
 	t_lit		*l;
 	t_color		out;
-	t_vec		lnc[3];
 	int			i;
 
 	out = (t_color) (unsigned)AMASK;
 	l = r->e->s.lits;
 	while (l)
 	{
-		if (intersec(r->e, get_line(l->t, pt)).t > 0.999999 && (i = 0) == 0)
-		{
-			lnc[0] = normalise(get_line(pt, l->t).v);
-			lnc[2] = normalise(get_line(pt, r->c->t).v);
-			lnc[1] = normalise(g_ref[obj.type].norm(unrot(apply(vecpro(obj.t, -1),
-			pt), obj.dir), obj, lnc[2]));
-			out.i |= rgbadd(rgbadd(out, rgbpro(rgbmin(l->color, rgbneg(obj.mat.color)),
-			l->power * diffuse_light(lnc))), rgbpro(l->color, l->power *
-			spec_light(lnc) * obj.mat.spec)).i;
-		}
+		if (intersec(r->e, get_line(l->t, pt)).t > 0.9999 && (i = 0) == 0)
+			out.i |= phong(r, pt, *l, obj).i;
 		l = l->next;
 	}
 	return (out);
