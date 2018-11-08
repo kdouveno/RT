@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 16:36:07 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/07 19:44:11 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/08 13:58:14 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	cone_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 		sq(d.m.x) + sq(d.m.y) - sq(d.m.z) * ta);
 	if (res.type == NORES)
 		return ;
-	add_res(e, rlist, (t_reslist){res.a, o, NULL});
+	add_res(e, rlist, (t_reslist){res.a, {}, o, NULL});
 	if (res.type == TWORES)
-		add_res(e, rlist, (t_reslist){res.b, o, NULL});
+		add_res(e, rlist, (t_reslist){res.b, {}, o, NULL});
 }
 
 void	cylinder_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
@@ -39,9 +39,9 @@ void	cylinder_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 		sq(d.m.x) + sq(d.m.y) - o->v[0] * o->v[0]);
 	if (res.type == NORES)
 		return ;
-	add_res(e, rlist, (t_reslist){res.a, o, NULL});
+	add_res(e, rlist, (t_reslist){res.a, {}, o, NULL});
 	if (res.type == TWORES)
-		add_res(e, rlist, (t_reslist){res.b, o, NULL});
+		add_res(e, rlist, (t_reslist){res.b, {}, o, NULL});
 }
 
 void	sphere_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
@@ -54,14 +54,14 @@ void	sphere_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 		sq(d.m.x) + sq(d.m.y) + sq(d.m.z) - o->v[0] * o->v[0]);
 	if (res.type == NORES)
 		return ;
-	add_res(e, rlist, (t_reslist){res.a, o, NULL});
+	add_res(e, rlist, (t_reslist){res.a, {}, o, NULL});
 	if (res.type == TWORES)
-		add_res(e, rlist, (t_reslist){res.b, o, NULL});
+		add_res(e, rlist, (t_reslist){res.b, {}, o, NULL});
 }
 
 void	plane_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 {
 	if (!d.v.x)
 		return ;
-	add_res(e, rlist, (t_reslist){-d.m.x / d.v.x, o, NULL});
+	add_res(e, rlist, (t_reslist){-d.m.x / d.v.x, {}, o, NULL});
 }

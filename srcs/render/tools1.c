@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 14:36:38 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/07 19:52:21 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/08 00:17:34 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	add_res(t_env *e, t_reslist **cur, t_reslist t)
 		return ;
 	tmp = *cur;
 	last = NULL;
-	while (tmp && tmp->next && t.t > tmp->t)
+	while (tmp && t.t > tmp->t)
 	{
 		last = tmp;
 		tmp = tmp->next;

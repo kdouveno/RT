@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/07 19:43:48 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/08 19:07:10 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@
 # define DIMX 900
 # define DIMY 700
 # define FOV 85
-# define THRD_CNT 100
+# define THRD_CNT 1
 # define REC_FILE 3
+# define AMB_L 0.075
 # define CONE 4
-# define AMASK 0xFF000000
-# define RMASK 0xFF0000
-# define GMASK 0xFF00
-# define BMASK 0xFF
+# define AMASK 0xFF000000U
+# define RMASK 0xFF0000U
+# define GMASK 0xFF00U
+# define BMASK 0xFFU
 typedef struct			s_global
 {
 	SDL_Window			*win;
@@ -82,6 +83,8 @@ typedef struct			s_bool
 {
 	unsigned char		c1 : 1;
 	unsigned char		c2 : 1;
+	unsigned char		clip : 1;
+	unsigned char		clipr : 1;
 }						t_bool;
 
 typedef struct			s_lit
@@ -112,6 +115,12 @@ typedef struct			s_mat
 	float				spec;
 }						t_mat;
 
+typedef struct			s_objlist
+{
+	struct s_obj		*obj;
+	struct s_objlist	*next;
+}						t_objlist;
+
 typedef struct			s_obj
 {
 	t_pt				t;
@@ -122,8 +131,8 @@ typedef struct			s_obj
 	t_mat				mat;
 	t_bool				b;
 	int					id;
-	char				disp;
 	struct s_clip		*clips;
+	t_objlist			*clipping;
 	t_grad				*grad;
 	struct s_obj		*next;
 }						t_obj;
@@ -131,6 +140,7 @@ typedef struct			s_obj
 typedef struct			s_reslist
 {
 	double				t;
+	t_pt				pt;
 	t_obj				*o;
 	struct s_reslist	*next;
 }						t_reslist;
@@ -156,8 +166,6 @@ typedef struct			s_scene
 	t_grad				*grads;
 }						t_scene;
 
-
-
 typedef struct			s_prst
 {
 	t_pt				t;
@@ -181,12 +189,6 @@ typedef struct			s_rendering
 	t_cam				*c;
 	SDL_Surface			*s;
 }						t_rendering;
-
-typedef struct			s_insecres
-{
-	t_obj				*obj;
-	double				t;
-}						t_insecres;
 
 int						is_name_char(char c);
 int						is_ignored(char c);
@@ -261,7 +263,6 @@ void					set_camera(t_env *e, t_vec t, t_rot r, double a);
 int						add_obj(t_env *e, t_obj obj);
 int						add_light(t_env *e, t_lit light);
 
-t_insecres				insec(t_env *e, t_line line);
 t_color					raytrace(t_rendering *r, t_line l);
 int						key_hook(int key, t_env *e);
 

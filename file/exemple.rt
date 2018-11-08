@@ -21,4 +21,12 @@ light{
 	tx: -50
 	ty: 50
 	tz: -20
+	power: 0.5
+}
+
+light{
+	tx: -50
+	ty: -50
+	tz: -20
+	power: 0.5
 }

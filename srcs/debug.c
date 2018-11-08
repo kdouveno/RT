@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/07 15:21:12 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/08 17:54:47 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static void	debug_objs(t_obj *save, t_clip *clips)
 	{
 		printf("\nType: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
 		"Variable: %f\nColor: %x\nDiffuse: %f\nSpecular: %f\nID: %d\n"
-		"Display: %c\nLinked to %p\n",
+		"Linked to %p\n",
 		g_ref[save->type].name, save->t.x, save->t.y, save->t.z,
 		save->dir.x, save->dir.y, save->dir.z,
 		save->v[0], save->mat.color.i, save->mat.diff,
-		save->mat.spec, save->id, save->disp, save->grad);
+		save->mat.spec, save->id, save->grad);
 		printf("\n\033[38;5;136m");
 		clips = save->clips;
 		while (clips != NULL)
