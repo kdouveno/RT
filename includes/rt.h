@@ -110,6 +110,7 @@ typedef struct			s_mat
 	t_color				color;
 	float				diff;
 	float				spec;
+	SDL_Surface			*txt;
 }						t_mat;
 
 typedef struct			s_obj
@@ -217,6 +218,9 @@ int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
 
 void					*render(void *r);
 t_cam					*render_cam(t_env *e, int ncam);
+
+void					link_texture(t_env *e, t_obj *obj, char *file);
+
 
 int						check_file_ext(const char *str, const char *ext);
 char					*file_name(char *str);
