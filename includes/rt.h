@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/08 19:07:10 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/09 18:32:27 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,11 @@ typedef struct			s_obj
 
 typedef struct			s_reslist
 {
-	double				t;
-	t_pt				pt;
 	t_obj				*o;
+	t_pt				pt;
+	t_vec				n;
+	t_vec				cam;
+	double				t;
 	struct s_reslist	*next;
 }						t_reslist;
 
@@ -234,6 +236,8 @@ t_vec					cone_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					cylinder_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					plane_norm(t_pt pt, t_obj obj, t_vec v);
 
+int						sphere_isptin(t_pt pt, t_obj o);
+
 typedef struct			s_objfx
 {
 	char				name[10];
@@ -241,22 +245,23 @@ typedef struct			s_objfx
 	void				(*intersec)(t_env *e, t_line d, t_obj *o,
 		t_reslist **rlist);
 	t_vec				(*norm)(t_pt pt, t_obj obj, t_vec v);
+	int					(*isptin)(t_pt pt, t_obj o);
 }						t_objfx;
 
 static const t_objfx	g_ref[] = {
-	{"env", &env_parse, NULL, NULL},
-	{"camera", &cam_parse, NULL, NULL},
-	{"light", &light_parse, NULL, NULL},
-	{"sphere", &obj_parse, &sphere_line, &sphere_norm},
-	{"cone", &obj_parse, &cone_line, &cone_norm},
-	{"cylinder", &obj_parse, &cylinder_line, &cylinder_norm},
-	{"plane", &obj_parse, &plane_line, &plane_norm},
-	{"pyramid", &obj_parse, NULL, NULL},
-	{"torus", &obj_parse, NULL, NULL},
-	{"cuboid", &obj_parse, NULL, NULL},
-	{"grad", &grad_parse, NULL, NULL},
-	{"preset", &prst_parse, NULL, NULL},
-	{"", NULL, NULL, NULL}
+	{"env", &env_parse, NULL, NULL, NULL},
+	{"camera", &cam_parse, NULL, NULL, NULL},
+	{"light", &light_parse, NULL, NULL, NULL},
+	{"sphere", &obj_parse, &sphere_line, &sphere_norm, &sphere_isptin},
+	{"cone", &obj_parse, &cone_line, &cone_norm, NULL},
+	{"cylinder", &obj_parse, &cylinder_line, &cylinder_norm, NULL},
+	{"plane", &obj_parse, &plane_line, &plane_norm, NULL},
+	{"pyramid", &obj_parse, NULL, NULL, NULL},
+	{"torus", &obj_parse, NULL, NULL, NULL},
+	{"cuboid", &obj_parse, NULL, NULL, NULL},
+	{"grad", &grad_parse, NULL, NULL, NULL},
+	{"preset", &prst_parse, NULL, NULL, NULL},
+	{"", NULL, NULL, NULL, NULL}
 };
 
 void					set_camera(t_env *e, t_vec t, t_rot r, double a);
@@ -267,6 +272,7 @@ t_color					raytrace(t_rendering *r, t_line l);
 int						key_hook(int key, t_env *e);
 
 t_polyres				solve_polynome(double a, double b, double c);
+double					dist(t_pt a, t_pt b);
 void					add_res(t_env *e, t_reslist **cur, t_reslist t);
 void					free_res(t_reslist *list);
 

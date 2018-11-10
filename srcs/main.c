@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/07 15:30:40 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/10 00:30:46 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static void	init_cam(t_env *e)
 		32, RMASK, GMASK, BMASK, AMASK)))
 			error(e, SDL_GetError());
 		cams = cams->next;
-
 	}
 }
 
@@ -136,7 +135,7 @@ void	*render(void *r)
 	d = &((t_rendering*)r)->c->data;
 	while (d->iy < d->ymax - 1)
 	{
-		pthread_mutex_lock(&((t_rendering*)r)->lock);
+		// pthread_mutex_lock(&((t_rendering*)r)->lock);
 		ix = d->ix++;
 		iy = d->iy;
 		l = (t_line){((t_rendering*)r)->c->t, d->vp_ul};
@@ -148,9 +147,10 @@ void	*render(void *r)
 		}
 		else
 			d->vp_ul = apply(d->x, d->vp_ul);
-		t_color c = raytrace(r, l);
-		((int*)d->render->pixels)[iy * d->xmax + ix] = c.i;
+		// if (ix == DIMX / 2 && iy == DIMY / 2)
+		((int*)d->render->pixels)[iy * d->xmax + ix] = raytrace(r, l).i;
 	}
+
 	pthread_exit(NULL);
 	return (NULL);
 }
