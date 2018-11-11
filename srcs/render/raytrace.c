@@ -80,12 +80,12 @@ t_color get_pt_color(t_obj obj, t_pt pt)
 
 }
 
-t_color		ambiant_light(t_color amb_lit_c, t_color obj_color)
+t_color		ambiant_light(t_color amb_lit_c, t_color obj_color, double coef)
 {
 	t_color	out;
 
-	out = (t_color)rgbadd(obj_color, amb_lit_c);
-	return ((t_color)rgbpro(out, AMB_L));
+	out = (t_color)rgbmin(amb_lit_c, rgbneg(obj_color));
+	return ((t_color)rgbpro(out, coef));
 }
 
 t_color		phong(t_rendering *r, t_pt pt, t_lit l, t_obj o)
@@ -104,9 +104,8 @@ t_color		phong(t_rendering *r, t_pt pt, t_lit l, t_obj o)
 	diffuse = rgbpro(rgbmin(l.color, rgbneg(obj_color)),
 		l.power * diffuse_light(lnc));
 	specular = rgbpro(l.color, l.power * spec_light(lnc) * o.mat.spec);
-	//ambient = ambiant_light(r->e->s.amb_lit_c, obj_color);
-	ambient.i = 0;
-	return (rgbadd(rgbadd(rgbadd((t_color)AMASK, specular), diffuse),ambient));
+	ambient = ambiant_light(r->e->s.amb_lit_c, obj_color, AMB_L);
+	return (rgbadd(rgbadd(rgbadd((t_color)AMASK, specular), diffuse), ambient));
 }
 
 t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
@@ -121,9 +120,9 @@ t_color		lites(t_rendering *r, t_pt pt, t_obj obj)
 	{
 		if (intersec(r->e, get_line(l->t, pt)).t > 0.9999 && (i = 0) == 0)
 			out = rgbadd(out, phong(r, pt, *l, obj));
-		//else
-			//out = rgbadd(out,
-				//	ambiant_light(r->e->s.amb_lit_c, get_pt_color(obj, pt)));
+		else
+			out = rgbadd(out,
+			ambiant_light(r->e->s.amb_lit_c, get_pt_color(obj, pt), AMB_L));
 		l = l->next;
 	}
 	return (out);

@@ -28,7 +28,7 @@ int		check_arg(t_lit *lit, char *l1, char *l2)
 	else if (!(ft_strcmp(l1, "color")))
 	{
 		if (l2[0] == '#')
-			lit->color.i = (unsigned)ft_extoi(&l2[1]);
+			lit->color.i = (unsigned)atoi_hexa(&l2[1]);
 		else
 			lit->color.i = ft_atoi(l2);
 		return (0);

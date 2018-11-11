@@ -5,23 +5,26 @@ camera{
 sphere{
 	v:20
 	texture:test3.bmp
+	color: #0000FF
 }
 
 cone{
 	ty: 30
 	v:20
+	color: #00FF00
 }
 
 cone{
 	ty:-30
 	v:20
+	color: #FF0000
 }
 
 light{
 	tx: -50
 	ty: 50
 	tz: 20
-	color: #FFFFFFFF
+	color: #FFFFFF
 }
 
 

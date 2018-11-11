@@ -28,11 +28,12 @@
 # define THRD_CNT 100
 # define REC_FILE 15
 # define CONE 4
-# define AMB_L 0.2
+# define AMB_L 0.075
 # define AMASK 0xFF000000
 # define RMASK 0xFF0000
 # define GMASK 0xFF00
 # define BMASK 0xFF
+
 typedef struct			s_global
 {
 	SDL_Window			*win;
@@ -218,13 +219,13 @@ void					*render(void *r);
 t_cam					*render_cam(t_env *e, int ncam);
 
 void					init(t_env *e);
-t_color					init_lit_scene(t_scene *s);
 void					init_objs(t_env *e);
 void					init_cam(t_env *e);
-void					link_texture(t_env *e, t_obj *obj, char *file);
+t_color					init_lit_scene(t_scene *s);
 void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);
 void					link_color_grad(t_env *e);
+void					link_texture(t_env *e, t_obj *obj, char *file);
 void					link_mat(t_env *e, t_obj *obj, char *file);
 
 int						check_file_ext(const char *str, const char *ext);
@@ -256,6 +257,33 @@ static const t_objfx	g_ref[] = {
 	{"", NULL, NULL, NULL}
 };
 
+typedef struct			s_char_int
+{
+	char				hexa;
+	int					n;
+}						t_char_int;
+
+
+static const			t_char_int	g_hexa[] = {
+	{'0', 0},
+	{'1', 1},
+	{'2', 2},
+	{'3', 3},
+	{'4', 4},
+	{'5', 5},
+	{'6', 6},
+	{'7', 7},
+	{'8', 8},
+	{'9', 9},
+	{'A', 10},
+	{'B', 11},
+	{'C', 12},
+	{'D', 13},
+	{'E', 14},
+	{'F', 15},
+	{'\0', 0}
+};
+
 void					set_camera(t_env *e, t_vec t, t_rot r, double a);
 int						add_obj(t_env *e, t_obj obj);
 int						add_light(t_env *e, t_lit light);
@@ -264,6 +292,7 @@ t_insecres				insec(t_env *e, t_line line);
 t_color					raytrace(t_rendering *r, t_line l);
 int						key_hook(int key, t_env *e);
 
+int						atoi_hexa(char const *str);
 void					arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);
 void					debug(t_env *e);
