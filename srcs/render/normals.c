@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 17:31:48 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/07 15:38:58 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/11 17:18:02 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,34 @@ t_vec	plane_norm(t_pt pt, t_obj obj, t_vec v)
 	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
 		out = vec_rev(out);
 	(void)pt;
+	return (out);
+}
+
+t_vec	cuboid_norm(t_pt pt, t_obj obj, t_vec v)
+{
+	t_line	d;
+	double	d1;
+	double	t;
+	t_vec	out;
+	int i;
+
+	i = 0;
+	d = (t_line){pt, v};
+	while (i < 2)
+	{
+		d1 = ((i ? -1 : 1) * obj.v[0] - d.m.x) / d.v.x;
+		if (fabs(d1) < fabs(t) && ((t = d1) || 1))
+			out = (t_vec){1, 0, 0};
+		d1 = ((i ? -1 : 1) * obj.v[1] - d.m.y) / d.v.y;
+		if (fabs(d1) < fabs(t) && ((t = d1) || 1))
+			out = (t_vec){0, 1, 0};
+		d1 = ((i ? -1 : 1) * obj.v[2] - d.m.z) / d.v.z;
+		if (fabs(d1) < fabs(t) && ((t = d1) || 1))
+			out = (t_vec){0, 0, 1};
+		i++;
+	}
+	out = rot(out, obj.dir);
+	if ((t = scalar_product(normalise(out), v)) > 1 || t < 0)
+		out = vec_rev(out);
 	return (out);
 }

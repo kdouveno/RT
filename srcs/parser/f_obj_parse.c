@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/08 19:13:22 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/11 11:27:14 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 static int		check_arg(t_env *e, t_obj *obj, char *l1, char *l2)
 {
-	if (!(ft_strcmp(l1, "v")))
-	{
+	int out;
+
+	out = 1;
+	if (!(ft_strcmp(l1, "v1")) && !(out = 0))
 		obj->v[0] = ft_atod(l2);
-		return (0);
-	}
-	else if (!(ft_strcmp(l1, "id")))
+	else if (!(ft_strcmp(l1, "v2")) && !(out = 0))
+		obj->v[1] = ft_atod(l2);
+	else if (!(ft_strcmp(l1, "v3")) && !(out = 0))
+		obj->v[2] = ft_atod(l2);
+	else if (!(ft_strcmp(l1, "id")) && !(out = 0))
 	{
 		obj->id = ft_atoi(l2);
 		obj->id = obj->id < 0 ? -obj->id : obj->id;
-		return (0);
 	}
-	else if (!(ft_strcmp(l1, "clip")))
-	{
+	else if (!(ft_strcmp(l1, "clip")) && !(out = 0))
 		creat_clips(e, obj, l2);
-		return (0);
-	}
-	return (1);
+	return (out);
 }
 
 int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
@@ -90,7 +90,7 @@ t_obj	*obj_parse_2(t_env *e, int type, int fd)
 
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
-	*obj = (t_obj){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, 0, type, {},
+	*obj = (t_obj){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, -1, type, {},
 		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 0, 0}, {0, 0, 0, 0}, -1,
 		NULL, NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0

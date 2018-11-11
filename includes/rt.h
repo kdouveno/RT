@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/09 18:32:27 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/11 11:29:31 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <fcntl.h>
+# define PRE 0.00000001
 # define DIMX 900
 # define DIMY 700
 # define FOV 85
@@ -230,13 +231,22 @@ void					cylinder_line(t_env *e, t_line d, t_obj *o,
 	t_reslist **rlist);
 void					plane_line(t_env *e, t_line d, t_obj *o,
 	t_reslist **rlist);
+void					cuboid_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **rlist);
 
 t_vec					sphere_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					cone_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					cylinder_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					plane_norm(t_pt pt, t_obj obj, t_vec v);
+t_vec					cuboid_norm(t_pt pt, t_obj obj, t_vec v);
 
 int						sphere_isptin(t_pt pt, t_obj o);
+int						cylinder_isptin(t_pt pt, t_obj o);
+int						cone_isptin(t_pt pt, t_obj o);
+int						plane_isptin(t_pt pt, t_obj o);
+int						cuboid_isptin(t_pt pt, t_obj o);
+
+double					get_norm(t_vec a);
 
 typedef struct			s_objfx
 {
@@ -253,12 +263,12 @@ static const t_objfx	g_ref[] = {
 	{"camera", &cam_parse, NULL, NULL, NULL},
 	{"light", &light_parse, NULL, NULL, NULL},
 	{"sphere", &obj_parse, &sphere_line, &sphere_norm, &sphere_isptin},
-	{"cone", &obj_parse, &cone_line, &cone_norm, NULL},
-	{"cylinder", &obj_parse, &cylinder_line, &cylinder_norm, NULL},
-	{"plane", &obj_parse, &plane_line, &plane_norm, NULL},
+	{"cone", &obj_parse, &cone_line, &cone_norm, &cone_isptin},
+	{"cylinder", &obj_parse, &cylinder_line, &cylinder_norm, &cylinder_isptin},
+	{"plane", &obj_parse, &plane_line, &plane_norm, &plane_isptin},
 	{"pyramid", &obj_parse, NULL, NULL, NULL},
 	{"torus", &obj_parse, NULL, NULL, NULL},
-	{"cuboid", &obj_parse, NULL, NULL, NULL},
+	{"cuboid", &obj_parse, &cuboid_line, &cuboid_norm, &cuboid_isptin},
 	{"grad", &grad_parse, NULL, NULL, NULL},
 	{"preset", &prst_parse, NULL, NULL, NULL},
 	{"", NULL, NULL, NULL, NULL}

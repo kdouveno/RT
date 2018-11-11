@@ -1,10 +1,10 @@
 camera{
 	tx: -50
 	ty: 50
-	dirz: -45
+	dirz: -50
 }
 
-/light{
+light{
 	ty: 40
 	tz: 10
 	tx: -100
@@ -15,22 +15,23 @@ light{
 	ty: 0
 	tz: 10
 	tx: -30
-	power: .8
+	power: .2
 }
 
 sphere{
 	id: -2
 	ty: 50
 	tx: -8
-
 	v: 60
 }
 
 sphere{
 	id: -3
+	ty: -50
 	tx: -8
-	v: 30
+	v: 60
 }
+
 
 sphere{
 	id: 1

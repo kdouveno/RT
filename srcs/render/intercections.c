@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 16:36:07 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/09 18:32:54 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/11 11:30:10 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,33 @@ void	plane_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 	if (!d.v.x)
 		return ;
 	add_res(e, rlist, (t_reslist){o, {}, {}, {}, -d.m.x / d.v.x, NULL});
+}
+
+void	cuboid_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
+{
+	double d1;
+	double d2;
+	double d3;
+	int i;
+
+	i = 0;
+	while (i < 2)
+	{
+		d1 = ((i ? -1 : 1) * o->v[0] - d.m.x) / d.v.x;
+		d2 = d.v.y * d1 + d.m.y;
+		d3 = d.v.z * d1 + d.m.z;
+		if (d1 > 0 && d2 < o->v[1] && d2 > -o->v[1] && d3 < o->v[2] && d3 > -o->v[2])
+			add_res(e, rlist, (t_reslist){o, {}, {}, {}, d1, NULL});
+		d1 = ((i ? -1 : 1) * o->v[1] - d.m.y) / d.v.y;
+		d2 = d.v.x * d1 + d.m.x;
+		d3 = d.v.z * d1 + d.m.z;
+		if (d1 > 0 && d2 < o->v[0] && d2 > -o->v[0] && d3 < o->v[2] && d3 > -o->v[2])
+			add_res(e, rlist, (t_reslist){o, {}, {}, {}, d1, NULL});
+		d1 = ((i ? -1 : 1) * o->v[2] - d.m.z) / d.v.z;
+		d2 = d.v.y * d1 + d.m.y;
+		d3 = d.v.x * d1 + d.m.x;
+		if (d1 > 0 && d2 < o->v[1] && d2 > -o->v[1] && d3 < o->v[0] && d3 > -o->v[0])
+			add_res(e, rlist, (t_reslist){o, {}, {}, {}, d1, NULL});
+		i++;
+	}
 }

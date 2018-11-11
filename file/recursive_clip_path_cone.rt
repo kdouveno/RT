@@ -1,0 +1,22 @@
+camera{
+	tx:		20
+	ty:		20
+	dirz:	225
+}
+
+light{
+	ty: 40
+	tx: 100
+	tz: -100
+}
+
+sphere{
+	id:4
+	v:10
+	clip:2
+}
+
+cone{
+	id:	-2
+	v: 60
+}

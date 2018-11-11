@@ -1,0 +1,40 @@
+camera{
+	tx:		100
+	ty:		10
+}
+
+light{
+	tx: 100
+}
+
+/sphere{
+	id:4
+	v1:10
+}
+
+/sphere{
+	tx: 40
+	v1: 30
+	id: -3
+}
+
+cylinder{
+	id: -2
+	tz: 19.9
+	diry: 90
+	v1: 20
+}
+
+/cylinder{
+	id: -3
+	tz: 40
+	diry: 90
+	v1: 20
+}
+
+cylinder{
+	id: 1
+	v1: 40
+	clip: 2
+	clip: 3
+}

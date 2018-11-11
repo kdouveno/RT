@@ -1,0 +1,13 @@
+camera{
+	tx: 100
+}
+
+light{
+	tx: 50
+	ty: 50
+	tz: 50
+}
+
+cone{
+	v1: 20
+}

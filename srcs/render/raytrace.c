@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/10 02:52:27 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/11 12:26:57 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_obj		*is_cind(t_obj *o, t_pt pt)
 	clpin = o->clipping;
 	while (clpin)
 	{
-		// printf("id_%d, %d\n", clpin->obj->id, g_ref[clpin->obj->type].isptin(pt, *clpin->obj));
 		if (g_ref[clpin->obj->type].isptin(pt, *clpin->obj))
 			return (clpin->obj);
 		clpin = clpin->next;
@@ -49,35 +48,26 @@ t_obj		*is_tangible(t_obj *o, t_pt pt, t_obj *last)
 	t_clip	*c;
 	int		pc;
 	t_obj	*pd;
-	int		pdp;
+	t_obj	*pdp;
 
-	// printf("tangible(id_%d, (%.1f, %.1f, %.1f))\n", o->id, pt.x, pt.y, pt.z);
 	pd = is_cind(o, pt);
 	pc = 1;
-	pdp = pd && !last ? (int)is_tangible(pd, pt, o) : 1;
+	pdp = pd && pd != last && (!last || o->b.clip) ? is_tangible(pd, pt, o) : pd;
 	c = o->clips;
 	if (!o->b.clip && !last)
 		last = o;
 	while (c){
-		// printf("clip: \033[32m %d\n", g_ref[c->obj->type].isptin(pt, *c->obj));
-		if (c->obj && c->obj != last && is_tangible(c->obj, pt, last) && g_ref[c->obj->type].isptin(pt, *c->obj))
+		if (c->obj && c->obj != last && is_tangible(c->obj, pt, o) && g_ref[c->obj->type].isptin(pt, *c->obj))
 		{
-			// printf("\033[37m");
 			pc = 0;
 			break ;
 		}
-		// printf("\033[37m");
-
 		c = c->next;
 	}
-	// printf("bclip: %d, pc: %d, pd: %p, clipr %d\n", o->b.clip, pc, pd, o->b.clipr);
-	if (o->b.clip && pc == 1 && pd && pdp && !o->b.clipr){
-		// printf("- id_%d\n", pd->id);
-		return (pd);}
-	if (!o->b.clip && pc){
-		// printf("- id_%d\n", o->id);
-		return (o);}
-	// printf("- NULL\n");
+	if (o->b.clip && pc == 1 && pd && pdp)
+		return (pdp);
+	if (!o->b.clip && pc)
+		return (o);
 	return (NULL);
 }
 
@@ -123,13 +113,14 @@ t_reslist	get_touch(t_reslist *list, t_line line, t_pt campt)
 	while (list)
 	{
 		list->pt = get_linept(line, list->t);
+
 		if ((tmpobj = is_tangible(list->o, list->pt, NULL)) && !tmpobj->b.clip)
 		{
 			out = *list;
 			out.o = tmpobj;
 			out.cam = normalise(get_line(list->pt, campt).v);
 			out.n = normalise(g_ref[list->o->type].norm(unrot(apply(vecpro(list->o->t, -1),
-			list->pt), list->o->dir), *list->o, out.cam));
+				list->pt), list->o->dir), *list->o, out.cam));
 			return (out);
 		}
 		list = list->next;

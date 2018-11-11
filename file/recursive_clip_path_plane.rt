@@ -1,0 +1,33 @@
+camera{
+	tx: -100
+}
+
+light{
+	ty: 40
+	tx: -100
+	tz: 10
+}
+
+plane{
+	id:-2
+	clip: 3
+	clip: 5
+	dirz: 120
+}
+
+cylinder{
+	id:-3
+	v:10
+}
+
+cylinder{
+	id:-5
+	dirx:90
+	v:10
+}
+
+sphere{
+	id:4
+	v:40
+	clip:2
+}
