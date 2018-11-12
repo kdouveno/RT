@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:02 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/12 17:30:51 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	stock_cam(t_env *e, t_cam *cam, char *l1, char *l2)
 	ft_memdel((void**)&cp);
 }
 
-t_cam	*cam_parse_2(t_env *e, int fd)
+t_cam	*parse_cam_2(t_env *e, int fd)
 {
 	char	*line;
 	int		res;
@@ -120,7 +120,7 @@ t_cam	*cam_parse_2(t_env *e, int fd)
 	return (cam);
 }
 
-void	cam_parse(t_env *e, int type, int fd, t_scene *s)
+void	parse_cam(t_env *e, int type, int fd, t_scene *s)
 {
 	t_cam	*save;
 
@@ -130,8 +130,8 @@ void	cam_parse(t_env *e, int type, int fd, t_scene *s)
 	{
 		while(save->next != NULL)
 			save = save->next;
-		save->next = cam_parse_2(e, fd);
+		save->next = parse_cam_2(e, fd);
 	}
 	else
-		s->cams = cam_parse_2(e, fd);
+		s->cams = parse_cam_2(e, fd);
 }

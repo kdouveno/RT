@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:12 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/12 17:51:03 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 	ft_memdel((void**)&cp);
 }
 
-t_obj	*obj_parse_2(t_env *e, int type, int fd)
+t_obj	*parse_obj_2(t_env *e, int type, int fd)
 {
 	char	*line;
 	int		res;
@@ -102,7 +102,7 @@ t_obj	*obj_parse_2(t_env *e, int type, int fd)
 	return (obj);
 }
 
-void	obj_parse(t_env *e, int type, int fd, t_scene *s)
+void	parse_obj(t_env *e, int type, int fd, t_scene *s)
 {
 	t_obj	*save;
 
@@ -111,8 +111,8 @@ void	obj_parse(t_env *e, int type, int fd, t_scene *s)
 	{
 		while(save->next != NULL)
 			save = save->next;
-		save->next = obj_parse_2(e, type, fd);
+		save->next = parse_obj_2(e, type, fd);
 	}
 	else
-		s->objs = obj_parse_2(e, type, fd);
+		s->objs = parse_obj_2(e, type, fd);
 }

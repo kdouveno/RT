@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 16:26:31 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/12 17:52:27 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define RMASK 0xFF0000U
 # define GMASK 0xFF00U
 # define BMASK 0xFFU
+
 typedef struct			s_global
 {
 	SDL_Window			*win;
@@ -203,12 +204,12 @@ void					wrong_type(t_env *e, char *l_type, int fd, int skip);
 int						get_prop(t_env *e, char *line, char **l1, char **l2);
 char					*get_name(t_env *e, char *line, int i, int *l);
 void					parse(t_env *e, char *arg, t_prst *p);
-void					obj_parse(t_env *e, int type, int fd, t_scene *s);
-void					light_parse(t_env *e, int type, int fd, t_scene *s);
-void					cam_parse(t_env *e, int type, int fd, t_scene *s);
-void					env_parse(t_env *e, int type, int fd, t_scene *s);
-void					grad_parse(t_env *e, int type, int fd, t_scene *s);
-void					prst_parse(t_env *e, int type, int fd, t_scene *s);
+void					parse_obj(t_env *e, int type, int fd, t_scene *s);
+void					parse_light(t_env *e, int type, int fd, t_scene *s);
+void					parse_cam(t_env *e, int type, int fd, t_scene *s);
+void					parse_env(t_env *e, int type, int fd, t_scene *s);
+void					parse_grad(t_env *e, int type, int fd, t_scene *s);
+void					parse_prst(t_env *e, int type, int fd, t_scene *s);
 void					parse_color(t_obj *obj, char *l2, t_grad *grad, int nb);
 void					creat_clips(t_env *e, t_obj *obj, char *l2);
 void					stock_obj(t_env *e, t_obj *obj, char *l1, char *l2);
@@ -271,18 +272,18 @@ typedef struct			s_objfx
 }						t_objfx;
 
 static const t_objfx	g_ref[] = {
-	{"env", &env_parse, NULL, NULL, NULL},
-	{"camera", &cam_parse, NULL, NULL, NULL},
-	{"light", &light_parse, NULL, NULL, NULL},
-	{"sphere", &obj_parse, &sphere_line, &sphere_norm, &sphere_isptin},
-	{"cone", &obj_parse, &cone_line, &cone_norm, &cone_isptin},
-	{"cylinder", &obj_parse, &cylinder_line, &cylinder_norm, &cylinder_isptin},
-	{"plane", &obj_parse, &plane_line, &plane_norm, &plane_isptin},
-	{"pyramid", &obj_parse, NULL, NULL, NULL},
-	{"torus", &obj_parse, NULL, NULL, NULL},
-	{"cuboid", &obj_parse, &cuboid_line, &cuboid_norm, &cuboid_isptin},
-	{"grad", &grad_parse, NULL, NULL, NULL},
-	{"preset", &prst_parse, NULL, NULL, NULL},
+	{"env", &parse_env, NULL, NULL, NULL},
+	{"camera", &parse_cam, NULL, NULL, NULL},
+	{"light", &parse_light, NULL, NULL, NULL},
+	{"sphere", &parse_obj, &sphere_line, &sphere_norm, &sphere_isptin},
+	{"cone", &parse_obj, &cone_line, &cone_norm, &cone_isptin},
+	{"cylinder", &parse_obj, &cylinder_line, &cylinder_norm, &cylinder_isptin},
+	{"plane", &parse_obj, &plane_line, &plane_norm, &plane_isptin},
+	{"pyramid", &parse_obj, NULL, NULL, NULL},
+	{"torus", &parse_obj, NULL, NULL, NULL},
+	{"cuboid", &parse_obj, &cuboid_line, &cuboid_norm, &cuboid_isptin},
+	{"grad", &parse_grad, NULL, NULL, NULL},
+	{"preset", &parse_prst, NULL, NULL, NULL},
 	{"", NULL, NULL, NULL, NULL}
 };
 
@@ -291,7 +292,6 @@ typedef struct			s_char_int
 	char				hexa;
 	int					n;
 }						t_char_int;
-
 
 static const			t_char_int	g_hexa[] = {
 	{'0', 0},
@@ -313,6 +313,8 @@ static const			t_char_int	g_hexa[] = {
 	{'\0', 0}
 };
 
+int						atoi_hexa(char const *str);
+
 void					set_camera(t_env *e, t_vec t, t_rot r, double a);
 int						add_obj(t_env *e, t_obj obj);
 int						add_light(t_env *e, t_lit light);
@@ -320,7 +322,6 @@ int						add_light(t_env *e, t_lit light);
 t_color					raytrace(t_rendering *r, t_line l);
 int						key_hook(int key, t_env *e);
 
-int						atoi_hexa(char const *str);
 t_polyres				solve_polynome(double a, double b, double c);
 double					dist(t_pt a, t_pt b);
 void					add_res(t_env *e, t_reslist **cur, t_reslist t);

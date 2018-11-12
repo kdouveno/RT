@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:10 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/12 17:50:08 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)
 	ft_memdel((void**)&cp);
 }
 
-t_lit	*light_parse_2(t_env *e, int fd)
+t_lit	*parse_light_2(t_env *e, int fd)
 {
 	char	*line;
 	int		res;
@@ -77,7 +77,7 @@ t_lit	*light_parse_2(t_env *e, int fd)
 	return (lit);
 }
 
-void	light_parse(t_env *e, int type, int fd, t_scene *s)
+void	parse_light(t_env *e, int type, int fd, t_scene *s)
 {
 	t_lit	*save;
 
@@ -87,8 +87,8 @@ void	light_parse(t_env *e, int type, int fd, t_scene *s)
 	{
 		while(save->next != NULL)
 			save = save->next;
-		save->next = light_parse_2(e, fd);
+		save->next = parse_light_2(e, fd);
 	}
 	else
-		s->lits = light_parse_2(e, fd);
+		s->lits = parse_light_2(e, fd);
 }

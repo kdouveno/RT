@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 18:54:01 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:13 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/12 17:51:36 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	stock_prst(t_env *e, t_prst *prst, char *l1, char *l2)
 	ft_memdel((void**)&cp);
 }
 
-void	prst_parse_2(t_env *e, t_prst *p)
+void	parse_prst_2(t_env *e, t_prst *p)
 {
 	t_prst	*save;
 
@@ -66,7 +66,7 @@ void	prst_parse_2(t_env *e, t_prst *p)
 		e->p = p;
 }
 
-void	prst_parse(t_env *e, int type, int fd, t_scene *s)
+void	parse_prst(t_env *e, int type, int fd, t_scene *s)
 {
 	char	*line;
 	int		res;
@@ -78,7 +78,7 @@ void	prst_parse(t_env *e, int type, int fd, t_scene *s)
 	(void)s;
 	if (!(prst = malloc(sizeof(t_prst))))
 		error(e, MALLOC_ERROR);
-	prst_parse_2(e, prst);
+	parse_prst_2(e, prst);
 	*prst = (t_prst){{0, 0, 0}, {0, 0, 0}, {NULL, NULL, NULL, NULL,
 		(t_color){(t_rgb){0,0,0,0}}}, NULL};
 	while ((res = get_next_line(fd, &line)) > 0

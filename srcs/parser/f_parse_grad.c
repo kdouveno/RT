@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:15:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:08 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/12 17:49:33 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void			stock_grad(t_env *e, t_grad *grad, char *l1, char *l2)
 	ft_memdel((void**)&cp);
 }
 
-t_grad			*grad_parse_2(t_env *e, int fd)
+t_grad			*parse_grad_2(t_env *e, int fd)
 {
 	char	*line;
 	int		res;
@@ -79,7 +79,7 @@ t_grad			*grad_parse_2(t_env *e, int fd)
 	return (grad);
 }
 
-void			grad_parse(t_env *e, int type, int fd, t_scene *s)
+void			parse_grad(t_env *e, int type, int fd, t_scene *s)
 {
 	t_grad	*save;
 
@@ -89,8 +89,8 @@ void			grad_parse(t_env *e, int type, int fd, t_scene *s)
 	{
 		while(save->next != NULL)
 			save = save->next;
-		save->next = grad_parse_2(e, fd);
+		save->next = parse_grad_2(e, fd);
 	}
 	else
-		s->grads = grad_parse_2(e, fd);
+		s->grads = parse_grad_2(e, fd);
 }
