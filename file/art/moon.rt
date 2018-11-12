@@ -1,13 +1,13 @@
 camera{
-	tx: -50
+	tx: 50
 	ty: 50
-	dirz: -50
+	dirz: 50
 }
 
 light{
 	ty: 40
 	tz: 10
-	tx: -100
+	tx: 100
 	power: .8
 }
 
