@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/07 15:44:26 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/12 16:26:31 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <fcntl.h>
+# define PRE 0.00000001
 # define DIMX 900
 # define DIMY 700
 # define FOV 85
-# define THRD_CNT 100
+# define THRD_CNT 1
 # define REC_FILE 15
-# define CONE 4
 # define AMB_L 0.075
-# define AMASK 0xFF000000
-# define RMASK 0xFF0000
-# define GMASK 0xFF00
-# define BMASK 0xFF
-
+# define CONE 4
+# define AMASK 0xFF000000U
+# define RMASK 0xFF0000U
+# define GMASK 0xFF00U
+# define BMASK 0xFFU
 typedef struct			s_global
 {
 	SDL_Window			*win;
@@ -84,6 +84,8 @@ typedef struct			s_bool
 {
 	unsigned char		c1 : 1;
 	unsigned char		c2 : 1;
+	unsigned char		clip : 1;
+	unsigned char		clipr : 1;
 }						t_bool;
 
 typedef struct			s_lit
@@ -115,6 +117,12 @@ typedef struct			s_mat
 	SDL_Surface			*txt;
 }						t_mat;
 
+typedef struct			s_objlist
+{
+	struct s_obj		*obj;
+	struct s_objlist	*next;
+}						t_objlist;
+
 typedef struct			s_obj
 {
 	t_pt				t;
@@ -125,11 +133,21 @@ typedef struct			s_obj
 	t_mat				mat;
 	t_bool				b;
 	int					id;
-	char				disp;
 	struct s_clip		*clips;
+	t_objlist			*clipping;
 	t_grad				*grad;
 	struct s_obj		*next;
 }						t_obj;
+
+typedef struct			s_reslist
+{
+	t_obj				*o;
+	t_pt				pt;
+	t_vec				n;
+	t_vec				cam;
+	double				t;
+	struct s_reslist	*next;
+}						t_reslist;
 
 typedef struct			s_set
 {
@@ -177,20 +195,6 @@ typedef struct			s_rendering
 	SDL_Surface			*s;
 }						t_rendering;
 
-typedef struct			s_insecres
-{
-	t_obj				*obj;
-	double				t;
-}						t_insecres;
-
-typedef struct			s_objfx
-{
-	char				name[10];
-	void				(*parse)(t_env *e, int type, int fd, t_scene *s);
-	double				(*intersec)(t_line d, double r);
-	t_vec				(*norm)(t_pt pt, t_obj obj, t_vec v);
-}						t_objfx;
-
 int						is_name_char(char c);
 int						is_ignored(char c);
 int						is_vec_null(t_vec vec);
@@ -231,30 +235,55 @@ void					link_mat(t_env *e, t_obj *obj, char *file);
 int						check_file_ext(const char *str, const char *ext);
 char					*file_name(char *str);
 
-double					sphere_line(t_line d, double r);
-double					cone_line(t_line d, double r);
-double					cylinder_line(t_line d, double r);
-double					plane_line(t_line d, double r);
+void					sphere_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **rlist);
+void					cone_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **rlist);
+void					cylinder_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **rlist);
+void					plane_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **rlist);
+void					cuboid_line(t_env *e, t_line d, t_obj *o,
+	t_reslist **rlist);
 
 t_vec					sphere_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					cone_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					cylinder_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					plane_norm(t_pt pt, t_obj obj, t_vec v);
+t_vec					cuboid_norm(t_pt pt, t_obj obj, t_vec v);
+
+int						sphere_isptin(t_pt pt, t_obj o);
+int						cylinder_isptin(t_pt pt, t_obj o);
+int						cone_isptin(t_pt pt, t_obj o);
+int						plane_isptin(t_pt pt, t_obj o);
+int						cuboid_isptin(t_pt pt, t_obj o);
+
+double					get_norm(t_vec a);
+
+typedef struct			s_objfx
+{
+	char				name[10];
+	void				(*parse)(t_env *e, int type, int fd, t_scene *s);
+	void				(*intersec)(t_env *e, t_line d, t_obj *o,
+		t_reslist **rlist);
+	t_vec				(*norm)(t_pt pt, t_obj obj, t_vec v);
+	int					(*isptin)(t_pt pt, t_obj o);
+}						t_objfx;
 
 static const t_objfx	g_ref[] = {
-	{"env", &env_parse, NULL, NULL},
-	{"camera", &cam_parse, NULL, NULL},
-	{"light", &light_parse, NULL, NULL},
-	{"sphere", &obj_parse, &sphere_line, &sphere_norm},
-	{"cone", &obj_parse, &cone_line, &cone_norm},
-	{"cylinder", &obj_parse, &cylinder_line, &cylinder_norm},
-	{"plane", &obj_parse, &plane_line, &plane_norm},
-	{"pyramid", &obj_parse, NULL, NULL},
-	{"torus", &obj_parse, NULL, NULL},
-	{"cuboid", &obj_parse, NULL, NULL},
-	{"grad", &grad_parse, NULL, NULL},
-	{"preset", &prst_parse, NULL, NULL},
-	{"", NULL, NULL, NULL}
+	{"env", &env_parse, NULL, NULL, NULL},
+	{"camera", &cam_parse, NULL, NULL, NULL},
+	{"light", &light_parse, NULL, NULL, NULL},
+	{"sphere", &obj_parse, &sphere_line, &sphere_norm, &sphere_isptin},
+	{"cone", &obj_parse, &cone_line, &cone_norm, &cone_isptin},
+	{"cylinder", &obj_parse, &cylinder_line, &cylinder_norm, &cylinder_isptin},
+	{"plane", &obj_parse, &plane_line, &plane_norm, &plane_isptin},
+	{"pyramid", &obj_parse, NULL, NULL, NULL},
+	{"torus", &obj_parse, NULL, NULL, NULL},
+	{"cuboid", &obj_parse, &cuboid_line, &cuboid_norm, &cuboid_isptin},
+	{"grad", &grad_parse, NULL, NULL, NULL},
+	{"preset", &prst_parse, NULL, NULL, NULL},
+	{"", NULL, NULL, NULL, NULL}
 };
 
 typedef struct			s_char_int
@@ -288,11 +317,15 @@ void					set_camera(t_env *e, t_vec t, t_rot r, double a);
 int						add_obj(t_env *e, t_obj obj);
 int						add_light(t_env *e, t_lit light);
 
-t_insecres				insec(t_env *e, t_line line);
 t_color					raytrace(t_rendering *r, t_line l);
 int						key_hook(int key, t_env *e);
 
 int						atoi_hexa(char const *str);
+t_polyres				solve_polynome(double a, double b, double c);
+double					dist(t_pt a, t_pt b);
+void					add_res(t_env *e, t_reslist **cur, t_reslist t);
+void					free_res(t_reslist *list);
+
 void					arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);
 void					debug(t_env *e);

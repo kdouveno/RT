@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_link.c                                           :+:      :+:    :+:   */
+/*   i_link_obj.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/10/24 15:44:59 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/12 16:27:23 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+void	add_objlist(t_env *e, t_objlist **list, t_obj *ajout)
+{
+	t_objlist	*add;
+
+	if (!(add = (t_objlist*)malloc(sizeof(t_objlist))))
+		error(e, MALLOC_ERROR);
+	*add = (t_objlist){ajout, *list};
+	*list = add;
+}
 
 void	link_clips(t_env *e)
 {
@@ -31,7 +41,11 @@ void	link_clips(t_env *e)
 				check = check->next;
 			if ((check != NULL)
 				&& (clips->id == check->id || -clips->id == check->id))
+				{
+					check->b.clip = 1;
 					clips->obj = check;
+					add_objlist(e, &check->clipping, objs);
+				}
 			clips = clips->next;
 		}
 		objs = objs->next;

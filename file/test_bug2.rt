@@ -1,8 +1,0 @@
-sphere{
-	tx:6
-	mat:iron.mat
-	ty:8
-}
-preset{
-	src:test_bug.rt
-}

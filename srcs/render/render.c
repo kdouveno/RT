@@ -23,8 +23,7 @@ void	*render(void *r)
 		}
 		else
 			d->vp_ul = apply(d->x, d->vp_ul);
-		t_color c = raytrace(r, l);
-		((int*)d->render->pixels)[iy * d->xmax + ix] = c.i;
+		((int*)d->render->pixels)[iy * d->xmax + ix] = raytrace(r, l).i;
 	}
 	pthread_exit(NULL);
 	return (NULL);

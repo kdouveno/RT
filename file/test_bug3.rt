@@ -1,9 +1,0 @@
-camera{
-	tx:6
-	ty:8
-	ry:5
-}
-preset{
-	src: test.rt
-	tx:5
-}

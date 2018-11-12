@@ -1,4 +1,33 @@
-# include "rt.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   i_init.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
+/*   Updated: 2018/11/12 17:01:46 by kdouveno         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rt.h"
+
+void init_objs(t_env *e) {
+	t_obj	*objs;
+
+	objs = e->s.objs;
+	while (objs)
+	{
+		if (objs->r >= 0)
+			objs->dir = get_rot(objs->dir, objs->r);
+		else
+			objs->dir = (t_three_d){rad(objs->dir.x),
+			rad(objs->dir.y), rad(objs->dir.z)};
+		if (objs->type == CONE)
+			objs->v[0] = rad(objs->v[0]);
+		objs = objs->next;
+	}
+}
 
 void	init_cam(t_env *e)
 {
@@ -18,27 +47,14 @@ void	init_cam(t_env *e)
 		d->dimy = DIMY;
 		d->xmax = d->dimx * d->antialia;
 		d->ymax = d->dimy * d->antialia;
-		d->vp_ul = rot((t_vec){(double)(d->xmax / 2) / tan(d->fov / 2),
-			d->xmax / 2, d->ymax / 2}, cams->dir);
-		d->x = rot((t_vec){0, -1, 0}, cams->dir);
-		d->y = rot((t_vec){0, d->xmax - 1, -1}, cams->dir);
+		d->vp_ul = rot((t_vec){(double)(-d->xmax / 2) / tan(d->fov / 2),
+			-d->xmax / 2, d->ymax / 2}, cams->dir);
+		d->x = rot((t_vec){0, 1, 0}, cams->dir);
+		d->y = rot((t_vec){0, -d->xmax + 1, -1}, cams->dir);
 		if (!(d->render = SDL_CreateRGBSurface(0, d->xmax, d->ymax,
 		32, RMASK, GMASK, BMASK, AMASK)))
 			error(e, SDL_GetError());
 		cams = cams->next;
-	}
-}
-
-void	init_objs(t_env *e)
-{
-	t_obj	*objs;
-
-	objs = e->s.objs;
-	while (objs)
-	{
-		if (objs->type == CONE)
-			objs->v[0] = rad(objs->v[0]);
-		objs = objs->next;
 	}
 }
 
