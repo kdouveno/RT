@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_parse_env.c                                      :+:      :+:    :+:   */
+/*   f_is_vec_null.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/08 16:15:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:06 by gperez           ###   ########.fr       */
+/*   Created: 2018/10/23 17:40:03 by gperez            #+#    #+#             */
+/*   Updated: 2018/11/12 17:17:40 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	env_parse(t_env *e, int type, int fd, t_scene *s)
+int	is_vec_null(t_vec vec)
 {
-	(void)fd;
-	(void)s;
-	(void)type;
-	(void)e;
+	return (vec.x == 0 && vec.y == 0 && vec.z == 0);
 }
