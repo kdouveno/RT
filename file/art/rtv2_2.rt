@@ -12,12 +12,6 @@ light{
 	tz: 50
 }
 
-/cylinder{
-	v1: 40
-	clip: 2
-	clip: 3
-}
-
 cylinder{
 	id: -2
 	tz: 40
@@ -78,6 +72,7 @@ cuboid{
 	clip: 7
 	clip: 8
 }
+
 cuboid{
 	v1: 20
 	v2: 40
