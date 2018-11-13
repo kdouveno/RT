@@ -1,0 +1,41 @@
+camera{
+	tx: 200
+	ty: 100
+	tz: 10
+	diry: -5
+	dirz: 45
+}
+
+light{
+	tx: 100
+	ty: 200
+	tz: 150
+}
+
+cuboid{
+	id: 4
+	v1: 21
+	v2: 20
+	v3: 40
+
+	ty: -40
+	tz: -40
+}
+
+cuboid{
+	id: 5
+	v1: 21
+	v2: 20
+	v3: 40
+
+	ty: 40
+	tz: -40
+}
+
+cuboid{
+	v1: 20
+	v2: 60
+	v3: 80
+	clip: 4
+	clip: 5
+}
