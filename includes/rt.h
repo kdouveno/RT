@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:52:27 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/13 17:50:36 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,48 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <fcntl.h>
-# define PRE 0.00000001
-# define DIMX 900
-# define DIMY 700
-# define FOV 85
-# define THRD_CNT 1
-# define REC_FILE 15
-# define AMB_L 0.075
-# define CONE 4
-# define AMASK 0xFF000000U
-# define RMASK 0xFF0000U
-# define GMASK 0xFF00U
-# define BMASK 0xFFU
 
-typedef struct			s_global
+# define THRD_CNT		1
+# define REC_FILE		15
+
+# define FOV			85
+# define DIMX			900
+# define DIMY			700
+
+# define AMB_L			0.075
+# define PRE			0.00000001
+
+# define CONE			4
+
+# define AMASK			0xFF000000U
+# define RMASK			0xFF0000U
+# define GMASK			0xFF00U
+# define BMASK			0xFFU
+
+# define UI_BTN_Y		50
+# define UI_BTN_SPC		25
+# define UI_WIDTH		300
+# define UI_HEIGHT		650
+
+typedef struct			s_aabb
 {
+	double				x;
+	double				y;
+	double				w;
+	double				h;
+}						t_aabb;
+
+typedef struct			s_list_win
+{
+	Uint32				id;
 	SDL_Window			*win;
-	int					rec_lim_file;
-	int					rec_nb_file;
-	int					thread_count;
-}						t_global;
+	SDL_Surface			*render;
+	struct s_list_win	*next;
+}						t_list_win;
+
+
+
+
 
 typedef struct			s_wininfo
 {
@@ -180,13 +202,51 @@ typedef struct			s_prst
 	struct s_prst		*next;
 }						t_prst;
 
-typedef struct			s_env
+typedef struct s_env t_env;
+
+typedef struct			s_list_btn
 {
-	t_global			glb;
-	t_wininfo			w;
+	SDL_Surface			*tex;
+	SDL_Surface			*tex_hover;
+	SDL_Surface			*tex_click;
+	t_aabb				aabb;
+	int					st_hover;
+	int					st_pressing;
+	void				(*action_call)(struct s_env*);
+	struct s_list_btn	*next;
+}						t_list_btn;
+
+typedef struct			s_menu
+{
+	t_list_btn			*list_btn;
+	int					cam_y;
+	int					max_y;
+}						t_menu;
+
+typedef struct			s_gui
+{
+	t_menu				*menu_main;
+	t_menu				*menu_cam;
+	t_menu				*actual_menu;
+}						t_gui;
+
+struct					s_env
+{
+	int					rec_lim_file;
+	int					rec_nb_file;
+	int					thread_count;
+	SDL_Event			event;
+	t_list_win			*list_win;
+	t_list_win			*focus_win;
+	t_list_win			*mouse_win;
+	struct s_gui		gui;
+	Uint32				id_main_win;
+	int					exit;
 	t_scene				s;
 	t_prst				*p;
-}						t_env;
+};
+
+
 
 typedef struct			s_rendering
 {
@@ -195,6 +255,10 @@ typedef struct			s_rendering
 	t_cam				*c;
 	SDL_Surface			*s;
 }						t_rendering;
+
+/*
+** PARSER
+*/
 
 int						is_name_char(char c);
 int						is_ignored(char c);
@@ -220,8 +284,9 @@ int						check_rot(void *cam, char *l1, char *l2);
 int						check_value(t_obj *obj, char *l1, char *l2);
 int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
 
-void					*render(void *r);
-t_cam					*render_cam(t_env *e, int ncam);
+/*
+** INIT
+*/
 
 void					init(t_env *e);
 void					init_objs(t_env *e);
@@ -235,6 +300,39 @@ void					link_mat(t_env *e, t_obj *obj, char *file);
 
 int						check_file_ext(const char *str, const char *ext);
 char					*file_name(char *str);
+
+/*
+** UI
+*/
+
+int						aabb_col_pt(t_aabb aabb, t_vec pt);
+void					list_btn_add(t_env *rt, t_list_btn **list,
+									t_list_btn new);
+void					list_btn_del(t_list_btn *list);
+void					list_btn_cam(t_env *rt, int add);
+void					list_btn_update(t_env *rt, t_list_btn *list,
+									int mouse_out);
+void					list_btn_draw(t_list_win *win, t_list_btn *list);
+void					list_win_add(t_env *rt, t_list_win **list,
+									t_list_win new);
+void					list_win_del(t_list_win *list);
+void					list_win_delone(t_list_win **list, t_list_win *el);
+t_list_win				*list_win_get(t_list_win *list, Uint32 id);
+
+void					gui_set_button_pos(t_menu *menu);
+void					sdl_loop(t_env *rt);
+void					sdl_event_manager(t_env *rt);
+SDL_Surface				*sdl_img_import(char *filename);
+void					sdl_img_export(SDL_Surface *img, char *filename);
+void					rt_export_screenshoot(t_list_win *win, char *filename);
+void					ft_clear_screen(t_color color, t_list_win *win);
+
+/*
+** RENDER
+*/
+
+void					*render(void *r);
+t_cam					*render_cam(t_env *e, int ncam);
 
 void					sphere_line(t_env *e, t_line d, t_obj *o,
 	t_reslist **rlist);
@@ -260,6 +358,7 @@ int						plane_isptin(t_pt pt, t_obj o);
 int						cuboid_isptin(t_pt pt, t_obj o);
 
 double					get_norm(t_vec a);
+
 
 typedef struct			s_objfx
 {
@@ -330,12 +429,12 @@ void					free_res(t_reslist *list);
 void					arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);
 void					debug(t_env *e);
+void					quit(t_env *e, const char *msg);
 void					error(t_env *e, const char *msg);
 void					error_prst(t_prst *p, char *msg);
 void					free_prst(t_prst *p);
 
 int						my_key(int key, t_env *e);
 void					k_escape(t_env *e);
-void					quit(t_env *e, char *msg);
 
 #endif

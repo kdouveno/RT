@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:38 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:20:39 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/13 17:57:45 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,20 @@
 
 void		error(t_env *e, const char *msg)
 {
-	(void)e;
 	ft_putstr("\033[38;5;203m");
 	ft_putendl(msg);
 	ft_putstr("\033[0m");
+	quit(e, NULL);
+}
+
+void		quit(t_env *e, const char *msg)
+{
+	if (msg)
+	{
+		ft_putstr("\033[38;5;203m");
+		ft_putendl(msg);
+		ft_putstr("\033[0m");
+	}
 	free_scene(&(e->s));
 	free_prst(e->p);
 	exit(0);

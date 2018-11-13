@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:32 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:20:32 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/13 17:57:30 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void	parameter_thread_rec(t_env *e, char *argv, int i, int r)
 	if ((res != 0 && !r )|| (r && res < REC_FILE))
 	{
 		if (!r)
-			e->glb.thread_count = res % 2 != 0 ? res + 1 : res;
+			e->thread_count = res % 2 != 0 ? res + 1 : res;
 		else
-			e->glb.rec_lim_file = res;
+			e->rec_lim_file = res;
 		r ? printf("\033[38;5;40mRecursive limit changed to : %d\n\033[0m",
-			e->glb.rec_lim_file)
+			e->rec_lim_file)
 			: printf("\033[38;5;40mThreads changed to : %d\n\033[0m",
-			e->glb.thread_count);
+			e->thread_count);
 	}
 	else
 		r ? ft_putstr("\033[38;5;203mRecursive number is not apply\n\033[0m")
@@ -80,8 +80,8 @@ void	arg(t_env *e, int argc, char **argv)
 
 	i = 2;
 	d = 0;
-	*e = (t_env){{NULL, 3, -1, THRD_CNT},
-		{0,0}, {NULL, NULL, NULL, NULL, (t_color){(t_rgb){0,0,0,0}}}, NULL};
+	*e = (t_env){3, -1, THRD_CNT,
+		(SDL_Event){}, NULL, NULL, NULL, (t_gui){}, 0, 0, {NULL, NULL, NULL, NULL, (t_color){(t_rgb){0,0,0,0}}}, NULL};
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')

@@ -6,37 +6,31 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:20:52 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/13 17:59:14 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	ft_window(t_env *e)
-{
-	SDL_Surface	*sur;
-	SDL_Surface	*sur1;
-
-	if (SDL_Init(SDL_INIT_EVERYTHING))
-		error(e, SDL_ERROR);
-	e->glb.win = SDL_CreateWindow("RT - UI",
-		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		DIMX, DIMY, SDL_WINDOW_SHOWN);
-	init(e);
-	sur = render_cam(e, 0)->data.render;
-	sur1 = SDL_GetWindowSurface(e->glb.win);
-	SDL_BlitSurface(sur, NULL, sur1, 0);
-	SDL_UpdateWindowSurface(e->glb.win);
-}
-
-int		main(int argc, char **argv)
+int		main(void)
 {
 	t_env		e;
 
-	arg(&e, argc, argv);
-	ft_window(&e);
-	free_scene((&e.s));
-	free_prst(e.p);
-	getchar();
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+		return (0);
+	if (!(e.gui.menu_main = (t_menu*)ft_memalloc(sizeof(t_menu))))
+		error(&e, MALLOC_ERROR);
+	e.gui.menu_main->list_btn = NULL;
+	e.gui.menu_main->cam_y = 0;
+	if (!(e.gui.menu_cam = (t_menu*)ft_memalloc(sizeof(t_menu))))
+		error(&e, MALLOC_ERROR);
+	e.gui.menu_cam->list_btn = NULL;
+	e.gui.menu_cam->cam_y = 0;
+	list_win_add(&e, &(e.list_win), (t_list_win){0,
+		SDL_CreateWindow("RT - UI", SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED, UI_WIDTH, UI_HEIGHT, 0), NULL, NULL});
+	e.id_main_win = SDL_GetWindowID(e.list_win->win);
+	e.exit = 0;
+	sdl_loop(&e);
 	return (0);
 }
