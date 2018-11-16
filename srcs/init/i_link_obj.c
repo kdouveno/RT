@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:32 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/15 17:16:40 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ void	add_objlist(t_env *e, t_objlist **list, t_obj *ajout)
 		error(e, MALLOC_ERROR);
 	*add = (t_objlist){ajout, *list};
 	*list = add;
+}
+
+static void	link_clip(t_env *e, t_obj* check, t_clip *clip, t_obj *obj)
+{
+	check->b.clip = 1;
+	clip->obj = check;
+	add_objlist(e, &check->clipping, obj);
 }
 
 void	link_clips(t_env *e)
@@ -41,11 +48,7 @@ void	link_clips(t_env *e)
 				check = check->next;
 			if ((check != NULL)
 				&& (clips->id == check->id || -clips->id == check->id))
-				{
-					check->b.clip = 1;
-					clips->obj = check;
-					add_objlist(e, &check->clipping, objs);
-				}
+					link_clip(e, check, clips, objs);
 			clips = clips->next;
 		}
 		objs = objs->next;

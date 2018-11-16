@@ -6,13 +6,28 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:28 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/15 18:27:07 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void init_objs(t_env *e) {
+static void check_clip_loop(t_env *e, t_obj *o, t_obj *original, int i)
+{
+	t_objlist	*clpin;
+
+	if (i && o == original)
+		error(e, CLIP_CIRCLE_ERROR);
+	i = 1;
+	clpin = o->clipping;
+	while (clpin)
+	{
+		check_clip_loop(e, clpin->obj, original, i);
+		clpin = clpin->next;
+	}
+}
+
+void 		init_objs(t_env *e) {
 	t_obj	*objs;
 
 	objs = e->s.objs;
@@ -25,11 +40,12 @@ void init_objs(t_env *e) {
 			rad(objs->dir.y), rad(objs->dir.z)};
 		if (objs->type == CONE)
 			objs->v[0] = rad(objs->v[0]);
+		check_clip_loop(e, objs, objs, 0);
 		objs = objs->next;
 	}
 }
 
-void	init_cam(t_env *e)
+void		init_cam(t_env *e)
 {
 	t_cam			*cams;
 	t_cam_render	*d;
@@ -71,7 +87,7 @@ t_color		init_lit_scene(t_scene *s)
 	return (s->amb_lit_c);
 }
 
-void	init(t_env *e)
+void		init(t_env *e)
 {
 	t_prst	*p;
 
