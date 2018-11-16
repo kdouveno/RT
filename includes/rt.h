@@ -31,9 +31,9 @@
 # define AMB_L 0.075
 # define CONE 4
 # define AMASK 0xFF000000U
-# define RMASK 0xFF0000U
-# define GMASK 0xFF00U
-# define BMASK 0xFFU
+# define RMASK 0x000000FFU
+# define GMASK 0x0000FF00U
+# define BMASK 0x00FF0000U
 
 typedef struct			s_global
 {
