@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/12 17:19:31 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/16 15:29:24 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,9 @@ t_reslist	get_touch(t_reslist *list, t_line line, t_pt campt)
 			out = *list;
 			out.o = tmpobj;
 			out.cam = normalise(get_line(list->pt, campt).v);
-			out.n = normalise(g_ref[list->o->type].norm(unrot(apply(vecpro(list->o->t, -1),
-				list->pt), list->o->dir), *list->o, out.cam));
+			out.n = normalise(g_ref[list->o->type].norm(
+				vecpro(unrot(apply(vecpro(list->o->t, -1), list->pt),
+				list->o->dir), 1 / list->o->scale), *list->o, out.cam));
 			return (out);
 		}
 		list = list->next;
@@ -142,8 +143,8 @@ t_reslist	intersec(t_rendering *r, t_line line)
 	while (b)
 	{
 		l.m = apply(vecpro(b->t, -1), line.m);
-		l.m = unrot(l.m, b->dir);
-		l.v = unrot(line.v, b->dir);
+		l.m = vecpro(unrot(l.m, b->dir), 1 / b->scale);
+		l.v = vecpro(unrot(line.v, b->dir), 1 / b->scale);
 		g_ref[b->type].intersec(r->e, l, b, &list);
 		b = b->next;
 	}

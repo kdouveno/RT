@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 18:54:01 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:51:36 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/16 15:25:59 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ static int		check_arg(t_env *e, t_prst *prst, char *l1, char *l2)
 		}
 		return (0);
  	}
+	if (!(ft_strcmp(l1, "scale")))
+	{
+		prst->scale = ft_atod(l2);
+		return (0);
+	}
+
 	return (1);
 }
 
@@ -79,7 +85,7 @@ void	parse_prst(t_env *e, int type, int fd, t_scene *s)
 	if (!(prst = malloc(sizeof(t_prst))))
 		error(e, MALLOC_ERROR);
 	parse_prst_2(e, prst);
-	*prst = (t_prst){{0, 0, 0}, {0, 0, 0}, {NULL, NULL, NULL, NULL,
+	*prst = (t_prst){{0, 0, 0}, {0, 0, 0}, 1, {NULL, NULL, NULL, NULL,
 		(t_color){(t_rgb){0,0,0,0}}}, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:52:27 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/16 15:25:38 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct			s_obj
 	t_pt				t;
 	t_three_d			dir;
 	double				r;
+	double				scale;
 	int					type;
 	double				v[4];
 	t_mat				mat;
@@ -176,6 +177,7 @@ typedef struct			s_prst
 {
 	t_pt				t;
 	t_three_d			dir;
+	double				scale;
 	t_scene				s;
 	struct s_prst		*next;
 }						t_prst;
