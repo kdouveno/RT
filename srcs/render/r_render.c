@@ -12,6 +12,30 @@
 
 #include "rt.h"
 
+t_color	rec_raytrace(t_rendering *r, t_line l, int m)
+{
+	t_cam_render *d;
+	t_vec	v[4];
+
+	d = &r->c->data;
+	// printf("l.v: (%f, %f, %f), %d, %d", l.v.x, l.v.y, l.v.z, m, d->antialia);
+	if (m < d->antialia)
+	{
+		v[0] = apply(vecpro(apply(d->x, d->y), 1 / (m * 4)), l.v);
+		v[1] = apply(vecpro(apply(d->x, vec_rev(d->y)), 1 / (m * 4)), l.v);
+		v[2] = apply(vecpro(apply(vec_rev(d->x), d->y), 1 / (m * 4)), l.v);
+		v[3] = apply(vec_rev(vecpro(apply(d->x, d->y), 1 / (m * 4))), l.v);
+		return (rgbmoy4((t_color[]){
+			rec_raytrace(r, (t_line){l.m, v[0]}, m * 2),
+			rec_raytrace(r, (t_line){l.m, v[1]}, m * 2),
+			rec_raytrace(r, (t_line){l.m, v[2]}, m * 2),
+			rec_raytrace(r, (t_line){l.m, v[3]}, m * 2),
+		}));
+	}
+	else
+		return (raytrace(r, l, 0));
+}
+
 void	*render(void *r)
 {
 	int				ix;
