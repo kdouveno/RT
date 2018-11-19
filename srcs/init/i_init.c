@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/15 18:27:07 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/19 17:40:51 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,12 @@ void		init_cam(t_env *e)
 			rad(cams->dir.y), rad(cams->dir.z)};
 		d->dimx = DIMX;
 		d->dimy = DIMY;
-		d->xmax = d->dimx * d->antialia;
-		d->ymax = d->dimy * d->antialia;
-		d->vp_ul = rot((t_vec){(double)(-d->xmax / 2) / tan(d->fov / 2),
-			-d->xmax / 2, d->ymax / 2}, cams->dir);
+		d->vp_ul = rot((t_vec){(double)(-d->dimx / 2) / tan(d->fov / 2),
+			-d->dimx / 2, d->dimy / 2}, cams->dir);
 		d->x = rot((t_vec){0, 1, 0}, cams->dir);
-		d->y = rot((t_vec){0, -d->xmax + 1, -1}, cams->dir);
-		if (!(d->render = SDL_CreateRGBSurface(0, d->xmax, d->ymax,
+		d->y = rot((t_vec){0, 0, -1}, cams->dir);
+		d->xy = rot((t_vec){0, -d->dimx + 1, -1}, cams->dir);
+		if (!(d->render = SDL_CreateRGBSurface(0, d->dimx, d->dimy,
 		32, RMASK, GMASK, BMASK, AMASK)))
 			error(e, SDL_GetError());
 		cams = cams->next;

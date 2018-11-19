@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/16 22:28:10 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/19 18:51:06 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # define PRE 0.00000001
-# define DIMX 900
-# define DIMY 700
+# define DIMX 800
+# define DIMY 450
 # define FOV 85
 # define THRD_CNT 1
 # define REC_FILE 15
@@ -55,12 +55,11 @@ typedef struct			s_cam_render
 	t_pt				vp_ul;
 	t_vec				x;
 	t_vec				y;
+	t_vec				xy;
 	double				fov;
 	SDL_Surface			*render;
 	int					ix;
 	int					iy;
-	int					xmax;
-	int					ymax;
 	int					dimx;
 	int					dimy;
 	int					antialia;

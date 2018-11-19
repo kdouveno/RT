@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:30:51 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/19 18:54:42 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	}
 	else if (!(ft_strcmp(l1, "antialiasing")))
 	{
+		cam->data.antialia = ft_atoi(l2);
 		if (!(is_powertwo(cam->data.antialia)) && !(is_pos(cam->data.antialia)))
 		{
 			cam->data.antialia = 1;
@@ -104,7 +105,7 @@ t_cam	*parse_cam_2(t_env *e, int fd)
 	if (!(cam = malloc(sizeof(t_cam))))
 		error(e, MALLOC_ERROR);
 	*cam = (t_cam){(t_pt){0, 0, 0},(t_vec){0, 0, 0}, -1, -1,
-		{{0,0,0}, {}, {}, rad(FOV), NULL, 0, 0, 0, 0, 0, 0, 1},
+		{{0,0,0}, {}, {}, {}, rad(FOV), NULL, 0, 0, 0, 0, 1},
 		NULL};
 	while ((res = get_next_line(fd, &line)) > 0 &&
 		get_prop(e, line, &l1, &l2) != 1)
