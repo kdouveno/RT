@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/16 15:29:24 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/16 22:19:51 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_obj		*is_tangible(t_obj *o, t_pt pt, t_obj *last)
 // 	return (NULL);
 // }
 
-t_reslist	get_touch(t_reslist *list, t_line line, t_pt campt)
+t_reslist	get_touch(t_reslist *list, t_line line)
 {
 	t_reslist	out;
 	t_obj		*tmpobj;
@@ -118,7 +118,7 @@ t_reslist	get_touch(t_reslist *list, t_line line, t_pt campt)
 		{
 			out = *list;
 			out.o = tmpobj;
-			out.cam = normalise(get_line(list->pt, campt).v);
+			out.cam = normalise(get_line(list->pt, line.m).v);
 			out.n = normalise(g_ref[list->o->type].norm(
 				vecpro(unrot(apply(vecpro(list->o->t, -1), list->pt),
 				list->o->dir), 1 / list->o->scale), *list->o, out.cam));
@@ -149,7 +149,7 @@ t_reslist	intersec(t_rendering *r, t_line line)
 		b = b->next;
 	}
 	if (list)
-		out = get_touch(list, line, r->c->t);
+		out = get_touch(list, line);
 	return (out);
 }
 
@@ -204,7 +204,6 @@ t_color		phong(t_lit l, t_reslist res)
 	t_vec		lnc[3];
 	t_color		diffuse;
 	t_color		specular;
-	t_color		ambient;
 	t_color		obj_color;
 
 	obj_color = get_pt_color(*res.o, res.pt);
@@ -214,11 +213,10 @@ t_color		phong(t_lit l, t_reslist res)
 	diffuse = rgbpro(rgbmin(l.color, rgbneg(obj_color)),
 		l.power * diffuse_light(lnc));
 	specular = rgbpro(l.color, l.power * spec_light(lnc) * res.o->mat.spec);
-	ambient = (t_color)rgbpro(obj_color, AMB_L);
-	return (rgbadd(rgbadd(rgbadd((t_color)AMASK, specular), diffuse), ambient));
+	return (rgbadd(rgbadd((t_color)AMASK, specular), diffuse));
 }
 
-t_color		lites(t_rendering *r, t_reslist res)
+t_color		lites(t_rendering *r, t_reslist res, int bounce)
 {
 	t_lit		*l;
 	t_color		out;
@@ -228,11 +226,15 @@ t_color		lites(t_rendering *r, t_reslist res)
 	l = r->e->s.lits;
 	while (l)
 	{
-		if (intersec(r, get_line(l->t, res.pt)).t > 0.9999 && (i = 0) == 0)
+		out = rgbadd(out,
+		ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt), AMB_L));
+		if (intersec(r, get_line(l->t, res.pt)).t > 1 - PRE && (i = 0) == 0)
 			out = rgbadd(out, phong(*l, res));
-		else
-			out = rgbadd(out,
-			ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt), AMB_L));
+		if (res.o->mat.refl && bounce < REC_BOUNCE)
+		{
+			out = rgbmid(out, raytrace(r, (t_line){res.pt, apply(vec_rev(res.cam),
+			vecpro(res.n, 2 * scalar_product(res.cam, res.n)))}, bounce + 1), res.o->mat.refl);
+		}
 		l = l->next;
 	}
 	return (out);
@@ -242,7 +244,7 @@ t_color		lites(t_rendering *r, t_reslist res)
 **	renvoie la couleur du pixel a afficher pour un rayon de droite
 */
 
-t_color		raytrace(t_rendering *r, t_line l)
+t_color		raytrace(t_rendering *r, t_line l, int bounce)
 {
 	t_reslist	res;
 	t_color		out;
@@ -252,6 +254,6 @@ t_color		raytrace(t_rendering *r, t_line l)
 	out = (t_color)(unsigned)AMASK;
 	res = intersec(r, l);
 	if (res.o)
-		out.i |= lites(r, res).i;
+		out.i |= lites(r, res, bounce).i;
 	return (out);
 }

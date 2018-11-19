@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 14:36:38 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/12 17:19:34 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/16 17:58:57 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	add_res(t_env *e, t_reslist **cur, t_reslist t)
 	t_reslist	*last;
 	t_reslist	*tmp;
 
-	if (t.t < 0)
+	if (t.t < PRE)
 		return ;
 	tmp = *cur;
 	last = NULL;

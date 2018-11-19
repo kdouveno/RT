@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:20:49 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/16 18:41:28 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ static void	debug_objs(t_obj *save, t_clip *clips)
 	while (save != NULL)
 	{
 		printf("\nType: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
-		"Variable: %f\nColor: %x\nDiffuse: %f\nSpecular: %f\nID: %d\n"
+		"Variable: %f\nColor: %x argb(%d, %d, %d, %d)\nDiffuse: %f\nSpecular: %f\nID: %d\n"
 		"address: %p\nLinked to %p\n",
 		g_ref[save->type].name, save->t.x, save->t.y, save->t.z,
-		save->dir.x, save->dir.y, save->dir.z,
-		save->v[0], save->mat.color.i, save->mat.diff,
-		save->mat.spec, save->id, save, save->grad);
+		save->dir.x, save->dir.y, save->dir.z, save->v[0], save->mat.color.i,
+		save->mat.color.p.a, save->mat.color.p.r, save->mat.color.p.g,
+		save->mat.color.p.b, save->mat.diff, save->mat.spec,
+		save->id, save, save->grad);
 		printf("\n\033[38;5;136m");
 		clips = save->clips;
 		while (clips != NULL)

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:19:33 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/16 17:39:36 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*render(void *r)
 		}
 		else
 			d->vp_ul = apply(d->x, d->vp_ul);
-		((int*)d->render->pixels)[iy * d->xmax + ix] = raytrace(r, l).i;
+		((int*)d->render->pixels)[iy * d->xmax + ix] = raytrace(r, l, 0).i;
 	}
 	pthread_exit(NULL);
 	return (NULL);

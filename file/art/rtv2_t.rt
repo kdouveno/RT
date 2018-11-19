@@ -15,21 +15,35 @@ light{
 cuboid{
 	id: 4
 	v1: 21
-	v2: 20
-	v3: 40
+	v2: 21
+	v3: 41
 
-	ty: -40
-	tz: -40
+	ty: -41
+	tz: -41
 }
 
 cuboid{
 	id: 5
 	v1: 21
-	v2: 20
-	v3: 40
+	v2: 21
+	v3: 41
 
-	ty: 40
-	tz: -40
+	ty: 41
+	tz: -41
+}
+
+cylinder{
+	id: 6
+	ty: -60
+	diry: 90
+	v: 40
+}
+
+cylinder{
+	id: 7
+	ty: 60
+	diry: 90
+	v: 40
 }
 
 cuboid{
@@ -38,4 +52,6 @@ cuboid{
 	v3: 80
 	clip: 4
 	clip: 5
+	clip: 6
+	clip: 7
 }

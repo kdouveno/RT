@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/16 15:25:38 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/16 22:28:10 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define FOV 85
 # define THRD_CNT 1
 # define REC_FILE 15
+# define REC_BOUNCE 10
 # define AMB_L 0.075
 # define CONE 4
 # define AMASK 0xFF000000U
@@ -115,6 +116,7 @@ typedef struct			s_mat
 	t_color				color;
 	float				diff;
 	float				spec;
+	float				refl;
 	SDL_Surface			*txt;
 }						t_mat;
 
@@ -321,7 +323,7 @@ void					set_camera(t_env *e, t_vec t, t_rot r, double a);
 int						add_obj(t_env *e, t_obj obj);
 int						add_light(t_env *e, t_lit light);
 
-t_color					raytrace(t_rendering *r, t_line l);
+t_color					raytrace(t_rendering *r, t_line l, int bounce);
 int						key_hook(int key, t_env *e);
 
 t_polyres				solve_polynome(double a, double b, double c);
