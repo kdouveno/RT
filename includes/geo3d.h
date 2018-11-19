@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/16 22:13:00 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/19 16:12:12 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_color				rgbadd(t_color c1, t_color c2);
 t_color				rgbmin(t_color c1, t_color c2);
 t_color				rgbneg(t_color c);
 t_color				rgbmid(t_color c1, t_color c2, float mid);
+t_color				rgbmoy4(t_color c[4]);
 
 
 double				rad(double deg);
