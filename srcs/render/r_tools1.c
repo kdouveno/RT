@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 14:36:38 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/16 17:58:57 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/19 14:57:58 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,37 +59,4 @@ t_pt	get_linept(t_line d, double t)
 double	dist(t_pt a, t_pt b)
 {
 	return (sqrt(sq(a.x - b.x) + sq(a.y - b.y) + sq(a.z - b.z)));
-}
-
-void	add_res(t_env *e, t_reslist **cur, t_reslist t)
-{
-	t_reslist	*last;
-	t_reslist	*tmp;
-
-	if (t.t < PRE)
-		return ;
-	tmp = *cur;
-	last = NULL;
-	while (tmp && t.t > tmp->t)
-	{
-		last = tmp;
-		tmp = tmp->next;
-	}
-	t.next = tmp;
-	if (!(tmp = (t_reslist*)malloc(sizeof(t_reslist))))
-		error(e, MALLOC_ERROR);
-	*tmp = t;
-	last ? (last->next = tmp) : (*cur = tmp);
-}
-
-void	free_res(t_reslist *list)
-{
-	t_reslist	*tmp;
-
-	while (list)
-	{
-		tmp = list->next;
-		free(list);
-		list = tmp;
-	}
 }
