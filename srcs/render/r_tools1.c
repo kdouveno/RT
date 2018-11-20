@@ -38,11 +38,6 @@ t_polyres	solve_polynome(double a, double b, double c)
 	return (out);
 }
 
-t_vec	get_vector(t_pt a, t_pt b)
-{
-	return ((t_vec){b.x - a.x, b.y - a.y, b.z - a.z});
-}
-
 t_line	get_line(t_pt a, t_pt b)
 {
 	return ((t_line){a, get_vector(a, b)});
