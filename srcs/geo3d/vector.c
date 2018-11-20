@@ -38,7 +38,7 @@ t_rot	get_rot(t_vec a, double x)
 		out.y = (a.z < 0 ? -1 : 1) * angle(y, (t_vec){1, 0, 0});
 	if (a.x || a.y)
 		out.z = (a.y < 0 ? -1 : 1) * (angle(z, (t_vec){1, 0, 0})
-				+ (a.x < 0 ? M_PI_2 : 0));
+				- (a.x < 0 ? M_PI : 0));
 	return (out);
 }
 
