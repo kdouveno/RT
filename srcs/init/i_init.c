@@ -74,30 +74,29 @@ void		init_cam(t_env *e)
 	}
 }
 
-t_color		init_lit_scene(t_scene *s)
+t_color		init_lit_scene(t_env *e, t_scene *s)
 {
 	t_lit	*l;
+	t_prst	*p;
 
 	l = s->lits;
+	p = s->prsts;
 	while (l)
 	{
 		s->amb_lit_c = rgbadd(s->amb_lit_c, l->color);
-		l = l->next;
+		while (p)
+		{
+			e->s.amb_lit_c = rgbadd(init_lit_scene(e, &(p->s)), e->s.amb_lit_c);
+			p = p->next;
+		}		l = l->next;
 	}
 	return (s->amb_lit_c);
 }
 
 void		init(t_env *e)
 {
-	t_prst	*p;
-
-	p = e->p;
 	init_cam(e);
 	init_objs(e);
-	init_lit_scene(&(e->s));
-	while (p)
-	{
-		e->s.amb_lit_c = rgbadd(init_lit_scene(&(e->p->s)), e->s.amb_lit_c);
-		p = p->next;
-	}
+	init_lit_scene(e, &(e->s));
+
 }

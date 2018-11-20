@@ -19,7 +19,6 @@ void		error(t_env *e, const char *msg)
 	ft_putendl(msg);
 	ft_putstr("\033[0m");
 	free_scene(&(e->s));
-	free_prst(e->p);
 	exit(0);
 }
 

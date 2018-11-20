@@ -85,5 +85,6 @@ void		free_scene(t_scene *s)
 	free_lit(s->lits);
 	free_cam(s->cams);
 	free_grad(s->grads);
+	free_prst(s->prsts);
 //	printf("\033[0m\n");
 }

@@ -61,7 +61,7 @@ void	parse_prst_2(t_env *e, t_prst *p)
 {
 	t_prst	*save;
 
-	save = e->p;
+	save = e->s.prsts;
 	if (save != NULL)
 	{
 		while(save->next != NULL)
@@ -69,7 +69,7 @@ void	parse_prst_2(t_env *e, t_prst *p)
 		save->next = p;
 	}
 	else
-		e->p = p;
+		e->s.prsts = p;
 }
 
 void	parse_prst(t_env *e, int type, int fd, t_scene *s)
@@ -85,7 +85,7 @@ void	parse_prst(t_env *e, int type, int fd, t_scene *s)
 	if (!(prst = malloc(sizeof(t_prst))))
 		error(e, MALLOC_ERROR);
 	parse_prst_2(e, prst);
-	*prst = (t_prst){{0, 0, 0}, {0, 0, 0}, 1, {NULL, NULL, NULL, NULL,
+	*prst = (t_prst){{0, 0, 0}, {0, 0, 0}, 1, {NULL, NULL, NULL, NULL, NULL,
 		(t_color){(t_rgb){0,0,0,0}}}, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)

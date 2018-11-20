@@ -84,29 +84,26 @@ static void	debug_cams(t_cam *save)
 	}
 }
 
-void		debug_prst(t_prst *p)
+void		debug_prst(t_prst *p, int rec)
 {
 	while (p && (p->s.cams || p->s.lits || p->s.objs || p->s.grads))
 	{
-		printf("\n\n\n\033[38;5;96mPRESET :\n");
+		printf("\n\n\n\033[38;5;96mPRESET (rec %d):\n", rec);
 		printf("Translation: %f %f %f\nDirection: %f %f %f\n",
 		p->t.x, p->t.y, p->t.z, p->dir.x, p->dir.y, p->dir.z);
-		debug_cams(p->s.cams);
-		debug_lits(p->s.lits);
-		debug_grad(p->s.grads);
-		debug_objs(p->s.objs, NULL);
+		debug(p->s, rec++);
 		p = p->next;
 	}
 }
 
-void		debug(t_env *e)
+void		debug(t_scene s, int rec)
 {
-	debug_cams(e->s.cams);
-	debug_lits(e->s.lits);
-	debug_grad(e->s.grads);
-	debug_objs(e->s.objs, NULL);
-	debug_prst(e->p);
-	if (!e->s.cams && !e->s.lits && !e->s.grads && !e->s.objs && !e->p)
+	debug_cams(s.cams);
+	debug_lits(s.lits);
+	debug_grad(s.grads);
+	debug_objs(s.objs, NULL);
+	debug_prst(s.prsts, rec);
+	if (s.cams && s.lits && s.grads && s.objs && s.prsts)
 		printf("\033[38;5;203m%s\n", EMPTY_SCENE);
 	printf("\033[0m");
 }
