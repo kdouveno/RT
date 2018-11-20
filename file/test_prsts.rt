@@ -1,0 +1,15 @@
+camera{
+}
+
+light{
+}
+
+sphere{
+	v1:20
+	tx:-100
+}
+
+preset{
+	tx:	20
+	src: test_prsts.rt
+}

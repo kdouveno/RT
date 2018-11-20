@@ -171,6 +171,7 @@ typedef struct			s_scene
 	t_lit				*lits;
 	t_cam				*cams;
 	t_grad				*grads;
+	struct s_prst		*prsts;
 	t_color				amb_lit_c;
 }						t_scene;
 
@@ -188,7 +189,6 @@ typedef struct			s_env
 	t_global			glb;
 	t_wininfo			w;
 	t_scene				s;
-	t_prst				*p;
 }						t_env;
 
 typedef struct			s_rendering
@@ -229,7 +229,7 @@ t_cam					*render_cam(t_env *e, int ncam);
 void					init(t_env *e);
 void					init_objs(t_env *e);
 void					init_cam(t_env *e);
-t_color					init_lit_scene(t_scene *s);
+t_color					init_lit_scene(t_env *e, t_scene *s);
 void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);
 void					link_color_grad(t_env *e);
@@ -332,7 +332,7 @@ void					free_res(t_reslist *list);
 
 void					arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);
-void					debug(t_env *e);
+void					debug(t_scene s, int rec);
 void					error(t_env *e, const char *msg);
 void					error_prst(t_prst *p, char *msg);
 void					free_prst(t_prst *p);

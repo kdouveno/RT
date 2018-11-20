@@ -36,7 +36,6 @@ int		main(int argc, char **argv)
 	arg(&e, argc, argv);
 	ft_window(&e);
 	free_scene((&e.s));
-	free_prst(e.p);
 	getchar();
 	return (0);
 }
