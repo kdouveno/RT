@@ -290,32 +290,6 @@ static const t_objfx	g_ref[] = {
 	{"", NULL, NULL, NULL, NULL}
 };
 
-typedef struct			s_char_int
-{
-	char				hexa;
-	int					n;
-}						t_char_int;
-
-static const			t_char_int	g_hexa[] = {
-	{'0', 0},
-	{'1', 1},
-	{'2', 2},
-	{'3', 3},
-	{'4', 4},
-	{'5', 5},
-	{'6', 6},
-	{'7', 7},
-	{'8', 8},
-	{'9', 9},
-	{'A', 10},
-	{'B', 11},
-	{'C', 12},
-	{'D', 13},
-	{'E', 14},
-	{'F', 15},
-	{'\0', 0}
-};
-
 int						atoi_hexa(char const *str);
 
 void					set_camera(t_env *e, t_vec t, t_rot r, double a);

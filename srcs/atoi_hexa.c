@@ -6,20 +6,21 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 18:17:07 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:20:35 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/20 17:49:44 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		hexa_dic(char h)
+int		hexa_dic(char c)
 {
-	int		i;
-
-	i = 0;
-	while (g_hexa[i].hexa && g_hexa[i].hexa != h)
-		i++;
-	return (g_hexa[i].n);
+	if (c >= '0' && c <= '9')
+		return (c - '0');
+	if (c >= 'A' && c <= 'Z')
+		return (c - 'A' + 10);
+	if (c >= 'a' && c <= 'z')
+		return (c - 'a' + 10);
+	return (0);
 }
 
 int		atoi_hexa(char const *str)
