@@ -62,9 +62,10 @@ static void	debug_lits(t_lit *save)
 		printf("\n\033[38;5;46mLights :\n\n");
 	while (save != NULL)
 	{
-		printf("Translation: %f %f %f\nPower: %f\nColor: %x\nID: %d\n\n",
+		printf("Translation: %f %f %f\nPower: %f\nColor: %x argb(%d, %d, %d, %d)\nID: %d\n\n",
 		save->t.x, save->t.y, save->t.z,
-		save->power, save->color.i, save->id);
+		save->power, save->color.i, save->color.p.a, save->color.p.r, save->color.p.g,
+		save->color.p.b, save->id);
 		save = save->next;
 	}
 }

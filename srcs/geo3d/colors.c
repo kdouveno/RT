@@ -56,7 +56,13 @@ t_color	rgbadd(t_color c1, t_color c2)
 
 t_color	rgbneg(t_color c)
 {
-	return ((t_color){{255 - c.p.r, 255 - c.p.g, 255 - c.p.b, c.p.a}});
+	t_color out;
+
+	out.p.r = 255 - c.p.r;
+	out.p.g = 255 - c.p.g;
+	out.p.b = 255 - c.p.b;
+	out.p.a = c.p.a;
+	return (out);
 }
 
 t_color	rgbmin(t_color c1, t_color c2)
