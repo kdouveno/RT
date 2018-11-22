@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 17:10:28 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:04 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/21 18:07:48 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ static void		parse_color_grad(t_grad *grad, char *l2, int nb)
 	{
 		grad->b.c1 = l2[0] == '#' ? 0 : 1;
 		if (l2[0] == '#')
-			grad->color1.i = (unsigned)atoi_hexa(&l2[1]);
+			grad->c1.i = (unsigned)atoi_hexa(&l2[1]);
 		else
-			grad->color1.i = ft_atoi(l2);
+			grad->c1.i = ft_atoi(l2);
 	}
 	else
 	{
 		grad->b.c2 = l2[0] == '#' ? 0 : 1;
 		if (l2[0] == '#')
-			grad->color2.i = (unsigned)atoi_hexa(&l2[1]);
+			grad->c2.i = (unsigned)atoi_hexa(&l2[1]);
 		else
-			grad->color2.i = ft_atoi(l2);
+			grad->c2.i = ft_atoi(l2);
 	}
 }
 
