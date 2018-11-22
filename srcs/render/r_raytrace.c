@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/22 10:49:14 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/22 14:29:07 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,11 +190,9 @@ t_color	texture_color(t_obj obj, t_pt pt)
 	y = ang.y - M_PI_2;
 	x = (obj.mat.txt->w * x) / (2 * M_PI);
 	y = (obj.mat.txt->h * y) / -M_PI;
-	SDL_LockSurface(obj.mat.txt);
 	out.p.b = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x));
 	out.p.g = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 1);
 	out.p.r = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 2);
-	SDL_UnlockSurface(obj.mat.txt);
 	return (out);
 }
 
@@ -204,10 +202,22 @@ t_color	get_grad_color(t_pt pt, t_grad *grad)
 	t_vec v;
 	t_vec z;
 	float t;
+
 	v = get_vector(grad->t, pt);
 	dir = normalise(grad->dir);
 	z = vecpro(dir, scalar_product(v, dir));
-	t = z.x / dir.x;
+	if (grad->dir.x)
+		t = z.x / grad->dir.x;
+	else if (grad->dir.y)
+		t = z.y / grad->dir.y;
+	else if (grad->dir.z)
+		t = z.z / grad->dir.z;
+	else
+		return (grad->c1);
+	if (t < 0)
+		t = 0.0;
+	else if (t > 1)
+		t = 1;
 	return (rgbmid(grad->c1, grad->c2, t));
 }
 
@@ -279,8 +289,6 @@ t_color		raytrace(t_rendering *r, t_line l, int bounce)
 {
 	t_reslist	res;
 	t_color		out;
-
-	pthread_mutex_unlock(&r->lock);
 
 	out = (t_color)(unsigned)AMASK;
 	res = intersec(r, l);

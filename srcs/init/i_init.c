@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/22 10:42:34 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/22 12:44:33 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ static void check_clip_loop(t_env *e, t_obj *o, t_obj *original, int i)
 	{
 		check_clip_loop(e, clpin->obj, original, i);
 		clpin = clpin->next;
+	}
+}
+
+void		init_grad(t_scene *s)
+{
+	t_grad	*grads;
+
+	grads = s->grads;
+	while (grads)
+	{
+		grads->dir = get_vector(grads->t, grads->dir);
+		grads->r = get_rot(grads->dir, 0);
+		grads = grads->next;
 	}
 }
 
@@ -95,6 +108,7 @@ t_color		init_lit_scene(t_env *e, t_scene *s)
 
 void		init_scene(t_env *e, t_scene *s)
 {
+	init_grad(s);
 	init_cam(e, s);
 	init_objs(e, s);
 	if (s->prsts)
