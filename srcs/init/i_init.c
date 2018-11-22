@@ -27,7 +27,8 @@ static void check_clip_loop(t_env *e, t_obj *o, t_obj *original, int i)
 	}
 }
 
-void 		init_objs(t_env *e) {
+void 		init_objs(t_env *e)
+{
 	t_obj	*objs;
 
 	objs = e->s.objs;
@@ -41,6 +42,29 @@ void 		init_objs(t_env *e) {
 		if (objs->type == CONE)
 			objs->v[0] = rad(objs->v[0]);
 		check_clip_loop(e, objs, objs, 0);
+		objs = objs->next;
+	}
+}
+
+void		init_grads(t_env *e)
+{
+	t_obj	*objs;
+	t_grad	*grads;
+
+	objs = e->objs;
+	while (objs)
+	{
+		while (grads)
+		{
+			grads = e->grads;
+			if (grads->id == objs->id)
+			{
+				objs->grads = grads;
+				grads = NULL;
+			}
+			else
+				grads = grads->next;
+		}
 		objs = objs->next;
 	}
 }
@@ -96,6 +120,7 @@ void		init(t_env *e)
 {
 	init_cam(e);
 	init_objs(e);
+	init_grads(e);
 	init_lit_scene(e, &(e->s));
 
 }

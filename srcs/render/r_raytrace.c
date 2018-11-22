@@ -175,17 +175,44 @@ double		spec_light(t_vec lnc[3])
 	return (out);
 }
 
-t_color texture_color(t_obj obj, t_pt pt)
+int	texture_color(t_obj obj, t_pt pt)
 {
-	(void)obj;
+	t_vec	ctr_pt;
+	float	x;
+	float	y;
+	t_vec	ang;
+	t_color	out;
+	char	*pPixels = obj.mat.txt->pixels;
+
+	out = (t_color)AMASK;
 	(void)pt;
-	return (obj.mat.color);
+	(void)obj;
+	(void)ctr_pt;
+	ctr_pt = unrot(get_vector(obj.t, pt), obj.dir);
+	ang = get_rot(ctr_pt, 0);
+	x = ang.z - M_PI;
+	y = ang.y - M_PI_2;
+	x = (obj.mat.txt->w * x) / (2 * M_PI);
+	y = (obj.mat.txt->h * y) / -M_PI;
+	SDL_LockSurface(obj.mat.txt);
+	//SDL_GetRGB(y * obj.mat.txt->w + x , obj.mat.txt->format, &(out.p.r), &(out.p.g), &(out.p.b));
+	out.p.b = *(pPixels + 3 * ((int)y * obj.mat.txt->w + (int)x));
+	out.p.g = *(pPixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 1);
+	out.p.r = *(pPixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 2);
+	SDL_UnlockSurface(obj.mat.txt);
+	printf("%x\n", out.i);
+	return (out.i);
 }
 
 t_color get_pt_color(t_obj obj, t_pt pt)
 {
+	t_color out;
+
 	if (obj.mat.txt)
-		return (texture_color(obj, pt));
+	{
+		out.i = texture_color(obj, pt);
+		return (out);
+	}
 	else
 		return (obj.mat.color);
 
