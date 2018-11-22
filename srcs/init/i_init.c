@@ -6,42 +6,21 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/19 17:40:51 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/21 17:58:27 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void check_clip_loop(t_env *e, t_obj *o, t_obj *original, int i)
-{
-	t_objlist	*clpin;
+void 		init_grads(t_env *e) {
+	t_grad	*grads;
 
-	if (i && o == original)
-		error(e, CLIP_CIRCLE_ERROR);
-	i = 1;
-	clpin = o->clipping;
-	while (clpin)
+	grads = e->s.grads;
+	while (grads)
 	{
-		check_clip_loop(e, clpin->obj, original, i);
-		clpin = clpin->next;
-	}
-}
-
-void 		init_objs(t_env *e) {
-	t_obj	*objs;
-
-	objs = e->s.objs;
-	while (objs)
-	{
-		if (objs->r >= 0)
-			objs->dir = get_rot(objs->dir, objs->r);
-		else
-			objs->dir = (t_three_d){rad(objs->dir.x),
-			rad(objs->dir.y), rad(objs->dir.z)};
-		if (objs->type == CONE)
-			objs->v[0] = rad(objs->v[0]);
-		check_clip_loop(e, objs, objs, 0);
-		objs = objs->next;
+		grads->dir = get_vector(grads->t, grads->dir);
+		grads->r = get_rot(grads->dir, 0);
+		grads = grads->next;
 	}
 }
 
@@ -96,6 +75,7 @@ void		init(t_env *e)
 {
 	init_cam(e);
 	init_objs(e);
+	init_grads(e);
 	init_lit_scene(e, &(e->s));
 
 }

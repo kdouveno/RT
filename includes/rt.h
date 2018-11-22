@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/19 18:51:06 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/21 17:49:56 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,10 @@ typedef struct			s_grad
 {
 	t_pt				t;
 	t_three_d			dir;
+	t_rot				r;
 	int					id;
-	t_color				color1;
-	t_color				color2;
+	t_color				c1;
+	t_color				c2;
 	t_bool				b;
 	struct s_grad		*next;
 }						t_grad;
@@ -199,6 +200,10 @@ typedef struct			s_rendering
 	SDL_Surface			*s;
 }						t_rendering;
 
+/*
+**	PARSER
+*/
+
 int						is_name_char(char c);
 int						is_ignored(char c);
 int						is_vec_null(t_vec vec);
@@ -223,12 +228,14 @@ int						check_rot(void *cam, char *l1, char *l2);
 int						check_value(t_obj *obj, char *l1, char *l2);
 int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
 
-void					*render(void *r);
-t_cam					*render_cam(t_env *e, int ncam);
+/*
+**	INIT
+*/
 
 void					init(t_env *e);
 void					init_objs(t_env *e);
 void					init_cam(t_env *e);
+void 					init_objs(t_env *e);
 t_color					init_lit_scene(t_env *e, t_scene *s);
 void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);
@@ -238,6 +245,13 @@ void					link_mat(t_env *e, t_obj *obj, char *file);
 
 int						check_file_ext(const char *str, const char *ext);
 char					*file_name(char *str);
+
+/*
+**	RENDER
+*/
+void					*render(void *r);
+t_cam					*render_cam(t_env *e, int ncam);
+t_color					raytrace(t_rendering *r, t_line l, int bounce);
 
 void					sphere_line(t_env *e, t_line d, t_obj *o,
 	t_reslist **rlist);
@@ -290,19 +304,26 @@ static const t_objfx	g_ref[] = {
 	{"", NULL, NULL, NULL, NULL}
 };
 
+/*
+**	TOOLS
+*/
+
 int						atoi_hexa(char const *str);
 
 void					set_camera(t_env *e, t_vec t, t_rot r, double a);
 int						add_obj(t_env *e, t_obj obj);
 int						add_light(t_env *e, t_lit light);
 
-t_color					raytrace(t_rendering *r, t_line l, int bounce);
 int						key_hook(int key, t_env *e);
 
 t_polyres				solve_polynome(double a, double b, double c);
 double					dist(t_pt a, t_pt b);
 void					add_res(t_env *e, t_reslist **cur, t_reslist t);
 void					free_res(t_reslist *list);
+
+/*
+**	ATEXIT
+*/
 
 void					arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);

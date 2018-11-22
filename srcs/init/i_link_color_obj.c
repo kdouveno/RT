@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 15:43:14 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:30 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/21 17:52:42 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		color_obj(t_obj *objs, t_grad *save_g)
 		if (save_g->id == (signed)objs->mat.color.i)
 		{
 			if (save_g->b.c1 == 0)
-				objs->mat.color.i = save_g->color1.i;
+				objs->mat.color.i = save_g->c1.i;
 			else
 				objs->mat.color.i = 0;
 			return ;

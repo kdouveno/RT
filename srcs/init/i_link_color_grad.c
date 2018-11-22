@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 15:44:27 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:29 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/21 18:11:49 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,42 @@ static void		grad_vec_nonull(t_grad *grads, t_grad *save_g)
 {
 	while (save_g)
 	{
-		if (save_g->id == (signed)grads->color1.i && grads->b.c1 == 1)
+		if (save_g->id == (signed)grads->c1.i && grads->b.c1 == 1)
 		{
 			if (save_g->b.c1 == 0)
-				grads->color1.i = save_g->color1.i;
+				grads->c1.i = save_g->c1.i;
 			else
-				grads->color1.i = 0;
+				grads->c1.i = 0;
 			return ;
 		}
-		else if (save_g->id == (signed)grads->color2.i && grads->b.c2 == 1)
+		else if (save_g->id == (signed)grads->c2.i && grads->b.c2 == 1)
 		{
 			if (save_g->b.c1 == 0)
-				grads->color2.i = save_g->color2.i;
+				grads->c2.i = save_g->c2.i;
 			else
-				grads->color2.i = 0;
+				grads->c2.i = 0;
 			return ;
 		}
 		save_g = save_g->next;
 	}
-	grads->color1.i = 0;
+	grads->c1.i = 0;
 }
 
 static void		grad_vec_null(t_grad *grads, t_grad *save_g)
 {
 	while (save_g)
 	{
-		if (save_g->id == (signed)grads->color1.i)
+		if (save_g->id == (signed)grads->c1.i)
 		{
 			if (save_g->b.c1 == 0)
-				grads->color1.i = save_g->color1.i;
+				grads->c1.i = save_g->c1.i;
 			else
-				grads->color1.i = 0;
+				grads->c1.i = 0;
 			return ;
 		}
 		save_g = save_g->next;
 	}
-	grads->color1.i = 0;
+	grads->c1.i = 0;
 }
 
 void		link_color_grad(t_env *e)

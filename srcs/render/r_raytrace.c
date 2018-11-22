@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/16 22:19:51 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/21 17:58:05 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,10 +182,25 @@ t_color texture_color(t_obj obj, t_pt pt)
 	return (obj.mat.color);
 }
 
+t_color	get_grad_color(t_pt pt, t_grad *grad)
+{
+	t_vec dir;
+	t_vec v;
+	t_vec z;
+	float t;
+	v = get_vector(grad->t, pt);
+	dir = normalise(grad->dir);
+	z = vecpro(dir, scalar_product(v, dir));
+	t = z.x / dir.x;
+	return (rgbmid(grad->c1, grad->c2, t));
+}
+
 t_color get_pt_color(t_obj obj, t_pt pt)
 {
 	if (obj.mat.txt)
 		return (texture_color(obj, pt));
+	else if(obj.grad)
+		return (get_grad_color(pt, obj.grad));
 	else
 		return (obj.mat.color);
 
