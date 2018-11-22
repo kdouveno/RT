@@ -6,13 +6,15 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/22 10:10:44 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/22 10:38:33 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void 		init_grads(t_env *e) {
+void		init_grads(t_scene *s)
+{
+	t_obj	*objs;
 	t_grad	*grads;
 
 	grads = e->s.grads;
@@ -22,37 +24,28 @@ void 		init_grads(t_env *e) {
 		grads->r = get_rot(grads->dir, 0);
 		grads = grads->next;
 	}
-}
-
-void		init_grads(t_env *e)
-{
-	t_obj	*objs;
-	t_grad	*grads;
-
-	objs = e->objs;
+	objs = s->objs;
 	while (objs)
 	{
+		grads = s->grads;
 		while (grads)
-		{
-			grads = e->grads;
 			if (grads->id == objs->id)
 			{
-				objs->grads = grads;
+				objs->grad = grads;
 				grads = NULL;
 			}
 			else
 				grads = grads->next;
-		}
 		objs = objs->next;
 	}
 }
 
-void		init_cam(t_env *e)
+void		init_cam(t_env *e, t_scene *s)
 {
 	t_cam			*cams;
 	t_cam_render	*d;
 
-	cams = e->s.cams;
+	cams = s->cams;
 	while (cams != NULL)
 	{
 		d = &cams->data;
@@ -94,11 +87,18 @@ t_color		init_lit_scene(t_env *e, t_scene *s)
 	return (s->amb_lit_c);
 }
 
+void		init_scene(t_env *e, t_scene *s)
+{
+	init_cam(e, s);
+	init_objs(e, s);
+	init_grads(s);
+	if (s->prsts)
+		init_scene(e, &(s->prsts->s));
+
+}
+
 void		init(t_env *e)
 {
-	init_cam(e);
-	init_objs(e);
-	init_grads(e);
+	init_scene(e, &(e->s));
 	init_lit_scene(e, &(e->s));
-
 }
