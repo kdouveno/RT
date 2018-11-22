@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/19 18:35:04 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/22 17:13:43 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_color	rec_raytrace(t_rendering *r, t_line l, int m)
 	t_cam_render *d;
 	t_vec	v[4];
 
+	if (m == 1)
+		pthread_mutex_unlock(&r->lock);
 	d = &r->c->data;
 	if (m < d->antialia)
 	{
@@ -68,7 +70,7 @@ void	*render(void *r)
 t_cam	*render_cam(t_env *e, int ncam)
 {
 	t_rendering		r;
-	pthread_t		thds[THRD_CNT];
+	pthread_t		thds[e->glb.thread_count];
 	int				i;
 	t_cam			*c;
 
@@ -82,13 +84,16 @@ t_cam	*render_cam(t_env *e, int ncam)
 		return (NULL);
 	r.c = c;
 	i = 0;
-	while (i < THRD_CNT)
+	while (i < e->glb.thread_count)
 	{
 		if (pthread_create(thds + i, NULL, &render, &r))
 			error(e, PTHR_ERROR);
 		i++;
 	}
 	while (i >= 0)
+	{
 		pthread_join(thds[i--], NULL);
+	}
+
 	return (c);
 }
