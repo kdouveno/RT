@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/22 10:39:56 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/22 12:15:25 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,9 +233,7 @@ int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
 */
 
 void					init(t_env *e);
-void					init_objs(t_env *e);
-void					init_cam(t_env *e);
-void 					init_objs(t_env *e);
+void					init_objs(t_env *e, t_scene *s);
 t_color					init_lit_scene(t_env *e, t_scene *s);
 void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);
