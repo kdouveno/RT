@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/22 10:10:40 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/22 10:49:14 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ double		spec_light(t_vec lnc[3])
 	return (out);
 }
 
-int	texture_color(t_obj obj, t_pt pt)
+t_color	texture_color(t_obj obj, t_pt pt)
 {
 	float	x;
 	float	y;
@@ -195,7 +195,7 @@ int	texture_color(t_obj obj, t_pt pt)
 	out.p.g = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 1);
 	out.p.r = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 2);
 	SDL_UnlockSurface(obj.mat.txt);
-	return (out.i);
+	return (out);
 }
 
 t_color	get_grad_color(t_pt pt, t_grad *grad)
@@ -213,8 +213,6 @@ t_color	get_grad_color(t_pt pt, t_grad *grad)
 
 t_color get_pt_color(t_obj obj, t_pt pt)
 {
-	t_color out;
-
 	if (obj.mat.txt)
 		return (texture_color(obj, pt));
 	else if(obj.grad)
