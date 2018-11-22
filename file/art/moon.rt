@@ -38,5 +38,15 @@ sphere{
 	v: 40
 	clip: 2
 	clip: 3
+	color: 100
+}
 
+grad{
+	id: 100
+ 	tx: 45
+	tz: -35
+	dirx: 40
+	dirz: 40
+	c1: #e6b868
+	c2: #ffffee
 }

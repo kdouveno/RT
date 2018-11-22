@@ -80,4 +80,13 @@ cuboid{
 	clip: 6
 	clip: 5
 	clip: 4
+	color: 100
+}
+
+grad{
+	id:100
+	tx: 20
+	dirx: 19.9999
+	c1: #ffffff
+	c2: #0000ff
 }
