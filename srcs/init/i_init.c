@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/21 17:58:27 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/22 10:10:44 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,29 @@ void 		init_grads(t_env *e) {
 		grads->dir = get_vector(grads->t, grads->dir);
 		grads->r = get_rot(grads->dir, 0);
 		grads = grads->next;
+	}
+}
+
+void		init_grads(t_env *e)
+{
+	t_obj	*objs;
+	t_grad	*grads;
+
+	objs = e->objs;
+	while (objs)
+	{
+		while (grads)
+		{
+			grads = e->grads;
+			if (grads->id == objs->id)
+			{
+				objs->grads = grads;
+				grads = NULL;
+			}
+			else
+				grads = grads->next;
+		}
+		objs = objs->next;
 	}
 }
 
