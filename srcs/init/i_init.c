@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/22 10:38:33 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/22 10:42:34 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		init_grads(t_scene *s)
 	t_obj	*objs;
 	t_grad	*grads;
 
-	grads = e->s.grads;
+	grads = s->grads;
 	while (grads)
 	{
 		grads->dir = get_vector(grads->t, grads->dir);

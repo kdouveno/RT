@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:53:22 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/21 17:58:54 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/22 10:47:22 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ static void check_clip_loop(t_env *e, t_obj *o, t_obj *original, int i)
 	}
 }
 
-void 		init_objs(t_env *e)
+void 		init_objs(t_env *e, t_scene *s)
 {
 	t_obj	*objs;
 
-	objs = e->s.objs;
+	objs = s->objs;
 	while (objs)
 	{
-		printf("%p\n", objs->grad);
 		if (objs->r >= 0)
 			objs->dir = get_rot(objs->dir, objs->r);
 		else
