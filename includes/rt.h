@@ -227,8 +227,10 @@ void					*render(void *r);
 t_cam					*render_cam(t_env *e, int ncam);
 
 void					init(t_env *e);
-void					init_objs(t_env *e);
-void					init_cam(t_env *e);
+void					init_scene(t_env *e, t_scene *s);
+void					init_objs(t_env *e, t_scene *s);
+void					init_cam(t_env *e, t_scene *s);
+void					init_grads(t_scene *s);
 t_color					init_lit_scene(t_env *e, t_scene *s);
 void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);

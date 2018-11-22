@@ -27,11 +27,11 @@ static void check_clip_loop(t_env *e, t_obj *o, t_obj *original, int i)
 	}
 }
 
-void 		init_objs(t_env *e)
+void 		init_objs(t_env *e, t_scene *s)
 {
 	t_obj	*objs;
 
-	objs = e->s.objs;
+	objs = s->objs;
 	while (objs)
 	{
 		if (objs->r >= 0)
@@ -46,20 +46,20 @@ void 		init_objs(t_env *e)
 	}
 }
 
-void		init_grads(t_env *e)
+void		init_grads(t_scene *s)
 {
 	t_obj	*objs;
 	t_grad	*grads;
 
-	objs = e->objs;
+	objs = s->objs;
 	while (objs)
 	{
+		grads = s->grads;
 		while (grads)
 		{
-			grads = e->grads;
 			if (grads->id == objs->id)
 			{
-				objs->grads = grads;
+				objs->grad = grads;
 				grads = NULL;
 			}
 			else
@@ -69,12 +69,12 @@ void		init_grads(t_env *e)
 	}
 }
 
-void		init_cam(t_env *e)
+void		init_cam(t_env *e, t_scene *s)
 {
 	t_cam			*cams;
 	t_cam_render	*d;
 
-	cams = e->s.cams;
+	cams = s->cams;
 	while (cams != NULL)
 	{
 		d = &cams->data;
@@ -116,11 +116,18 @@ t_color		init_lit_scene(t_env *e, t_scene *s)
 	return (s->amb_lit_c);
 }
 
+void		init_scene(t_env *e, t_scene *s)
+{
+	init_cam(e, s);
+	init_objs(e, s);
+	init_grads(s);
+	if (s->prsts)
+		init_scene(e, &(s->prsts->s));
+
+}
+
 void		init(t_env *e)
 {
-	init_cam(e);
-	init_objs(e);
-	init_grads(e);
+	init_scene(e, &(e->s));
 	init_lit_scene(e, &(e->s));
-
 }
