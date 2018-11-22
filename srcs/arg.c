@@ -95,5 +95,5 @@ void	arg(t_env *e, int argc, char **argv)
 		error(e, EXT_ERROR);
 	parse(e, argv[1], 0);
 	if (d == 1)
-		debug(e->s, 0);
+		debug(e->s, 1);
 }

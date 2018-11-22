@@ -24,7 +24,7 @@
 # include <fcntl.h>
 # define PRE 0.00000001
 # define DIMX 800
-# define DIMY 450
+# define DIMY 800
 # define FOV 85
 # define THRD_CNT 1
 # define REC_FILE 15
