@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 17:31:48 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/12 17:19:30 by gperez           ###   ########.fr       */
+/*   Updated: 2018/11/22 11:17:22 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ t_vec	sphere_norm(t_pt pt, t_obj obj, t_vec v)
 	t_vec	out;
 	double	tmp;
 
-	(void)v;
 	(void)obj;
-	out = (t_vec)pt;
+	out = rot(pt, obj.dir);
 	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
 		out = vec_rev(out);
 	return (out);
