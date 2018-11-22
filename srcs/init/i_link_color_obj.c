@@ -22,6 +22,7 @@ static void		color_obj(t_obj *objs, t_grad *save_g)
 				objs->mat.color.i = save_g->color1.i;
 			else
 				objs->mat.color.i = 0;
+			objs->grad = save_g;
 			return ;
 		}
 		save_g = save_g->next;

@@ -7,10 +7,15 @@ light{
 sphere{
 	v1:20
 	tx:-100
-	texture: monde.bmp
+	color:65
+	texture: deg.bmp
 }
 
 preset{
 	tx:	20
 	src: test_prsts.rt
+}
+
+grad{
+	id:65
 }

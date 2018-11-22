@@ -46,29 +46,6 @@ void 		init_objs(t_env *e, t_scene *s)
 	}
 }
 
-void		init_grads(t_scene *s)
-{
-	t_obj	*objs;
-	t_grad	*grads;
-
-	objs = s->objs;
-	while (objs)
-	{
-		grads = s->grads;
-		while (grads)
-		{
-			if (grads->id == objs->id)
-			{
-				objs->grad = grads;
-				grads = NULL;
-			}
-			else
-				grads = grads->next;
-		}
-		objs = objs->next;
-	}
-}
-
 void		init_cam(t_env *e, t_scene *s)
 {
 	t_cam			*cams;
@@ -120,10 +97,8 @@ void		init_scene(t_env *e, t_scene *s)
 {
 	init_cam(e, s);
 	init_objs(e, s);
-	init_grads(s);
 	if (s->prsts)
 		init_scene(e, &(s->prsts->s));
-
 }
 
 void		init(t_env *e)
