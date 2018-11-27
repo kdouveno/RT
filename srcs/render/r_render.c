@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/27 18:06:18 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/27 18:21:30 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*render(void *r)
 	d = &((t_rendering*)r)->c->data;
 	while (d->iy < d->dimy)
 	{
-		// pthread_mutex_lock(&((t_rendering*)r)->lock);
+		pthread_mutex_lock(&((t_rendering*)r)->lock);
 		ix = d->ix++;
 		iy = d->iy;
 		l = (t_line){((t_rendering*)r)->c->t, d->vp_ul};
