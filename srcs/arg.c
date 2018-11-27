@@ -21,7 +21,7 @@ static void	parameter_thread_rec(t_env *e, char *argv, int i, int r)
 	if ((res != 0 && !r )|| (r && res < REC_FILE))
 	{
 		if (!r)
-			e->glb.thread_count = res % 2 != 0 ? res + 1 : res;
+			e->glb.thread_count = res;
 		else
 			e->glb.rec_lim_file = res;
 		r ? printf("\033[38;5;40mRecursive limit changed to : %d\n\033[0m",
