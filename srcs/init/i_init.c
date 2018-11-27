@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/22 12:44:33 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/27 18:11:31 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void		init_scene(t_env *e, t_scene *s)
 {
 	init_objs(e, s);
 	init_cam(e, s);
+	init_grad(s);
 	if (s->prsts)
 		init_scene(e, &(s->prsts->s));
 }
