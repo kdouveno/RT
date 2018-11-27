@@ -175,10 +175,39 @@ double		spec_light(t_vec lnc[3])
 	return (out);
 }
 
+t_color	texture_none(t_obj obj, t_pt pt)
+{
+//	double	x;
+//	double	y;
+	//t_vec	ang;
+	t_color	out;
+	//int calc;
+
+	(void)obj;
+	(void)pt;
+	out = (t_color)AMASK;
+
+//sphere
+/*	x = sin(pt.z / obj.v[0]) / M_PI * 100;
+	y = sin(pt.y / obj.v[0]) / M_PI * 100;
+	if ((int)x % 2 == 0 && (int)y % 2 == 0 && (x != 0 && y != 0))
+		out.i = 0x222222;
+	else
+		out.i = 0xFF00FF;
+*/
+
+//plan	calc = (int)(pt.x / 10) + (int)(pt.z / 10) + (int)(pt.y / 10);
+	/*if (calc % 2 == 0)
+		out.i = 0x222222;
+	else
+		out.i = 0xFF00FF;
+*/	return (out);
+}
+
 t_color	texture_color(t_obj obj, t_pt pt)
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 	t_vec	ang;
 	t_color	out;
 	char	*pixels;
@@ -186,10 +215,10 @@ t_color	texture_color(t_obj obj, t_pt pt)
 	pixels = obj.mat.txt->pixels;
 	out = (t_color)AMASK;
 	ang = get_rot(unrot(get_vector(obj.t, pt), obj.dir), 0);
-	x = ang.z - M_PI;
-	y = ang.y - M_PI_2;
+	x = ang.z + M_PI;
+	y = ang.y + M_PI_2;
 	x = (obj.mat.txt->w * x) / (2 * M_PI);
-	y = (obj.mat.txt->h * y) / -M_PI;
+	y = obj.mat.txt->h - (obj.mat.txt->h * y) / M_PI;
 	SDL_LockSurface(obj.mat.txt);
 	out.p.b = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x));
 	out.p.g = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 1);
@@ -204,10 +233,22 @@ t_color	get_grad_color(t_pt pt, t_grad *grad)
 	t_vec v;
 	t_vec z;
 	float t;
+
 	v = get_vector(grad->t, pt);
 	dir = normalise(grad->dir);
 	z = vecpro(dir, scalar_product(v, dir));
-	t = z.x / dir.x;
+	if (grad->dir.x)
+		t = z.x / grad->dir.x;
+	else if (grad->dir.y)
+		t = z.y / grad->dir.y;
+	else if (grad->dir.z)
+		t = z.z / grad->dir.z;
+	else
+		return (grad->c1);
+	if (t < 0)
+		t = 0.0;
+	else if (t > 1)
+		t = 1;
 	return (rgbmid(grad->c1, grad->c2, t));
 }
 

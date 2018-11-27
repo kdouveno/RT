@@ -52,7 +52,7 @@ void		init_cam(t_env *e, t_scene *s)
 	t_cam_render	*d;
 
 	cams = s->cams;
-	while (cams != NULL)
+	while (cams)
 	{
 		d = &cams->data;
 		if (cams->r >= 0)
@@ -95,8 +95,8 @@ t_color		init_lit_scene(t_env *e, t_scene *s)
 
 void		init_scene(t_env *e, t_scene *s)
 {
-	init_cam(e, s);
 	init_objs(e, s);
+	init_cam(e, s);
 	if (s->prsts)
 		init_scene(e, &(s->prsts->s));
 }
