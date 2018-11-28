@@ -63,7 +63,7 @@ t_lit	*parse_light_2(t_env *e, int fd)
 
 	if (!(lit = malloc(sizeof(t_lit))))
 		error(e, MALLOC_ERROR);
-	*lit = (t_lit){(t_pt){0, 0, 0}, 1, (t_color){(t_rgb){255,255,255,255}}, {0, 0, 0, 0}, -1, NULL};
+	*lit = (t_lit){(t_pt){0, 0, 0}, 1.0, (t_color){(t_rgb){255,255,255,255}}, {0, 0, 0, 0}, -1, NULL};
 	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_light(e, lit, l1, l2);

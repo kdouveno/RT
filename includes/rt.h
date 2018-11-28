@@ -323,7 +323,7 @@ void					free_res(t_reslist *list);
 **	ATEXIT
 */
 
-void					arg(t_env *e, int argc, char **argv);
+int						arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);
 void					debug(t_scene s, int rec);
 void					error(t_env *e, const char *msg);

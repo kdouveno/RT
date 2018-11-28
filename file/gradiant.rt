@@ -1,13 +1,10 @@
 camera{
-	antialiasing: 4
+	ty: -15
+	dirz: -25
+	antialiasing: 1
 }
 
 light{
-	power:0.5
-}
-
-light{
-	power:0.5
 	tz:100
 	ty:-100
 }
@@ -85,6 +82,10 @@ sphere{
 	color:65
 }
 
+plane{
+	tx:-200
+	color:67
+}
 
 grad{
 	id:65
@@ -94,4 +95,9 @@ grad{
 	diry:22
 	c1:#FF0000
 	c2:#0000FF
+}
+
+grad{
+	id:67
+	c1:#00FF00
 }
