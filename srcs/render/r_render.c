@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/27 18:21:30 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/28 09:58:02 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	*render(void *r)
 t_cam	*render_cam(t_env *e, int ncam)
 {
 	t_rendering		r;
-	pthread_t		thds[THRD_CNT];
+	pthread_t		thds[e->glb.thread_count];
 	int				i;
 	t_cam			*c;
 
@@ -84,7 +84,7 @@ t_cam	*render_cam(t_env *e, int ncam)
 		return (NULL);
 	r.c = c;
 	i = 0;
-	while (i < THRD_CNT)
+	while (i < e->glb.thread_count)
 	{
 		if (pthread_create(thds + i, NULL, &render, &r))
 			error(e, PTHR_ERROR);

@@ -15,7 +15,8 @@ grad{
 	id:65
 	tx:-100
 	ty:-22
-	diry:44
+	diry:22
+	dirx:-100
 	c1:#FF0000
 	c2:#0000FF
 }
