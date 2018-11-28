@@ -219,7 +219,7 @@ t_color	texture_color(t_obj obj, t_pt pt)
 	y = ang.y + M_PI_2;
 	x = (obj.mat.txt->w * x) / (2 * M_PI);
 	y = obj.mat.txt->h - (obj.mat.txt->h * y) / M_PI;
-	
+
 	out.p.b = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x));
 	out.p.g = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 1);
 	out.p.r = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 2);

@@ -1,4 +1,5 @@
 camera{
+	antialiasing: 4
 }
 
 light{
