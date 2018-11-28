@@ -79,7 +79,7 @@ static void	debug_cams(t_cam *save)
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nDirection: %f %f %f\n"
-		"Antialiasing: %d\nFOV %d\nDimx : %d\nDimy : %d\nID: %d\n\n",
+		"Antialiasing: %d\nFOV: %d\nDimx : %d\nDimy : %d\nID: %d\n\n",
 		save->t.x, save->t.y, save->t.z,
 		save->dir.x, save->dir.y, save->dir.z,
 		save->data.antialia, (int)deg(save->data.fov), save->data.dimx,
@@ -105,7 +105,7 @@ void		debug_scene(t_scene	s)
 	if (s.auto_l)
 	{
 		printf("\n\033[38;5;15mScene :\n\n");
-		printf("Auto: light\n");
+		printf("Lights: Auto\n");
 	}
 }
 

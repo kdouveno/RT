@@ -1,5 +1,5 @@
 scene{
-	auto:light
+	lights:auto
 }
 
 camera{

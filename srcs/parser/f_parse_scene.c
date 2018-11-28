@@ -2,9 +2,9 @@
 
 static int		check_arg(t_env *e, t_scene *s, char *l1, char *l2)
 {
-	if (!(ft_strcmp(l1, "auto")))
+	if (!(ft_strcmp(l1, "lights")))
 	{
-		if (!(ft_strcmp(l2, "light")))
+		if (!(ft_strcmp(l2, "auto")))
 			s->auto_l = 1;
 		else
 			wrong_type(e, l1, 0, 0);
