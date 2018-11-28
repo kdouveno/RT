@@ -1,0 +1,52 @@
+camera{
+	tx: -50
+	ty: 50
+	dirz: 120
+}
+
+light{
+	ty: 40
+	tz: 10
+	tx: -100
+	power: .8
+}
+
+light{
+	ty: 0
+	tz: 10
+	tx: -30
+	power: .2
+}
+
+sphere{
+	id: -2
+	ty: 50
+	tx: -8
+	v: 60
+}
+
+sphere{
+	id: -3
+	ty: -50
+	tx: -8
+	v: 60
+}
+
+
+sphere{
+	id: 1
+	v: 40
+	clip: 2
+	clip: 3
+	color: 100
+}
+
+grad{
+	id: 100
+ 	tx: 45
+	tz: -35
+	dirx: 40
+	dirz: 40
+	c1: #e6b868
+	c2: #ffffee
+}

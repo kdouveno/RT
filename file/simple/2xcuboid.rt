@@ -1,0 +1,18 @@
+camera{
+	tx: 100
+}
+
+light{
+	tx: 50
+	ty: 50
+	tz: 50
+}
+
+cuboid{
+	v1: 20
+	v2: 20
+	v3: 20
+	scale: 2
+	dirz: 20
+	diry: 30
+}

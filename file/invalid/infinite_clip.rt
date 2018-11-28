@@ -1,0 +1,20 @@
+camera{
+	tx: 100
+}
+
+light{
+	tx:100
+}
+
+sphere{
+	id: 3
+	v:20
+	clip: 2
+}
+
+sphere{
+	id: 2
+	v:10
+	ty: 20
+	clip: 3
+}

@@ -1,0 +1,38 @@
+camera{
+	tx: 50
+	ty: 10
+	tz: 20
+	diry: -10
+	dirz: 7
+}
+
+light{
+	tx: 50
+	ty: 50
+	tz: 30
+}
+
+cone{
+	id: 4
+	v1: 30
+}
+
+sphere{
+	id: 2
+	v1: 20
+	clip: 3
+
+}
+
+sphere{
+	id: 3
+	v1: 21
+	clip: 4
+	clip: 89
+
+}
+
+plane{
+	id: 89
+	diry: 90
+}

@@ -14,10 +14,10 @@
 
 double	rad(double deg)
 {
-	return (deg * 2 * M_PI / 360);
+	return (deg * M_PI / 180);
 }
 
 double	deg(double rad)
 {
-	return (rad * 360 / (2 * M_PI));
+	return (rad * 180 / M_PI);
 }

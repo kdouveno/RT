@@ -1,0 +1,92 @@
+camera{
+	tx: 200
+	ty: 100
+	tz: 10
+	diry: -5
+	dirz: 45
+}
+
+light{
+	tx: 50
+	ty: 50
+	tz: 50
+}
+
+cylinder{
+	id: -2
+	tz: 40
+	diry: 90
+	v1: 40
+}
+
+cylinder{
+	id: -3
+	tz: -40
+	diry: 90
+	v1: 40
+}
+
+cuboid{
+	id: -5
+	v1: 21
+	v2: 20
+	v3: 20
+	ty: -20
+	tz: 20
+}
+
+cuboid{
+	id: -4
+	v1: 21
+	v2: 20
+	v3: 20
+	ty: 20
+	tz: -20
+}
+
+cuboid{
+	id: 7
+	v1: 20
+	v2: 20
+	v3: 20
+	ty: 20
+	tz: 60
+}
+
+cuboid{
+	id: 8
+	v1: 20
+	v2: 20
+	v3: 20
+	ty: -20
+	tz: -60
+}
+
+cuboid{
+	id: -6
+	v1: 21
+	v2: 41
+	v3: 81
+	clip: 2
+	clip: 3
+	clip: 7
+	clip: 8
+}
+
+cuboid{
+	v1: 20
+	v2: 40
+	v3: 80
+	clip: 6
+	clip: 5
+	clip: 4
+	color: 100
+}
+
+grad{
+	id:100
+	tx: 20
+	dirx: 19.9999
+	c1: #ffffff
+	c2: #0000ff
+}

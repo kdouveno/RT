@@ -1,0 +1,61 @@
+camera{
+	tx: 90
+	antialiasing: 1
+}
+
+light{
+	tx: 90
+}
+
+sphere{
+	id: 1
+	v: 20
+	tx: 20
+	reflexion: .4
+	clip: 8
+}
+
+sphere{
+	id: 8
+	v: 20
+	tx: 30
+	ty: -20
+}
+
+plane{
+	id: 2
+	ty: -100
+	dirz: 45
+	color: #6BEDF9
+	reflexion: 1
+	spec: 1
+}
+
+plane{
+	id:3
+	ty: 100
+	dirz: 45
+	color: #6BEDF9
+	reflexion: 1
+	spec: 1
+}
+
+plane{
+	id: 4
+	dirz: -45
+	color: #E8f96B
+}
+
+plane{
+	id: 5
+	tz: 50
+	diry: 90
+	color: #45FF7D
+}
+
+plane{
+	id: 6
+	tz: -50
+	diry: 90
+	color: #F3FD28
+}

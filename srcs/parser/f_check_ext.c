@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_check_ext.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/12 17:17:56 by gperez            #+#    #+#             */
+/*   Updated: 2018/11/12 17:17:57 by gperez           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # include "rt.h"
 
-int		check_file_mat(const char *str)
+int		check_file_ext(const char *str, const char *ext)
 {
 	int	len;
 
 	len = ft_strlen(str);
-	if (len > 4)
+	if (len > (int)ft_strlen(ext))
 	{
-		if (!(ft_strcmp(&(str[len - 4]), ".mat")))
+		if (!(ft_strcmp(&(str[len - ft_strlen(ext)]), ext)))
 			return (0);
 		else
 			return (1);
