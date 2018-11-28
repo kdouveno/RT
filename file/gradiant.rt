@@ -94,8 +94,3 @@ grad{
 	c1:#FF0000
 	c2:#0000FF
 }
-
-preset{
-	tx:	20
-	src: test_prsts.rt
-}

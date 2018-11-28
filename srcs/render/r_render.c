@@ -90,8 +90,8 @@ t_cam	*render_cam(t_env *e, int ncam)
 			error(e, PTHR_ERROR);
 		i++;
 	}
-	while (i >= 0)
-		pthread_join(thds[i--], NULL);
-
+	i = 0;
+	while (i < e->glb.thread_count)
+		pthread_join(thds[i++], NULL);
 	return (c);
 }
