@@ -173,6 +173,7 @@ typedef struct			s_scene
 	t_cam				*cams;
 	t_grad				*grads;
 	struct s_prst		*prsts;
+	int					auto_l;
 	t_color				amb_lit_c;
 }						t_scene;
 
@@ -215,7 +216,7 @@ void					parse(t_env *e, char *arg, t_prst *p);
 void					parse_obj(t_env *e, int type, int fd, t_scene *s);
 void					parse_light(t_env *e, int type, int fd, t_scene *s);
 void					parse_cam(t_env *e, int type, int fd, t_scene *s);
-void					parse_env(t_env *e, int type, int fd, t_scene *s);
+void					parse_scene(t_env *e, int type, int fd, t_scene *s);
 void					parse_grad(t_env *e, int type, int fd, t_scene *s);
 void					parse_prst(t_env *e, int type, int fd, t_scene *s);
 void					parse_color(t_obj *obj, char *l2, t_grad *grad, int nb);
@@ -287,7 +288,7 @@ typedef struct			s_objfx
 }						t_objfx;
 
 static const t_objfx	g_ref[] = {
-	{"env", &parse_env, NULL, NULL, NULL},
+	{"scene", &parse_scene, NULL, NULL, NULL},
 	{"camera", &parse_cam, NULL, NULL, NULL},
 	{"light", &parse_light, NULL, NULL, NULL},
 	{"sphere", &parse_obj, &sphere_line, &sphere_norm, &sphere_isptin},

@@ -107,7 +107,7 @@ t_color		init_lit_scene(t_env *e, t_scene *s)
 	return (s->amb_lit_c);
 }
 
-int			init_nb_light(t_scene *s)
+int			nb_light(t_scene *s)
 {
 	t_lit	*l;
 	int		c;
@@ -116,20 +116,18 @@ int			init_nb_light(t_scene *s)
 	l = s->lits;
 	while (l)
 	{
-		if (l->power != 1.0f)
-			return (1);
 		c++;
 		l = l->next;
 	}
 	return (c);
 }
 
-void		init_light(t_scene *s)
+void		init_light_auto(t_scene *s)
 {
 	t_lit	*l;
 	int		c;
 
-	c = init_nb_light(s);
+	c = nb_light(s);
 	if (c == 1)
 		return;
 	l = s->lits;
@@ -142,7 +140,8 @@ void		init_light(t_scene *s)
 
 void		init_scene(t_env *e, t_scene *s)
 {
-	init_light(s);
+	if (s->auto_l)
+		init_light_auto(s);
 	init_objs(e, s);
 	init_cam(e, s);
 	init_grad(s);
