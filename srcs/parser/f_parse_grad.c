@@ -20,12 +20,12 @@ static int		check_arg(t_grad *grad, char *l1, char *l2)
 		grad->id = grad->id < 0 ? -grad->id : grad->id;
 		return (0);
 	}
-	if (!(ft_strcmp(l1, "c1")) || !(ft_strcmp(l1, "c1")))
+	if (!(ft_strcmp(l1, "c1")) || !(ft_strcmp(l1, "color1")))
 	{
 		parse_color(NULL, l2, grad, 1);
 		return (0);
 	}
-	if (!(ft_strcmp(l1, "c2")) || !(ft_strcmp(l1, "c2")))
+	if (!(ft_strcmp(l1, "c2")) || !(ft_strcmp(l1, "color2")))
 	{
 		parse_color(NULL, l2, grad, 2);
 		return (0);

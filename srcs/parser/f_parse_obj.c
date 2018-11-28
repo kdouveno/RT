@@ -30,11 +30,6 @@ static int		check_arg(t_env *e, t_obj *obj, char *l1, char *l2)
 		obj->scale = ft_atod(l2);
 		return (0);
 	}
-	else if(!(ft_strcmp(l1, "reflexion")))
-	{
-		obj->mat.refl = (float)ft_atod(l2);
-		return (0);
-	}
 	return (1);
 }
 
@@ -53,7 +48,7 @@ int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
 		obj->mat.spec = ft_atod(l2);
 		return (0);
 	}
-	else if (!(ft_strcmp(l1, "color")))
+	else if (!(ft_strcmp(l1, "c")) || !(ft_strcmp(l1, "color")))
 	{
 		parse_color(obj, l2, NULL, 0);
 		return (0);
@@ -61,6 +56,11 @@ int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
 	else if (!(ft_strcmp(l1, "texture")))
 	{
 		link_texture(e, obj, ft_strjoin("textures/", l2));
+		return (0);
+	}
+	else if(!(ft_strcmp(l1, "reflexion")))
+	{
+		obj->mat.refl = (float)ft_atod(l2);
 		return (0);
 	}
 	return (1);

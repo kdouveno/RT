@@ -25,7 +25,7 @@ int		check_arg(t_lit *lit, char *l1, char *l2)
 		lit->power = ft_atod(l2);
 		return (0);
 	}
-	else if (!(ft_strcmp(l1, "color")))
+	else if (!(ft_strcmp(l1, "c")) || !(ft_strcmp(l1, "color")))
 	{
 		if (l2[0] == '#')
 			lit->color.i = (unsigned)atoi_hexa(&l2[1]);

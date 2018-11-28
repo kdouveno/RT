@@ -13,7 +13,7 @@ static int		check_arg(t_env *e, t_scene *s, char *l1, char *l2)
 	return (1);
 }
 
-void	stock_env(t_env *e, char *l1, char *l2, t_scene *s)
+void	stock_scene(t_env *e, char *l1, char *l2, t_scene *s)
 {
 	char	*cp;
 	int		i;
@@ -39,7 +39,7 @@ void	parse_scene(t_env *e, int type, int fd, t_scene *s)
 	(void)type;
 	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
 	{
-		stock_env(e, l1, l2, s);
+		stock_scene(e, l1, l2, s);
 		ft_memdel((void**)&l1);
 		ft_memdel((void**)&l2);
 		ft_memdel((void**)&line);

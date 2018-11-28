@@ -1,0 +1,81 @@
+scene{
+	auto:light
+}
+
+camera{
+	tx: (double)
+	ty: (double)
+	tz: (double)
+
+	dirx: (double)
+	diry: (double)
+	dirz: (double)
+
+	dimx: (int)
+	dimy: (int)
+
+	id: (int)
+	fov: (int)
+	antialiasing: (int) 1 / 2 / 4 / 8 / 16
+}
+
+light{
+	tx: (double)
+	ty: (double)
+	tz: (double)
+
+	power: (double)
+	c / color : (int) "id" | (int)"#FFFFFF"
+}
+
+grad{
+	tx: (double)
+	ty: (double)
+	tz: (double)
+
+	dirx: (double)
+	diry: (double)
+	dirz: (double)
+
+	c1 / color1: (int) "id" | (int)"#FFFFFF"
+	c2 / color2: (int) "id" | (int)"#FFFFFF"
+}
+
+sphere / cylinder / cone / plane / pyramid / torus / cuboid{
+	tx: (double)
+	ty: (double)
+	tz: (double)
+
+	dirx: (double)
+	diry: (double)
+	dirz: (double)
+
+	id: (int)
+	clip : (int) "id"
+	scale : (double)
+
+	mat: (string) "file.mat"
+	spec: (double)
+	reflexion: (double)
+	c / color: (int) "id" | (int)"#FFFFFF"
+	texture: (string) "texture"
+
+	v / v1: (double)
+	v2: (double)
+	v3: (double)
+	v4: (double)
+}
+
+preset{
+	tx: (double)
+	ty: (double)
+	tz: (double)
+
+	dirx: (double)
+	diry: (double)
+	dirz: (double)
+
+	scale : (double)
+
+	src : (string) "file.rt"
+}

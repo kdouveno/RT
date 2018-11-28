@@ -34,12 +34,13 @@ static void	debug_objs(t_obj *save, t_clip *clips)
 	while (save != NULL)
 	{
 		printf("\nType: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
-		"Variable: %f\nColor: %06x argb(%d, %d, %d, %d)\nDiffuse: %f\nSpecular: %f\nID: %d\n"
+		"Variable: %f\nScale: %f\nColor: %06x argb(%d, %d, %d, %d)\nDiffuse: %f\nSpecular: %f\nReflexion: %f\nTexture: %p\nID: %d\n"
 		"address: %p\nLinked to %p\n",
 		g_ref[save->type].name, save->t.x, save->t.y, save->t.z,
-		save->dir.x, save->dir.y, save->dir.z, save->v[0], save->mat.color.i,
+		save->dir.x, save->dir.y, save->dir.z, save->v[0], save->scale,
+		save->mat.color.i,
 		save->mat.color.p.a, save->mat.color.p.r, save->mat.color.p.g,
-		save->mat.color.p.b, save->mat.diff, save->mat.spec,
+		save->mat.color.p.b, save->mat.diff, save->mat.spec,save->mat.refl, save->mat.txt,
 		save->id, save, save->grad);
 		printf("\n\033[38;5;136m");
 		clips = save->clips;
@@ -78,10 +79,11 @@ static void	debug_cams(t_cam *save)
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nDirection: %f %f %f\n"
-		"Antialiasing: %d\nID: %d\n\n",
+		"Antialiasing: %d\nFOV %d\nDimx : %d\nDimy : %d\nID: %d\n\n",
 		save->t.x, save->t.y, save->t.z,
 		save->dir.x, save->dir.y, save->dir.z,
-		save->data.antialia, save->id);
+		save->data.antialia, (int)deg(save->data.fov), save->data.dimx,
+		save->data.dimy, save->id);
 		save = save->next;
 	}
 }
@@ -91,15 +93,25 @@ void		debug_prst(t_prst *p, int rec)
 	while (p && (p->s.cams || p->s.lits || p->s.objs || p->s.grads))
 	{
 		printf("\n\n\n\033[38;5;96mPRESET (rec %d):\n", rec);
-		printf("Translation: %f %f %f\nDirection: %f %f %f\n",
-		p->t.x, p->t.y, p->t.z, p->dir.x, p->dir.y, p->dir.z);
+		printf("Translation: %f %f %f\nDirection: %f %f %f\nScale : %f\n",
+		p->t.x, p->t.y, p->t.z, p->dir.x, p->dir.y, p->dir.z, p->scale);
 		debug(p->s, rec++);
 		p = p->next;
 	}
 }
 
+void		debug_scene(t_scene	s)
+{
+	if (s.auto_l)
+	{
+		printf("\n\033[38;5;15mScene :\n\n");
+		printf("Auto: light\n");
+	}
+}
+
 void		debug(t_scene s, int rec)
 {
+	debug_scene(s);
 	debug_cams(s.cams);
 	debug_lits(s.lits);
 	debug_grad(s.grads);

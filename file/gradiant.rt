@@ -1,3 +1,7 @@
+scene{
+	auto:light
+}
+
 camera{
 	ty: -15
 	dirz: -25
@@ -7,6 +11,10 @@ camera{
 light{
 	tz:100
 	ty:-100
+}
+
+light{
+	power: 0.5
 }
 
 sphere{

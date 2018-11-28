@@ -46,7 +46,7 @@ void	stock_prst(t_env *e, t_prst *prst, char *l1, char *l2)
 
 	i = 0;
 	cp = ft_str_tolower(l1);
-	if (check_pt(prst, cp, l2) == 1 && check_rot(prst, cp, l2) == 1
+	if (check_pt(prst, cp, l2) == 1 && check_dir(prst, cp, l2) == 1
 			&& check_arg(e, prst, cp, l2) == 1)
 	{
 		while (is_ignored(l1[i]) == 1)
