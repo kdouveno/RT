@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/29 10:08:31 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/29 10:09:42 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "libft.h"
 # include "gnl.h"
 # include "X.h"
-# include "reslist.h"
+# include <stdlib.h>
 # include "SDL.h"
 # include <pthread.h>
 # include <stdio.h>
