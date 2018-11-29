@@ -1,0 +1,45 @@
+scene{
+	auto:light
+}
+
+camera{
+	antialiasing: 1
+}
+
+light{
+	tz:-100
+	ty:-100
+}
+
+light{
+	tz:100
+	ty:-100
+}
+
+light{
+	tz:-100
+	ty:100
+}
+
+light{
+	tz:100
+	ty:100
+}
+
+sphere{
+	spec:0.5
+	v1:12
+	tx:-100
+	ty:-10
+	color:65
+}
+
+grad{
+	id:65
+	tx:-100
+	ty:-22
+	dirx:-100
+	diry:22
+	c1:#FF0000
+	c2:#0000FF
+}

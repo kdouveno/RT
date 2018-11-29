@@ -12,23 +12,9 @@
 
 #include "rt.h"
 
-static int		is_pos(int nb)
-{
-	if (nb > 0)
-		return (1);
-	return (0);
-}
-
 static int		is_powertwo(int nb)
 {
-	int	cp;
-
-	cp = sqrt(nb);
-	if (nb == 0)
-		return (0);
-	if (nb == 2)
-		return (1);
-	if (cp * cp == nb)
+	if (nb == 2 || nb == 4 || nb == 8 || nb == 16)
 		return (1);
 	return (0);
 }
@@ -65,10 +51,11 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	else if (!(ft_strcmp(l1, "antialiasing")))
 	{
 		cam->data.antialia = ft_atoi(l2);
-		if (!(is_powertwo(cam->data.antialia)) && !(is_pos(cam->data.antialia)))
+		cam->data.antialia = cam->data.antialia < 0 ? -cam->data.antialia : cam->data.antialia;
+		if (!(is_powertwo(cam->data.antialia)) && cam->data.antialia != 1)
 		{
 			cam->data.antialia = 1;
-			ft_putstr("\033[2;49;91mAntialiasing is not a power of 2 -> changed to 1\n");
+			ft_putstr("\033[2;49;91mAntialiasing is invalid -> changed to 1\n");
 		}
 		return (0);
 	}

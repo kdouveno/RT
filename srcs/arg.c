@@ -73,7 +73,7 @@ static void	parameter(t_env *e, char *argv, int *d)
 		parameter_shortcut(e, argv, d);
 }
 
-void	arg(t_env *e, int argc, char **argv)
+int		arg(t_env *e, int argc, char **argv)
 {
 	int	i;
 	int	d;
@@ -81,7 +81,7 @@ void	arg(t_env *e, int argc, char **argv)
 	i = 2;
 	d = 0;
 	*e = (t_env){{NULL, 3, -1, THRD_CNT},
-		{0,0}, {NULL, NULL, NULL, NULL, NULL,
+		{0,0}, {NULL, NULL, NULL, NULL, NULL, 0,
 			(t_color){(t_rgb){0,0,0,0}}}};
 	while (i < argc)
 	{
@@ -94,6 +94,5 @@ void	arg(t_env *e, int argc, char **argv)
 	if (check_file_ext(argv[1], ".rt"))
 		error(e, EXT_ERROR);
 	parse(e, argv[1], 0);
-	if (d == 1)
-		debug(e->s, 1);
+	return (d);
 }

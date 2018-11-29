@@ -1,16 +1,22 @@
+scene{
+	lights:auto
+}
+
 camera{
+	ty: -15
+	dirz: -25
+	antialiasing: 1
 }
 
 light{
-	power:0.5
-}
-
-light{
-	power:0.5
 	tz:100
 	ty:-100
 }
 
+light{
+	power: 0.5
+}
+
 sphere{
 	spec:0.5
 	v1:12
@@ -84,6 +90,10 @@ sphere{
 	color:65
 }
 
+plane{
+	tx:-200
+	color:67
+}
 
 grad{
 	id:65
@@ -95,7 +105,7 @@ grad{
 	c2:#0000FF
 }
 
-preset{
-	tx:	20
-	src: test_prsts.rt
+grad{
+	id:67
+	c1:#00FF00
 }

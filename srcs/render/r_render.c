@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/28 09:58:02 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/28 18:03:00 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ t_color	rec_raytrace(t_rendering *r, t_line l, int m)
 		return (raytrace(r, l, 0));
 }
 
+static void	render_next_line(t_cam_render *d)
+{
+	if (d->ix >= d->dimx)
+	{
+		d->ix = 0;
+		d->iy++;
+		d->vp_ul = apply(d->xy, d->vp_ul);
+	}
+	else
+		d->vp_ul = apply(d->x, d->vp_ul);
+}
+
 void	*render(void *r)
 {
 	int				ix;
@@ -44,25 +56,19 @@ void	*render(void *r)
 	t_line			l;
 	t_cam_render	*d;
 
-	iy = 0;
 	d = &((t_rendering*)r)->c->data;
-	while (d->iy < d->dimy)
+	while (1)
 	{
 		pthread_mutex_lock(&((t_rendering*)r)->lock);
+		if (d->iy >= d->dimy)
+			break ;
 		ix = d->ix++;
 		iy = d->iy;
 		l = (t_line){((t_rendering*)r)->c->t, d->vp_ul};
-		if (d->ix >= d->dimx)
-		{
-			d->ix = 0;
-			d->iy++;
-			d->vp_ul = apply(d->xy, d->vp_ul);
-		}
-		else
-			d->vp_ul = apply(d->x, d->vp_ul);
-		// if (ix == DIMX / 2 && iy == DIMY / 2)
+		render_next_line(d);
 		((int*)d->render->pixels)[iy * d->dimx + ix] = rec_raytrace(r, l, 1).i;
 	}
+	pthread_mutex_unlock(&((t_rendering*)r)->lock);
 	pthread_exit(NULL);
 	return (NULL);
 }
@@ -90,8 +96,8 @@ t_cam	*render_cam(t_env *e, int ncam)
 			error(e, PTHR_ERROR);
 		i++;
 	}
-	while (i >= 0)
-		pthread_join(thds[i--], NULL);
-
+	i = 0;
+	while (i < e->glb.thread_count)
+		pthread_join(thds[i++], NULL);
 	return (c);
 }

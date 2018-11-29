@@ -101,13 +101,47 @@ t_color		init_lit_scene(t_env *e, t_scene *s)
 		{
 			e->s.amb_lit_c = rgbadd(init_lit_scene(e, &(p->s)), e->s.amb_lit_c);
 			p = p->next;
-		}		l = l->next;
+		}
+		l = l->next;
 	}
 	return (s->amb_lit_c);
 }
 
+int			nb_light(t_scene *s)
+{
+	t_lit	*l;
+	int		c;
+
+	c = 0;
+	l = s->lits;
+	while (l)
+	{
+		c++;
+		l = l->next;
+	}
+	return (c);
+}
+
+void		init_light_auto(t_scene *s)
+{
+	t_lit	*l;
+	int		c;
+
+	c = nb_light(s);
+	if (c == 1)
+		return;
+	l = s->lits;
+	while (l)
+	{
+		l->power = l->power / c;
+		l = l->next;
+	}
+}
+
 void		init_scene(t_env *e, t_scene *s)
 {
+	if (s->auto_l)
+		init_light_auto(s);
 	init_objs(e, s);
 	init_cam(e, s);
 	init_grad(s);

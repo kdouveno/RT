@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/22 14:29:07 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/28 12:19:53 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,12 @@ t_reslist	get_touch(t_reslist *list, t_line line)
 			out.n = normalise(g_ref[list->o->type].norm(
 				vecpro(unrot(apply(vecpro(list->o->t, -1), list->pt),
 				list->o->dir), 1 / list->o->scale), *list->o, out.cam));
+			free(list);
 			return (out);
 		}
 		list = list->next;
 	}
+	free(list);
 	return ((t_reslist){NULL, {}, {}, {}, 0, NULL});
 }
 
@@ -219,7 +221,7 @@ t_color	texture_color(t_obj obj, t_pt pt)
 	y = ang.y + M_PI_2;
 	x = (obj.mat.txt->w * x) / (2 * M_PI);
 	y = obj.mat.txt->h - (obj.mat.txt->h * y) / M_PI;
-	
+
 	out.p.b = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x));
 	out.p.g = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 1);
 	out.p.r = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 2);
