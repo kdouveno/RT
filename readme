@@ -16,7 +16,7 @@ camera{
 
 	id: (int)
 	fov: (int)
-	antialiasing: (int) 1 / 2 / 4 / 8 / 16
+	ssaa: (int) 1 / 2 / 4 / 8 / 16
 }
 
 light{

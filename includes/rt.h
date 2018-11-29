@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/29 10:09:42 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/29 15:25:49 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ typedef struct			s_cam_render
 	int					iy;
 	int					dimx;
 	int					dimy;
-	int					antialia;
+	int					ssaa;
+	int					aaa;
 }						t_cam_render;
 
 typedef struct			s_cam

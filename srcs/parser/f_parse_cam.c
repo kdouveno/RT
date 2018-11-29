@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/19 18:54:42 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/29 15:21:23 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,25 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 		cam->data.fov = cam->data.fov < 0 ? -cam->data.fov : cam->data.fov;
 		return (0);
 	}
-	else if (!(ft_strcmp(l1, "antialiasing")))
+	else if (!(ft_strcmp(l1, "ssaa")))
 	{
-		cam->data.antialia = ft_atoi(l2);
-		cam->data.antialia = cam->data.antialia < 0 ? -cam->data.antialia : cam->data.antialia;
-		if (!(is_powertwo(cam->data.antialia)) && cam->data.antialia != 1)
+		cam->data.ssaa = ft_atoi(l2);
+		cam->data.ssaa = cam->data.ssaa < 0 ? -cam->data.ssaa : cam->data.ssaa;
+		if (!(is_powertwo(cam->data.ssaa)) && cam->data.ssaa != 1)
 		{
-			cam->data.antialia = 1;
-			ft_putstr("\033[2;49;91mAntialiasing is invalid -> changed to 1\n");
+			cam->data.ssaa = 1;
+			ft_putstr("\033[2;49;91mssaa is invalid -> changed to 1\n");
+		}
+		return (0);
+	}
+	else if (!(ft_strcmp(l1, "aaa")))
+	{
+		cam->data.ssaa = ft_atoi(l2);
+		cam->data.ssaa = cam->data.ssaa < 0 ? -cam->data.ssaa : cam->data.ssaa;
+		if (!(is_powertwo(cam->data.ssaa)) && cam->data.ssaa != 1)
+		{
+			cam->data.ssaa = 1;
+			ft_putstr("\033[2;49;91mssaa is invalid -> changed to 1\n");
 		}
 		return (0);
 	}

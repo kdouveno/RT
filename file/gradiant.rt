@@ -5,7 +5,7 @@ scene{
 camera{
 	ty: -15
 	dirz: -25
-	antialiasing: 1
+	ssaa: 1
 }
 
 light{

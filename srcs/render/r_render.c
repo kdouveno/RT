@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/28 18:03:00 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/29 15:18:11 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_color	rec_raytrace(t_rendering *r, t_line l, int m)
 	if (m == 1)
 		pthread_mutex_unlock(&r->lock);
 	d = &r->c->data;
-	if (m < d->antialia)
+	if (m < d->ssaa)
 	{
 		v[0] = apply(vecpro(apply(d->x, d->y), 1 / (m * 4.0)), l.v);
 		v[1] = apply(vecpro(apply(d->x, vec_rev(d->y)), 1 / (m * 4.0)), l.v);
