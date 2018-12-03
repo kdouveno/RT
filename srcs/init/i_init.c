@@ -69,7 +69,7 @@ void		init_cam(t_env *e, t_scene *s)
 	{
 		d = &cams->data;
 		if (cams->r >= 0)
-			cams->dir = get_rot(cams->dir, cams->r);
+			cams->dir = get_rot(get_vector(cams->t, cams->dir), cams->r);
 		else
 			cams->dir = (t_three_d){rad(cams->dir.x),
 			rad(cams->dir.y), rad(cams->dir.z)};
