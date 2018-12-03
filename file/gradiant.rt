@@ -9,11 +9,13 @@ camera{
 }
 
 light{
+	radius:4
 	tz:100
 	ty:-100
 }
 
 light{
+	radius:4
 	power: 0.5
 }
 

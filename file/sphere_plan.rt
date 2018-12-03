@@ -4,9 +4,11 @@ scene{
 
 camera{
 	tx: 100
+	antialiasing: 1
 }
 
 light{
+	radius: 1.8
 	tx: 50
 	ty: -50
 	tz: 50
@@ -14,7 +16,7 @@ light{
 
 plane{
 	tx:-100
-	c:#00FFFF
+	c:#FFFFFF
 }
 
 

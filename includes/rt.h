@@ -23,7 +23,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 # define PRE 0.00000001
-# define SHADOW_S 0.1
+# define SHADOW_REC 3
+# define SHADOW_RAY 6
+# define SHADOW_C 0.16666
 # define DIMX 800
 # define DIMY 800
 # define FOV 85
@@ -93,7 +95,8 @@ typedef struct			s_bool
 typedef struct			s_lit
 {
 	t_pt				t;
-	float				power;
+	double				power;
+	double				radius;
 	t_color				color;
 	t_bool				b;
 	int					id;

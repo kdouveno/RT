@@ -295,18 +295,20 @@ t_color		soft_shadow(t_rendering *r, t_reslist res, t_lit l, int rec)
 	t_reslist	obj;
 
 	out = (t_color) (unsigned)AMASK;
-	out = rgbadd(out,
-	ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt), AMB_L));
-	if (rec > 2)
+	if (rec > SHADOW_REC)
 		return (out);
-	if ((obj = intersec(r, get_line(l->t, res.pt))).t > 1 - PRE)
-		out = rgbadd(out, phong(l, res));
-	else if (obj.o != res.o)
+	out = rgbadd(out,
+		ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt), AMB_L));
+	if ((obj = intersec(r, get_line(l.t, res.pt))).t > 1 - PRE)
+		out = rgbadd(out, phong((t_lit){{l.t.x, l.t.y, l.t.z}, l.power, l.radius, l.color, l.b, l.id, l.next}, res));
+	else if (l.radius != 0.0f && obj.o != res.o)
 	{
-		out = rgbadd(out, soft_shadow(r, res, (t_lit){{l.t.x + 1, l.t.y, l.t.z}, l.power, l.color, l.b, l.id, l.next}, rec + 1));
-		out = rgbadd(out, soft_shadow(r, res, (t_lit){{l.t.x - 1, l.t.y, l.t.z}, l.power, l.color, l.b, l.id, l.next}, rec + 1));
-		out = rgbadd(out, soft_shadow(r, res, (t_lit){{l.t.x, l.t.y + 1, l.t.z}, l.power, l.color, l.b, l.id, l.next}, rec + 1));
-		out = rgbadd(out, soft_shadow(r, res, (t_lit){{l.t.x, l.t.y - 1, l.t.z}, l.power, l.color, l.b, l.id, l.next}, rec + 1));
+		out = rgbadd(out, rgbpro(soft_shadow(r, res, (t_lit){{l.t.x, l.t.y, l.t.z + l.radius}, l.power, l.radius, l.color, l.b, l.id, l.next}, rec + 1), SHADOW_C));
+		out = rgbadd(out, rgbpro(soft_shadow(r, res, (t_lit){{l.t.x, l.t.y, l.t.z - l.radius}, l.power, l.radius, l.color, l.b, l.id, l.next}, rec + 1), SHADOW_C));
+		out = rgbadd(out, rgbpro(soft_shadow(r, res, (t_lit){{l.t.x, l.t.y + l.radius, l.t.z}, l.power, l.radius, l.color, l.b, l.id, l.next}, rec + 1), SHADOW_C));
+		out = rgbadd(out, rgbpro(soft_shadow(r, res, (t_lit){{l.t.x, l.t.y - l.radius, l.t.z}, l.power, l.radius, l.color, l.b, l.id, l.next}, rec + 1), SHADOW_C));
+		out = rgbadd(out, rgbpro(soft_shadow(r, res, (t_lit){{l.t.x + l.radius, l.t.y, l.t.z}, l.power, l.radius, l.color, l.b, l.id, l.next}, rec + 1), SHADOW_C));
+		out = rgbadd(out, rgbpro(soft_shadow(r, res, (t_lit){{l.t.x - l.radius, l.t.y, l.t.z}, l.power, l.radius, l.color, l.b, l.id, l.next}, rec + 1), SHADOW_C));
 	}
 	return (out);
 }
@@ -320,7 +322,7 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce)
 	l = r->e->s.lits;
 	while (l)
 	{
-		out = rgbadd(out, soft_shadow(r, res, *l, 0));
+		out = rgbadd(out, soft_shadow(r, res, *l, 1));
 		if (res.o->mat.refl && bounce < REC_BOUNCE)
 		{
 			out = rgbmid(out, raytrace(r, (t_line){res.pt, apply(vec_rev(res.cam),

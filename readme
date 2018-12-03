@@ -25,6 +25,7 @@ light{
 	tz: (double)
 
 	power: (double)
+	radius: (double)
 	c / color : (int) "id" | (int)"#FFFFFF"
 }
 

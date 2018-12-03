@@ -12,6 +12,16 @@
 
 #include "rt.h"
 
+int		check_arg2(t_lit *lit, char *l1, char *l2)
+{
+	if (!(ft_strcmp(l1, "radius")))
+	{
+		lit->radius = ft_atod(l2);
+		return (0);
+	}
+	return (1);
+}
+
 int		check_arg(t_lit *lit, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "id")))
@@ -43,7 +53,8 @@ void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)
 
 	i = 0;
 	cp = ft_str_tolower(l1);
-	if (check_pt(lit, cp, l2) == 1 && check_arg(lit, cp, l2 ) == 1)
+	if (check_pt(lit, cp, l2) == 1 && check_arg(lit, cp, l2 ) == 1
+		&& check_arg2(lit, cp, l2 ) == 1)
 	{
 		while (is_ignored(l1[i]) == 1)
 			i++;
@@ -63,7 +74,7 @@ t_lit	*parse_light_2(t_env *e, int fd)
 
 	if (!(lit = malloc(sizeof(t_lit))))
 		error(e, MALLOC_ERROR);
-	*lit = (t_lit){(t_pt){0, 0, 0}, 1.0, (t_color){(t_rgb){255,255,255,255}}, {0, 0, 0, 0}, -1, NULL};
+	*lit = (t_lit){(t_pt){0, 0, 0}, 1.0f, 0.0f, (t_color){(t_rgb){255,255,255,255}}, {0, 0, 0, 0}, -1, NULL};
 	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_light(e, lit, l1, l2);
