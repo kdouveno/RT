@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 10:49:38 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/11 04:02:05 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:59:43 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ t_rot	get_rot(t_vec a, double x)
 	t_vec z;
 
 	out = (t_rot){x, 0, 0};
-	y = (t_vec){a.x, 0, a.z};
 	z = (t_vec){a.x, a.y, 0};
-	if (a.x || a.z)
-		out.y = (a.z < 0 ? -1 : 1) * angle(y, (t_vec){1, 0, 0});
 	if (a.x || a.y)
-		out.z = (a.y < 0 ? -1 : 1) * (angle(z, (t_vec){1, 0, 0})
-				- (a.x < 0 ? M_PI : 0));
+		out.z = (a.y < 0 ? -1 : 1) * ((a.x < 0 ? M_PI : 0)
+		- angle(z, (t_vec){1, 0, 0}));
+	a = zrot(a, -out.z);
+	y = (t_vec){a.x, 0, a.z};
+	if (a.x || a.z)
+		out.y = (a.z > 0 ? -1 : 1) * angle(y, (t_vec){1, 0, 0});
 	return (out);
 }
 
