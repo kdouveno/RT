@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/29 15:25:49 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/30 16:26:30 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define REC_BOUNCE 10
 # define AMB_L 0.075
 # define CONE 4
+# define AAA_THRESH 20
 # define AMASK 0xFF000000U
 # define RMASK 0x00FF0000U
 # define GMASK 0x0000FF00U
@@ -199,7 +200,6 @@ typedef struct			s_rendering
 	pthread_mutex_t		lock;
 	t_env				*e;
 	t_cam				*c;
-	SDL_Surface			*s;
 }						t_rendering;
 
 /*

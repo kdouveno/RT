@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/29 15:18:11 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/11/30 17:15:26 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ t_color	rec_raytrace(t_rendering *r, t_line l, int m)
 	t_cam_render	*d;
 	t_vec			v[4];
 
-	if (m == 1)
+	if (m <= 1)
 		pthread_mutex_unlock(&r->lock);
 	d = &r->c->data;
-	if (m < d->ssaa)
+	if (m < d->ssaa && m)
 	{
 		v[0] = apply(vecpro(apply(d->x, d->y), 1 / (m * 4.0)), l.v);
 		v[1] = apply(vecpro(apply(d->x, vec_rev(d->y)), 1 / (m * 4.0)), l.v);
@@ -66,11 +66,66 @@ void	*render(void *r)
 		iy = d->iy;
 		l = (t_line){((t_rendering*)r)->c->t, d->vp_ul};
 		render_next_line(d);
-		((int*)d->render->pixels)[iy * d->dimx + ix] = rec_raytrace(r, l, 1).i;
+		((int*)d->render->pixels)[iy * d->dimx + ix] = rec_raytrace(
+			r, l, !d->aaa).i;
 	}
 	pthread_mutex_unlock(&((t_rendering*)r)->lock);
 	pthread_exit(NULL);
 	return (NULL);
+}
+
+int		aaacolor(t_color a, t_color b)
+{
+	if (abs(a.p.r - b.p.r) > AAA_THRESH)
+		return (1);
+	if (abs(a.p.g - b.p.g) > AAA_THRESH)
+		return (1);
+	if (abs(a.p.b - b.p.b) > AAA_THRESH)
+		return (1);
+	// printf("0\n");
+
+	return (0);
+}
+
+t_vec	get_camvec(t_cam c, int i)
+{
+	t_vec out;
+
+	i++;
+	out = rot((t_vec){(double)(-c.data.dimx / 2) / tan(c.data.fov / 2),
+		-c.data.dimx / 2 + i % c.data.dimx - 1,
+		c.data.dimy / 2 - i / c.data.dimx + 1}, c.dir);
+	// printf("%f %f %f, (%d, %d)\n", out.x, out.y, out.z, i % c.data.dimx, i / c.data.dimx);
+	return (out);
+}
+
+void	aaa(t_rendering *r)
+{
+	long			i;
+	long			max;
+	t_cam_render	*d;
+	t_color			*p;
+	int				tmp;
+
+	d = &r->c->data;
+	if (!d->aaa)
+		return ;
+	max = d->dimx * d->dimy;
+	p = (t_color*)d->render->pixels;
+	i = 0;
+	while (i < max)
+	{
+		tmp = 0;
+		// if (p[i].i != 0xff000000)
+		// printf("\n%x\n%x %x %x\n%x\n", p[i - d->dimx].i, p[i - 1].i, p[i].i,
+			// p[i + 1].i, p[i + d->dimx].i);
+		if ((i > d->dimx && aaacolor(p[i], p[i - d->dimx]))
+		|| ((i + 1) % d->dimx != 1 && aaacolor(p[i], p[i - 1]))
+		|| ((i + 1) % d->dimx && aaacolor(p[i], p[i + 1]))
+		|| (i < max - d->dimx && aaacolor(p[i], p[i + d->dimx])))
+			p[i] = rec_raytrace(r, (t_line){r->c->t, get_camvec(*r->c, i)}, 1);
+		i++;
+	}
 }
 
 t_cam	*render_cam(t_env *e, int ncam)
@@ -80,15 +135,13 @@ t_cam	*render_cam(t_env *e, int ncam)
 	int				i;
 	t_cam			*c;
 
-	r.lock = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
-	r.e = e;
 	i = 0;
 	c = e->s.cams;
 	while (i++ < ncam && c)
 		c = c->next;
 	if (!c)
 		return (NULL);
-	r.c = c;
+	r = (t_rendering){PTHREAD_MUTEX_INITIALIZER, e, c};
 	i = 0;
 	while (i < e->glb.thread_count)
 	{
@@ -99,5 +152,6 @@ t_cam	*render_cam(t_env *e, int ncam)
 	i = 0;
 	while (i < e->glb.thread_count)
 		pthread_join(thds[i++], NULL);
+	aaa(&r);
 	return (c);
 }
