@@ -289,20 +289,38 @@ t_color		phong(t_lit l, t_reslist res)
 	return (rgbadd(rgbadd((t_color)AMASK, specular), diffuse));
 }
 
+t_color		soft_shadow(t_rendering *r, t_reslist res, t_lit l, int rec)
+{
+	t_color		out;
+	t_reslist	obj;
+
+	out = (t_color) (unsigned)AMASK;
+	out = rgbadd(out,
+	ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt), AMB_L));
+	if (rec > 2)
+		return (out);
+	if ((obj = intersec(r, get_line(l->t, res.pt))).t > 1 - PRE)
+		out = rgbadd(out, phong(l, res));
+	else if (obj.o != res.o)
+	{
+		out = rgbadd(out, soft_shadow(r, res, (t_lit){{l.t.x + 1, l.t.y, l.t.z}, l.power, l.color, l.b, l.id, l.next}, rec + 1));
+		out = rgbadd(out, soft_shadow(r, res, (t_lit){{l.t.x - 1, l.t.y, l.t.z}, l.power, l.color, l.b, l.id, l.next}, rec + 1));
+		out = rgbadd(out, soft_shadow(r, res, (t_lit){{l.t.x, l.t.y + 1, l.t.z}, l.power, l.color, l.b, l.id, l.next}, rec + 1));
+		out = rgbadd(out, soft_shadow(r, res, (t_lit){{l.t.x, l.t.y - 1, l.t.z}, l.power, l.color, l.b, l.id, l.next}, rec + 1));
+	}
+	return (out);
+}
+
 t_color		lites(t_rendering *r, t_reslist res, int bounce)
 {
 	t_lit		*l;
 	t_color		out;
-	int			i;
 
 	out = (t_color) (unsigned)AMASK;
 	l = r->e->s.lits;
 	while (l)
 	{
-		out = rgbadd(out,
-		ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt), AMB_L));
-		if (intersec(r, get_line(l->t, res.pt)).t > 1 - PRE && (i = 0) == 0)
-			out = rgbadd(out, phong(*l, res));
+		out = rgbadd(out, soft_shadow(r, res, *l, 0));
 		if (res.o->mat.refl && bounce < REC_BOUNCE)
 		{
 			out = rgbmid(out, raytrace(r, (t_line){res.pt, apply(vec_rev(res.cam),

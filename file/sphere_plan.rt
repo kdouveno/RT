@@ -1,0 +1,24 @@
+scene{
+	lights: auto
+}
+
+camera{
+	tx: 100
+}
+
+light{
+	tx: 50
+	ty: -50
+	tz: 50
+}
+
+plane{
+	tx:-100
+	c:#00FFFF
+}
+
+
+sphere{
+	v1: 20
+	c:#FFFFFF
+}

@@ -23,6 +23,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # define PRE 0.00000001
+# define SHADOW_S 0.1
 # define DIMX 800
 # define DIMY 800
 # define FOV 85
