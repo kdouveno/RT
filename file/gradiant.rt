@@ -5,7 +5,6 @@ scene{
 camera{
 	ty: -15
 	dirz: -25
-	ssaa: 1
 }
 
 light{
