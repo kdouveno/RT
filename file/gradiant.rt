@@ -4,7 +4,8 @@ scene{
 
 camera{
 	ty: -15
-	dirz: -25
+	dirz: 155
+	ssaa: 4
 }
 
 light{

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/30 17:15:26 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/03 15:31:53 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ t_vec	get_camvec(t_cam c, int i)
 	t_vec out;
 
 	i++;
-	out = rot((t_vec){(double)(-c.data.dimx / 2) / tan(c.data.fov / 2),
-		-c.data.dimx / 2 + i % c.data.dimx - 1,
+	out = rot((t_vec){(double)(c.data.dimx / 2) / tan(c.data.fov / 2),
+		c.data.dimx / 2 - i % c.data.dimx + 1,
 		c.data.dimy / 2 - i / c.data.dimx + 1}, c.dir);
 	// printf("%f %f %f, (%d, %d)\n", out.x, out.y, out.z, i % c.data.dimx, i / c.data.dimx);
 	return (out);
