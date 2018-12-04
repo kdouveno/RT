@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/03 15:10:42 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/04 12:45:45 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	}
 	else if (!(ft_strcmp(l1, "fov")))
 	{
-		cam->data.fov = rad(ft_atoi(l2));
+		cam->data.fov = ft_atod(l2);
 		cam->data.fov = cam->data.fov < 0 ? -cam->data.fov : cam->data.fov;
 		return (0);
 	}
@@ -62,6 +62,11 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	else if (!(ft_strcmp(l1, "aaa")))
 	{
 		cam->data.aaa = 0;
+		return (0);
+	}
+	else if (!(ft_strcmp(l1, "para")))
+	{
+		cam->data.para = 1;
 		return (0);
 	}
 	return(1);
@@ -97,7 +102,7 @@ t_cam	*parse_cam_2(t_env *e, int fd)
 	if (!(cam = malloc(sizeof(t_cam))))
 		error(e, MALLOC_ERROR);
 	*cam = (t_cam){(t_pt){0, 0, 0},(t_vec){0, 0, 0}, -1, -1,
-		{{0,0,0}, {}, {}, {}, rad(FOV), NULL, 0, 0, 0, 0, 1, 1},
+		{{}, {}, {}, {}, {}, FOV, NULL, 0, 0, 0, 0, 1, 1, 0},
 		NULL};
 	while ((res = get_next_line(fd, &line)) > 0 &&
 		get_prop(e, line, &l1, &l2) != 1)

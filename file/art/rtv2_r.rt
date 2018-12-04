@@ -1,17 +1,11 @@
-/camera{
-	tx: 100
-	ty: -40
-	tz: -80
-	diry: 0
-	dirz: -45
-}
-
 camera{
-	tx: 200
-	ty: 100
-	tz: 10
-	diry: -5
-	dirz: 45
+	tx: 150
+	ty: 60
+	tz: 0
+	para: 1
+	fov: 200
+	ssaa: 2
+	r: 0
 }
 
 light{
