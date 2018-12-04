@@ -1,9 +1,7 @@
 camera{
 	tx: -50
-	ty: 50
-	dirz: 120
-	ssaa: 8
-	aaa: 1
+	ty: -20
+	r: 0
 }
 
 light{
