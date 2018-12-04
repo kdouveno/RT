@@ -16,7 +16,6 @@ light{
 
 light{
 	radius:4
-	power: 0.5
 }
 
 sphere{

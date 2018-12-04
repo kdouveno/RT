@@ -177,33 +177,54 @@ double		spec_light(t_vec lnc[3])
 	return (out);
 }
 
+void	fill_color_scale(t_obj obj, t_color c[2], int *scale)
+{
+	if (obj.type == 3)
+	{
+		*scale = (obj.v[0] / 3);
+		c[0].i = 0x000000;
+		c[1].i = 0xFF00FF;
+	}
+	else if (obj.type == 4)
+	{
+		*scale = (deg(obj.v[0]) / 3);
+		c[0].i = 0x000000;
+		c[1].i = 0xFFFF00;
+	}
+	else if (obj.type == 5)
+	{
+		*scale = (obj.v[0] / 3);
+		c[0].i = 0x000000;
+		c[1].i = 0x00FF00;
+	}
+}
+
 t_color	texture_none(t_obj obj, t_pt pt)
 {
-//	double	x;
-//	double	y;
-	//t_vec	ang;
 	t_color	out;
-	//int calc;
+	t_color	c[2];
+	int		scale;
 
-	(void)obj;
-	(void)pt;
-	out = (t_color)AMASK;
-
-//sphere
-/*	x = sin(pt.z / obj.v[0]) / M_PI * 100;
-	y = sin(pt.y / obj.v[0]) / M_PI * 100;
-	if ((int)x % 2 == 0 && (int)y % 2 == 0 && (x != 0 && y != 0))
-		out.i = 0x222222;
+	scale = 0;
+	if (obj.type == 6)
+	{
+		if (((int)(pt.y + OFFSET / 4) % 2 == 0)
+			^ ((int)(pt.z + OFFSET / 4) % 2 == 0)
+			^ ((int)(pt.x + OFFSET / 4) % 2 == 0))
+			out.i = 0x000000;
+		else
+			out.i = 0xFFFFFF;
+	}
 	else
-		out.i = 0xFF00FF;
-*/
-
-//plan	calc = (int)(pt.x / 10) + (int)(pt.z / 10) + (int)(pt.y / 10);
-	/*if (calc % 2 == 0)
-		out.i = 0x222222;
-	else
-		out.i = 0xFF00FF;
-*/	return (out);
+	{
+		fill_color_scale(obj, c, &scale);
+		if (((int)((pt.y + OFFSET) / scale) % 2 == 0)
+			^ ((int)((pt.z + OFFSET) / scale) % 2 == 0))
+			out = c[0];
+		else
+			out = c[1];
+	}
+	return (out);
 }
 
 t_color	texture_color(t_obj obj, t_pt pt)
@@ -256,7 +277,12 @@ t_color	get_grad_color(t_pt pt, t_grad *grad)
 t_color get_pt_color(t_obj obj, t_pt pt)
 {
 	if (obj.mat.txt)
-		return (texture_color(obj, pt));
+	{
+		if (!(ft_strcmp(obj.mat.txt->userdata, "none")))
+			return (texture_none(obj, pt));
+		else
+			return (texture_color(obj, pt));
+	}
 	else if(obj.grad)
 		return (get_grad_color(pt, obj.grad));
 	else

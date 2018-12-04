@@ -1,22 +1,27 @@
 camera{
+	tx:0
+	antialiasing:2
 }
 
 light{
+	ty:20
 }
 
 
 sphere{
-	v1:12
-	tx:-100
-	ty:-10
-	color:65
-}
-
-sphere{
-	v1:12
+	v1:10
 	tx:-100
 	ty:10
-	color:65
+	texture: none
+}
+
+plane
+{
+	tx:-200
+	tz: -30
+	diry:90
+	c:#00FFFF
+	texture: none
 }
 
 preset{

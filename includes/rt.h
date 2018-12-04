@@ -23,6 +23,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # define PRE 0.00000001
+# define OFFSET 100000000
 # define SHADOW_REC 3
 # define SHADOW_RAY 6
 # define SHADOW_C 0.16666

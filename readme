@@ -59,7 +59,7 @@ sphere / cylinder / cone / plane / pyramid / torus / cuboid{
 	spec: (double)
 	reflexion: (double)
 	c / color: (int) "id" | (int)"#FFFFFF"
-	texture: (string) "texture"
+	texture: (string) "texture.rt" | (string) "none"
 
 	v / v1: (double)
 	v2: (double)

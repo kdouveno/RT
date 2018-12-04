@@ -10,17 +10,17 @@ camera{
 light{
 	radius: 1.8
 	tx: 50
-	ty: -50
-	tz: 50
+	ty: 25
+	tz: 25
 }
 
 plane{
 	tx:-100
-	c:#FFFFFF
+	c:#FF00FF
 }
 
 
 sphere{
 	v1: 20
-	c:#FFFFFF
+	c:#FF00FF
 }
