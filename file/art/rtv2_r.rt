@@ -1,10 +1,9 @@
 camera{
 	tx: 150
 	ty: 60
-	tz: 0
-	para: 1
-	fov: 200
-	ssaa: 2
+	tz: 60
+	fov: 85
+	ssaa: 8
 	r: 0
 }
 

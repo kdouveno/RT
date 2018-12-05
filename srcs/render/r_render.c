@@ -6,35 +6,54 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/04 16:35:06 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/05 13:16:42 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_color	rec_raytrace(t_rendering *r, t_line l, int m, t_cam c)
+static void		assign_lines(t_line ls[4], t_line l, int m, t_cam_render *d)
+{
+	double c;
+
+	ls[0] = l;
+	ls[1] = l;
+	ls[2] = l;
+	ls[3] = l;
+	if (d->para)
+	{
+		c = d->fov / (d->dimx * m * 4.0);
+		ls[0].m = apply(vecpro(apply(d->x, d->y), c), l.m);
+		ls[1].m = apply(vecpro(apply(d->x, vec_rev(d->y)), c), l.m);
+		ls[2].m = apply(vecpro(apply(vec_rev(d->x), d->y), c), l.m);
+		ls[3].m = apply(vec_rev(vecpro(apply(d->x, d->y), c)), l.m);
+	}
+	else
+	{
+		c = 1 / (m * 4.0);
+		ls[0].v = apply(vecpro(apply(d->x, d->y), c), l.v);
+		ls[1].v = apply(vecpro(apply(d->x, vec_rev(d->y)), c), l.v);
+		ls[2].v = apply(vecpro(apply(vec_rev(d->x), d->y), c), l.v);
+		ls[3].v = apply(vec_rev(vecpro(apply(d->x, d->y), c)), l.v);
+	}
+}
+
+t_color	rec_raytrace(t_rendering *r, t_line l, int m)
 {
 	t_cam_render	*d;
-	t_line			v[4];
-	t_three_d		*t;
-	double			c;
+	t_line			ls[4];
 
 	if (m <= 1)
 		pthread_mutex_unlock(&r->lock);
-	t = c.data.para ? &l.m - &l : &l.v - &l;
-	c = (c.data.para ? c.data.fov / c.data.dimx : 1) / (m * 4.0);
 	d = &r->c->data;
 	if (m < d->ssaa && m)
 	{
-		v[0] = apply(vecpro(apply(d->x, d->y), c), l.v);
-		v[1] = apply(vecpro(apply(d->x, vec_rev(d->y)), c), l.v);
-		v[2] = apply(vecpro(apply(vec_rev(d->x), d->y), c), l.v);
-		v[3] = apply(vec_rev(vecpro(apply(d->x, d->y), c)), l.v);
+		assign_lines(ls, l, m, d);
 		return (rgbmoy4((t_color[]){
-			rec_raytrace(r, (t_line){l.m, v[0]}, m * 2),
-			rec_raytrace(r, (t_line){l.m, v[1]}, m * 2),
-			rec_raytrace(r, (t_line){l.m, v[2]}, m * 2),
-			rec_raytrace(r, (t_line){l.m, v[3]}, m * 2),
+			rec_raytrace(r, ls[0], m * 2),
+			rec_raytrace(r, ls[1], m * 2),
+			rec_raytrace(r, ls[2], m * 2),
+			rec_raytrace(r, ls[3], m * 2),
 		}));
 	}
 	else
@@ -139,9 +158,6 @@ void	aaa(t_rendering *r)
 	while (i < max)
 	{
 		tmp = 0;
-		// if (p[i].i != 0xff000000)
-		// printf("\n%x\n%x %x %x\n%x\n", p[i - d->dimx].i, p[i - 1].i, p[i].i,
-			// p[i + 1].i, p[i + d->dimx].i);
 		if ((i > d->dimx && aaacolor(p[i], p[i - d->dimx]))
 		|| ((i + 1) % d->dimx != 1 && aaacolor(p[i], p[i - 1]))
 		|| ((i + 1) % d->dimx && aaacolor(p[i], p[i + 1]))
