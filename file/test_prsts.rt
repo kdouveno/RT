@@ -1,5 +1,7 @@
 camera{
-	tx:0
+	tx:-40
+	ty:-30
+	dirz:-35
 	antialiasing:2
 }
 
@@ -11,7 +13,15 @@ light{
 sphere{
 	v1:10
 	tx:-100
-	ty:10
+	texture: none
+}
+
+cuboid{
+	v1:10
+	v2:10
+	v3:10
+	tx:-100
+	ty:40
 	texture: none
 }
 
