@@ -6,7 +6,7 @@ camera{
 	tz: 60
 	tx: 30
 	ty: 60
-	r: 90
+	r: 0
 	dirx: -100
 	ssaa: 4
 }
