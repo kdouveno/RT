@@ -12,14 +12,13 @@ light{
 
 sphere{
 	v1:10
+	dirz:45
 	tx:-100
 	texture: none
 }
 
-cuboid{
+cylinder{
 	v1:10
-	v2:10
-	v3:10
 	tx:-100
 	ty:40
 	texture: none
