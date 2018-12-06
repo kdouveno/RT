@@ -8,6 +8,7 @@ camera{
 	ty: 60
 	r: 0
 	dirx: -100
+	para:
 	ssaa: 4
 }
 

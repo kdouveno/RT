@@ -2,8 +2,9 @@ camera{
 	tx: 150
 	ty: 60
 	tz: 60
-	fov: 85
+	fov: 200
 	ssaa: 8
+	para:
 	r: 0
 }
 
@@ -11,6 +12,13 @@ light{
 	tx: 100
 	ty: 200
 	tz: 150
+}
+grad{
+	id: 102
+	tx: 19.99
+	dirx: -20
+	c1: #ffffff
+	c2: #ff0000
 }
 
 cylinder{
@@ -65,6 +73,7 @@ cuboid{
 	clip: 4
 	clip: 12
 	clip: 10
+	color: 102
 }
 
 cuboid{
