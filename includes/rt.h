@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/11 15:42:24 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:14:31 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,8 @@ typedef struct			s_rendering
 /*
 **	UI
 */
+
+int					count_cams(t_env *e);
 
 void				button_pressed(t_env *e);
 

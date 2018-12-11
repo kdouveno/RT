@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 04:59:25 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/11 15:40:47 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:01:40 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void				b_call_open_win(void *e, int n)
 {
 	char	*title;
 	char	*number;
+	t_cam	*c;
 
 	if (!(number = ft_itoa(n)))
 		error((t_env*)e, MALLOC_ERROR);
@@ -43,8 +44,11 @@ void				b_call_open_win(void *e, int n)
 		error((t_env*)e, MALLOC_ERROR);
 	}
 	ft_strdel(&number);
+	n--;
+	c = render_cam((t_env*)e, n);
 	list_win_add((t_env*)e, &(((t_env*)e)->ui.list_win), (t_list_win){0,
-		SDL_CreateWindow(title, 0, 0, 600, 350, 0), NULL, NULL});
-	ft_clear_screen(0xffff0000, ((t_env*)e)->ui.list_win);
+		SDL_CreateWindow(title, 0, 0, c->data.dimx, c->data.dimy, 0), NULL, NULL});
+	SDL_BlitSurface(c->data.render, NULL,
+		((t_env*)e)->ui.list_win->render, NULL);
 	ft_strdel(&title);
 }

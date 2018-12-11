@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 00:27:13 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/04 14:13:12 by schaaban         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:09:19 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,16 @@ void				rt_exit(t_env *e)
 {
 	s_free_sdl(e);
 	list_win_del(e->ui.list_win);
-	list_btn_del(e->ui.gui.menu_main->list_btn);
 	if (e->ui.gui.menu_main)
+	{
+		list_btn_del(e->ui.gui.menu_main->list_btn);
 		ft_memdel((void**)&(e->ui.gui.menu_main));
-	list_btn_del(e->ui.gui.menu_cam->list_btn);
+	}
 	if (e->ui.gui.menu_cam)
+	{
+		list_btn_del(e->ui.gui.menu_cam->list_btn);
 		ft_memdel((void**)&(e->ui.gui.menu_cam));
+	}
 	SDL_Quit();
 	exit(0);
 }

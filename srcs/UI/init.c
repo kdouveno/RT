@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:03:49 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/11 14:27:27 by schaaban         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:18:22 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void				rtui_init(t_env *e)
 	e->ui.exit = 0;
 	s_init_digits(e);
 	s_init_menu_main(e);
-	s_init_menu_cam(e, 8);
+	s_init_menu_cam(e, count_cams(e));
 	e->ui.gui.actual_menu = e->ui.gui.menu_main;
 	gui_set_button_pos(e->ui.gui.menu_main);
 	gui_set_button_pos(e->ui.gui.menu_cam);
