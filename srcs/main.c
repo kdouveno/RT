@@ -6,32 +6,29 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/11 15:05:13 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:30:58 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	ft_window(t_env *e, int d)
+inline static void	s_init_ptrs(t_rt *rt)
 {
-	SDL_Surface	*sur;
-	SDL_Surface	*sur1;
+	int		i;
 
-	if (SDL_Init(SDL_INIT_EVERYTHING))
-		error(e, SDL_ERROR);
-	e->glb.win = SDL_CreateWindow("RT - UI",
-		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		DIMX, DIMY, SDL_WINDOW_SHOWN);
-	init(e);
-	if (d == 1)
-		debug(e->s, 1);
-	sur = render_cam(e, 0)->data.render;
-	sur1 = SDL_GetWindowSurface(e->glb.win);
-	SDL_BlitSurface(sur, NULL, sur1, 0);
-	SDL_UpdateWindowSurface(e->glb.win);
+	i = -1;
+	while (++i < 10)
+		e->ui.digits[i] = NULL;
+	e->ui.win = NULL;
+	e->ui.render = NULL;
+	e->ui.list_win = NULL;
+	e->ui.focus_win = NULL;
+	e->ui.mouse_win = NULL;
+	e->ui.gui.menu_main = NULL;
+	e->ui.gui.menu_cam = NULL;
 }
 
-int		main(int argc, char **argv)
+int					main(int argc, char **argv)
 {
 	t_env		e;
 	int			d;
