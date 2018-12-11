@@ -3,7 +3,7 @@ ifndef LIB?
 NAME = rt
 endif
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 FW =	openGL\
 		appKit\
 		SDL2

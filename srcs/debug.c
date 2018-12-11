@@ -79,10 +79,10 @@ static void	debug_cams(t_cam *save)
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nDirection: %f %f %f\n"
-		"Antialiasing: %d\nFOV: %d\nDimx : %d\nDimy : %d\nID: %d\n\n",
+		"ssaa: %d\nFOV: %d\nDimx : %d\nDimy : %d\nID: %d\n\n",
 		save->t.x, save->t.y, save->t.z,
 		save->dir.x, save->dir.y, save->dir.z,
-		save->data.antialia, (int)deg(save->data.fov), save->data.dimx,
+		save->data.ssaa, (int)deg(save->data.fov), save->data.dimx,
 		save->data.dimy, save->id);
 		save = save->next;
 	}

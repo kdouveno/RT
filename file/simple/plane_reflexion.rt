@@ -1,6 +1,6 @@
 camera{
 	tx: 90
-	antialiasing: 2
+	ssaa: 2
 }
 
 light{

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/27 18:11:31 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/04 16:12:33 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,30 @@ void 		init_objs(t_env *e, t_scene *s)
 	}
 }
 
+void		init_cam_vecs(t_cam *cams)
+{
+	double			step;
+	t_cam_render	*d;
+
+	d = &cams->data;
+	step = 1;
+	d->pt_ul = cams->t;
+	if (d->para)
+	{
+		step = d->fov / d->dimx;
+		d->vp_ul = rot((t_vec){1,
+			0, 0}, cams->dir);
+		d->pt_ul = apply(rot((t_vec){0, d->fov / 2, d->dimy * step / 2},
+			cams->dir), d->pt_ul);
+	}
+	else
+		d->vp_ul = rot((t_vec){(double)(d->dimx / 2) / tan(rad(d->fov) / 2),
+			d->dimx / 2, d->dimy / 2}, cams->dir);
+	d->x = rot((t_vec){0, -step, 0}, cams->dir);
+	d->y = rot((t_vec){0, 0, -step}, cams->dir);
+	d->xy = rot((t_vec){0, step * (d->dimx - 1), -step}, cams->dir);
+}
+
 void		init_cam(t_env *e, t_scene *s)
 {
 	t_cam			*cams;
@@ -69,17 +93,13 @@ void		init_cam(t_env *e, t_scene *s)
 	{
 		d = &cams->data;
 		if (cams->r >= 0)
-			cams->dir = get_rot(cams->dir, cams->r);
+			cams->dir = get_rot(get_vector(cams->t, cams->dir), cams->r);
 		else
 			cams->dir = (t_three_d){rad(cams->dir.x),
 			rad(cams->dir.y), rad(cams->dir.z)};
 		d->dimx = DIMX;
 		d->dimy = DIMY;
-		d->vp_ul = rot((t_vec){(double)(-d->dimx / 2) / tan(d->fov / 2),
-			-d->dimx / 2, d->dimy / 2}, cams->dir);
-		d->x = rot((t_vec){0, 1, 0}, cams->dir);
-		d->y = rot((t_vec){0, 0, -1}, cams->dir);
-		d->xy = rot((t_vec){0, -d->dimx + 1, -1}, cams->dir);
+		init_cam_vecs(cams);
 		if (!(d->render = SDL_CreateRGBSurface(0, d->dimx, d->dimy,
 		32, RMASK, GMASK, BMASK, AMASK)))
 			error(e, SDL_GetError());

@@ -3,7 +3,7 @@ scene{
 }
 
 camera{
-	antialiasing: 1
+	ssaa: 1
 }
 
 light{

@@ -3,9 +3,13 @@ scene{
 }
 
 camera{
-	ty: -15
-	dirz: -25
-	antialiasing: 1
+	tz: 60
+	tx: 30
+	ty: 60
+	r: 0
+	dirx: -100
+	para:
+	ssaa: 4
 }
 
 light{

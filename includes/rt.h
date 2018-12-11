@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/22 12:15:25 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/04 14:39:47 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define REC_BOUNCE 10
 # define AMB_L 0.075
 # define CONE 4
+# define AAA_THRESH 20
 # define AMASK 0xFF000000U
 # define RMASK 0x00FF0000U
 # define GMASK 0x0000FF00U
@@ -57,6 +58,7 @@ typedef struct			s_wininfo
 typedef struct			s_cam_render
 {
 	t_pt				vp_ul;
+	t_pt				pt_ul;
 	t_vec				x;
 	t_vec				y;
 	t_vec				xy;
@@ -66,7 +68,9 @@ typedef struct			s_cam_render
 	int					iy;
 	int					dimx;
 	int					dimy;
-	int					antialia;
+	int					ssaa;
+	int					aaa;
+	int					para;
 }						t_cam_render;
 
 typedef struct			s_cam
@@ -203,7 +207,6 @@ typedef struct			s_rendering
 	pthread_mutex_t		lock;
 	t_env				*e;
 	t_cam				*c;
-	SDL_Surface			*s;
 }						t_rendering;
 
 /*
