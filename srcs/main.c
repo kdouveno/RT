@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:20:52 by gperez           ###   ########.fr       */
+/*   Updated: 2018/12/11 14:58:16 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ int		main(int argc, char **argv)
 	int			d;
 
 	d = arg(&e, argc, argv);
-	ft_window(&e, d);
-	free_scene((&e.s));
-	getchar();
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+		return (0);
+	s_init_ptrs(&rt);
+	rtui_init(&rt);
+	sdl_loop(&rt);
 	return (0);
 }
