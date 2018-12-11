@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/11 15:22:38 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:42:24 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,7 @@ typedef struct			s_rendering
 void				button_pressed(t_env *e);
 
 
-int					aabb_col_pt(t_aabb aabb, t_v2 pt);
+int					aabb_col_pt(t_aabb aabb, t_vec pt);
 
 
 void				list_btn_add(t_env *e, t_list_btn **list, t_list_btn new);
@@ -240,10 +240,10 @@ void				rtui_init(t_env *e);
 void				gui_set_button_pos(t_menu *menu);
 
 
-void				b_call_menu_cam(t_env *e, int n);
-void				b_call_menu_main(t_env *e, int n);
-void				b_call_exit(t_env *e, int n);
-void				b_call_open_win(t_env *e, int n);
+void				b_call_menu_cam(void *e, int n);
+void				b_call_menu_main(void *e, int n);
+void				b_call_exit(void *e, int n);
+void				b_call_open_win(void *e, int n);
 
 
 void				error_handler(t_env *e, int error_code);

@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-int					aabb_col_pt(t_aabb aabb, t_v2 pt)
+int					aabb_col_pt(t_aabb aabb, t_vec pt)
 {
 	if (pt.x >= aabb.x && pt.x < (aabb.x + aabb.w)
 		&& pt.y >= aabb.y && pt.y < (aabb.y + aabb.h))

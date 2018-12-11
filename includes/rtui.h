@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:08:07 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/11 15:21:31 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:41:08 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,12 @@
 # define UI_BTN_DG_Y			28
 # define UI_BTN_DG_SPC			0
 
-typedef struct s_ui
-					t_ui;
-typedef struct s_list_win
-					t_list_win;
-typedef struct s_aabb
-					t_aabb;
-typedef struct s_list_btn
-					t_list_btn;
-typedef struct s_menu
-					t_menu;
-typedef struct s_gui
-					t_gui;
+typedef struct s_ui			t_ui;
+typedef struct s_list_win	t_list_win;
+typedef struct s_aabb		t_aabb;
+typedef struct s_list_btn	t_list_btn;
+typedef struct s_menu		t_menu;
+typedef struct s_gui		t_gui;
 
 struct				s_list_win
 {
@@ -73,7 +67,7 @@ struct				s_list_btn
 	int				st_pressing;
 	int				cam_n;
 
-	void			(*action_call)(t_rt*, int);
+	void			(*action_call)(void*, int);
 
 	t_list_btn		*next;
 };

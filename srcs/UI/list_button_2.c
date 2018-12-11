@@ -14,11 +14,11 @@
 
 static void			s_btn_update(t_env *e, t_list_btn *button)
 {
-	t_v2	mouse_v2;
+	t_vec	mouse_v2;
 	int		mpos_i[2];
 
 	SDL_GetMouseState(&mpos_i[0], &mpos_i[1]);
-	mouse_v2 = (t_v2){(double)mpos_i[0], (double)mpos_i[1], 0};
+	mouse_v2 = (t_vec){(double)mpos_i[0], (double)mpos_i[1], 0};
 	if (aabb_col_pt(button->aabb, mouse_v2) && e->ui.mouse_win)
 	{
 		button->st_hover = 1;
@@ -61,9 +61,9 @@ void				list_btn_update(t_env *e, t_list_btn *list, int mouse_out)
 
 static void			s_draw_digits(t_env *e, t_list_win *win, t_list_btn *btn)
 {
-	t_v3	click;
+	t_vec	click;
 
-	click = (btn->st_pressing) ? (t_v3){9, -9, 0} : (t_v3){0, 0, 0};
+	click = (btn->st_pressing) ? (t_vec){9, -9, 0} : (t_vec){0, 0, 0};
 	if (btn->cam_n < 10)
 	{
 		SDL_BlitSurface(e->ui.digits[(int)(btn->cam_n)], NULL, win->render,

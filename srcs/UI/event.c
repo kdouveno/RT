@@ -71,7 +71,7 @@ static void			s_event_wheel(t_env *e)
 
 void				sdl_event_manager(t_env *e)
 {
-	while (SDL_PollEvent(&e.ui->event))
+	while (SDL_PollEvent(&e->ui.event))
 	{
 		if (e->ui.event.type == SDL_KEYDOWN)
 			s_event_keys(e);

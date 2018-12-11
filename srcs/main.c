@@ -6,13 +6,13 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/11 15:30:58 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:51:51 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-inline static void	s_init_ptrs(t_rt *rt)
+inline static void	s_init_ptrs(t_env *e)
 {
 	int		i;
 
