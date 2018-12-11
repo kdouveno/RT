@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtui.h"
+#include "rt.h"
 
 void				gui_set_button_pos(t_menu *menu)
 {

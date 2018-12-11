@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtui.h"
+#include "rt.h"
 
 void				list_btn_add(t_env *e, t_list_btn **list, t_list_btn new)
 {
@@ -56,13 +56,13 @@ void				list_btn_cam(t_env *e, int add)
 {
 	t_list_btn	*it;
 
-	it = rt->gui.actual_menu->list_btn;
+	it = e->ui.gui.actual_menu->list_btn;
 	if (!it)
 		return ;
 	while (it)
 	{
-		it->aabb.y += (add) ? rt->gui.actual_menu->cam_y :
-			-rt->gui.actual_menu->cam_y;
+		it->aabb.y += (add) ? e->ui.gui.actual_menu->cam_y :
+			-e->ui.gui.actual_menu->cam_y;
 		it = it->next;
 	}
 }

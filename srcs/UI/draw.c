@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtui.h"
+#include "rt.h"
 
 static Uint32		s_get_rgba(Uint32 base_color, t_list_win *win)
 {

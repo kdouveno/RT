@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtui.h"
+#include "rt.h"
 
 SDL_Surface			*sdl_img_import(char *filename)
 {
@@ -29,5 +29,5 @@ void				sdl_img_export(SDL_Surface *img, char *filename)
 
 void				rt_export_screenshoot(t_env *e, char *filename)
 {
-	sdl_img_export(rt->render, filename);
+	sdl_img_export(e->ui.render, filename);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtui.h"
+#include "rt.h"
 
 void				list_win_add(t_env *e, t_list_win **list, t_list_win new)
 {

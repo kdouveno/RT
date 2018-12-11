@@ -6,22 +6,22 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 04:59:25 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/11 15:12:33 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:26:11 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtui.h"
+#include "rt.h"
 
 void				b_call_menu_cam(t_env *e, int n)
 {
 	(void)n;
-	rt->gui.actual_menu = rt->gui.menu_cam;
+	e->ui.gui.actual_menu = e->ui.gui.menu_cam;
 }
 
 void				b_call_menu_main(t_env *e, int n)
 {
 	(void)n;
-	rt->gui.actual_menu = rt->gui.menu_main;
+	e->ui.gui.actual_menu = e->ui.gui.menu_main;
 }
 
 void				b_call_exit(t_env *e, int n)
@@ -43,8 +43,8 @@ void				b_call_open_win(t_env *e, int n)
 		error(rt, MALLOC_ERROR);
 	}
 	ft_strdel(&number);
-	list_win_add(rt, &(rt->list_win), (t_list_win){0,
+	list_win_add(rt, &(e->ui.list_win), (t_list_win){0,
 		SDL_CreateWindow(title, 0, 0, 600, 350, 0), NULL, NULL});
-	ft_clear_screen(0xffff0000, rt->list_win);
+	ft_clear_screen(0xffff0000, e->ui.list_win);
 	ft_strdel(&title);
 }

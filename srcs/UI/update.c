@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtui.h"
+#include "rt.h"
 
 void				ft_update(t_env *e)
 {
 	list_btn_cam(rt, 1);
-	if (rt->mouse_win)
+	if (e->ui.mouse_win)
 	{
-		if (rt->mouse_win->id == rt->id_main_win)
-			list_btn_update(rt, rt->gui.actual_menu->list_btn, 0);
+		if (e->ui.mouse_win->id == e->ui.id_main_win)
+			list_btn_update(rt, e->ui.gui.actual_menu->list_btn, 0);
 	}
 	else
-		list_btn_update(rt, rt->gui.actual_menu->list_btn, 1);
+		list_btn_update(rt, e->ui.gui.actual_menu->list_btn, 1);
 }

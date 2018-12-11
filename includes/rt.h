@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/04 14:39:47 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:22:38 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft.h"
 # include "gnl.h"
 # include "X.h"
+# include "rtui.h"
 # include <stdlib.h>
 # include "SDL.h"
 # include <pthread.h>
@@ -197,6 +198,7 @@ typedef struct			s_prst
 
 typedef struct			s_env
 {
+	t_ui				ui;
 	t_global			glb;
 	t_wininfo			w;
 	t_scene				s;
@@ -208,6 +210,60 @@ typedef struct			s_rendering
 	t_env				*e;
 	t_cam				*c;
 }						t_rendering;
+
+/*
+**	UI
+*/
+
+void				button_pressed(t_env *e);
+
+
+int					aabb_col_pt(t_aabb aabb, t_v2 pt);
+
+
+void				list_btn_add(t_env *e, t_list_btn **list, t_list_btn new);
+void				list_btn_del(t_list_btn *list);
+void				list_btn_update(t_env *e, t_list_btn *list, int mouse_out);
+void				list_btn_draw(t_env *e, t_list_win *win, t_list_btn *list);
+void				list_btn_cam(t_env *e, int add);
+
+
+void				list_win_add(t_env *e, t_list_win **list, t_list_win new);
+void				list_win_del(t_list_win *list);
+void				list_win_delone(t_list_win **list, t_list_win *el);
+t_list_win			*list_win_get(t_list_win *list, Uint32 id);
+
+
+void				rtui_init(t_env *e);
+
+
+void				gui_set_button_pos(t_menu *menu);
+
+
+void				b_call_menu_cam(t_env *e, int n);
+void				b_call_menu_main(t_env *e, int n);
+void				b_call_exit(t_env *e, int n);
+void				b_call_open_win(t_env *e, int n);
+
+
+void				error_handler(t_env *e, int error_code);
+void				rt_exit(t_env *e);
+
+
+void				sdl_loop(t_env *e);
+void				sdl_event_manager(t_env *e);
+
+
+void				ft_update(t_env *e);
+
+
+SDL_Surface			*sdl_img_import(char *filename);
+void				sdl_img_export(SDL_Surface *img, char *filename);
+void				rt_export_screenshoot(t_env *e, char *filename);
+
+
+void				ft_put_pixel(int x, int y, Uint32 c, t_list_win *win);
+void				ft_clear_screen(Uint32 color, t_list_win *win);
 
 /*
 **	PARSER
@@ -256,6 +312,7 @@ char					*file_name(char *str);
 /*
 **	RENDER
 */
+
 void					*render(void *r);
 t_cam					*render_cam(t_env *e, int ncam);
 t_color					raytrace(t_rendering *r, t_line l, int bounce);
