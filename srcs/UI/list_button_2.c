@@ -12,7 +12,7 @@
 
 #include "rtui.h"
 
-static void			s_btn_update(t_rt *rt, t_list_btn *button)
+static void			s_btn_update(t_env *e, t_list_btn *button)
 {
 	t_v2	mouse_v2;
 	int		mpos_i[2];
@@ -40,7 +40,7 @@ static void			s_btn_update(t_rt *rt, t_list_btn *button)
 	}
 }
 
-void				list_btn_update(t_rt *rt, t_list_btn *list, int mouse_out)
+void				list_btn_update(t_env *e, t_list_btn *list, int mouse_out)
 {
 	t_list_btn	*it;
 
@@ -59,7 +59,7 @@ void				list_btn_update(t_rt *rt, t_list_btn *list, int mouse_out)
 	}
 }
 
-static void			s_draw_digits(t_rt *rt, t_list_win *win, t_list_btn *btn)
+static void			s_draw_digits(t_env *e, t_list_win *win, t_list_btn *btn)
 {
 	t_v3	click;
 
@@ -84,7 +84,7 @@ static void			s_draw_digits(t_rt *rt, t_list_win *win, t_list_btn *btn)
 	}
 }
 
-void				list_btn_draw(t_rt *rt, t_list_win *win, t_list_btn *list)
+void				list_btn_draw(t_env *e, t_list_win *win, t_list_btn *list)
 {
 	t_list_btn	*it;
 

@@ -27,7 +27,7 @@ void				sdl_img_export(SDL_Surface *img, char *filename)
 		return ;
 }
 
-void				rt_export_screenshoot(t_rt *rt, char *filename)
+void				rt_export_screenshoot(t_env *e, char *filename)
 {
 	sdl_img_export(rt->render, filename);
 }

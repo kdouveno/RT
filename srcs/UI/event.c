@@ -12,7 +12,7 @@
 
 #include "rtui.h"
 
-static void			s_event_window(t_rt *rt)
+static void			s_event_window(t_env *e)
 {
 	if (rt->event.window.event == SDL_WINDOWEVENT_CLOSE)
 	{
@@ -32,7 +32,7 @@ static void			s_event_window(t_rt *rt)
 		rt->mouse_win = NULL;
 }
 
-static void			s_event_keys(t_rt *rt)
+static void			s_event_keys(t_env *e)
 {
 	if (rt->event.key.keysym.sym == SDLK_ESCAPE)
 	{
@@ -45,7 +45,7 @@ static void			s_event_keys(t_rt *rt)
 	}
 }
 
-static void			s_event_wheel(t_rt *rt)
+static void			s_event_wheel(t_env *e)
 {
 	if (rt->mouse_win->id != rt->id_main_win)
 		return ;
@@ -69,7 +69,7 @@ static void			s_event_wheel(t_rt *rt)
 	}
 }
 
-void				sdl_event_manager(t_rt *rt)
+void				sdl_event_manager(t_env *e)
 {
 	while (SDL_PollEvent(&rt->event))
 	{

@@ -12,7 +12,7 @@
 
 #include "rtui.h"
 
-static void			s_free_sdl(t_rt *rt)
+static void			s_free_sdl(t_env *e)
 {
 	int		i;
 
@@ -26,7 +26,7 @@ static void			s_free_sdl(t_rt *rt)
 		SDL_DestroyWindow(rt->win);
 }
 
-void				rt_exit(t_rt *rt)
+void				rt_exit(t_env *e)
 {
 	s_free_sdl(rt);
 	list_win_del(rt->list_win);

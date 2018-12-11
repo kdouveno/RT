@@ -12,7 +12,7 @@
 
 #include "rtui.h"
 
-void				list_win_add(t_rt *rt, t_list_win **list, t_list_win new)
+void				list_win_add(t_env *e, t_list_win **list, t_list_win new)
 {
 	t_list_win	*dnew;
 

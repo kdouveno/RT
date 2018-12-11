@@ -12,7 +12,7 @@
 
 #include "rtui.h"
 
-void				list_btn_add(t_rt *rt, t_list_btn **list, t_list_btn new)
+void				list_btn_add(t_env *e, t_list_btn **list, t_list_btn new)
 {
 	t_list_btn	*dnew;
 
@@ -52,7 +52,7 @@ void				list_btn_del(t_list_btn *list)
 	}
 }
 
-void				list_btn_cam(t_rt *rt, int add)
+void				list_btn_cam(t_env *e, int add)
 {
 	t_list_btn	*it;
 

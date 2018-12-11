@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:08:07 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/11 15:06:57 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:10:58 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdio.h>
 # include <math.h>
 # include <SDL.h>
-# include "SDL_image.h"
 # include "libft.h"
 
 # define UI_WIDTH				440
@@ -32,15 +31,6 @@
 # define UI_BTN_DG_Y			28
 # define UI_BTN_DG_SPC			0
 
-# define RT_PI					M_PI
-
-# define RT_SDL_RMASK			0x00ff0000
-# define RT_SDL_GMASK			0x0000ff00
-# define RT_SDL_BMASK			0x000000ff
-# define RT_SDL_AMASK			0xff000000
-
-# define ERR_MALLOC				0
-
 typedef struct s_rt
 					t_rt;
 typedef struct s_list_win
@@ -53,10 +43,6 @@ typedef struct s_menu
 					t_menu;
 typedef struct s_gui
 					t_gui;
-typedef struct s_v3
-					t_v3;
-typedef struct s_v3
-					t_v2;
 
 struct				s_list_win
 {
@@ -108,7 +94,7 @@ struct				s_gui
 	t_menu			*actual_menu;
 };
 
-struct				s_rt
+struct				s_ui
 {
 	SDL_Event		event;
 	SDL_Surface		*render;

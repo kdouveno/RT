@@ -12,7 +12,7 @@
 
 #include "rtui.h"
 
-void				ft_update(t_rt *rt)
+void				ft_update(t_env *e)
 {
 	list_btn_cam(rt, 1);
 	if (rt->mouse_win)

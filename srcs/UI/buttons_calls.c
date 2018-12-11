@@ -6,31 +6,31 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 04:59:25 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/10 05:00:25 by schaaban         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:12:33 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtui.h"
 
-void				b_call_menu_cam(t_rt *rt, int n)
+void				b_call_menu_cam(t_env *e, int n)
 {
 	(void)n;
 	rt->gui.actual_menu = rt->gui.menu_cam;
 }
 
-void				b_call_menu_main(t_rt *rt, int n)
+void				b_call_menu_main(t_env *e, int n)
 {
 	(void)n;
 	rt->gui.actual_menu = rt->gui.menu_main;
 }
 
-void				b_call_exit(t_rt *rt, int n)
+void				b_call_exit(t_env *e, int n)
 {
 	(void)n;
 	rt_exit(rt);
 }
 
-void				b_call_open_win(t_rt *rt, int n)
+void				b_call_open_win(t_env *e, int n)
 {
 	char	*title;
 	char	*number;

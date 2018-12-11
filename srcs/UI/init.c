@@ -12,7 +12,7 @@
 
 #include "rtui.h"
 
-static void			s_init_digits(t_rt *rt)
+static void			s_init_digits(t_env *e)
 {
 	int		i;
 	char	*s;
@@ -33,7 +33,7 @@ static void			s_init_digits(t_rt *rt)
 	ft_strdel(&s);
 }
 
-static void			s_init_menu_main(t_rt *rt)
+static void			s_init_menu_main(t_env *e)
 {
 	list_btn_add(rt, &(rt->gui.menu_main->list_btn), (t_list_btn){
 		sdl_img_import("img/btn_exit.bmp"),
@@ -47,7 +47,7 @@ static void			s_init_menu_main(t_rt *rt)
 		0, 0, -1, &b_call_menu_cam, NULL});
 }
 
-static void			s_init_menu_cam(t_rt *rt, int cam_count)
+static void			s_init_menu_cam(t_env *e, int cam_count)
 {
 	while (cam_count > 0)
 	{
@@ -65,7 +65,7 @@ static void			s_init_menu_cam(t_rt *rt, int cam_count)
 		0, 0, -1, &b_call_menu_main, NULL});
 }
 
-void				rtui_init(t_rt *rt)
+void				rtui_init(t_env *e)
 {
 	if (!(rt->gui.menu_main = (t_menu*)ft_memalloc(sizeof(t_menu))))
 		error(rt, MALLOC_ERROR);

@@ -12,7 +12,7 @@
 
 #include "rtui.h"
 
-void				sdl_loop(t_rt *rt)
+void				sdl_loop(t_env *e)
 {
 	t_list_win	*it_list_win;
 
