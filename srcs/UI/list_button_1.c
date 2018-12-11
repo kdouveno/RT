@@ -19,11 +19,11 @@ void				list_btn_add(t_rt *rt, t_list_btn **list, t_list_btn new)
 	if (!list)
 		return ;
 	if (!new.tex)
-		error_handler(rt, ERR_MALLOC);
+		error(rt, MALLOC_ERROR);
 	if (!(dnew = (t_list_btn*)ft_memalloc(sizeof(t_list_btn))))
 	{
 		SDL_FreeSurface(new.tex);
-		error_handler(rt, ERR_MALLOC);
+		error(rt, MALLOC_ERROR);
 	}
 	new.st_hover = 0;
 	new.st_pressing = 0;

@@ -36,11 +36,11 @@ void				b_call_open_win(t_rt *rt, int n)
 	char	*number;
 
 	if (!(number = ft_itoa(n)))
-		error_handler(rt, ERR_MALLOC);
+		error(rt, MALLOC_ERROR);
 	if (!(title = ft_strjoin("RTv2 - Camera ", number)))
 	{
 		ft_strdel(&number);
-		error_handler(rt, ERR_MALLOC);
+		error(rt, MALLOC_ERROR);
 	}
 	ft_strdel(&number);
 	list_win_add(rt, &(rt->list_win), (t_list_win){0,

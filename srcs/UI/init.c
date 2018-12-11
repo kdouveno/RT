@@ -19,14 +19,14 @@ static void			s_init_digits(t_rt *rt)
 
 	i = -1;
 	if (!(s = ft_strdup("img/digit_x.bmp")))
-		error_handler(rt, ERR_MALLOC);
+		error(rt, MALLOC_ERROR);
 	while (++i < 10)
 	{
 		s[10] = '0' + i;
 		if (!(rt->digits[i] = sdl_img_import(s)))
 		{
 			ft_strdel(&s);
-			error_handler(rt, ERR_MALLOC);
+			error(rt, MALLOC_ERROR);
 		}
 		SDL_SetColorKey(rt->digits[i], SDL_TRUE, 0);
 	}
@@ -68,11 +68,11 @@ static void			s_init_menu_cam(t_rt *rt, int cam_count)
 void				rtui_init(t_rt *rt)
 {
 	if (!(rt->gui.menu_main = (t_menu*)ft_memalloc(sizeof(t_menu))))
-		error_handler(rt, ERR_MALLOC);
+		error(rt, MALLOC_ERROR);
 	rt->gui.menu_main->list_btn = NULL;
 	rt->gui.menu_main->cam_y = 0;
 	if (!(rt->gui.menu_cam = (t_menu*)ft_memalloc(sizeof(t_menu))))
-		error_handler(rt, ERR_MALLOC);
+		error(rt, MALLOC_ERROR);
 	rt->gui.menu_cam->list_btn = NULL;
 	rt->gui.menu_cam->cam_y = 0;
 	list_win_add(rt, &(rt->list_win), (t_list_win){0,
