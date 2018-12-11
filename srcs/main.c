@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/11 14:58:16 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:05:13 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		main(int argc, char **argv)
 	d = arg(&e, argc, argv);
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		return (0);
-	s_init_ptrs(&rt);
-	rtui_init(&rt);
-	sdl_loop(&rt);
+	s_init_ptrs(&e);
+	rtui_init(&e);
+	sdl_loop(&e);
 	return (0);
 }
