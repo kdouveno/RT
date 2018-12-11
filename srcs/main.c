@@ -31,9 +31,8 @@ inline static void	s_init_ptrs(t_env *e)
 int					main(int argc, char **argv)
 {
 	t_env		e;
-	int			d;
 
-	d = arg(&e, argc, argv);
+	e.glb.d = arg(&e, argc, argv);
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		return (0);
 	s_init_ptrs(&e);

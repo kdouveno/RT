@@ -45,6 +45,7 @@
 typedef struct			s_global
 {
 	SDL_Window			*win;
+	int					d;
 	int					rec_lim_file;
 	int					rec_nb_file;
 	int					thread_count;

@@ -173,4 +173,6 @@ void		init(t_env *e)
 {
 	init_scene(e, &(e->s));
 	init_lit_scene(e, &(e->s));
+	if (e->glb.d)
+		debug(e->s, 1);
 }

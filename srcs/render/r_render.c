@@ -147,7 +147,6 @@ void	aaa(t_rendering *r)
 	long			max;
 	t_cam_render	*d;
 	t_color			*p;
-	int				tmp;
 
 	d = &r->c->data;
 	if (!d->aaa)
@@ -157,7 +156,6 @@ void	aaa(t_rendering *r)
 	i = 0;
 	while (i < max)
 	{
-		tmp = 0;
 		if ((i > d->dimx && aaacolor(p[i], p[i - d->dimx]))
 		|| ((i + 1) % d->dimx != 1 && aaacolor(p[i], p[i - 1]))
 		|| ((i + 1) % d->dimx && aaacolor(p[i], p[i + 1]))

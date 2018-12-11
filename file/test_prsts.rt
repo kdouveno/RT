@@ -1,6 +1,10 @@
 camera{
-	tx:0
-	antialiasing:2
+	ty: 100
+	tz:40
+	dirx:100
+	diry:10
+	r:0
+	ssaa:2
 }
 
 light{
@@ -8,18 +12,26 @@ light{
 }
 
 
-sphere{
+cylinder{
 	v1:10
-	tx:-100
+	tx:100
+	ty:-10
+	texture: none
+}
+
+sphere{
+	dirz:-90
+	v1:10
+	tx:100
 	ty:10
 	texture: none
 }
 
 plane
 {
-	tx:-200
+	tx:200
 	tz: -30
-	diry:90
+	diry : 90
 	c:#00FFFF
 	texture: none
 }

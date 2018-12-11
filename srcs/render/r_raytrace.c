@@ -181,21 +181,33 @@ void	fill_color_scale(t_obj obj, t_color c[2], int *scale)
 {
 	if (obj.type == 3)
 	{
-		*scale = (obj.v[0] / 3);
+		*scale = obj.v[0] / 2;
 		c[0].i = 0x000000;
 		c[1].i = 0xFF00FF;
 	}
 	else if (obj.type == 4)
 	{
-		*scale = (deg(obj.v[0]) / 3);
+		*scale = deg(obj.v[0]) / 2;
 		c[0].i = 0x000000;
 		c[1].i = 0xFFFF00;
 	}
 	else if (obj.type == 5)
 	{
-		*scale = (obj.v[0] / 3);
+		*scale = obj.v[0] / 2;
 		c[0].i = 0x000000;
 		c[1].i = 0x00FF00;
+	}
+	else if (obj.type == 9)
+	{
+		*scale = (obj.v[0] + obj.v[1] + obj.v[2]) / 6;
+		c[0].i = 0x000000;
+		c[1].i = 0x00FFFF;
+	}
+	else
+	{
+		*scale = 4;
+		c[0].i = 0x000000;
+		c[1].i = 0xFFFFFF;
 	}
 }
 
@@ -206,24 +218,13 @@ t_color	texture_none(t_obj obj, t_pt pt)
 	int		scale;
 
 	scale = 0;
-	if (obj.type == 6)
-	{
-		if (((int)(pt.y + OFFSET / 4) % 2 == 0)
-			^ ((int)(pt.z + OFFSET / 4) % 2 == 0)
-			^ ((int)(pt.x + OFFSET / 4) % 2 == 0))
-			out.i = 0x000000;
-		else
-			out.i = 0xFFFFFF;
-	}
+	fill_color_scale(obj, c, &scale);
+	if (((int)((pt.y + OFFSET) / scale) % 2 == 0)
+		^ ((int)((pt.z + OFFSET) / scale) % 2 == 0)
+		^ ((int)((pt.x + OFFSET) / scale) % 2 == 0))
+		out = c[0];
 	else
-	{
-		fill_color_scale(obj, c, &scale);
-		if (((int)((pt.y + OFFSET) / scale) % 2 == 0)
-			^ ((int)((pt.z + OFFSET) / scale) % 2 == 0))
-			out = c[0];
-		else
-			out = c[1];
-	}
+		out = c[1];
 	return (out);
 }
 
