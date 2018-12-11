@@ -74,11 +74,11 @@ void				sdl_event_manager(t_env *e)
 	while (SDL_PollEvent(&e.ui->event))
 	{
 		if (e->ui.event.type == SDL_KEYDOWN)
-			s_event_keys(rt);
+			s_event_keys(e);
 		if (e->ui.event.type == SDL_WINDOWEVENT)
-			s_event_window(rt);
+			s_event_window(e);
 		if (e->ui.event.type == SDL_MOUSEWHEEL)
-			s_event_wheel(rt);
+			s_event_wheel(e);
 		if (e->ui.event.type == SDL_QUIT)
 			e->ui.exit = 1;
 	}

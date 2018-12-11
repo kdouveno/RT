@@ -18,13 +18,13 @@ void				sdl_loop(t_env *e)
 
 	while (!e->ui.exit)
 	{
-		sdl_event_manager(rt);
-		ft_update(rt);
+		sdl_event_manager(e);
+		ft_update(e);
 		ft_clear_screen(0xff000000,
 			list_win_get(e->ui.list_win, e->ui.id_main_win));
-		list_btn_draw(rt, list_win_get(e->ui.list_win, e->ui.id_main_win),
+		list_btn_draw(e, list_win_get(e->ui.list_win, e->ui.id_main_win),
 			e->ui.gui.actual_menu->list_btn);
-		list_btn_cam(rt, 0);
+		list_btn_cam(e, 0);
 		it_list_win = e->ui.list_win;
 		while (it_list_win)
 		{
@@ -32,5 +32,5 @@ void				sdl_loop(t_env *e)
 			it_list_win = it_list_win->next;
 		}
 	}
-	rt_exit(rt);
+	rt_exit(e);
 }

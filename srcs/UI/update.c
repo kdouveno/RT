@@ -14,12 +14,12 @@
 
 void				ft_update(t_env *e)
 {
-	list_btn_cam(rt, 1);
+	list_btn_cam(e, 1);
 	if (e->ui.mouse_win)
 	{
 		if (e->ui.mouse_win->id == e->ui.id_main_win)
-			list_btn_update(rt, e->ui.gui.actual_menu->list_btn, 0);
+			list_btn_update(e, e->ui.gui.actual_menu->list_btn, 0);
 	}
 	else
-		list_btn_update(rt, e->ui.gui.actual_menu->list_btn, 1);
+		list_btn_update(e, e->ui.gui.actual_menu->list_btn, 1);
 }

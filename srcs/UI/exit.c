@@ -28,7 +28,7 @@ static void			s_free_sdl(t_env *e)
 
 void				rt_exit(t_env *e)
 {
-	s_free_sdl(rt);
+	s_free_sdl(e);
 	list_win_del(e->ui.list_win);
 	list_btn_del(e->ui.gui.menu_main->list_btn);
 	if (e->ui.gui.menu_main)

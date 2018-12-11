@@ -23,15 +23,15 @@ void				list_win_add(t_env *e, t_list_win **list, t_list_win new)
 		if (!(new.render = SDL_GetWindowSurface(new.win)))
 		{
 			SDL_DestroyWindow(new.win);
-			error(rt, MALLOC_ERROR);
+			error(e, MALLOC_ERROR);
 		}
 	}
 	else
-		error(rt, MALLOC_ERROR);
+		error(e, MALLOC_ERROR);
 	if (!(dnew = (t_list_win*)ft_memalloc(sizeof(t_list_win))))
 	{
 		SDL_DestroyWindow(new.win);
-		error(rt, MALLOC_ERROR);
+		error(e, MALLOC_ERROR);
 	}
 	new.id = SDL_GetWindowID(new.win);
 	new.next = *list;

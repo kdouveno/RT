@@ -27,7 +27,7 @@ void				b_call_menu_main(t_env *e, int n)
 void				b_call_exit(t_env *e, int n)
 {
 	(void)n;
-	rt_exit(rt);
+	rt_exit(e);
 }
 
 void				b_call_open_win(t_env *e, int n)
@@ -36,14 +36,14 @@ void				b_call_open_win(t_env *e, int n)
 	char	*number;
 
 	if (!(number = ft_itoa(n)))
-		error(rt, MALLOC_ERROR);
+		error(e, MALLOC_ERROR);
 	if (!(title = ft_strjoin("RTv2 - Camera ", number)))
 	{
 		ft_strdel(&number);
-		error(rt, MALLOC_ERROR);
+		error(e, MALLOC_ERROR);
 	}
 	ft_strdel(&number);
-	list_win_add(rt, &(e->ui.list_win), (t_list_win){0,
+	list_win_add(e, &(e->ui.list_win), (t_list_win){0,
 		SDL_CreateWindow(title, 0, 0, 600, 350, 0), NULL, NULL});
 	ft_clear_screen(0xffff0000, e->ui.list_win);
 	ft_strdel(&title);

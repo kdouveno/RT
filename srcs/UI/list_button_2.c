@@ -29,7 +29,7 @@ static void			s_btn_update(t_env *e, t_list_btn *button)
 			if (button->st_pressing)
 			{
 				button->st_pressing = 0;
-				(button->action_call)(rt, button->cam_n);
+				(button->action_call)(e, button->cam_n);
 			}
 		}
 	}
@@ -48,7 +48,7 @@ void				list_btn_update(t_env *e, t_list_btn *list, int mouse_out)
 	while (it)
 	{
 		if (!mouse_out)
-			s_btn_update(rt, it);
+			s_btn_update(e, it);
 		else
 		{
 			if (!(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)))
@@ -106,7 +106,7 @@ void				list_btn_draw(t_env *e, t_list_win *win, t_list_btn *list)
 					{it->aabb.x, it->aabb.y, it->aabb.w, it->aabb.h}));
 		}
 		if (it->cam_n >= 0)
-			s_draw_digits(rt, win, it);
+			s_draw_digits(e, win, it);
 		it = it->next;
 	}
 }
