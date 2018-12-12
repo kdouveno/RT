@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/11 16:14:31 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/12 11:45:50 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,6 +319,18 @@ char					*file_name(char *str);
 void					*render(void *r);
 t_cam					*render_cam(t_env *e, int ncam);
 t_color					raytrace(t_rendering *r, t_line l, int bounce);
+t_color					get_pt_color(t_obj obj, t_pt pt);
+t_color					texture_color(t_obj obj, t_pt pt);
+t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
+	int rec);
+t_reslist				intersec(t_rendering *r, t_line line);
+void					aaa(t_rendering *r);
+t_color					rec_raytrace(t_rendering *r, t_line l, int m);
+
+
+
+
+
 
 void					sphere_line(t_env *e, t_line d, t_obj *o,
 	t_reslist **rlist);
