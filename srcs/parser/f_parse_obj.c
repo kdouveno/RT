@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/16 16:44:45 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/12 15:56:44 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		check_arg(t_env *e, t_obj *obj, char *l1, char *l2)
 	}
 	else if(!(ft_strcmp(l1, "scale")))
 	{
-		obj->scale = ft_atod(l2);
+		obj->m.scale = ft_atod(l2);
 		return (0);
 	}
 	return (1);
@@ -95,9 +95,9 @@ t_obj	*parse_obj_2(t_env *e, int type, int fd)
 
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
-	*obj = (t_obj){(t_pt){0, 0, 0}, (t_vec){0, 0, 0}, -1, 1, type, {},
-		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 0, 0, 0, NULL}, {0, 0, 0, 0}, -1,
-		NULL, NULL, NULL, NULL};
+	*obj = (t_obj){zero_matrix(), type, {},
+		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 0, 0, 0, NULL}, {0, 0, 0,
+			0}, -1, NULL, NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{

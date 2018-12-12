@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 13:51:39 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:17:54 by gperez           ###   ########.fr       */
+/*   Updated: 2018/12/12 13:57:00 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ int		check_pt(void *cam, char *l1, char *l2)
 	obj = (t_obj*)cam;
 	if (!(ft_strcmp(l1, "tx")))
 	{
-		obj->t.x = ft_atod(l2);
+		obj->m.t.x = ft_atod(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "ty")))
 	{
-		obj->t.y = ft_atod(l2);
+		obj->m.t.y = ft_atod(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "tz")))
 	{
-		obj->t.z = ft_atod(l2);
+		obj->m.t.z = ft_atod(l2);
 		return (0);
 	}
 	return (1);
@@ -42,17 +42,17 @@ int		check_dir(void *cam, char *l1, char *l2)
 	obj = (t_obj*)cam;
 	if (!(ft_strcmp(l1, "dirx")))
 	{
-		obj->dir.x = ft_atod(l2);
+		obj->m.rot.x = ft_atod(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "diry")))
 	{
-		obj->dir.y = ft_atod(l2);
+		obj->m.rot.y = ft_atod(l2);
 		return (0);
 	}
 	if (!(ft_strcmp(l1, "dirz")))
 	{
-		obj->dir.z = ft_atod(l2);
+		obj->m.rot.z = ft_atod(l2);
 		return (0);
 	}
 	return (1);
@@ -65,7 +65,7 @@ int		check_rot(void *cam, char *l1, char *l2)
 	obj = (t_obj*)cam;
 	if (!(ft_strcmp(l1, "r")))
 	{
-		obj->r = ft_atod(l2);
+		obj->m.r = ft_atod(l2);
 		return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/04 12:45:45 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/12 16:26:10 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_cam	*parse_cam_2(t_env *e, int fd)
 
 	if (!(cam = malloc(sizeof(t_cam))))
 		error(e, MALLOC_ERROR);
-	*cam = (t_cam){(t_pt){0, 0, 0},(t_vec){0, 0, 0}, -1, -1,
+	*cam = (t_cam){zero_matrix(), -1,
 		{{}, {}, {}, {}, {}, FOV, NULL, 0, 0, 0, 0, 1, 1, 0},
 		NULL};
 	while ((res = get_next_line(fd, &line)) > 0 &&

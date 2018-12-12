@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/04 16:12:33 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/12 16:42:56 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void		init_grad(t_scene *s)
 	grads = s->grads;
 	while (grads)
 	{
-		grads->dir = get_vector(grads->t, grads->dir);
-		grads->r = get_rot(grads->dir, 0);
+		grads->m.rot = get_vector(grads->m.t, grads->m.rot);
+		grads->r = get_rot(grads->m.rot, 0);
 		grads = grads->next;
 	}
 }
@@ -47,11 +47,11 @@ void 		init_objs(t_env *e, t_scene *s)
 	objs = s->objs;
 	while (objs)
 	{
-		if (objs->r >= 0)
-			objs->dir = get_rot(objs->dir, objs->r);
+		if (objs->m.r >= 0)
+			objs->m.rot = get_rot(objs->m.rot, objs->m.r);
 		else
-			objs->dir = (t_three_d){rad(objs->dir.x),
-			rad(objs->dir.y), rad(objs->dir.z)};
+			objs->m.rot = (t_three_d){rad(objs->m.rot.x),
+			rad(objs->m.rot.y), rad(objs->m.rot.z)};
 		if (objs->type == CONE)
 			objs->v[0] = rad(objs->v[0]);
 		check_clip_loop(e, objs, objs, 0);
@@ -66,21 +66,21 @@ void		init_cam_vecs(t_cam *cams)
 
 	d = &cams->data;
 	step = 1;
-	d->pt_ul = cams->t;
+	d->pt_ul = cams->m.t;
 	if (d->para)
 	{
 		step = d->fov / d->dimx;
 		d->vp_ul = rot((t_vec){1,
-			0, 0}, cams->dir);
+			0, 0}, cams->m.rot);
 		d->pt_ul = apply(rot((t_vec){0, d->fov / 2, d->dimy * step / 2},
-			cams->dir), d->pt_ul);
+			cams->m.rot), d->pt_ul);
 	}
 	else
 		d->vp_ul = rot((t_vec){(double)(d->dimx / 2) / tan(rad(d->fov) / 2),
-			d->dimx / 2, d->dimy / 2}, cams->dir);
-	d->x = rot((t_vec){0, -step, 0}, cams->dir);
-	d->y = rot((t_vec){0, 0, -step}, cams->dir);
-	d->xy = rot((t_vec){0, step * (d->dimx - 1), -step}, cams->dir);
+			d->dimx / 2, d->dimy / 2}, cams->m.rot);
+	d->x = rot((t_vec){0, -step, 0}, cams->m.rot);
+	d->y = rot((t_vec){0, 0, -step}, cams->m.rot);
+	d->xy = rot((t_vec){0, step * (d->dimx - 1), -step}, cams->m.rot);
 }
 
 void		init_cam(t_env *e, t_scene *s)
@@ -92,11 +92,11 @@ void		init_cam(t_env *e, t_scene *s)
 	while (cams)
 	{
 		d = &cams->data;
-		if (cams->r >= 0)
-			cams->dir = get_rot(get_vector(cams->t, cams->dir), cams->r);
+		if (cams->m.r >= 0)
+			cams->m.rot = get_rot(get_vector(cams->m.t, cams->m.rot), cams->m.r);
 		else
-			cams->dir = (t_three_d){rad(cams->dir.x),
-			rad(cams->dir.y), rad(cams->dir.z)};
+			cams->m.rot = (t_three_d){rad(cams->m.rot.x),
+			rad(cams->m.rot.y), rad(cams->m.rot.z)};
 		d->dimx = DIMX;
 		d->dimy = DIMY;
 		init_cam_vecs(cams);

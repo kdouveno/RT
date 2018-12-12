@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/12 11:48:52 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/12 14:29:24 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,21 @@ inline static t_line	get_camline(t_cam c, int i)
 	t_cam_render	*d;
 
 	d = &c.data;
-	out = (t_line){c.t, {}};
+	out = (t_line){c.m.t, {}};
 	i++;
 	if (c.data.para)
 	{
 		step = d->fov / d->dimx;
 		out.m = apply(rot((t_vec){0, d->fov / 2 - step * (i % d->dimx + 1),
 			d->dimy * step / 2 - step * (i / c.data.dimx + 1)},
-			c.dir), c.t);
+			c.m.rot), c.m.t);
 		out.v= d->vp_ul;
 	}
 	else
 	{
 		out.v = rot((t_vec){(double)(c.data.dimx / 2) / tan(rad(c.data.fov) / 2),
 		c.data.dimx / 2 - i % c.data.dimx + 1,
-		c.data.dimy / 2 - i / c.data.dimx + 1}, c.dir);
+		c.data.dimy / 2 - i / c.data.dimx + 1}, c.m.rot);
 	}
 	return (out);
 }

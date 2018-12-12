@@ -7,6 +7,7 @@ camera{
 	tx: 30
 	ty: 60
 	r: 0
+	fov: 85
 	dirx: -100
 	para:
 	ssaa: 4
@@ -22,12 +23,12 @@ camera{
 	ty: 30
 	r: 20
 	dirx: -100
-	ssaa: 4
 }
 
 light{
 	tz:100
 	ty:-100
+	radius: 4
 }
 
 light{

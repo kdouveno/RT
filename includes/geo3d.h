@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/28 10:19:58 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/12 12:29:06 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ typedef struct		s_polyres
 	double			a;
 	double			b;
 }					t_polyres;
+
+typedef struct		s_loc
+{
+	int				state;
+	t_pt			pt;
+	void			*target;
+}					t_loc;
+
 
 t_three_d			xrot(t_three_d td, double a);
 t_three_d			yrot(t_three_d td, double a);

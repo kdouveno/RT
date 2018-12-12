@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_raw_texture.c                                    :+:      :+:    :+:   */
+/*   r_texture_color.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:27:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/12 11:30:37 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/12 15:49:47 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_color	texture_color(t_obj obj, t_pt pt)
 
 	pixels = obj.mat.txt->pixels;
 	out = (t_color)AMASK;
-	ang = get_rot(unrot(get_vector(obj.t, pt), obj.dir), 0);
+	ang = get_rot(unrot(get_vector(obj.m.t, pt), obj.m.rot), 0);
 	x = ang.z + M_PI;
 	y = ang.y + M_PI_2;
 	x = (obj.mat.txt->w * x) / (2 * M_PI);

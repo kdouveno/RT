@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/12 11:45:50 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/12 16:42:01 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,46 @@ typedef struct			s_wininfo
 	int					y;
 }						t_wininfo;
 
+
+typedef struct			s_fd
+{
+	int					fd;
+	char				*file;
+}						t_fd;
+
+typedef struct			s_bool
+{
+	unsigned char		c1 : 1;
+	unsigned char		c2 : 1;
+	unsigned char		clip : 1;
+	unsigned char		clipr : 1;
+}						t_bool;
+
+
+typedef struct			s_mat
+{
+	t_color				color;
+	float				diff;
+	float				spec;
+	float				refl;
+	SDL_Surface			*txt;
+}						t_mat;
+
+typedef struct			s_objlist
+{
+	struct s_obj		*obj;
+	struct s_objlist	*next;
+}						t_objlist;
+
+typedef struct			s_matrix
+{
+	t_loc				l;
+	t_vec				t;
+	t_three_d			rot;
+	double				r;
+	double				scale;
+}						t_matrix;
+
 typedef struct			s_cam_render
 {
 	t_pt				vp_ul;
@@ -75,33 +115,9 @@ typedef struct			s_cam_render
 	int					para;
 }						t_cam_render;
 
-typedef struct			s_cam
-{
-	t_pt				t;
-	t_three_d			dir;
-	double				r;
-	int					id;
-	t_cam_render		data;
-	struct s_cam		*next;
-}						t_cam;
-
-typedef struct			s_fd
-{
-	int					fd;
-	char				*file;
-}						t_fd;
-
-typedef struct			s_bool
-{
-	unsigned char		c1 : 1;
-	unsigned char		c2 : 1;
-	unsigned char		clip : 1;
-	unsigned char		clipr : 1;
-}						t_bool;
-
 typedef struct			s_lit
 {
-	t_pt				t;
+	t_matrix			m;
 	double				power;
 	double				radius;
 	t_color				color;
@@ -112,9 +128,9 @@ typedef struct			s_lit
 
 typedef struct			s_grad
 {
-	t_pt				t;
-	t_three_d			dir;
-	t_rot				r;
+
+	t_matrix			m;
+	t_three_d			r;
 	int					id;
 	t_color				c1;
 	t_color				c2;
@@ -122,27 +138,17 @@ typedef struct			s_grad
 	struct s_grad		*next;
 }						t_grad;
 
-typedef struct			s_mat
+typedef struct			s_cam
 {
-	t_color				color;
-	float				diff;
-	float				spec;
-	float				refl;
-	SDL_Surface			*txt;
-}						t_mat;
-
-typedef struct			s_objlist
-{
-	struct s_obj		*obj;
-	struct s_objlist	*next;
-}						t_objlist;
+	t_matrix			m;
+	int					id;
+	t_cam_render		data;
+	struct s_cam		*next;
+}						t_cam;
 
 typedef struct			s_obj
 {
-	t_pt				t;
-	t_three_d			dir;
-	double				r;
-	double				scale;
+	t_matrix			m;
 	int					type;
 	double				v[4];
 	t_mat				mat;
@@ -277,6 +283,7 @@ int						is_ignored(char c);
 int						is_vec_null(t_vec vec);
 void					wrong_type(t_env *e, char *l_type, int fd, int skip);
 
+t_matrix				zero_matrix();
 int						get_prop(t_env *e, char *line, char **l1, char **l2);
 char					*get_name(t_env *e, char *line, int i, int *l);
 void					parse(t_env *e, char *arg, t_prst *p);
