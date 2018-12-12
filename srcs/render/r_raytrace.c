@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/28 12:19:53 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/12 11:03:56 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ t_color	texture_color(t_obj obj, t_pt pt)
 	x = ang.z + M_PI;
 	y = ang.y + M_PI_2;
 	x = (obj.mat.txt->w * x) / (2 * M_PI);
-	y = obj.mat.txt->h - (obj.mat.txt->h * y) / M_PI;
+	y = (obj.mat.txt->h * y) / M_PI;
 
 	out.p.b = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x));
 	out.p.g = *(pixels + 3 * ((int)y * obj.mat.txt->w + (int)x) + 1);

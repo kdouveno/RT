@@ -1,12 +1,13 @@
 camera{
 	tx: 100
+	r: 0
 	ssaa:4
 }
 
 light{
 	tx: 50
-	ty: 50
-	tz: 50
+	ty: 20
+	tz: 20
 }
 
 sphere{
