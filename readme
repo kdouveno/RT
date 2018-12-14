@@ -1,12 +1,32 @@
+________________________________________________________________________________
+                             [TYPE DEFINITIONS]
+________________________________________________________________________________
+ID:
+	(int)
+triplet:
+	[(double) | '~'], [(double) | '~'], [(double) | '~']
+loc:
+	[(tripet) | (ID)]
+HEX6:
+	A 6 Bytes hex number preceded by '#'; ex: "#0A5E3F", "#Aa5bF7"
+FILE.ext:
+	A path to file with 'ext' extension
+coef:
+	a float which value should stay between 0 and 1
+________________________________________________________________________________
+                                [PROPERTIES]
+________________________________________________________________________________
 scene{
-	lights:auto
+	lights: auto
 }
 
 camera{
+	t: (triplet)
 	tx: (double)
 	ty: (double)
 	tz: (double)
 
+	rot: (triplet)
 	dirx: (double)
 	diry: (double)
 	dirz: (double)
@@ -14,32 +34,40 @@ camera{
 	dimx: (int)
 	dimy: (int)
 
-	id: (int)
-	fov: (int)
-	ssaa: (int) 1 / 2 / 4 / 8 / 16
+	id: (ID)
+	fov: (double)
+	ssaa: [1 | 2 | 4 | 8 | 16]
 }
 
 light{
+	t: (triplet)
 	tx: (double)
 	ty: (double)
 	tz: (double)
 
+	rot: (triplet)
+	dirx: (double)
+	diry: (double)
+	dirz: (double)
 	power: (double)
 	radius: (double)
-	c / color : (int) "id" | (int)"#FFFFFF"
+	c / color : (ID) | (HEX6)
 }
 
 grad{
+	id: (ID)
+	t: (triplet)
 	tx: (double)
 	ty: (double)
 	tz: (double)
 
+	rot: (triplet)
 	dirx: (double)
 	diry: (double)
 	dirz: (double)
 
-	c1 / color1: (int) "id" | (int)"#FFFFFF"
-	c2 / color2: (int) "id" | (int)"#FFFFFF"
+	c1 / color1: (ID) | (HEX6)
+	c2 / color2: (ID) | (HEX6)
 }
 
 sphere / cylinder / cone / plane / pyramid / torus / cuboid{
@@ -51,15 +79,15 @@ sphere / cylinder / cone / plane / pyramid / torus / cuboid{
 	diry: (double)
 	dirz: (double)
 
-	id: (int)
-	clip : (int) "id"
+	id: (ID)
+	clip : (ID)
 	scale : (double)
 
-	mat: (string) "file.mat"
-	spec: (double)
-	reflexion: (double)
-	c / color: (int) "id" | (int)"#FFFFFF"
-	texture: (string) "texture.rt" | (string) "none"
+	mat: (PATH.mat)
+	spec: (coef)
+	reflexion: (coef)
+	c / color: [(ID) | (HEX6)]
+	texture: [(FILE.rt) | none]
 
 	v / v1: (double)
 	v2: (double)
@@ -76,7 +104,8 @@ preset{
 	diry: (double)
 	dirz: (double)
 
-	scale : (double)
+	scale : (coef)
 
-	src : (string) "file.rt"
+	src : (FILE.rt)
 }
+________________________________________________________________________________
