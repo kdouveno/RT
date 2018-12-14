@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/12 14:51:42 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/14 14:56:56 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)
 
 	i = 0;
 	cp = ft_str_tolower(l1);
-	if (check_pt(lit, cp, l2) == 1 && check_arg(lit, cp, l2 ) == 1
+	if (check_loc(e, lit, cp, l2) && check_pt(lit, cp, l2) == 1 && check_arg(lit, cp, l2 ) == 1
 		&& check_arg2(lit, cp, l2 ) == 1)
 	{
 		while (is_ignored(l1[i]) == 1)

@@ -3,9 +3,7 @@ scene{
 }
 
 camera{
-	tz: 60
-	tx: 30
-	ty: 60
+	t: 60, 30, 60
 	r: 0
 	fov: 85
 	dirx: -100
@@ -26,9 +24,7 @@ camera{
 }
 
 light{
-	tz:100
-	ty:-100
-	radius: 4
+	t: ~, -100, 100
 }
 
 light{
@@ -37,36 +33,28 @@ light{
 sphere{
 	spec:0.5
 	v1:12
-	tx:-100
-	ty:-10
+	t:-100, -10, ~
 	color:65
 }
 
 sphere{
 	spec:0.5
 	v1:12
-	tx:-100
-	ty:10
-	color:65
-}
-
-
-
-sphere{
-	spec:0.5
-	v1:12
-	tx:-100
-	ty:0
-	tz:10
+	t:-100, 10, ~
 	color:65
 }
 
 sphere{
 	spec:0.5
 	v1:12
-	tx:-100
-	ty:0
-	tz:-10
+	t:-100, 0, 10
+	color:65
+}
+
+sphere{
+	spec:0.5
+	v1:12
+	t:-100, 0, -10
 	color:65
 }
 
@@ -74,36 +62,28 @@ sphere{
 sphere{
 	spec:0.5
 	v1:12
-	tx:-100
-	ty:-10
-	tz:10
+	t:-100, -10, 10
 	color:65
 }
 
 sphere{
 	spec:0.5
 	v1:12
-	tx:-100
-	ty:-10
-	tz:-10
+	t:-100, -10, -10
 	color:65
 }
 
 sphere{
 	spec:0.5
 	v1:12
-	tx:-100
-	ty:10
-	tz:10
+	t: -100, 10, 10
 	color:65
 }
 
 sphere{
 	spec:0.5
 	v1:12
-	tx:-100
-	ty:10
-	tz:-10
+	t:-100, 10, -10
 	color:65
 }
 
@@ -114,10 +94,8 @@ plane{
 
 grad{
 	id:65
-	tx:-100
-	ty:-22
-	dirx:-100
-	diry:22
+	t:-100, -22, ~
+	rot:-100, 22, ~
 	c1:#FF0000
 	c2:#0000FF
 }

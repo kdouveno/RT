@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/12 16:26:10 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/14 11:39:31 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void	stock_cam(t_env *e, t_cam *cam, char *l1, char *l2)
 
 	i = 0;
 	cp = ft_str_tolower(l1);
-	if (check_pt(cam, cp, l2) == 1 && check_rot(cam, cp, l2) == 1
-		&& check_arg(cam, cp, l2 ) == 1 && check_dir(cam, cp, l2) == 1
-		&& check_dimx_dimy(cam, cp, l2) == 1)
+	if (check_loc(e, cam, cp, l2) && check_pt(cam, cp, l2)
+		&& check_rot(cam, cp, l2) && check_arg(cam, cp, l2)
+		&& check_dir(cam, cp, l2) && check_dimx_dimy(cam, cp, l2))
 	{
 		while (is_ignored(l1[i]) == 1)
 			i++;

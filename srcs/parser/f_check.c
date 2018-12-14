@@ -6,11 +6,27 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 13:51:39 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/12 13:57:00 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/14 14:44:37 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+int		check_loc(t_env *e, void *obj, char *l1, char *l2)
+{
+	t_obj *o;
+
+	o = (t_obj*)obj;
+	if (!ft_strcmp(l1, "loc"))
+		parse_loc(e, o, l2);
+	else if (!ft_strcmp(l1, "t"))
+		parse_3d(e, &o->m.t, l2);
+	else if (!ft_strcmp(l1, "rot"))
+		parse_3d(e, &o->m.rot, l2);
+	else
+		return (1);
+	return (0);
+}
 
 int		check_pt(void *cam, char *l1, char *l2)
 {

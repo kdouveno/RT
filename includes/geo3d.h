@@ -61,7 +61,8 @@ typedef struct		s_polyres
 
 typedef struct		s_loc
 {
-	int				state;
+	int				id;
+	int				lock;
 	t_pt			pt;
 	void			*target;
 }					t_loc;

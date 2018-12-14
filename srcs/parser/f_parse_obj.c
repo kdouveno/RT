@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/12 15:56:44 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/14 14:57:04 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 
 	i = 0;
 	cp = ft_str_tolower(l1);
-	if (check_pt(obj, cp, l2) && check_arg(e, obj, cp, l2 )
-			&& check_rot(obj, cp, l2) && check_mat(e, obj, cp, l2)
-					&& check_dir(obj, cp, l2) && check_value(obj, cp, l2))
+	if (check_loc(e, obj, cp, l2) && check_pt(obj, cp, l2) && check_arg(e, obj, cp, l2 ) && check_rot(obj, cp, l2) && check_mat(e, obj, cp, l2) && check_dir(obj, cp, l2) && check_value(obj, cp, l2))
 	{
 		while (is_ignored(l1[i]) == 1)
 			i++;

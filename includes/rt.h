@@ -297,11 +297,15 @@ void					parse_color(t_obj *obj, char *l2, t_grad *grad, int nb);
 void					creat_clips(t_env *e, t_obj *obj, char *l2);
 void					stock_obj(t_env *e, t_obj *obj, char *l1, char *l2);
 
+void					parse_loc(t_env *e, t_obj *o, char *l2);
+int						parse_3d(t_env *e, t_pt *pt, char *l2);
+
 int						check_pt(void *cam, char* l1, char *l2);
 int						check_dir(void *cam, char* l1, char *l2);
 int						check_rot(void *cam, char *l1, char *l2);
 int						check_value(t_obj *obj, char *l1, char *l2);
 int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
+int						check_loc(t_env *e, void *obj, char *l1, char *l2);
 
 /*
 **	INIT
