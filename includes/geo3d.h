@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/12 12:29:06 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/14 15:30:10 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 # include <math.h>
 # include "msgs.h"
 
-typedef struct		s_three_d
+typedef struct		s_3d
 {
 	double	x;
 	double	y;
 	double	z;
-}					t_three_d;
+}					t_3d;
 
-typedef t_three_d	t_vec;
-typedef t_three_d	t_pt;
-typedef t_three_d	t_rot;
+typedef t_3d	t_vec;
+typedef t_3d	t_pt;
+typedef t_3d	t_rot;
 
 
 typedef struct		s_rgb
@@ -68,11 +68,11 @@ typedef struct		s_loc
 }					t_loc;
 
 
-t_three_d			xrot(t_three_d td, double a);
-t_three_d			yrot(t_three_d td, double a);
-t_three_d			zrot(t_three_d td, double a);
-t_three_d			rot(t_three_d td, t_rot r);
-t_three_d			unrot(t_three_d td, t_rot r);
+t_3d			xrot(t_3d td, double a);
+t_3d			yrot(t_3d td, double a);
+t_3d			zrot(t_3d td, double a);
+t_3d			rot(t_3d td, t_rot r);
+t_3d			unrot(t_3d td, t_rot r);
 
 t_vec				get_vector(t_pt a, t_pt b);
 t_line				get_line(t_pt a, t_pt b);

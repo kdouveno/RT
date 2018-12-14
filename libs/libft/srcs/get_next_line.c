@@ -6,12 +6,11 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:16:46 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/30 14:32:34 by gperez           ###   ########.fr       */
+/*   Updated: 2018/12/14 15:37:22 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gnl.h"
-#include <stdio.h>
 
 #include "libft.h"
 #include <stdlib.h>

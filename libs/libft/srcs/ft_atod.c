@@ -6,12 +6,11 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 10:41:13 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/05/16 13:51:46 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/14 15:37:20 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 double		ft_atod(const char *str)
 {

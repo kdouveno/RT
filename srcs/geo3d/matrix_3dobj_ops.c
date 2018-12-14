@@ -12,9 +12,9 @@
 
 #include "geo3d.h"
 
-t_three_d	xrot(t_three_d td, double a)
+t_3d	xrot(t_3d td, double a)
 {
-	t_three_d out;
+	t_3d out;
 
 	out.x = td.x;
 	out.y = cos(a) * td.y - sin(a) * td.z;
@@ -22,9 +22,9 @@ t_three_d	xrot(t_three_d td, double a)
 	return (out);
 }
 
-t_three_d	yrot(t_three_d td, double a)
+t_3d	yrot(t_3d td, double a)
 {
-	t_three_d out;
+	t_3d out;
 
 	out.x = cos(a) * td.x + sin(a) * td.z;
 	out.y = td.y;
@@ -32,9 +32,9 @@ t_three_d	yrot(t_three_d td, double a)
 	return (out);
 }
 
-t_three_d	zrot(t_three_d td, double a)
+t_3d	zrot(t_3d td, double a)
 {
-	t_three_d out;
+	t_3d out;
 
 	out.x = cos(a) * td.x - sin(a) * td.y;
 	out.y = sin(a) * td.x + cos(a) * td.y;
@@ -42,7 +42,7 @@ t_three_d	zrot(t_three_d td, double a)
 	return (out);
 }
 
-t_three_d	rot(t_three_d td, t_rot r)
+t_3d	rot(t_3d td, t_rot r)
 {
 	td = xrot(td, r.x);
 	td = yrot(td, r.y);
@@ -50,7 +50,7 @@ t_three_d	rot(t_three_d td, t_rot r)
 	return (td);
 }
 
-t_three_d	unrot(t_three_d td, t_rot r)
+t_3d	unrot(t_3d td, t_rot r)
 {
 	td = zrot(td, -r.z);
 	td = yrot(td, -r.y);

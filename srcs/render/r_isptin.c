@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 14:44:37 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/12 14:27:18 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/14 15:38:41 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ int		plane_isptin(t_pt pt, t_obj o)
 int		cuboid_isptin(t_pt pt, t_obj o)
 {
 	pt = unrot(apply(vecpro(o.m.t, -1), pt), o.m.rot);
-	// printf("cuboid is in %d\n", pt.x <= o.v[0] + PRE && pt.x >= -o.v[0] - PRE
-			// && pt.y <= o.v[1] + PRE && pt.y >= -o.v[1] - PRE
-			// && pt.z <= o.v[2] + PRE && pt.z >= -o.v[2] - PRE);
 	return (pt.x <= o.v[0] + PRE && pt.x >= -o.v[0] - PRE
 			&& pt.y <= o.v[1] + PRE && pt.y >= -o.v[1] - PRE
 			&& pt.z <= o.v[2] + PRE && pt.z >= -o.v[2] - PRE);

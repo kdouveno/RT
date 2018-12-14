@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/12 16:42:01 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/14 15:37:12 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <stdlib.h>
 # include "SDL.h"
 # include <pthread.h>
-# include <stdio.h>
 # include <fcntl.h>
 # define PRE 0.00000001
 # define OFFSET 100000000
@@ -92,7 +91,7 @@ typedef struct			s_matrix
 {
 	t_loc				l;
 	t_vec				t;
-	t_three_d			rot;
+	t_3d			rot;
 	double				r;
 	double				scale;
 }						t_matrix;
@@ -128,9 +127,8 @@ typedef struct			s_lit
 
 typedef struct			s_grad
 {
-
 	t_matrix			m;
-	t_three_d			r;
+	t_3d			r;
 	int					id;
 	t_color				c1;
 	t_color				c2;
@@ -197,7 +195,7 @@ typedef struct			s_scene
 typedef struct			s_prst
 {
 	t_pt				t;
-	t_three_d			dir;
+	t_3d			dir;
 	double				scale;
 	t_scene				s;
 	struct s_prst		*next;

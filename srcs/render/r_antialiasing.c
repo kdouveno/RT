@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/12 14:29:24 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/14 15:38:11 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ inline static int		aaacolor(t_color a, t_color b)
 		return (1);
 	if (abs(a.p.b - b.p.b) > AAA_THRESH)
 		return (1);
-	// printf("0\n");
-
 	return (0);
 }
 

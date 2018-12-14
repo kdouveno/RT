@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:47:42 by kdouveno          #+#    #+#             */
-/*   Updated: 2017/11/21 17:17:09 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/14 12:34:30 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char		**ft_strsplit(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	count_words(s, c, &len, &b);
-	if (!(out = (char **)malloc(sizeof(void*) * len + 1)))
+	if (!(out = (char **)malloc(sizeof(void*) * (len + 1))))
 		return (NULL);
 	out[len] = NULL;
 	malloc_split_cells(out, s, c);

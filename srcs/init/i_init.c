@@ -50,7 +50,7 @@ void 		init_objs(t_env *e, t_scene *s)
 		if (objs->m.r >= 0)
 			objs->m.rot = get_rot(objs->m.rot, objs->m.r);
 		else
-			objs->m.rot = (t_three_d){rad(objs->m.rot.x),
+			objs->m.rot = (t_3d){rad(objs->m.rot.x),
 			rad(objs->m.rot.y), rad(objs->m.rot.z)};
 		if (objs->type == CONE)
 			objs->v[0] = rad(objs->v[0]);
@@ -95,7 +95,7 @@ void		init_cam(t_env *e, t_scene *s)
 		if (cams->m.r >= 0)
 			cams->m.rot = get_rot(get_vector(cams->m.t, cams->m.rot), cams->m.r);
 		else
-			cams->m.rot = (t_three_d){rad(cams->m.rot.x),
+			cams->m.rot = (t_3d){rad(cams->m.rot.x),
 			rad(cams->m.rot.y), rad(cams->m.rot.z)};
 		d->dimx = DIMX;
 		d->dimy = DIMY;
