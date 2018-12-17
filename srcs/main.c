@@ -32,6 +32,11 @@ int					main(int argc, char **argv)
 {
 	t_env		e;
 
+	if (argc == 1)
+	{
+		ft_putendl("\033[38;5;203m"USAGE);
+		return (0);
+	}
 	e.glb.d = arg(&e, argc, argv);
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		return (0);
