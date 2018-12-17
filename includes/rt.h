@@ -79,6 +79,7 @@ typedef struct			s_mat
 	float				spec;
 	float				refl;
 	SDL_Surface			*txt;
+	SDL_Surface			*txt_bm;
 }						t_mat;
 
 typedef struct			s_objlist
@@ -315,7 +316,7 @@ t_color					init_lit_scene(t_env *e, t_scene *s);
 void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);
 void					link_color_grad(t_env *e);
-void					link_texture(t_env *e, t_obj *obj, char *file);
+void					link_texture(t_env *e, t_obj *obj, char *file, char type);
 void					link_mat(t_env *e, t_obj *obj, char *file);
 
 int						check_file_ext(const char *str, const char *ext);

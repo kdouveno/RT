@@ -33,39 +33,6 @@ static int		check_arg(t_env *e, t_obj *obj, char *l1, char *l2)
 	return (1);
 }
 
-int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
- {
-	if (!(ft_strcmp(l1, "mat")))
- 	{
- 		if (check_file_ext(l2, ".mat") && l2[0])
- 			wrong_type(e, l1, 0, 0);
- 		else if (l2[0])
- 			link_mat(e, obj, ft_strjoin("mat/", l2));
- 		return (0);
- 	}
-	else if (!(ft_strcmp(l1, "spec")))
-	{
-		obj->mat.spec = ft_atod(l2);
-		return (0);
-	}
-	else if (!(ft_strcmp(l1, "c")) || !(ft_strcmp(l1, "color")))
-	{
-		parse_color(obj, l2, NULL, 0);
-		return (0);
-	}
-	else if (!(ft_strcmp(l1, "texture")))
-	{
-		link_texture(e, obj, ft_strjoin("textures/", l2));
-		return (0);
-	}
-	else if(!(ft_strcmp(l1, "reflexion")))
-	{
-		obj->mat.refl = (float)ft_atod(l2);
-		return (0);
-	}
-	return (1);
- }
-
 void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 {
 	char	*cp;
@@ -94,7 +61,7 @@ t_obj	*parse_obj_2(t_env *e, int type, int fd)
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
 	*obj = (t_obj){zero_matrix(), type, {},
-		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 0, 0, 0, NULL}, {0, 0, 0,
+		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 0, 0, 0, NULL, NULL}, {0, 0, 0,
 			0}, -1, NULL, NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)

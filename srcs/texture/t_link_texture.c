@@ -12,17 +12,32 @@
 
 #include "rt.h"
 
-void	link_texture(t_env *e, t_obj *obj, char *file)
+SDL_Surface	*type_text(SDL_Surface *txt, char *file)
 {
-	if (!file)
-		error(e, MALLOC_ERROR);
-	if (!(obj->mat.txt = SDL_LoadBMP(file)))
+	if (!(txt = SDL_LoadBMP(file)))
 	{
 		ft_putendl("\033[38;5;203m"TEXT_ERROR"\033[0m");
-		obj->mat.txt = SDL_CreateRGBSurface(0, 0, 0, 32,
+		txt = SDL_CreateRGBSurface(0, 0, 0, 32,
 			RMASK, GMASK, BMASK, AMASK);
-		obj->mat.txt->userdata = "none";
+		txt->userdata = "none";
 	}
 	else
-		obj->mat.txt->userdata = "fill";
+		txt->userdata = "fill";
+	return (txt);
+}
+
+void	link_texture(t_env *e, t_obj *obj, char *file, char type)
+{
+	if (!file)
+	{
+		ft_memdel((void**)&file);
+		error(e, MALLOC_ERROR);
+	}
+	if ((obj->mat.txt && type == 't') || (obj->mat.txt_bm && type == 'b'))
+		return (wrong_type(e, file, 0, 0));
+	if (type == 'b')
+		obj->mat.txt_bm = type_text(obj->mat.txt_bm, file);
+	else
+		obj->mat.txt = type_text(obj->mat.txt, file);
+	ft_memdel((void**)&file);
 }
