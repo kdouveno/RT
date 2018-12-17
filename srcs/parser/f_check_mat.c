@@ -1,6 +1,31 @@
 #include "rt.h"
 
-int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
+int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
+{
+	if (!(ft_strcmp(l1, "c")) || !(ft_strcmp(l1, "color")))
+	{
+		parse_color(obj, l2, NULL, 0);
+		return (0);
+	}
+	else if(!(ft_strcmp(l1, "reflexion")))
+	{
+		obj->mat.refl = (float)ft_atod(l2);
+		return (0);
+	}
+	else if (!(ft_strcmp(l1, "txt")) || !(ft_strcmp(l1, "texture")))
+	{
+		link_texture(e, obj, ft_strjoin("textures/", l2), 't');
+		return (0);
+	}
+	else if (!(ft_strcmp(l1, "txt_bm")) || !(ft_strcmp(l1, "texture_bump")))
+	{
+		link_texture(e, obj, ft_strjoin("textures/", l2), 'b');
+		return (0);
+	}
+	return (1);
+}
+
+int		check_mat(t_env *e, t_obj *obj, char *l1, char *l2)
  {
 	if (!(ft_strcmp(l1, "mat")))
  	{
@@ -20,25 +45,7 @@ int		check_mat(t_env *e, t_obj *obj, char* l1, char *l2)
 		obj->mat.diff = ft_atod(l2);
 		return (0);
 	}
-	else if (!(ft_strcmp(l1, "c")) || !(ft_strcmp(l1, "color")))
-	{
-		parse_color(obj, l2, NULL, 0);
-		return (0);
-	}
-	else if (!(ft_strcmp(l1, "txt")) || !(ft_strcmp(l1, "texture")))
-	{
-		link_texture(e, obj, ft_strjoin("textures/", l2), 't');
-		return (0);
-	}
-	else if (!(ft_strcmp(l1, "txt_bm")) || !(ft_strcmp(l1, "texture_bump")))
-	{
-		link_texture(e, obj, ft_strjoin("textures/", l2), 'b');
-		return (0);
-	}
-	else if(!(ft_strcmp(l1, "reflexion")))
-	{
-		obj->mat.refl = (float)ft_atod(l2);
-		return (0);
-	}
-	return (1);
+	else
+		return (check_mat2(e, obj, l1, l2));
+
  }
