@@ -2,8 +2,7 @@ camera{
 	tx: 200
 	ty: 100
 	tz: 10
-	roty: -5
-	rotz: 45
+	r: 0
 }
 
 light{
@@ -54,4 +53,13 @@ cuboid{
 	clip: 5
 	clip: 6
 	clip: 7
+	color: 100
+}
+
+grad{
+	id:100
+	tx: 20
+	dir: -20, ~, ~
+	c1: #fafafa
+	c2: #30da30
 }

@@ -1,10 +1,7 @@
 camera{
-	tx: 150
-	ty: 60
-	tz: 60
-	fov: 200
-	ssaa: 8
-	para:
+	tx: 200
+	ty: 100
+	tz: 10
 	r: 0
 }
 
@@ -15,8 +12,8 @@ light{
 }
 grad{
 	id: 102
-	tx: 19.99
-	rotx: -20
+	tx: 20
+	dir: -20, ~, ~
 	c1: #ffffff
 	c2: #ff0000
 }

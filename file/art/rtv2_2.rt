@@ -2,8 +2,7 @@ camera{
 	tx: 200
 	ty: 100
 	tz: 10
-	roty: -5
-	rotz: 45
+	r: 0
 }
 
 light{
@@ -86,7 +85,7 @@ cuboid{
 grad{
 	id:100
 	tx: 20
-	rotx: 19.9999
+	dir: -20, ~, ~
 	c1: #ffffff
 	c2: #0000ff
 }
