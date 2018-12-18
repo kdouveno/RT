@@ -13,11 +13,8 @@ FILE.ext:
 	A path to file with 'ext' extension
 coef:
 	a float which value should stay between 0 and 1
-<<<<<<< HEAD
 bool:
 	[0 | 1]
-=======
->>>>>>> 049f5d9e1e75c7aab1194e72ef4d95ed14d2131a
 ________________________________________________________________________________
                                 [PROPERTIES]
 ________________________________________________________________________________
@@ -42,11 +39,8 @@ camera{
 	id: (ID)
 	fov: (double)
 	ssaa: [1 | 2 | 4 | 8 | 16]
-<<<<<<< HEAD
 	aaa: (bool)
 	para: (bool)
-=======
->>>>>>> 049f5d9e1e75c7aab1194e72ef4d95ed14d2131a
 }
 
 light{
