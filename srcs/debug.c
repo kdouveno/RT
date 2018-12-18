@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/12 16:29:03 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:17:17 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	debug_grad(t_grad *save)
 		printf("Translation: %f %f %f\nDirection: %f %f %f\nColor1: %06x\n"
 		"Color2: %06x\nID: %d\n\n",
 		save->m.t.x, save->m.t.y, save->m.t.z,
-		save->m.rot.x, save->m.rot.y, save->m.rot.z,
+		save->r.x, save->r.y, save->r.z,
 		save->c1.i,save->c2.i, save->id);
 		save = save->next;
 	}

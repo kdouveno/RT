@@ -25,7 +25,7 @@ sphere{
 plane{
 	id: 2
 	ty: -100
-	dirz: 45
+	rotz: 45
 	color: #6BEDF9
 	reflexion: 1
 	spec: 1
@@ -34,7 +34,7 @@ plane{
 plane{
 	id:3
 	ty: 100
-	dirz: 45
+	rotz: 45
 	color: #6BEDF9
 	reflexion: 1
 	spec: 1
@@ -42,20 +42,20 @@ plane{
 
 plane{
 	id: 4
-	dirz: -45
+	rotz: -45
 	color: #E8f96B
 }
 
 plane{
 	id: 5
 	tz: 50
-	diry: 90
+	roty: 90
 	color: #45FF7D
 }
 
 plane{
 	id: 6
 	tz: -50
-	diry: 90
+	roty: 90
 	color: #F3FD28
 }

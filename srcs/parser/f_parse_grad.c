@@ -6,31 +6,28 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:15:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/14 14:55:39 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:10:56 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int		check_arg(t_grad *grad, char *l1, char *l2)
+static int		check_arg(t_env *e, t_grad *grad, char *l1, char *l2)
 {
-	if (!(ft_strcmp(l1, "id")))
+	if (!(ft_strcmp(l1, "dir")))
+		parse_3d(e, &grad->r, l2);
+	else if (!(ft_strcmp(l1, "id")))
 	{
 		grad->id = ft_atoi(l2);
 		grad->id = grad->id < 0 ? -grad->id : grad->id;
-		return (0);
 	}
-	if (!(ft_strcmp(l1, "c1")) || !(ft_strcmp(l1, "color1")))
-	{
+	else if (!(ft_strcmp(l1, "c1")) || !(ft_strcmp(l1, "color1")))
 		parse_color(NULL, l2, grad, 1);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "c2")) || !(ft_strcmp(l1, "color2")))
-	{
+	else if (!(ft_strcmp(l1, "c2")) || !(ft_strcmp(l1, "color2")))
 		parse_color(NULL, l2, grad, 2);
-		return (0);
-	}
-	return (1);
+	else
+		return (1);
+	return (0);
 }
 
 void			stock_grad(t_env *e, t_grad *grad, char *l1, char *l2)
@@ -42,10 +39,10 @@ void			stock_grad(t_env *e, t_grad *grad, char *l1, char *l2)
 	cp = ft_str_tolower(l1);
 	if (!cp)
 		error(e, MALLOC_ERROR);
-	if (check_loc(e, grad, cp, l2) && check_pt(grad, cp, l2) == 1 && check_arg(grad, cp, l2) == 1
-	 && check_dir(grad, cp, l2) == 1)
+	if (check_loc(e, grad, cp, l2) && check_pt(grad, cp, l2)
+	&& check_arg(e, grad, cp, l2) && check_dir(grad, cp, l2))
 	{
-		while (is_ignored(l1[i]) == 1)
+		while (is_ignored(l1[i]))
 			i++;
 		if (l1[i] != '\0')
 			wrong_type(e, l1, 0, 0);

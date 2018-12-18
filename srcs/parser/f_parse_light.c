@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/14 14:56:56 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:04:47 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 int		check_arg2(t_lit *lit, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "radius")))
-	{
 		lit->radius = ft_atod(l2);
-		return (0);
-	}
-	return (1);
+	else
+		return (1);
+	return (0);
 }
 
 int		check_arg(t_lit *lit, char *l1, char *l2)
@@ -28,22 +27,19 @@ int		check_arg(t_lit *lit, char *l1, char *l2)
 	{
 		lit->id = ft_atoi(l2);
 		lit->id = lit->id < 0 ? -lit->id : lit->id;
-		return (0);
 	}
 	else if (!(ft_strcmp(l1, "power")))
-	{
 		lit->power = ft_atod(l2);
-		return (0);
-	}
 	else if (!(ft_strcmp(l1, "c")) || !(ft_strcmp(l1, "color")))
 	{
 		if (l2[0] == '#')
 			lit->color.i = (unsigned)atoi_hexa(&l2[1]);
 		else
 			lit->color.i = ft_atoi(l2);
-		return (0);
 	}
-	return (1);
+	else
+		return (1);
+	return (0);
 }
 
 void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)

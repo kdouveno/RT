@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 13:51:39 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/14 14:44:37 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:14:07 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,14 @@ int		check_pt(void *cam, char *l1, char *l2)
 
 	obj = (t_obj*)cam;
 	if (!(ft_strcmp(l1, "tx")))
-	{
 		obj->m.t.x = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "ty")))
-	{
+	else if (!(ft_strcmp(l1, "ty")))
 		obj->m.t.y = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "tz")))
-	{
+	else if (!(ft_strcmp(l1, "tz")))
 		obj->m.t.z = ft_atod(l2);
-		return (0);
-	}
-	return (1);
+	else
+		return (1);
+	return (0);
 }
 
 int		check_dir(void *cam, char *l1, char *l2)
@@ -56,22 +49,15 @@ int		check_dir(void *cam, char *l1, char *l2)
 	t_obj *obj;
 
 	obj = (t_obj*)cam;
-	if (!(ft_strcmp(l1, "dirx")))
-	{
+	if (!(ft_strcmp(l1, "rotx")))
 		obj->m.rot.x = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "diry")))
-	{
+	else if (!(ft_strcmp(l1, "roty")))
 		obj->m.rot.y = ft_atod(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "dirz")))
-	{
+	else if (!(ft_strcmp(l1, "rotz")))
 		obj->m.rot.z = ft_atod(l2);
-		return (0);
-	}
-	return (1);
+	else
+		return (1);
+	return (0);
 }
 
 int		check_rot(void *cam, char *l1, char *l2)
@@ -90,24 +76,14 @@ int		check_rot(void *cam, char *l1, char *l2)
 int		check_value(t_obj *obj, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "v")) || !(ft_strcmp(l1, "v1")))
-	{
 		obj->v[0] = ft_atod(l2);
-		return (0);
-	}
 	else if (!(ft_strcmp(l1, "v2")))
-	{
 		obj->v[1] = ft_atod(l2);
-		return (0);
-	}
 	else if (!(ft_strcmp(l1, "v3")))
-	{
 		obj->v[2] = ft_atod(l2);
-		return (0);
-	}
 	else if (!(ft_strcmp(l1, "v4")))
-	{
 		obj->v[3] = ft_atod(l2);
-		return (0);
-	}
-	return (1);
+	else
+		return (1);
+	return (0);
 }

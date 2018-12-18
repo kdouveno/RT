@@ -38,8 +38,8 @@ grad{
 	id:65
 	tx:-100
 	ty:-22
-	dirx:-100
-	diry:22
+	rotx:-100
+	roty:22
 	c1:#FF0000
 	c2:#0000FF
 }

@@ -2,8 +2,8 @@ camera{
 	tx: 50
 	ty: 10
 	tz: 20
-	diry: -10
-	dirz: 7
+	roty: -10
+	rotz: 7
 }
 
 light{
@@ -34,5 +34,5 @@ sphere{
 
 plane{
 	id: 89
-	diry: 90
+	roty: 90
 }

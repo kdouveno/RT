@@ -2,8 +2,8 @@ camera{
 	tx: 200
 	ty: 100
 	tz: 10
-	diry: -5
-	dirz: 45
+	roty: -5
+	rotz: 45
 }
 
 light{
@@ -35,14 +35,14 @@ cuboid{
 cylinder{
 	id: 6
 	ty: -60
-	diry: 90
+	roty: 90
 	v: 40
 }
 
 cylinder{
 	id: 7
 	ty: 60
-	diry: 90
+	roty: 90
 	v: 40
 }
 

@@ -16,14 +16,14 @@ light{
 grad{
 	id: 102
 	tx: 19.99
-	dirx: -20
+	rotx: -20
 	c1: #ffffff
 	c2: #ff0000
 }
 
 cylinder{
 	id: 5
-	diry: 90
+	roty: 90
 	v1: 40
 	ty: 60
 	tz: -40
@@ -44,7 +44,7 @@ cylinder{
 	id: 11
 	tz: 20
 	v1: 60
-	diry: 90
+	roty: 90
 }
 
 cuboid{
@@ -61,7 +61,7 @@ cuboid{
 cylinder{
 	id: 10
 	v1: 30
-	diry: 90
+	roty: 90
 	tz: 20
 }
 

@@ -6,21 +6,21 @@ camera{
 	t: 60, 30, 60
 	r: 0
 	fov: 85
-	dirx: -100
+	rotx: -100
 	para:
 	ssaa: 4
 }
 
 camera{
 	r: 0
-	dirx: -100
+	rotx: -100
 	ssaa: 4
 }
 
 camera{
 	ty: 30
 	r: 20
-	dirx: -100
+	rotx: -100
 }
 
 light{

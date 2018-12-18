@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/14 15:37:12 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:00:18 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct			s_matrix
 {
 	t_loc				l;
 	t_vec				t;
-	t_3d			rot;
+	t_3d				rot;
 	double				r;
 	double				scale;
 }						t_matrix;
@@ -129,7 +129,7 @@ typedef struct			s_lit
 typedef struct			s_grad
 {
 	t_matrix			m;
-	t_3d			r;
+	t_3d				r;
 	int					id;
 	t_color				c1;
 	t_color				c2;
@@ -196,7 +196,7 @@ typedef struct			s_scene
 typedef struct			s_prst
 {
 	t_pt				t;
-	t_3d			dir;
+	t_3d				dir;
 	double				scale;
 	t_scene				s;
 	struct s_prst		*next;

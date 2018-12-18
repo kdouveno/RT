@@ -1,8 +1,8 @@
 camera{
 	ty: 100
 	tz:40
-	dirx:100
-	diry:10
+	rotx:100
+	roty:10
 	r:0
 	ssaa:2
 }
@@ -20,7 +20,7 @@ cylinder{
 }
 
 sphere{
-	dirz:-90
+	rotz:-90
 	v1:10
 	tx:100
 	ty:10
@@ -31,7 +31,7 @@ plane
 {
 	tx:200
 	tz: -30
-	diry : 90
+	roty : 90
 	c:#00FFFF
 	texture: none
 }

@@ -1,7 +1,7 @@
 camera{
 	tx: -50
 	ty: 30
-	dirx: -10
+	rotx: -10
 	r: 0
 	ssaa: 8
 }
@@ -47,8 +47,7 @@ grad{
 	id: 100
  	tx: 45
 	tz: -35
-	dirx: 40
-	dirz: 40
+	dir: 40, ~, 40
 	c1: #e6b868
 	c2: #ffffee
 }
