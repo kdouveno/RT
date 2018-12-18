@@ -24,7 +24,7 @@ sphere{
 	v1:10
 	tx:100
 	ty:10
-	texture: none
+	texture: monde.bmp
 }
 
 plane

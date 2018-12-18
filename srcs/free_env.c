@@ -34,6 +34,7 @@ static void	free_obj(t_obj *obj)
 		next = obj->next;
 		free_clip(obj->clips);
 		SDL_FreeSurface(obj->mat.txt);
+		SDL_FreeSurface(obj->mat.txt_bm);
 		ft_memdel((void**)&obj);
 	//	printf("\033[38;5;164mObj clean\n");
 		obj = next;
