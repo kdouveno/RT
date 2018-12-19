@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-t_color	texture_color(t_obj obj, t_pt pt)
+t_color	texture_color(t_obj obj, t_pt pt, t_vec *pert)
 {
 	double	x;
 	double	y;
@@ -20,6 +20,7 @@ t_color	texture_color(t_obj obj, t_pt pt)
 	t_color	out;
 	char	*pixels;
 
+	(void)pert;
 	pixels = obj.mat.txt->pixels;
 	out = (t_color)AMASK;
 	ang = get_rot(unrot(get_vector(obj.m.t, pt), obj.m.rot), 0);

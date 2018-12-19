@@ -165,6 +165,7 @@ typedef struct			s_reslist
 	t_pt				pt;
 	t_vec				n;
 	t_vec				cam;
+	t_vec				pert;
 	double				t;
 	struct s_reslist	*next;
 }						t_reslist;
@@ -329,8 +330,8 @@ char					*file_name(char *str);
 void					*render(void *r);
 t_cam					*render_cam(t_env *e, int ncam);
 t_color					raytrace(t_rendering *r, t_line l, int bounce);
-t_color					get_pt_color(t_obj obj, t_pt pt);
-t_color					texture_color(t_obj obj, t_pt pt);
+t_color					get_pt_color(t_obj obj, t_pt pt, t_vec *pert);
+t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert);
 t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
 	int rec);
 t_reslist				intersec(t_rendering *r, t_line line);

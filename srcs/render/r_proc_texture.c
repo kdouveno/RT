@@ -46,7 +46,7 @@ void	fill_color_scale(t_obj obj, t_color c[2], int *scale)
 	}
 }
 
-t_color	texture_none(t_obj obj, t_pt pt)
+t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 {
 	t_color	out;
 	t_color	c[2];
@@ -60,6 +60,11 @@ t_color	texture_none(t_obj obj, t_pt pt)
 		out = c[0];
 	else
 		out = c[1];
+	if (obj.mat.txt_bm)
+	{
+		printf("pain\n");
+		*pert = normalise((t_vec){out.i, out.i, out.i});
+	}
 	return (out);
 }
 
@@ -88,14 +93,14 @@ t_color	get_grad_color(t_pt pt, t_grad *grad)
 	return (rgbmid(grad->c1, grad->c2, t));
 }
 
-t_color get_pt_color(t_obj obj, t_pt pt)
+t_color get_pt_color(t_obj obj, t_pt pt, t_vec *pert)
 {
 	if (obj.mat.txt)
 	{
 		if (!(ft_strcmp(obj.mat.txt->userdata, "none")))
-			return (texture_none(obj, pt));
+			return (texture_none(obj, pt, pert));
 		else
-			return (texture_color(obj, pt));
+			return (texture_color(obj, pt, pert));
 	}
 	else if(obj.grad)
 		return (get_grad_color(pt, obj.grad));

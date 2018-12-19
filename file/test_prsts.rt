@@ -1,5 +1,5 @@
 camera{
-	ty: 100
+	ty: -100
 	tz:40
 	rotx:100
 	roty:10
@@ -11,20 +11,12 @@ light{
 	ty:20
 }
 
-
-cylinder{
-	v1:10
-	tx:100
-	ty:-10
-	texture: none
-}
-
 sphere{
 	rotz:-90
-	v1:10
+	v1:20
 	tx:100
 	ty:10
-	texture: monde.bmp
+	txt_bm: none
 }
 
 plane

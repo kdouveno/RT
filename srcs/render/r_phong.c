@@ -49,8 +49,9 @@ t_color					phong(t_lit l, t_reslist res)
 	t_color		specular;
 	t_color		obj_color;
 
-	obj_color = get_pt_color(*res.o, res.pt);
-	lnc[0] = normalise(get_line(res.pt, l.m.t).v);
+	res.pert = (t_vec){0, 0, 0};
+	obj_color = get_pt_color(*res.o, res.pt, &res.pert);
+	lnc[0] = normalise(apply(get_line(res.pt, l.m.t).v, res.pert));
 	lnc[2] = res.cam;
 	lnc[1] = res.n;
 	diffuse = rgbpro(rgbmin(l.color, rgbneg(obj_color)),
@@ -70,7 +71,7 @@ t_color			soft_shadow(t_rendering *r, t_reslist res, t_lit l, int rec)
 	if (rec > SHADOW_REC && !(i = 0))
 		return (out);
 	out = rgbadd(out,
-		ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt), AMB_L));
+		ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt, &res.pert), AMB_L));
 	if ((obj = intersec(r, get_line(l.m.t, res.pt))).t > 1 - PRE)
 		out = rgbadd(out, phong(l, res));
 	else if (l.radius != 0.0f && obj.o != res.o)
