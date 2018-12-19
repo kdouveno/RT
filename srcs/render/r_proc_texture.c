@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:29:24 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/18 18:01:06 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:44:05 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 	t_color	c[2];
 	int		scale;
 
+	(void)pert;
 	scale = 0;
 	fill_color_scale(obj, c, &scale);
 	if (((int)((pt.y + OFFSET) / scale) % 2 == 0)
@@ -60,11 +61,6 @@ t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 		out = c[0];
 	else
 		out = c[1];
-	if (obj.mat.txt_bm)
-	{
-		printf("pain\n");
-		*pert = normalise((t_vec){out.i, out.i, out.i});
-	}
 	return (out);
 }
 
@@ -95,15 +91,26 @@ t_color	get_grad_color(t_pt pt, t_grad *grad)
 
 t_color get_pt_color(t_obj obj, t_pt pt, t_vec *pert)
 {
+	t_color	out;
+
+	(void)pert;
 	if (obj.mat.txt)
 	{
 		if (!(ft_strcmp(obj.mat.txt->userdata, "none")))
-			return (texture_none(obj, pt, pert));
+			out = texture_none(obj, pt, NULL);
 		else
-			return (texture_color(obj, pt, pert));
+			out = texture_color(obj, pt, NULL, obj.mat.txt);
 	}
 	else if(obj.grad)
-		return (get_grad_color(pt, obj.grad));
+		out = get_grad_color(pt, obj.grad);
 	else
-		return (obj.mat.color);
+		out = obj.mat.color;
+	if (obj.mat.txt_bm)
+	{
+		if (!(ft_strcmp(obj.mat.txt_bm->userdata, "none")))
+			texture_none(obj, pt, pert);
+		else
+			texture_color(obj, pt, pert, obj.mat.txt_bm);
+	}
+	return (out);
 }

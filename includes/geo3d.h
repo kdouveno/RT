@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/14 15:30:10 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:40:46 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ t_vec				vec_rev(t_vec v);
 t_pt				apply(t_vec v, t_pt p);
 double				angle(t_vec a, t_vec b);
 double				scalar_product(t_vec a, t_vec b);
+t_vec				cross_product(t_vec a, t_vec b);
 t_rot				get_rot(t_vec a, double x);
+
+t_vec				get_norm_plan(t_pt a, t_pt b, t_pt c);
 
 t_color				rgbpro(t_color c, double m);
 t_color				rgbadd(t_color c1, t_color c2);
