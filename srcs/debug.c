@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:23 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/18 18:17:17 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/19 15:33:16 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	debug_grad(t_grad *save)
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nDirection: %f %f %f\nColor1: %06x\n"
-		"Color2: %06x\nID: %d\n\n",
+		"Color2: %06x\nID: %d\nOrigin: %d %p (%f, %f, %f)\n\n",
 		save->m.t.x, save->m.t.y, save->m.t.z,
 		save->r.x, save->r.y, save->r.z,
-		save->c1.i,save->c2.i, save->id);
+		save->c1.i,save->c2.i, save->id, save->m.l.id, save->m.l.target, save->m.l.pt.x, save->m.l.pt.y, save->m.l.pt.z);
 		save = save->next;
 	}
 }
@@ -35,14 +35,14 @@ static void	debug_objs(t_obj *save, t_clip *clips)
 	{
 		printf("\nType: %s\nTranslation: %f %f %f\nRotation: %f %f %f\n"
 		"Variable: %f\nScale: %f\nColor: %06x argb(%d, %d, %d, %d)\nDiffuse: %f\nSpecular: %f\nReflexion: %f\nTexture: %p\nID: %d\n"
-		"address: %p\nLinked to %p\n",
+		"address: %p\nLinked to %p\nOrigin: %d %p (%f, %f, %f)\n",
 		g_ref[save->type].name, save->m.t.x, save->m.t.y, save->m.t.z,
 		save->m.rot.x, save->m.rot.y, save->m.rot.z, save->v[0], save->m.scale,
 		save->mat.color.i,
 		save->mat.color.p.a, save->mat.color.p.r, save->mat.color.p.g,
 		save->mat.color.p.b, save->mat.diff, save->mat.spec,save->mat.refl, save->mat.txt,
-		save->id, save, save->grad);
-		printf("\n\033[38;5;136m");
+		save->id, save, save->grad, save->m.l.id, save->m.l.target, save->m.l.pt.x, save->m.l.pt.y, save->m.l.pt.z);
+		printf("\033[38;5;136m");
 		clips = save->clips;
 		while (clips != NULL)
 		{
@@ -64,10 +64,12 @@ static void	debug_lits(t_lit *save)
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nPower: %f\nColor: %06x"
-		"argb(%d, %d, %d, %d)\nID: %d\n\n",
+		"argb(%d, %d, %d, %d)\nID: %d\nOrigin: %d %p (%f, %f, %f)\n\n",
 		save->m.t.x, save->m.t.y, save->m.t.z,
 		save->power, save->color.i, save->color.p.a, save->color.p.r, save->color.p.g,
-		save->color.p.b, save->id);
+		save->color.p.b, save->id, save->m.l.id, save->m.l.target, save->m.l.pt.x, save->m.l.pt.y, save->m.l.pt.z);
+		printf("%p\n", &save->m);
+
 		save = save->next;
 	}
 }
@@ -79,11 +81,11 @@ static void	debug_cams(t_cam *save)
 	while (save != NULL)
 	{
 		printf("Translation: %f %f %f\nDirection: %f %f %f\n"
-		"ssaa: %d\nFOV: %f\nDimx : %d\nDimy : %d\nID: %d\n\n",
+		"ssaa: %d\nFOV: %f\nDimx : %d\nDimy : %d\nID: %d\nOrigin: %d %p (%f, %f, %f)\n\n",
 		save->m.t.x, save->m.t.y, save->m.t.z,
 		save->m.rot.x, save->m.rot.y, save->m.rot.z,
 		save->data.ssaa, save->data.fov, save->data.dimx,
-		save->data.dimy, save->id);
+		save->data.dimy, save->id, save->m.l.id, save->m.l.target, save->m.l.pt.x, save->m.l.pt.y, save->m.l.pt.z);
 		save = save->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/18 18:00:18 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/19 15:18:38 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,14 @@ typedef struct			s_objlist
 	struct s_objlist	*next;
 }						t_objlist;
 
+typedef struct			s_loc
+{
+	int					id;
+	int					lock;
+	t_pt				pt;
+	struct s_matrix		*target;
+}						t_loc;
+
 typedef struct			s_matrix
 {
 	t_loc				l;
@@ -96,6 +104,8 @@ typedef struct			s_matrix
 	double				r;
 	double				scale;
 }						t_matrix;
+
+
 
 typedef struct			s_cam_render
 {
@@ -117,46 +127,46 @@ typedef struct			s_cam_render
 
 typedef struct			s_lit
 {
+	struct s_lit		*next;
 	t_matrix			m;
+	int					id;
 	double				power;
 	double				radius;
 	t_color				color;
 	t_bool				b;
-	int					id;
-	struct s_lit		*next;
 }						t_lit;
 
 typedef struct			s_grad
 {
+	struct s_grad		*next;
 	t_matrix			m;
-	t_3d				r;
 	int					id;
+	t_3d				r;
 	t_color				c1;
 	t_color				c2;
 	t_bool				b;
-	struct s_grad		*next;
 }						t_grad;
 
 typedef struct			s_cam
 {
+	struct s_cam		*next;
 	t_matrix			m;
 	int					id;
 	t_cam_render		data;
-	struct s_cam		*next;
 }						t_cam;
 
 typedef struct			s_obj
 {
+	struct s_obj		*next;
 	t_matrix			m;
+	int					id;
 	int					type;
 	double				v[4];
 	t_mat				mat;
 	t_bool				b;
-	int					id;
 	struct s_clip		*clips;
 	t_objlist			*clipping;
 	t_grad				*grad;
-	struct s_obj		*next;
 }						t_obj;
 
 typedef struct			s_reslist
@@ -317,6 +327,8 @@ void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);
 void					link_color_grad(t_env *e);
 void					link_texture(t_env *e, t_obj *obj, char *file, char type);
+void					link_locs(t_scene *s, void *o);
+
 void					link_mat(t_env *e, t_obj *obj, char *file);
 
 int						check_file_ext(const char *str, const char *ext);

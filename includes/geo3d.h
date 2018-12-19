@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/14 15:30:10 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/19 14:59:44 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,6 @@ typedef struct		s_polyres
 	double			b;
 }					t_polyres;
 
-typedef struct		s_loc
-{
-	int				id;
-	int				lock;
-	t_pt			pt;
-	void			*target;
-}					t_loc;
-
-
 t_3d			xrot(t_3d td, double a);
 t_3d			yrot(t_3d td, double a);
 t_3d			zrot(t_3d td, double a);
@@ -80,7 +71,7 @@ t_pt				get_linept(t_line d, double t);
 
 t_vec				normalise(t_vec v);
 t_vec				vecpro(t_vec v, double a);
-t_vec				vec_rev(t_vec v);
+t_vec				rev_3d(t_vec v);
 t_pt				apply(t_vec v, t_pt p);
 double				angle(t_vec a, t_vec b);
 double				scalar_product(t_vec a, t_vec b);

@@ -3,6 +3,7 @@ scene{
 }
 
 camera{
+	loc: 12
 	t: 60, 30, 60
 	r: 0
 	fov: 85
@@ -24,6 +25,7 @@ camera{
 }
 
 light{
+	id: 12
 	t: ~, -100, 100
 }
 

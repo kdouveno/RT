@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:18:00 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:00 by gperez           ###   ########.fr       */
+/*   Updated: 2018/12/19 10:46:00 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	link_mat(t_env *e, t_obj *obj, char *file)
 	fd.file = file;
 	if ((fd.fd = open(file, O_RDONLY)) == -1)
 	{
-		ft_putstr("\033[38;5;203mFail to open the file ");
+		ft_putstr("\033[38;5;203mFailed to open the file ");
 		ft_putstr(file);
 		ft_putstr("\033[0m");
 		ft_putchar('\n');

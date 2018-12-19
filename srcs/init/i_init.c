@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/18 18:24:22 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/19 15:18:27 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		init_grad(t_scene *s)
 	{
 		grads->m.rot = get_rot(grads->m.rot, 0);
 		grads->r = get_vector(grads->m.t, grads->r);
+		link_locs(s, grads);
 		grads = grads->next;
 	}
 }
@@ -55,6 +56,7 @@ void 		init_objs(t_env *e, t_scene *s)
 		if (objs->type == CONE)
 			objs->v[0] = rad(objs->v[0]);
 		check_clip_loop(e, objs, objs, 0);
+		link_locs(s, objs);
 		objs = objs->next;
 	}
 }
@@ -103,6 +105,7 @@ void		init_cam(t_env *e, t_scene *s)
 		if (!(d->render = SDL_CreateRGBSurface(0, d->dimx, d->dimy,
 		32, RMASK, GMASK, BMASK, AMASK)))
 			error(e, SDL_GetError());
+		link_locs(s, cams);
 		cams = cams->next;
 	}
 }

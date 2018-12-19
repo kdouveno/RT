@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/18 18:04:47 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/19 15:14:32 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_lit	*parse_light_2(t_env *e, int fd)
 
 	if (!(lit = malloc(sizeof(t_lit))))
 		error(e, MALLOC_ERROR);
-	*lit = (t_lit){zero_matrix(), 1.0f, 0.0f, (t_color){(t_rgb){255,255,255,255}}, {0, 0, 0, 0}, -1, NULL};
+	*lit = (t_lit){NULL, zero_matrix(), -1, 1.0f, 0.0f, (t_color){(t_rgb){255,255,255,255}}, {0, 0, 0, 0}};
 	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_light(e, lit, l1, l2);

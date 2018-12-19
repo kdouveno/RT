@@ -39,7 +39,7 @@ t_vec	get_vector(t_pt a, t_pt b)
 	return ((t_vec){b.x - a.x, b.y - a.y, b.z - a.z});
 }
 
-t_vec	vec_rev(t_vec v)
+t_vec	rev_3d(t_vec v)
 {
 	return ((t_vec){-v.x, -v.y, -v.z});
 }

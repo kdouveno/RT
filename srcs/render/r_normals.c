@@ -20,7 +20,7 @@ t_vec	cylinder_norm(t_pt pt, t_obj obj, t_vec v)
 	(void)v;
 	out = rot((t_vec){pt.x, pt.y, 0}, obj.m.rot);
 	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
-		out = vec_rev(out);
+		out = rev_3d(out);
 	return (out);
 }
 
@@ -32,7 +32,7 @@ t_vec	cone_norm(t_pt pt, t_obj obj, t_vec v)
 	(void)v;
 	out = rot((t_vec){pt.x, pt.y, -sq(tan(obj.v[0] )) * pt.z}, obj.m.rot);
 	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
-		out = vec_rev(out);
+		out = rev_3d(out);
 	return (out);
 }
 
@@ -44,7 +44,7 @@ t_vec	sphere_norm(t_pt pt, t_obj obj, t_vec v)
 	(void)obj;
 	out = rot(pt, obj.m.rot);
 	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
-		out = vec_rev(out);
+		out = rev_3d(out);
 	return (out);
 }
 
@@ -55,7 +55,7 @@ t_vec	plane_norm(t_pt pt, t_obj obj, t_vec v)
 
 	out = rot((t_vec){1, 0, 0}, obj.m.rot);
 	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
-		out = vec_rev(out);
+		out = rev_3d(out);
 	(void)pt;
 	return (out);
 }
@@ -85,6 +85,6 @@ t_vec	cuboid_norm(t_pt pt, t_obj obj, t_vec v)
 	}
 	out = rot(out, obj.m.rot);
 	if ((t = scalar_product(normalise(out), v)) > 1 || t < 0)
-		out = vec_rev(out);
+		out = rev_3d(out);
 	return (out);
 }

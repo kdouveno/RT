@@ -24,7 +24,7 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce)
 		out = rgbadd(out, soft_shadow(r, res, *l, 1));
 		if (res.o->mat.refl && bounce < REC_BOUNCE)
 		{
-			out = rgbmid(out, raytrace(r, (t_line){res.pt, apply(vec_rev(res.cam),
+			out = rgbmid(out, raytrace(r, (t_line){res.pt, apply(rev_3d(res.cam),
 			vecpro(res.n, 2 * scalar_product(res.cam, res.n)))}, bounce + 1), res.o->mat.refl);
 		}
 		l = l->next;

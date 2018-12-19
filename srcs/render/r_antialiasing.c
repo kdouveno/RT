@@ -25,17 +25,17 @@ inline static void		assign_lines(t_line ls[4], t_line l, int m,
 	{
 		c = d->fov / (d->dimx * m * 4.0);
 		ls[0].m = apply(vecpro(apply(d->x, d->y), c), l.m);
-		ls[1].m = apply(vecpro(apply(d->x, vec_rev(d->y)), c), l.m);
-		ls[2].m = apply(vecpro(apply(vec_rev(d->x), d->y), c), l.m);
-		ls[3].m = apply(vec_rev(vecpro(apply(d->x, d->y), c)), l.m);
+		ls[1].m = apply(vecpro(apply(d->x, rev_3d(d->y)), c), l.m);
+		ls[2].m = apply(vecpro(apply(rev_3d(d->x), d->y), c), l.m);
+		ls[3].m = apply(rev_3d(vecpro(apply(d->x, d->y), c)), l.m);
 	}
 	else
 	{
 		c = 1 / (m * 4.0);
 		ls[0].v = apply(vecpro(apply(d->x, d->y), c), l.v);
-		ls[1].v = apply(vecpro(apply(d->x, vec_rev(d->y)), c), l.v);
-		ls[2].v = apply(vecpro(apply(vec_rev(d->x), d->y), c), l.v);
-		ls[3].v = apply(vec_rev(vecpro(apply(d->x, d->y), c)), l.v);
+		ls[1].v = apply(vecpro(apply(d->x, rev_3d(d->y)), c), l.v);
+		ls[2].v = apply(vecpro(apply(rev_3d(d->x), d->y), c), l.v);
+		ls[3].v = apply(rev_3d(vecpro(apply(d->x, d->y), c)), l.v);
 	}
 }
 
