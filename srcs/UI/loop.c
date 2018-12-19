@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:15:01 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/10 16:29:00 by schaaban         ###   ########.fr       */
+/*   Updated: 2018/12/12 21:48:10 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void				sdl_loop(t_env *e)
 		list_btn_draw(e, list_win_get(e->ui.list_win, e->ui.id_main_win),
 			e->ui.gui.actual_menu->list_btn);
 		list_btn_cam(e, 0);
+		pbar_draw(e);
 		it_list_win = e->ui.list_win;
 		while (it_list_win)
 		{

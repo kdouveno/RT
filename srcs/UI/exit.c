@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 00:27:13 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/11 16:09:19 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/12 21:33:12 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void			s_free_sdl(t_env *e)
 		if (e->ui.digits[i])
 			SDL_FreeSurface(e->ui.digits[i]);
 	}
-	if (e->ui.win)
-		SDL_DestroyWindow(e->ui.win);
 }
 
 void				rt_exit(t_env *e)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_render.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/05 13:16:42 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/19 03:37:56 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	*render(void *r)
 		render_next_line(d);
 		((int*)d->render->pixels)[iy * d->dimx + ix] = rec_raytrace(
 			r, l, !d->aaa).i;
+		((t_rendering*)r)->e->ui.pbar.value = ((double)iy
+			/ (double)d->dimy);
 	}
 	pthread_mutex_unlock(&((t_rendering*)r)->lock);
 	pthread_exit(NULL);
@@ -147,7 +149,6 @@ void	aaa(t_rendering *r)
 	long			max;
 	t_cam_render	*d;
 	t_color			*p;
-	int				tmp;
 
 	d = &r->c->data;
 	if (!d->aaa)
@@ -157,7 +158,6 @@ void	aaa(t_rendering *r)
 	i = 0;
 	while (i < max)
 	{
-		tmp = 0;
 		if ((i > d->dimx && aaacolor(p[i], p[i - d->dimx]))
 		|| ((i + 1) % d->dimx != 1 && aaacolor(p[i], p[i - 1]))
 		|| ((i + 1) % d->dimx && aaacolor(p[i], p[i + 1]))

@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:19:24 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/11 14:36:22 by schaaban         ###   ########.fr       */
+/*   Updated: 2018/12/19 04:00:35 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ static void			s_event_keys(t_env *e)
 		e->ui.focus_win = NULL;
 		e->ui.mouse_win = list_win_get(e->ui.list_win, e->ui.id_main_win);
 	}
+	else if (e->ui.event.key.keysym.sym == SDLK_e)
+	{
+		if (e->ui.focus_win->id != e->ui.id_main_win)
+			rt_export_screenshoot(e, e->ui.focus_win);
+	}
 }
 
 static void			s_event_wheel(t_env *e)
@@ -58,11 +63,14 @@ static void			s_event_wheel(t_env *e)
 	else
 	{
 		if ((e->ui.gui.actual_menu->cam_y - UI_SCROLL_SP) <
-			(UI_HEIGHT - e->ui.gui.actual_menu->max_y - UI_BTN_Y))
+			(UI_HEIGHT - e->ui.gui.actual_menu->max_y
+			- UI_BTN_Y - UI_BTN_DOWN_Y))
 		{
-			if ((UI_HEIGHT - e->ui.gui.actual_menu->max_y - UI_BTN_Y) <= 0)
+			if ((UI_HEIGHT - e->ui.gui.actual_menu->max_y
+				- UI_BTN_Y - UI_BTN_DOWN_Y) <= 0)
 				e->ui.gui.actual_menu->cam_y =
-					(UI_HEIGHT - e->ui.gui.actual_menu->max_y - UI_BTN_Y);
+					(UI_HEIGHT - e->ui.gui.actual_menu->max_y
+					- UI_BTN_Y - UI_BTN_DOWN_Y);
 		}
 		else
 			e->ui.gui.actual_menu->cam_y -= UI_SCROLL_SP;

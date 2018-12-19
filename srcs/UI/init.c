@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:03:49 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/11 16:18:22 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/19 03:53:28 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void			s_init_menu_cam(t_env *e, int cam_count)
 		0, 0, -1, &b_call_menu_main, NULL});
 }
 
-void				rtui_init(t_env *e)
+void				s_init_gui(t_env *e)
 {
 	if (!(e->ui.gui.menu_main = (t_menu*)ft_memalloc(sizeof(t_menu))))
 		error(e, MALLOC_ERROR);
@@ -75,15 +75,27 @@ void				rtui_init(t_env *e)
 		error(e, MALLOC_ERROR);
 	e->ui.gui.menu_cam->list_btn = NULL;
 	e->ui.gui.menu_cam->cam_y = 0;
-	list_win_add(e, &(e->ui.list_win), (t_list_win){0,
-		SDL_CreateWindow("RT - UI", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, UI_WIDTH, UI_HEIGHT, 0), NULL, NULL});
-	e->ui.id_main_win = SDL_GetWindowID(e->ui.list_win->win);
-	e->ui.exit = 0;
-	s_init_digits(e);
+	e->ui.btn_zone = (t_aabb){0, 0, UI_WIDTH, UI_HEIGHT - UI_BTN_DOWN_Y};
 	s_init_menu_main(e);
 	s_init_menu_cam(e, count_cams(e));
+	pbar_init(e);
 	e->ui.gui.actual_menu = e->ui.gui.menu_main;
 	gui_set_button_pos(e->ui.gui.menu_main);
 	gui_set_button_pos(e->ui.gui.menu_cam);
+}
+
+void				rtui_init(t_env *e)
+{
+	char	*win_title;
+
+	if (!(win_title = ft_strjoin("RT - ", e->ui.file_name)))
+		error(e, MALLOC_ERROR);
+	s_init_gui(e);
+	list_win_add(e, &(e->ui.list_win), (t_list_win){0,
+		SDL_CreateWindow(win_title, SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED, UI_WIDTH, UI_HEIGHT, 0), NULL, 0, NULL});
+	ft_strdel(&win_title);
+	e->ui.id_main_win = SDL_GetWindowID(e->ui.list_win->win);
+	e->ui.exit = 0;
+	s_init_digits(e);
 }

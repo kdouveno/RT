@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 15:49:54 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/16 22:19:21 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/12 14:51:51 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_color	rgbpro(t_color c, double m)
 	if (test < 0)
 		test = 0;
 	out.p.b = (int)test;
-	out.p.a = out.p.a;
 	return (out);
 }
 
@@ -50,7 +49,6 @@ t_color	rgbadd(t_color c1, t_color c2)
 	if ((test = (int)c1.p.b + c2.p.b) > 255)
 		test = 255;
 	out.p.b = test;
-	out.p.a = out.p.a;
 	return (out);
 }
 
@@ -79,7 +77,6 @@ t_color	rgbmin(t_color c1, t_color c2)
 	if ((test = (int)c1.p.b - c2.p.b) < 0)
 		test = 0;
 	out.p.b = test;
-	out.p.a = out.p.a;
 	return (out);
 }
 
