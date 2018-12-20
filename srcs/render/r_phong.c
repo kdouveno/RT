@@ -51,7 +51,7 @@ t_color					phong(t_lit l, t_reslist res)
 
 	res.pert = (t_vec){0, 0, 0};
 	obj_color = get_pt_color(*res.o, res.pt, &res.pert);
-	lnc[0] = res.pert.x == 0 && res.pert.y == 0 && res.pert.z == 0 ? normalise(get_line(res.pt, l.m.t).v) : res.pert;
+	lnc[0] = res.pert.x == 0 && res.pert.y == 0 && res.pert.z == 0 ? res.n : rot(res.pert, get_rot(res.n, 0));
 	lnc[2] = res.cam;
 	lnc[1] = res.n;
 	diffuse = rgbpro(rgbmin(l.color, rgbneg(obj_color)),

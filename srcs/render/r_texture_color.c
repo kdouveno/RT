@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:27:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/19 19:08:34 by gperez           ###   ########.fr       */
+/*   Updated: 2018/12/20 14:21:51 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,23 @@ t_vec	perturbation(double x, double y, int width, char *pixels)
 {
 	t_vec	proj;
 	t_vec	dir;
+	t_pt	p[3];
+	t_vec	out;
 
 	dir = normalise((t_vec){1, 1, 0});
 	proj = vecpro(dir,
 		scalar_product(get_vector((t_pt){(int)x, (int)y, 0}, (t_pt){x, y, 0})
 		, dir));
+	p[1] = (t_pt){(int)x + 1, (int)y, get_text_color((int)x + 1, (int)y, width, pixels).i};
+	p[2] = (t_pt){(int)x, (int)y + 1, get_text_color((int)x, (int)y + 1, width, pixels).i};
 	if (get_norm(proj) > sqrt(2) / 2)
-		return (get_norm_plan((t_pt){(int)x + 1, (int)y, get_text_color((int)x + 1, (int)y, width, pixels).i},
-			(t_pt){(int)x, (int)y + 1, get_text_color((int)x, (int)y + 1, width, pixels).i},
-				(t_pt){(int)x + 1, (int)y + 1, get_text_color((int)x + 1,(int) y + 1, width, pixels).i}));
+		p[0] = (t_pt){(int)x + 1, (int)y + 1, get_text_color((int)x + 1,(int) y + 1, width, pixels).i};
 	else
-		return (get_norm_plan((t_pt){(int)x + 1, (int)y, get_text_color((int)x + 1, (int)y, width, pixels).i},
-			(t_pt){(int)x, (int)y + 1, get_text_color((int)x, (int)y + 1, width, pixels).i},
-				(t_pt){(int)x, (int)y, get_text_color((int)x, (int)y, width, pixels).i}));
+		p[0] = (t_pt){(int)x, (int)y, get_text_color((int)x, (int)y, width, pixels).i};
+	out = rot(get_norm_plan(p[0], p[1], p[2]), get_rot((t_rot){M_PI_2, 0, M_PI_2}, 0));
+	if (scalar_product(out, (t_vec){1, 0, 0}) < 0)
+		out = vec_rev(out);
+	return (out);
 }
 
 t_color	texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
