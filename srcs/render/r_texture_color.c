@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:27:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/20 15:12:44 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:19:15 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,20 @@ t_vec	perturbation(double x, double y, int width, char *pixels)
 	t_vec	dir;
 	t_pt	p[3];
 	t_vec	out;
+	float	lvl;
 
+	lvl = BMP_LEVEL;
 	dir = normalise((t_vec){1, 1, 0});
 	proj = vecpro(dir,
-		scalar_product(get_vector((t_pt){(int)x, (int)y, 0}, (t_pt){x, y, 0})
+		scalar_product(get_vector((t_pt){0, (int)x, (int)-y}, (t_pt){0 ,x, -y})
 		, dir));
-	p[1] = (t_pt){(int)x + 1, (int)y, get_text_color((int)x + 1, (int)y, width, pixels).i};
-	p[2] = (t_pt){(int)x, (int)y + 1, get_text_color((int)x, (int)y + 1, width, pixels).i};
+	p[1] = (t_pt){rgb_litlevel(get_text_color((int)x + 1, (int)y, width, pixels)) * lvl, (int)x + 1, (int)-y};
+	p[2] = (t_pt){rgb_litlevel(get_text_color((int)x, (int)y + 1, width, pixels)) * lvl, (int)x, (int)-y - 1};
 	if (get_norm(proj) > sqrt(2) / 2)
-		p[0] = (t_pt){(int)x + 1, (int)y + 1, get_text_color((int)x + 1,(int) y + 1, width, pixels).i};
+		p[0] = (t_pt){rgb_litlevel(get_text_color((int)x + 1,(int) y + 1, width, pixels)) * lvl, (int)x + 1, (int)-y - 1};
 	else
-		p[0] = (t_pt){(int)x, (int)y, get_text_color((int)x, (int)y, width, pixels).i};
-	out = rot(get_norm_plan(p[0], p[1], p[2]), get_rot((t_rot){M_PI_2, 0, M_PI_2}, 0));
+		p[0] = (t_pt){ rgb_litlevel(get_text_color((int)x, (int)y, width, pixels)) * lvl, (int)x, (int)-y};
+	out = get_norm_plan(p[0], p[1], p[2]);
 	if (scalar_product(out, (t_vec){1, 0, 0}) < 0)
 		out = vec_rev(out);
 	return (out);

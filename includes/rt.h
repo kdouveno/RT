@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/19 18:20:42 by gperez           ###   ########.fr       */
+/*   Updated: 2018/12/20 16:17:18 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define AMB_L 0.075
 # define CONE 4
 # define AAA_THRESH 20
+# define BMP_LEVEL 2
 # define AMASK 0xFF000000U
 # define RMASK 0x00FF0000U
 # define GMASK 0x0000FF00U
