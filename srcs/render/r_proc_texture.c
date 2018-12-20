@@ -46,23 +46,39 @@ void	fill_color_scale(t_obj obj, t_color c[2], int *scale)
 	}
 }
 
+
+/*t_color	perlin_noise(t_obj obj, t_pt pt)
+{
+	t_color	out;
+
+	out.i = 0xFFFFFF;
+	(void)pt;
+	(void)obj;
+	return (out);
+}*/
+
 t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 {
+	(void)pert;
 	t_color	out;
 	t_color	c[2];
 	int		scale;
 
-	(void)pert;
-	scale = 0;
-	fill_color_scale(obj, c, &scale);
-	if (((int)((pt.y + OFFSET) / scale) % 2 == 0)
-		^ ((int)((pt.z + OFFSET) / scale) % 2 == 0)
-		^ ((int)((pt.x + OFFSET) / scale) % 2 == 0))
-		out = c[0];
-	else
-		out = c[1];
-	return (out);
+	/*if (obj.type == 6)
+	{*/
+		scale = 0;
+		fill_color_scale(obj, c, &scale);
+		if (((int)((pt.y + OFFSET) / scale) % 2 == 0)
+			^ ((int)((pt.z + OFFSET) / scale) % 2 == 0)
+			^ ((int)((pt.x + OFFSET) / scale) % 2 == 0))
+			out = c[0];
+		else
+			out = c[1];
+		return (out);
+//	}
+//	return (perlin_noise(obj, pt));
 }
+
 
 t_color	get_grad_color(t_pt pt, t_grad *grad)
 {
