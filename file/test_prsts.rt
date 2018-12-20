@@ -20,12 +20,13 @@ light{
 }
 
 sphere{
-	spec:1
-	rotz:-90
+	diff:0.5
+	spec:0.7
+	rotz:-180
 	v1:40
 	tx:100
 	ty:10
-	txt_bm: monde.bmp
+	txt: monde.bmp
 }
 
 plane

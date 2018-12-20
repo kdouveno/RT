@@ -55,7 +55,7 @@ t_color					phong(t_lit l, t_reslist res)
 	lnc[2] = res.cam;
 	lnc[1] = res.n;
 	diffuse = rgbpro(rgbmin(l.color, rgbneg(obj_color)),
-		l.power * diffuse_light(lnc));
+		l.power * diffuse_light(lnc) * res.o->mat.diff);
 	specular = rgbpro(l.color, l.power * spec_light(lnc) * res.o->mat.spec);
 	return (rgbadd(rgbadd((t_color)AMASK, specular), diffuse));
 }

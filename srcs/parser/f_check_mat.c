@@ -35,7 +35,7 @@ int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
 }
 
 int		check_mat(t_env *e, t_obj *obj, char *l1, char *l2)
- {
+{
 	if (!(ft_strcmp(l1, "mat")))
  	{
  		if (check_file_ext(l2, ".mat") && l2[0])
@@ -56,4 +56,4 @@ int		check_mat(t_env *e, t_obj *obj, char *l1, char *l2)
 	}
 	else
 		return (check_mat2(e, obj, l1, l2));
- }
+}
