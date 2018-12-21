@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/21 11:32:00 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/21 17:58:33 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -399,6 +399,7 @@ static const t_objfx	g_ref[] = {
 	{"torus", &parse_obj, NULL, NULL, NULL},
 	{"cuboid", &parse_obj, &cuboid_line, &cuboid_norm, &cuboid_isptin},
 	{"grad", &parse_grad, NULL, NULL, NULL},
+	{"anchor", &parse_obj, NULL, NULL, NULL},
 	{"preset", &parse_prst, NULL, NULL, NULL},
 	{"", NULL, NULL, NULL, NULL}
 };

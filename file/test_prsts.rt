@@ -1,30 +1,49 @@
 camera{
-	ty: 100
-	tz:40
-	rotx:100
-	roty:10
+	ty: 200
+	tz: 100
 	r:0
 	ssaa:2
 }
 
-light{
-	ty:20
+camera{
+	tz: 100
+	r: 0
+	para: 1
+	fov: 300
 }
 
-
-cylinder{
-	v1:10
-	tx:100
-	ty:-10
-	texture: none
+light{
+	t:~, 20, 100
 }
 
 sphere{
-	rotz:-90
+	id: 10
+	v: 10
+	pos: 10, 50, ~
+	scale: 1.5
+	rotz: 45
+}
+
+sphere{
+	link: 10
+	rotz:90
 	v1:10
 	tx:100
-	ty:10
-	texture: monde.bmp
+	txt: monde.bmp
+}
+
+cylinder{
+	v: 2
+	tz: -30
+	roty: 90
+	color: #4cbf95;
+}
+
+cylinder{
+	v: 2
+	tz: -30
+	rotx: 90
+	color: #9dbf4c;
 }
 
 plane
@@ -32,8 +51,7 @@ plane
 	tx:200
 	tz: -30
 	roty : 90
-	c:#00FFFF
-	texture: none
+	c:#584d73
 }
 
 preset{

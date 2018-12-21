@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:25:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/21 13:48:37 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/21 18:04:41 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,10 @@ t_reslist				intersec(t_rendering *r, t_line line)
 	b = r->e->s.objs;
 	while (b)
 	{
+		if (!g_ref[b->type].intersec
+		|| (!g_ref[b->type].norm)
+		|| (!g_ref[b->type].isptin))
+			continue ;
 		l = rtrans_line(line, &b->m);
 		g_ref[b->type].intersec(r->e, l, b, &list);
 		b = b->next;
