@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:29:24 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/19 18:44:05 by gperez           ###   ########.fr       */
+/*   Updated: 2018/12/21 17:39:22 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,6 @@ void	fill_color_scale(t_obj obj, t_color c[2], int *scale)
 }
 
 
-/*t_color	perlin_noise(t_obj obj, t_pt pt)
-{
-	t_color	out;
-
-	out.i = 0xFFFFFF;
-	(void)pt;
-	(void)obj;
-	return (out);
-}*/
-
 t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 {
 	(void)pert;
@@ -64,8 +54,8 @@ t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 	t_color	c[2];
 	int		scale;
 
-	/*if (obj.type == 6)
-	{*/
+	if (obj.type == 6)
+	{
 		scale = 0;
 		fill_color_scale(obj, c, &scale);
 		if (((int)((pt.y + OFFSET) / scale) % 2 == 0)
@@ -75,8 +65,8 @@ t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 		else
 			out = c[1];
 		return (out);
-//	}
-//	return (perlin_noise(obj, pt));
+	}
+	return (perlin_noise(obj, pt));
 }
 
 
