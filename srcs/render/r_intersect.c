@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:25:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/12 14:54:03 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/21 12:35:04 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,7 @@ inline static t_reslist	get_touch(t_reslist *list, t_line line)
 			out = *list;
 			out.o = tmpobj;
 			out.cam = normalise(get_line(list->pt, line.m).v);
-			out.n = normalise(g_ref[list->o->type].norm(
-				vecpro(unrot(apply(vecpro(list->o->m.t, -1), list->pt),
-				list->o->m.rot), 1 / list->o->m.scale), *list->o, out.cam));
+			out.n = normalise(g_ref[list->o->type].norm(list->pt, *list->o, out.cam));
 			free(list);
 			return (out);
 		}

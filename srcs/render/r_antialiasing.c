@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/14 15:38:11 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/21 12:14:59 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,14 @@ inline static t_line	get_camline(t_cam c, int i)
 	if (c.data.para)
 	{
 		step = d->fov / d->dimx;
-		out.m = apply(rot((t_vec){0, d->fov / 2 - step * (i % d->dimx + 1),
-			d->dimy * step / 2 - step * (i / c.data.dimx + 1)},
-			c.m.rot), c.m.t);
+		out.m = apply(trans_vec((t_vec){0, d->fov / 2 - step * (i % d->dimx + 1), d->dimy * step / 2 - step * (i / c.data.dimx + 1)}, &c.m), c.m.t);
 		out.v= d->vp_ul;
 	}
 	else
 	{
-		out.v = rot((t_vec){(double)(c.data.dimx / 2) / tan(rad(c.data.fov) / 2),
+		out.v = trans_vec((t_vec){(double)(c.data.dimx / 2) / tan(rad(c.data.fov) / 2),
 		c.data.dimx / 2 - i % c.data.dimx + 1,
-		c.data.dimy / 2 - i / c.data.dimx + 1}, c.m.rot);
+		c.data.dimy / 2 - i / c.data.dimx + 1}, &c.m);
 	}
 	return (out);
 }

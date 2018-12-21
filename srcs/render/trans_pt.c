@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tranformation.c                                    :+:      :+:    :+:   */
+/*   trans_pt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/19 17:46:45 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/19 19:12:10 by kdouveno         ###   ########.fr       */
+/*   Created: 2018/12/21 10:54:04 by kdouveno          #+#    #+#             */
+/*   Updated: 2018/12/21 12:06:38 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_3d	trans_3d(t_3d in, t_obj *o)
+t_pt	trans_pt(t_pt in, t_matrix *o)
 {
 	while (o)
 	{
-		in = apply(rev_3d(o->m.l.pt), in);
-		in = unrot(in, o->m.rot);
-		in = apply(rev_3d(o->m.t), in);
-		o = (t_obj*)o->m.l.target;
+		in = apply(rev_3d(o->l.pt), in);
+		in = unrot(in, o->rot);
+		in = apply(rev_3d(o->t), in);
+		o = (t_matrix*)o->l.target;
 	}
 	return (in);
 }
 
-t_3d	rtrans3d(t_3d in, t_obj *o)
+static void	rtfr_pt(t_pt *out, t_matrix *o)
 {
-	rtfr_3d(t_3d &in, o);
-	return (in);
+	if (o->l.target)
+		rtfr_pt(out, o->l.target);
+	*out = apply(rev_3d(o->l.pt), *out);
+	*out = unrot(*out, o->rot);
+	*out = apply(rev_3d(o->t), *out);
 }
 
-void	rtfr_3d(t_3d *out, t_obj *o)
+t_pt	rtrans_pt(t_pt in, t_matrix *o)
 {
-	if (o->m.l.target)
-		rtfr_3d(out, o->m.l.target);
-	*out = apply(rev_3d(o->m.l.pt), *out);
-	*out = unrot(*out, o->m.rot);
-	*out = apply(rev_3d(o->m.t), *out);
+	rtfr_pt(&in, o);
+	return (in);
 }

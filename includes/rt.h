@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/19 15:18:38 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/21 11:32:00 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,11 +348,12 @@ t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
 t_reslist				intersec(t_rendering *r, t_line line);
 void					aaa(t_rendering *r);
 t_color					rec_raytrace(t_rendering *r, t_line l, int m);
-
-
-
-
-
+t_line					trans_line(t_line in, t_matrix *o);
+t_line					rtrans_line(t_line in, t_matrix *o);
+t_pt					trans_pt(t_pt in, t_matrix *o);
+t_pt					rtrans_pt(t_pt in, t_matrix *o);
+t_vec					trans_vec(t_vec in, t_matrix *o);
+t_vec					rtrans_vec(t_vec in, t_matrix *o);
 
 void					sphere_line(t_env *e, t_line d, t_obj *o,
 	t_reslist **rlist);
