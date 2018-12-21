@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 11:12:40 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/14 15:38:24 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/21 16:52:52 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int		parse_3d(t_env *e, t_pt *pt, char *l2)
 
 void	parse_loc(t_env *e, t_obj *o, char *l2)
 {
-	if (parse_3d(e, &o->m.l.pt, l2))
+	if (parse_3d(e, &o->m.pt, l2))
 		o->m.l.id = ft_atoi(l2);
 }
