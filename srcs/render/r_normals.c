@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 17:31:48 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/12 14:28:38 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/21 13:45:21 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_vec	cylinder_norm(t_pt pt, t_obj obj, t_vec v)
 	double	tmp;
 
 	(void)v;
-	out = rot((t_vec){pt.x, pt.y, 0}, obj.m.rot);
+	out = rtrans_vec((t_vec){pt.x, pt.y, 0}, &obj.m);
 	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
 		out = rev_3d(out);
 	return (out);
@@ -30,7 +30,7 @@ t_vec	cone_norm(t_pt pt, t_obj obj, t_vec v)
 	double	tmp;
 
 	(void)v;
-	out = rot((t_vec){pt.x, pt.y, -sq(tan(obj.v[0] )) * pt.z}, obj.m.rot);
+	out = rtrans_vec((t_vec){pt.x, pt.y, -sq(tan(obj.v[0] )) * pt.z}, &obj.m);
 	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
 		out = rev_3d(out);
 	return (out);
@@ -42,7 +42,7 @@ t_vec	sphere_norm(t_pt pt, t_obj obj, t_vec v)
 	double	tmp;
 
 	(void)obj;
-	out = rot(pt, obj.m.rot);
+	out = rtrans_vec(pt, &obj.m);
 	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
 		out = rev_3d(out);
 	return (out);
@@ -53,7 +53,7 @@ t_vec	plane_norm(t_pt pt, t_obj obj, t_vec v)
 	t_vec	out;
 	double	tmp;
 
-	out = rot((t_vec){1, 0, 0}, obj.m.rot);
+	out = rtrans_vec((t_vec){1, 0, 0}, &obj.m);
 	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
 		out = rev_3d(out);
 	(void)pt;
@@ -83,7 +83,7 @@ t_vec	cuboid_norm(t_pt pt, t_obj obj, t_vec v)
 			out = (t_vec){0, 0, 1};
 		i++;
 	}
-	out = rot(out, obj.m.rot);
+	out = rtrans_vec(out, &obj.m);
 	if ((t = scalar_product(normalise(out), v)) > 1 || t < 0)
 		out = rev_3d(out);
 	return (out);
