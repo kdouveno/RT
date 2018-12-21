@@ -14,5 +14,5 @@
 
 t_matrix	zero_matrix()
 {
-	return ((t_matrix){{-1, 0, {0, 0, 0}, NULL}, {0, 0, 0}, {0, 0, 0}, -1, -1});
+	return ((t_matrix){{-1, NULL}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, -1, 1});
 }

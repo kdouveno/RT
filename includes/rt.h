@@ -88,24 +88,21 @@ typedef struct			s_objlist
 	struct s_objlist	*next;
 }						t_objlist;
 
-typedef struct			s_loc
+typedef struct			s_link
 {
 	int					id;
-	int					lock;
-	t_pt				pt;
 	struct s_matrix		*target;
-}						t_loc;
+}						t_link;
 
 typedef struct			s_matrix
 {
-	t_loc				l;
+	t_link				l;
+	t_pt				pt;
 	t_vec				t;
 	t_3d				rot;
 	double				r;
 	double				scale;
 }						t_matrix;
-
-
 
 typedef struct			s_cam_render
 {
@@ -306,7 +303,7 @@ void					parse_color(t_obj *obj, char *l2, t_grad *grad, int nb);
 void					creat_clips(t_env *e, t_obj *obj, char *l2);
 void					stock_obj(t_env *e, t_obj *obj, char *l1, char *l2);
 
-void					parse_loc(t_env *e, t_obj *o, char *l2);
+void					parse_loc(t_env *e, t_obj *o, char *l2); // UNUSED
 int						parse_3d(t_env *e, t_pt *pt, char *l2);
 
 int						check_pt(void *cam, char* l1, char *l2);

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 13:51:39 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/18 18:14:07 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/21 17:38:24 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ int		check_loc(t_env *e, void *obj, char *l1, char *l2)
 	t_obj *o;
 
 	o = (t_obj*)obj;
-	if (!ft_strcmp(l1, "loc"))
-		parse_loc(e, o, l2);
+	if (!ft_strcmp(l1, "pos"))
+		return (parse_3d(e, &o->m.pt, l2));
 	else if (!ft_strcmp(l1, "t"))
-		parse_3d(e, &o->m.t, l2);
+		return (parse_3d(e, &o->m.t, l2));
+	else if (!ft_strcmp(l1, "link"))
+		o->m.l.id = ft_atoi(l2);
 	else if (!ft_strcmp(l1, "rot"))
-		parse_3d(e, &o->m.rot, l2);
+		return (parse_3d(e, &o->m.rot, l2));
 	else
 		return (1);
 	return (0);

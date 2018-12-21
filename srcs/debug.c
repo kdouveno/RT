@@ -22,7 +22,7 @@ static void	debug_grad(t_grad *save)
 		"Color2: %06x\nID: %d\nOrigin: %d %p (%f, %f, %f)\n\n",
 		save->m.t.x, save->m.t.y, save->m.t.z,
 		save->r.x, save->r.y, save->r.z,
-		save->c1.i,save->c2.i, save->id, save->m.l.id, save->m.l.target, save->m.l.pt.x, save->m.l.pt.y, save->m.l.pt.z);
+		save->c1.i,save->c2.i, save->id, save->m.l.id, save->m.l.target, save->m.pt.x, save->m.pt.y, save->m.pt.z);
 		save = save->next;
 	}
 }
@@ -41,7 +41,7 @@ static void	debug_objs(t_obj *save, t_clip *clips)
 		save->mat.color.i,
 		save->mat.color.p.a, save->mat.color.p.r, save->mat.color.p.g,
 		save->mat.color.p.b, save->mat.diff, save->mat.spec,save->mat.refl, save->mat.txt,
-		save->id, save, save->grad, save->m.l.id, save->m.l.target, save->m.l.pt.x, save->m.l.pt.y, save->m.l.pt.z);
+		save->id, save, save->grad, save->m.l.id, save->m.l.target, save->m.pt.x, save->m.pt.y, save->m.pt.z);
 		printf("\033[38;5;136m");
 		clips = save->clips;
 		while (clips != NULL)
@@ -67,7 +67,7 @@ static void	debug_lits(t_lit *save)
 		"argb(%d, %d, %d, %d)\nID: %d\nOrigin: %d %p (%f, %f, %f)\n\n",
 		save->m.t.x, save->m.t.y, save->m.t.z,
 		save->power, save->color.i, save->color.p.a, save->color.p.r, save->color.p.g,
-		save->color.p.b, save->id, save->m.l.id, save->m.l.target, save->m.l.pt.x, save->m.l.pt.y, save->m.l.pt.z);
+		save->color.p.b, save->id, save->m.l.id, save->m.l.target, save->m.pt.x, save->m.pt.y, save->m.pt.z);
 		printf("%p\n", &save->m);
 
 		save = save->next;
@@ -85,7 +85,7 @@ static void	debug_cams(t_cam *save)
 		save->m.t.x, save->m.t.y, save->m.t.z,
 		save->m.rot.x, save->m.rot.y, save->m.rot.z,
 		save->data.ssaa, save->data.fov, save->data.dimx,
-		save->data.dimy, save->id, save->m.l.id, save->m.l.target, save->m.l.pt.x, save->m.l.pt.y, save->m.l.pt.z);
+		save->data.dimy, save->id, save->m.l.id, save->m.l.target, save->m.pt.x, save->m.pt.y, save->m.pt.z);
 		save = save->next;
 	}
 }
