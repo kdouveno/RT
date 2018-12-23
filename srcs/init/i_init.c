@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/19 15:18:27 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/22 17:22:49 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		init_grad(t_scene *s)
 	while (grads)
 	{
 		grads->m.rot = get_rot(grads->m.rot, 0);
-		grads->r = get_vector(grads->m.t, grads->r);
+		grads->r = get_vector(grads->m.pt, grads->r);
 		link_locs(s, grads);
 		grads = grads->next;
 	}
@@ -68,7 +68,7 @@ void		init_cam_vecs(t_cam *cams)
 
 	d = &cams->data;
 	step = 1;
-	d->pt_ul = cams->m.t;
+	d->pt_ul = cams->m.pt;
 	if (d->para)
 	{
 		step = d->fov / d->dimx;
@@ -95,7 +95,7 @@ void		init_cam(t_env *e, t_scene *s)
 	{
 		d = &cams->data;
 		if (cams->m.r >= 0)
-			cams->m.rot = get_rot(get_vector(cams->m.t, cams->m.rot), cams->m.r);
+			cams->m.rot = get_rot(get_vector(cams->m.pt, cams->m.rot), cams->m.r);
 		else
 			cams->m.rot = (t_3d){rad(cams->m.rot.x),
 			rad(cams->m.rot.y), rad(cams->m.rot.z)};

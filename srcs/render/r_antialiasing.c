@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/21 12:14:59 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/22 17:22:31 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ inline static t_line	get_camline(t_cam c, int i)
 	t_cam_render	*d;
 
 	d = &c.data;
-	out = (t_line){c.m.t, {}};
+	out = (t_line){c.m.pt, {}};
 	i++;
 	if (c.data.para)
 	{

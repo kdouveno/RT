@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 15:44:27 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/12 14:10:35 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/22 17:23:58 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		link_color_grad(t_env *e)
 	grads = e->s.grads;
 	while (grads)
 	{
-		if (grads->b.c1 == 1 && is_vec_null(get_vector(grads->m.t, grads->m.rot)))
+		if (grads->b.c1 == 1 && is_vec_null(get_vector(grads->m.pt, grads->m.rot)))
 			grad_vec_null(grads, e->s.grads);
 		else if (grads->b.c1 == 1 || grads->b.c2 == 1)
 			grad_vec_nonull(grads, e->s.grads);
