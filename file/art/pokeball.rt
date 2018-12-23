@@ -1,0 +1,104 @@
+camera{
+	pos: 100, 20, 20
+	r: 0
+}
+
+camera{
+	pos: 100, ~, ~
+	r: 0
+	para: 1
+	fov: 150
+}
+
+light{
+	pos: 200, 100, 100
+}
+anchor{
+	id: 10
+	pos: ~, ~, ~
+	rotx: 30
+}
+
+sphere{
+	id: 4
+	pos: ~, ~, ~
+	link: 10
+	v: 50.000001
+	color: #ff3030
+	reflexion: .1
+	clip: 5
+	clip: 3
+}
+
+plane{
+	link: 4
+	id: 3
+	roty: 90
+	pos: ~, ~, 5
+}
+
+sphere{
+	id: 6
+	link: 10
+	v: 50
+	color: #ffffff
+	reflexion: .1
+	clip: 5
+	clip: 2
+}
+
+plane{
+	id: 2
+	roty: -90
+	pos: ~, ~, -5
+	link: 6
+}
+
+sphere{
+	link: 10
+	v: 49.999
+	color: #000000
+}
+
+cylinder {
+	id: 5
+	link: 10
+	v: 10
+	roty: 90
+	clip: 7
+}
+
+plane{
+	link: 10
+	id: 7
+	rotz: 180
+}
+
+sphere{
+	id: 8
+	link: 10
+	pos: 25, ~, ~
+	v: 27
+	txt_bm: test2.bmp
+	clip: 9
+}
+
+sphere{
+	id: 9
+	link: 8
+	v: 28
+	clip: 11
+}
+
+cylinder{
+	id: 11
+	link: 9
+	roty: 90
+	v: 6
+}
+
+plane{
+	texture: none
+	roty: 90
+	pos: ~, ~, -50
+}

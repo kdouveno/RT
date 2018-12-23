@@ -1,0 +1,11 @@
+camera{
+	pos: 100, 20, 20
+	r: 0
+}
+light{
+	pos: 100, 100, 100
+}
+sphere{
+	v:50
+	txt_bm: test2.bmp
+}
