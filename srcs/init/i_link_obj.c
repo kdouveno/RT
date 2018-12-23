@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/15 17:16:40 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/23 12:26:32 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,16 @@ void	link_clips(t_env *e)
 	t_clip	*clips;
 
 	objs = e->s.objs;
-	while (objs != NULL)
+	while (objs)
 	{
-		check = e->s.objs;
 		clips = objs->clips;
-		while (clips != NULL)
+		while (clips)
 		{
 			check = e->s.objs;
-			while ((check != NULL)
-				&& (clips->id != check->id && -clips->id != check->id))
+			while ((check) && (clips->id != check->id))
 				check = check->next;
-			if ((check != NULL)
-				&& (clips->id == check->id || -clips->id == check->id))
-					link_clip(e, check, clips, objs);
+			if (check)
+				link_clip(e, check, clips, objs);
 			clips = clips->next;
 		}
 		objs = objs->next;
