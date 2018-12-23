@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:25:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/21 18:04:41 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/23 12:49:05 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,26 @@ static t_obj			*is_tangible(t_obj *o, t_pt pt, t_obj *last)
 {
 	t_clip	*c;
 	int		pc;
-	t_obj	*pd;
-	t_obj	*pdp;
+	t_obj	*d;
+	t_obj	*p;
 
-	pd = is_cind(o, pt);
+	d = is_cind(o, pt);
 	pc = 1;
-	pdp = pd && pd != last && (!last || o->b.clip) ? is_tangible(pd, pt, o) : pd;
+	p = d && d != last && (!last || o->b.clip) ? is_tangible(d, pt, o) : d;
 	c = o->clips;
 	if (!o->b.clip && !last)
 		last = o;
 	while (c){
-		if (c->obj && c->obj != last && is_tangible(c->obj, pt, o) && g_ref[c->obj->type].isptin(pt, *c->obj))
+		if (c->obj && c->obj != last && is_tangible(c->obj, pt, o) &&
+		g_ref[c->obj->type].isptin(pt, *c->obj))
 		{
 			pc = 0;
 			break ;
 		}
 		c = c->next;
 	}
-	if (o->b.clip && pc == 1 && pd && pdp)
-		return (pdp);
+	if (o->b.clip && pc == 1 && d && p)
+		return (p);
 	if (!o->b.clip && pc)
 		return (o);
 	return (NULL);
@@ -102,7 +103,10 @@ t_reslist				intersec(t_rendering *r, t_line line)
 		if (!g_ref[b->type].intersec
 		|| (!g_ref[b->type].norm)
 		|| (!g_ref[b->type].isptin))
+		{
+			b = b->next;
 			continue ;
+		}
 		l = rtrans_line(line, &b->m);
 		g_ref[b->type].intersec(r->e, l, b, &list);
 		b = b->next;
