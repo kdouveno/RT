@@ -53,7 +53,7 @@ t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 	t_color	out;
 	t_color	c[2];
 	int		scale;
-
+	(void)pert;
 	if (obj.type == 6)
 	{
 		scale = 0;
@@ -68,7 +68,6 @@ t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 	}
 	return (perlin_noise(obj, pt));
 }
-
 
 t_color	get_grad_color(t_pt pt, t_grad *grad)
 {
@@ -99,7 +98,6 @@ t_color get_pt_color(t_obj obj, t_pt pt, t_vec *pert)
 {
 	t_color	out;
 
-	(void)pert;
 	if (obj.mat.txt)
 	{
 		if (!(ft_strcmp(obj.mat.txt->userdata, "none")))

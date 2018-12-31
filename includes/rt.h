@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/21 17:41:40 by gperez           ###   ########.fr       */
+/*   Updated: 2018/12/20 16:17:18 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,6 +338,8 @@ t_reslist				intersec(t_rendering *r, t_line line);
 void					aaa(t_rendering *r);
 t_color					rec_raytrace(t_rendering *r, t_line l, int m);
 t_color					perlin_noise(t_obj obj, t_pt pt);
+double					rand_noise(int t);
+
 
 
 
