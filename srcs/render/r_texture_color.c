@@ -77,16 +77,12 @@ t_color	plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 {
 	double	x;
 	double	y;
-	t_vec	ang;
 	t_color	out;
 	char	*pixels;
 
 	pixels = txt->pixels;
-	ang = get_rot(unrot(get_vector(obj.m.t, pt), obj.m.rot), 0);
-	x = ang.z + M_PI;
-	y = ang.y + M_PI_2;
-	x = (txt->w * x) / (2 * M_PI) + (txt->w * obj.mat.offx / 100);
-	y = (txt->h * y) / M_PI + (txt->h * obj.mat.offy / 100);
+	x = pt.x;
+	y = pt.y;
 	if ((int)x > txt->w)
 		x = (int)x % txt->w;
 	if ((int)y > txt->h)
@@ -95,7 +91,8 @@ t_color	plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 	if (pert && obj.mat.txt_bm && !(ft_strcmp(obj.mat.txt_bm->userdata, "fill"))
 		&& txt == obj.mat.txt_bm)
 		*pert = normalise(perturbation(x, y, txt->w, pixels));
-	return (out);}
+	return (out);
+}
 
 
 t_color	texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
