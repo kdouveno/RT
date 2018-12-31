@@ -92,6 +92,8 @@ sphere / cylinder / cone / plane / pyramid / torus / cuboid{
 	reflexion: (coef)
 	c / color: [(ID) | (HEX6)]
 	texture: [(FILE.rt) | none]
+	offx: (double)
+	offy: (double)
 
 	v / v1: (double)
 	v2: (double)

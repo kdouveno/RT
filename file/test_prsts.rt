@@ -34,6 +34,7 @@ sphere{
 	diff:0.5
 	spec:0.7
 	rotz:-180
+	offx:50
 	v1:40
 	tx:100
 	ty:10

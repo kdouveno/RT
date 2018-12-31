@@ -9,6 +9,23 @@ double	get_coef(double nb)
 	return (nb);
 }
 
+int		check_mat3(t_env *e, t_obj *obj, char *l1, char *l2)
+{
+	(void)e;
+	if(!(ft_strcmp(l1, "offx")))
+	{
+		obj->mat.offx = ft_atod(l2);
+		return (0);
+	}
+	else if(!(ft_strcmp(l1, "offy")))
+	{
+		obj->mat.offy = ft_atod(l2);
+		return (0);
+	}
+	else
+		return (1);
+}
+
 int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "c")) || !(ft_strcmp(l1, "color")))
@@ -31,7 +48,8 @@ int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
 		link_texture(e, obj, ft_strjoin("textures/", l2), 'b');
 		return (0);
 	}
-	return (1);
+	else
+		return (check_mat3(e, obj, l1, l2));
 }
 
 int		check_mat(t_env *e, t_obj *obj, char *l1, char *l2)
