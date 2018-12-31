@@ -78,8 +78,8 @@ typedef struct			s_mat
 	float				diff;
 	float				spec;
 	float				refl;
-	float				offx;
-	float				offy;
+	int					offx;
+	int					offy;
 	SDL_Surface			*txt;
 	SDL_Surface			*txt_bm;
 }						t_mat;
