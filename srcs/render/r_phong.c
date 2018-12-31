@@ -67,11 +67,13 @@ t_color			soft_shadow(t_rendering *r, t_reslist res, t_lit l, int rec)
 	t_pt		pts[6];
 	int			i;
 
+
 	out = (t_color) (unsigned)AMASK;
 	if (rec > SHADOW_REC && !(i = 0))
 		return (out);
-	out = rgbadd(out,
-		ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt, NULL), AMB_L));
+	if (rec == 1)
+		out = rgbadd(out,
+			ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt, NULL), AMB_L));
 	if ((obj = intersec(r, get_line(l.m.t, res.pt))).t > 1 - PRE)
 		out = rgbadd(out, phong(l, res));
 	else if (l.radius != 0.0f && obj.o != res.o)

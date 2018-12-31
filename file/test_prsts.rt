@@ -1,10 +1,13 @@
+scene{
+	lights: auto
+}
+
 camera{
 	ty: -100
 	tz:40
 	rotx:100
 	roty:10
 	r:0
-	ssaa:2
 }
 
 camera{
@@ -13,7 +16,14 @@ camera{
 	roty:10
 	fov: 60
 	r:0
-	ssaa:2
+}
+
+camera{
+	t: -150, ~, 150
+	rotx:100
+	roty:10
+	fov: 60
+	r:0
 }
 
 light{
@@ -27,8 +37,8 @@ sphere{
 	v1:40
 	tx:100
 	ty:10
-	txt: deg.bmp
-	txt_bm: deg.bmp
+	txt: monde.bmp
+	txt_bm: monde.bmp
 }
 
 plane
