@@ -1,34 +1,40 @@
 camera{
-	ty: 200
-	tz: 100
+	pos: ~, 200, 100
 	r:0
 	ssaa:2
+	link: 10
+}
+
+anchor{
+	id: 10
+	rot: 40, ~,90
 }
 
 camera{
-	tz: 100
+	pos: ~, ~, 100
 	r: 0
 	para: 1
 	fov: 300
+	link: 10
 }
 
 light{
-	t:~, 20, 100
+	pos: ~, 200, 100
 }
 
 sphere{
-	id: 10
 	v: 10
 	pos: 10, 50, ~
 	scale: 1.5
 	rotz: 45
+	link: 10
 }
 
 sphere{
 	link: 10
-	rotz:90
-	v1:10
-	tx:100
+	rotz: 90
+	v1: 10
+	tx: 100
 	txt: monde.bmp
 }
 
@@ -52,9 +58,4 @@ plane
 	tz: -30
 	roty : 90
 	c:#584d73
-}
-
-preset{
-	tx:	20
-	src: test_prsts.rt
 }

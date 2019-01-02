@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/22 17:22:49 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/02 18:09:20 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,17 @@ void		init_cam_vecs(t_cam *cams)
 
 	d = &cams->data;
 	step = 1;
-	d->pt_ul = cams->m.pt;
+	d->pt_ul = trans_pt((t_pt){0, 0, 0}, &cams->m);
 	if (d->para)
 	{
 		step = d->fov / d->dimx;
-		d->vp_ul = rot((t_vec){1,
-			0, 0}, cams->m.rot);
-		d->pt_ul = apply(rot((t_vec){0, d->fov / 2, d->dimy * step / 2},
-			cams->m.rot), d->pt_ul);
+		d->vp_ul = trans_vec((t_vec){1, 0, 0}, &cams->m);
+		d->pt_ul = apply(trans_vec((t_vec){0, d->fov / 2, d->dimy * step / 2},
+			&cams->m), d->pt_ul);
 	}
 	else
-		d->vp_ul = rot((t_vec){(double)(d->dimx / 2) / tan(rad(d->fov) / 2),
-			d->dimx / 2, d->dimy / 2}, cams->m.rot);
+		d->vp_ul = trans_vec((t_vec){(double)(d->dimx / 2) /
+			tan(rad(d->fov) / 2), d->dimx / 2, d->dimy / 2}, &cams->m);
 	d->x = rot((t_vec){0, -step, 0}, cams->m.rot);
 	d->y = rot((t_vec){0, 0, -step}, cams->m.rot);
 	d->xy = rot((t_vec){0, step * (d->dimx - 1), -step}, cams->m.rot);

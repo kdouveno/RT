@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:25:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/23 12:49:05 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/02 17:48:43 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ inline static t_reslist	get_touch(t_reslist *list, t_line line)
 	while (list)
 	{
 		list->pt = get_linept(line, list->t);
-
 		if ((tmpobj = is_tangible(list->o, list->pt, NULL)) && !tmpobj->b.clip)
 		{
 			out = *list;
