@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/03 16:24:31 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/03 17:37:56 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ typedef struct			s_grad
 	t_matrix			m;
 	int					id;
 	t_3d				r;
+	t_pt				cpt;
 	t_color				c1;
 	t_color				c2;
 	t_bool				b;

@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:29:24 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/22 17:09:37 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/03 17:41:21 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_color	get_grad_color(t_pt pt, t_grad *grad)
 	t_vec z;
 	float t;
 
-	v = get_vector(grad->m.pt, pt);
+	v = get_vector(grad->cpt, pt);
 	dir = normalise(grad->r);
 	z = vecpro(dir, scalar_product(v, dir));
 	if (grad->r.x)

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/03 17:28:38 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/03 17:39:45 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void		init_grad(t_scene *s)
 	while (grads)
 	{
 		link_locs(s, grads);
-		grads->m.rot = get_rot(grads->m.rot, 0);
-		grads->r = get_vector(grads->m.pt, grads->r);
+		grads->cpt = trans_pt((t_pt){0, 0, 0}, &grads->m);
+		grads->r = trans_vec(get_vector(grads->m.pt, grads->r), &grads->m);
 		grads = grads->next;
 	}
 }

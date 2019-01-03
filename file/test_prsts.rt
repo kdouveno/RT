@@ -1,5 +1,5 @@
 anchor{
-	id: 10
+	id: -1
 	pos: 20, 200, 50
 	rot: 40, 75, 90
 }
@@ -13,8 +13,8 @@ camera{
 	pos: ~, ~, 100
 	r: 0
 	para: 1
-	fov: 300
-	link: 10
+	fov: 30
+	link: 58
 }
 
 light{
@@ -23,14 +23,21 @@ light{
 }
 
 sphere{
+	id: 58
 	v: 10
-	pos: 10, 50, ~
+	pos: 10, 20, ~
 	scale: 1.5
 	rotz: 45
 	link: 10
+	color: 59
 }
 grad{
-
+	id: 59
+	pos: 5, ~, ~
+	dir: -5, ~, ~
+	c1: #d814c8
+	c2: #3db969
+	link: 58
 }
 sphere{
 	rotz: 90
