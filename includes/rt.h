@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/21 17:58:33 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/03 16:24:31 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct			s_lit
 	int					id;
 	double				power;
 	double				radius;
+	t_pt				cpt;
 	t_color				color;
 	t_bool				b;
 }						t_lit;

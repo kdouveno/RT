@@ -3,13 +3,11 @@ scene{
 }
 
 camera{
-	loc: 12
 	t: 60, 30, 60
 	r: 0
 	fov: 85
 	rotx: -100
 	para:
-	ssaa: 4
 }
 
 camera{
@@ -96,10 +94,10 @@ plane{
 
 grad{
 	id:65
-	t:-100, -32, ~
-	dir:-100, 32, ~
-	c1:#FF0000
-	c2:#0000FF
+	pos: -100, -32, ~
+	dir: -100, 32, ~
+	c1: #FF0000
+	c2: #0000FF
 }
 
 grad{

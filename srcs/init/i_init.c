@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/03 15:54:38 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/03 17:28:38 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void		init_grad(t_scene *s)
 	grads = s->grads;
 	while (grads)
 	{
+		link_locs(s, grads);
 		grads->m.rot = get_rot(grads->m.rot, 0);
 		grads->r = get_vector(grads->m.pt, grads->r);
-		link_locs(s, grads);
 		grads = grads->next;
 	}
 }
@@ -118,6 +118,8 @@ t_color		init_lit_scene(t_env *e, t_scene *s)
 	p = s->prsts;
 	while (l)
 	{
+		link_locs(s, l);
+		l->cpt = trans_pt((t_pt){0, 0, 0}, &l->m);
 		s->amb_lit_c = rgbadd(s->amb_lit_c, l->color);
 		while (p)
 		{

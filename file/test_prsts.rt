@@ -1,7 +1,7 @@
 anchor{
 	id: 10
-	pos: 20, 200, ~
-	rot: 40, 45, 90
+	pos: 20, 200, 50
+	rot: 40, 75, 90
 }
 
 camera{
@@ -19,6 +19,7 @@ camera{
 
 light{
 	pos: ~, 200, 100
+	link: 10
 }
 
 sphere{
@@ -28,11 +29,13 @@ sphere{
 	rotz: 45
 	link: 10
 }
+grad{
+
+}
 sphere{
 	rotz: 90
 	v1: 10
 	tx: 100
-	txt: monde.bmp
 }
 cylinder{
 	v: 2
@@ -48,8 +51,8 @@ cylinder{
 }
 plane
 {
-	tx:200
+	tx: 200
 	tz: -30
-	roty : 90
-	c:#584d73
+	roty: 90
+	c: #584d73
 }

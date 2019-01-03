@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:24:37 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/22 17:13:41 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/03 16:28:53 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_color					phong(t_lit l, t_reslist res)
 	t_color		obj_color;
 
 	obj_color = get_pt_color(*res.o, res.pt);
-	lnc[0] = normalise(get_line(res.pt, l.m.pt).v);
+	lnc[0] = normalise(get_vector(res.pt, l.cpt));
 	lnc[2] = res.cam;
 	lnc[1] = res.n;
 	diffuse = rgbpro(rgbmin(l.color, rgbneg(obj_color)),
@@ -66,22 +66,22 @@ t_color			soft_shadow(t_rendering *r, t_reslist res, t_lit l, int rec)
 	t_pt		pts[6];
 	int			i;
 
-	out = (t_color) (unsigned)AMASK;
+	out = (t_color)(unsigned)AMASK;
 	if (rec > SHADOW_REC && !(i = 0))
 		return (out);
 	out = rgbadd(out,
 		ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt), AMB_L));
-	if ((obj = intersec(r, get_line(l.m.pt, res.pt))).t > 1 - PRE)
+	if ((obj = intersec(r, get_line(l.cpt, res.pt))).t > 1 - PRE)
 		out = rgbadd(out, phong(l, res));
 	else if (l.radius != 0.0f && obj.o != res.o)
 	{
-		pts[0] = (t_pt){l.m.pt.x + l.radius, l.m.pt.y, l.m.pt.z};
-		pts[1] = (t_pt){l.m.pt.x - l.radius, l.m.pt.y, l.m.pt.z};
-		pts[2] = (t_pt){l.m.pt.x, l.m.pt.y + l.radius, l.m.pt.z};
-		pts[3] = (t_pt){l.m.pt.x, l.m.pt.y - l.radius, l.m.pt.z};
-		pts[4] = (t_pt){l.m.pt.x, l.m.pt.y, l.m.pt.z + l.radius};
-		pts[5] = (t_pt){l.m.pt.x, l.m.pt.y, l.m.pt.z - l.radius};
-		while (((i++) || 1) && (i < 6) | (int)(l.m.pt = pts[i]).x)
+		pts[0] = (t_pt){l.cpt.x + l.radius, l.cpt.y, l.cpt.z};
+		pts[1] = (t_pt){l.cpt.x - l.radius, l.cpt.y, l.cpt.z};
+		pts[2] = (t_pt){l.cpt.x, l.cpt.y + l.radius, l.cpt.z};
+		pts[3] = (t_pt){l.cpt.x, l.cpt.y - l.radius, l.cpt.z};
+		pts[4] = (t_pt){l.cpt.x, l.cpt.y, l.cpt.z + l.radius};
+		pts[5] = (t_pt){l.cpt.x, l.cpt.y, l.cpt.z - l.radius};
+		while (((i++) || 1) && (i < 6) | (int)(l.cpt = pts[i]).x)
 			out = rgbadd(out, rgbpro(soft_shadow(r, res, l, rec + 1),
 			SHADOW_C));
 	}
