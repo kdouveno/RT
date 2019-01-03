@@ -1,15 +1,14 @@
-camera{
-	pos: ~, 200, 100
-	r:0
-	ssaa:2
-	link: 10
-}
-
 anchor{
 	id: 10
-	rot: 40, ~,90
+	pos: 20, 200, ~
+	rot: 40, 45, 90
 }
 
+camera{
+	pos: 0, 200, 100
+	r: 0
+	link: 10
+}
 camera{
 	pos: ~, ~, 100
 	r: 0
@@ -29,29 +28,24 @@ sphere{
 	rotz: 45
 	link: 10
 }
-
 sphere{
-	link: 10
 	rotz: 90
 	v1: 10
 	tx: 100
 	txt: monde.bmp
 }
-
 cylinder{
 	v: 2
 	tz: -30
 	roty: 90
 	color: #4cbf95;
 }
-
 cylinder{
 	v: 2
 	tz: -30
 	rotx: 90
 	color: #9dbf4c;
 }
-
 plane
 {
 	tx:200

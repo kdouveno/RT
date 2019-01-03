@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 10:54:04 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/21 16:52:52 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/03 15:08:22 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_pt	trans_pt(t_pt in, t_matrix *o)
 	while (o)
 	{
 		in = apply(o->t, in);
-		in = unrot(in, o->rot);
+		in = rot(in, o->rot);
 		in = vecpro(in, o->scale);
 		in = apply(o->pt, in);
 		o = (t_matrix*)o->l.target;

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/02 18:09:20 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/03 15:54:38 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void		init_cam_vecs(t_cam *cams)
 	else
 		d->vp_ul = trans_vec((t_vec){(double)(d->dimx / 2) /
 			tan(rad(d->fov) / 2), d->dimx / 2, d->dimy / 2}, &cams->m);
-	d->x = rot((t_vec){0, -step, 0}, cams->m.rot);
-	d->y = rot((t_vec){0, 0, -step}, cams->m.rot);
-	d->xy = rot((t_vec){0, step * (d->dimx - 1), -step}, cams->m.rot);
+	d->x = trans_vec((t_vec){0, -step, 0}, &cams->m);
+	d->y = trans_vec((t_vec){0, 0, -step}, &cams->m);
+	d->xy = trans_vec((t_vec){0, step * (d->dimx - 1), -step}, &cams->m);
 }
 
 void		init_cam(t_env *e, t_scene *s)
@@ -100,11 +100,11 @@ void		init_cam(t_env *e, t_scene *s)
 			rad(cams->m.rot.y), rad(cams->m.rot.z)};
 		d->dimx = DIMX;
 		d->dimy = DIMY;
+		link_locs(s, cams);
 		init_cam_vecs(cams);
 		if (!(d->render = SDL_CreateRGBSurface(0, d->dimx, d->dimy,
 		32, RMASK, GMASK, BMASK, AMASK)))
 			error(e, SDL_GetError());
-		link_locs(s, cams);
 		cams = cams->next;
 	}
 }

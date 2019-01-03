@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/22 17:22:31 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/03 15:46:34 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,19 @@ inline static t_line	get_camline(t_cam c, int i)
 	t_cam_render	*d;
 
 	d = &c.data;
-	out = (t_line){c.m.pt, {}};
+	out = (t_line){d->pt_ul, {}};
 	i++;
-	if (c.data.para)
+	if (d->para)
 	{
 		step = d->fov / d->dimx;
-		out.m = apply(trans_vec((t_vec){0, d->fov / 2 - step * (i % d->dimx + 1), d->dimy * step / 2 - step * (i / c.data.dimx + 1)}, &c.m), c.m.t);
-		out.v= d->vp_ul;
+		out.m = apply(trans_vec((t_vec){0, d->fov / 2 - step * (i % d->dimx + 1), d->dimy * step / 2 - step * (i / d->dimx + 1)}, &c.m), d->pt_ul);
+		out.v = d->vp_ul;
 	}
 	else
 	{
-		out.v = trans_vec((t_vec){(double)(c.data.dimx / 2) / tan(rad(c.data.fov) / 2),
-		c.data.dimx / 2 - i % c.data.dimx + 1,
-		c.data.dimy / 2 - i / c.data.dimx + 1}, &c.m);
+		out.v = trans_vec((t_vec){(double)(d->dimx / 2) / tan(rad(d->fov) / 2),
+		d->dimx / 2 - i % d->dimx + 1,
+		d->dimy / 2 - i / d->dimx + 1}, &c.m);
 	}
 	return (out);
 }
