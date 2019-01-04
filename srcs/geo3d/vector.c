@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 10:49:38 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/14 15:37:26 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:29:02 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 double	scalar_product(t_vec a, t_vec b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
+}
+
+t_vec	cross_product(t_vec a, t_vec b)
+{
+	return ((t_vec){a.y * b.z - a.z * b.y,
+		a.z * b.x - a.x * b.z,
+		a.x * b.y - a.y * b.x});
 }
 
 double	angle(t_vec a, t_vec b)

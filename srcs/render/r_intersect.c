@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:25:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/02 17:48:43 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/04 11:08:51 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ inline static t_reslist	get_touch(t_reslist *list, t_line line)
 		list = list->next;
 	}
 	free(list);
-	return ((t_reslist){NULL, {}, {}, {}, 0, NULL});
+	return ((t_reslist){NULL, {}, {}, {}, {}, 0, NULL});
 }
 
 t_reslist				intersec(t_rendering *r, t_line line)
@@ -94,8 +94,7 @@ t_reslist				intersec(t_rendering *r, t_line line)
 	t_reslist	*list;
 
 	list = NULL;
-
-	out = (t_reslist){NULL, {}, {}, {}, 0, NULL};
+	out = (t_reslist){NULL, {}, {}, {}, {}, 0, NULL};
 	b = r->e->s.objs;
 	while (b)
 	{

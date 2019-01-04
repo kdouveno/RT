@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/19 14:59:44 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/04 10:48:40 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ t_vec				rev_3d(t_vec v);
 t_pt				apply(t_vec v, t_pt p);
 double				angle(t_vec a, t_vec b);
 double				scalar_product(t_vec a, t_vec b);
+t_vec				cross_product(t_vec a, t_vec b);
 t_rot				get_rot(t_vec a, double x);
+
+t_vec				get_norm_plan(t_pt a, t_pt b, t_pt c);
 
 t_color				rgbpro(t_color c, double m);
 t_color				rgbadd(t_color c1, t_color c2);
@@ -83,7 +86,7 @@ t_color				rgbmin(t_color c1, t_color c2);
 t_color				rgbneg(t_color c);
 t_color				rgbmid(t_color c1, t_color c2, float mid);
 t_color				rgbmoy4(t_color c[4]);
-
+double				rgb_litlevel(t_color c);
 
 double				rad(double deg);
 double				deg(double rad);

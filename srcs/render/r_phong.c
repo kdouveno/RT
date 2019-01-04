@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:24:37 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/03 16:28:53 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/04 11:02:58 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,13 @@ t_color					phong(t_lit l, t_reslist res)
 	t_color		specular;
 	t_color		obj_color;
 
-	obj_color = get_pt_color(*res.o, res.pt);
+	res.pert = (t_vec){0, 0, 0};
+	obj_color = get_pt_color(*res.o, res.pt, &res.pert);
 	lnc[0] = normalise(get_vector(res.pt, l.cpt));
 	lnc[2] = res.cam;
-	lnc[1] = res.n;
+	lnc[1] = res.pert.x == 0 && res.pert.y == 0 && res.pert.z == 0 ? res.n : rot(res.pert, get_rot(res.n, 0));
 	diffuse = rgbpro(rgbmin(l.color, rgbneg(obj_color)),
-		l.power * diffuse_light(lnc));
+		l.power * diffuse_light(lnc) * res.o->mat.diff);
 	specular = rgbpro(l.color, l.power * spec_light(lnc) * res.o->mat.spec);
 	return (rgbadd(rgbadd((t_color)AMASK, specular), diffuse));
 }
@@ -70,7 +71,7 @@ t_color			soft_shadow(t_rendering *r, t_reslist res, t_lit l, int rec)
 	if (rec > SHADOW_REC && !(i = 0))
 		return (out);
 	out = rgbadd(out,
-		ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt), AMB_L));
+		ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt, NULL), AMB_L));
 	if ((obj = intersec(r, get_line(l.cpt, res.pt))).t > 1 - PRE)
 		out = rgbadd(out, phong(l, res));
 	else if (l.radius != 0.0f && obj.o != res.o)

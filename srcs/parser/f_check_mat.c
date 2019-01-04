@@ -1,5 +1,14 @@
 #include "rt.h"
 
+double	get_coef(double nb)
+{
+	if (nb < 0.0f)
+		return (0.0f);
+	if (nb > 1.0f)
+		return (1.0f);
+	return (nb);
+}
+
 int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "c")) || !(ft_strcmp(l1, "color")))
@@ -9,7 +18,7 @@ int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
 	}
 	else if(!(ft_strcmp(l1, "reflexion")))
 	{
-		obj->mat.refl = (float)ft_atod(l2);
+		obj->mat.refl = get_coef(ft_atod(l2));
 		return (0);
 	}
 	else if (!(ft_strcmp(l1, "txt")) || !(ft_strcmp(l1, "texture")))
@@ -26,7 +35,7 @@ int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
 }
 
 int		check_mat(t_env *e, t_obj *obj, char *l1, char *l2)
- {
+{
 	if (!(ft_strcmp(l1, "mat")))
  	{
  		if (check_file_ext(l2, ".mat") && l2[0])
@@ -37,15 +46,14 @@ int		check_mat(t_env *e, t_obj *obj, char *l1, char *l2)
  	}
 	else if (!(ft_strcmp(l1, "spec")))
 	{
-		obj->mat.spec = ft_atod(l2);
+		obj->mat.spec = get_coef(ft_atod(l2));
 		return (0);
 	}
 	else if (!(ft_strcmp(l1, "diff")))
 	{
-		obj->mat.diff = ft_atod(l2);
+		obj->mat.diff = get_coef(ft_atod(l2));
 		return (0);
 	}
 	else
 		return (check_mat2(e, obj, l1, l2));
-
- }
+}

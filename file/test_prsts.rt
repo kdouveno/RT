@@ -30,6 +30,7 @@ sphere{
 	rotz: 45
 	link: 10
 	color: 59
+	spec: 1
 }
 grad{
 	id: 59
