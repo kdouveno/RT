@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/19 03:37:56 by schaaban         ###   ########.fr       */
+/*   Updated: 2018/12/20 13:37:03 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ void	*render(void *r)
 		render_next_line(d);
 		((int*)d->render->pixels)[iy * d->dimx + ix] = rec_raytrace(
 			r, l, !d->aaa).i;
-		((t_rendering*)r)->e->ui.pbar.value = ((double)iy
-			/ (double)d->dimy);
+		((t_rendering*)r)->e->ui.pbar.value = (((double)iy
+			/ (double)d->dimy)) * (1.0 - ((double)d->ssaa / 32.0));
 	}
 	pthread_mutex_unlock(&((t_rendering*)r)->lock);
 	pthread_exit(NULL);
@@ -163,6 +163,9 @@ void	aaa(t_rendering *r)
 		|| ((i + 1) % d->dimx && aaacolor(p[i], p[i + 1]))
 		|| (i < max - d->dimx && aaacolor(p[i], p[i + d->dimx])))
 			p[i] = rec_raytrace(r, get_camline(*r->c, i), 1);
+		((t_rendering*)r)->e->ui.pbar.value = (((double)i
+			/ (double)max) * ((double)d->ssaa / 32.0))
+			+ (1.0 - ((double)d->ssaa / 32.0));
 		i++;
 	}
 }
@@ -181,6 +184,8 @@ t_cam	*render_cam(t_env *e, int ncam)
 	if (!c)
 		return (NULL);
 	r = (t_rendering){PTHREAD_MUTEX_INITIALIZER, e, c};
+	if (r.c->data.iy >= r.c->data.dimy)
+		return (c);
 	i = 0;
 	while (i < e->glb.thread_count)
 	{
