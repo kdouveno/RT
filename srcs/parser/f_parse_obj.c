@@ -61,7 +61,7 @@ t_obj	*parse_obj_2(t_env *e, int type, int fd)
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
 	*obj = (t_obj){NULL, zero_matrix(), -1, type, {},
-		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 1, 0, 0, NULL, NULL},
+		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 1, 0, 0, 0, 0, NULL, NULL},
 		{0, 0, 0, 0}, NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)

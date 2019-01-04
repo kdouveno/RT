@@ -78,6 +78,8 @@ typedef struct			s_mat
 	float				diff;
 	float				spec;
 	float				refl;
+	int					offx;
+	int					offy;
 	SDL_Surface			*txt;
 	SDL_Surface			*txt_bm;
 }						t_mat;
@@ -345,6 +347,7 @@ t_color					get_pt_color(t_obj obj, t_pt pt, t_vec *pert);
 t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
 t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
 	int rec);
+t_color					perlin_noise(t_obj obj, t_pt pt);	
 t_reslist				intersec(t_rendering *r, t_line line);
 void					aaa(t_rendering *r);
 t_color					rec_raytrace(t_rendering *r, t_line l, int m);
