@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:19:24 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/19 04:00:35 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/04 14:44:37 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ static void			s_event_keys(t_env *e)
 	}
 	else if (e->ui.event.key.keysym.sym == SDLK_e)
 	{
-		if (e->ui.focus_win->id != e->ui.id_main_win)
-			rt_export_screenshoot(e, e->ui.focus_win);
+		if (e->ui.focus_win)
+			if (e->ui.focus_win->id != e->ui.id_main_win)
+				rt_export_screenshoot(e, e->ui.focus_win);
 	}
 }
 
