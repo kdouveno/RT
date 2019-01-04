@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:19:24 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/04 14:44:37 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/04 14:57:43 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,13 @@ static void			s_event_keys(t_env *e)
 {
 	if (e->ui.event.key.keysym.sym == SDLK_ESCAPE)
 	{
-		if (e->ui.focus_win->id == e->ui.id_main_win)
-			e->ui.exit = 1;
+		if (e->ui.focus_win)
+		{
+			if (e->ui.focus_win->id == e->ui.id_main_win)
+				e->ui.exit = 1;
+			else
+				list_win_delone(&(e->ui.list_win), e->ui.focus_win);
+		}
 		else
 			list_win_delone(&(e->ui.list_win), e->ui.focus_win);
 		e->ui.focus_win = NULL;
