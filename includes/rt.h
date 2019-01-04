@@ -49,6 +49,7 @@ typedef struct			s_global
 	int					rec_lim_file;
 	int					rec_nb_file;
 	int					thread_count;
+	t_color				amb_l;
 }						t_global;
 
 typedef struct			s_wininfo
@@ -203,6 +204,7 @@ typedef struct			s_scene
 	struct s_prst		*prsts;
 	int					auto_l;
 	t_color				amb_lit_c;
+	t_color				amb_lit_sh;
 }						t_scene;
 
 typedef struct			s_prst
@@ -324,7 +326,7 @@ int						check_loc(t_env *e, void *obj, char *l1, char *l2);
 
 void					init(t_env *e);
 void					init_objs(t_env *e, t_scene *s);
-t_color					init_lit_scene(t_env *e, t_scene *s);
+t_color					init_lit_scene(t_env *e, t_scene *s, int *l);
 void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);
 void					link_color_grad(t_env *e);
@@ -347,7 +349,7 @@ t_color					get_pt_color(t_obj obj, t_pt pt, t_vec *pert);
 t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
 t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
 	int rec);
-t_color					perlin_noise(t_obj obj, t_pt pt);	
+t_color					perlin_noise(t_obj obj, t_pt pt);
 t_reslist				intersec(t_rendering *r, t_line line);
 void					aaa(t_rendering *r);
 t_color					rec_raytrace(t_rendering *r, t_line l, int m);

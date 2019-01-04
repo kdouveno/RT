@@ -80,9 +80,9 @@ int		arg(t_env *e, int argc, char **argv)
 
 	i = 2;
 	d = 0;
-	*e = (t_env){{}, {NULL, 0, 3, -1, THRD_CNT},
+	*e = (t_env){{}, {NULL, 0, 3, -1, THRD_CNT, (t_color){(t_rgb){0,0,0,0}}},
 		{0,0}, {NULL, NULL, NULL, NULL, NULL, 0,
-			(t_color){(t_rgb){0,0,0,0}}}};
+			(t_color){(t_rgb){0,0,0,0}}, (t_color){(t_rgb){0,0,0,0}}}};
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')

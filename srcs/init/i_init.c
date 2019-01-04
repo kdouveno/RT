@@ -109,7 +109,7 @@ void		init_cam(t_env *e, t_scene *s)
 	}
 }
 
-t_color		init_lit_scene(t_env *e, t_scene *s)
+t_color		init_lit_scene(t_env *e, t_scene *s, int *nb_l)
 {
 	t_lit	*l;
 	t_prst	*p;
@@ -121,9 +121,10 @@ t_color		init_lit_scene(t_env *e, t_scene *s)
 		link_locs(s, l);
 		l->cpt = trans_pt((t_pt){0, 0, 0}, &l->m);
 		s->amb_lit_c = rgbadd(s->amb_lit_c, l->color);
+		(*nb_l)++;
 		while (p)
 		{
-			e->s.amb_lit_c = rgbadd(init_lit_scene(e, &(p->s)), e->s.amb_lit_c);
+			e->s.amb_lit_c = rgbadd(init_lit_scene(e, &(p->s), nb_l), e->s.amb_lit_c);
 			p = p->next;
 		}
 		l = l->next;
@@ -175,8 +176,25 @@ void		init_scene(t_env *e, t_scene *s)
 
 void		init(t_env *e)
 {
+	int	l;
+
+	l = 0;
 	init_scene(e, &(e->s));
-	init_lit_scene(e, &(e->s));
+	if (e->glb.amb_l.i == 0)
+		e->s.amb_lit_c = rgbadd(e->s.amb_lit_c, init_lit_scene(e, &(e->s), &l));
+	else
+	{
+		init_lit_scene(e, &(e->s), &l);
+		e->s.amb_lit_c = e->glb.amb_l;
+	}
+	if (l != 0)
+	{
+		e->s.amb_lit_sh.p.r = e->s.amb_lit_c.p.r / l;
+		e->s.amb_lit_sh.p.g = e->s.amb_lit_c.p.g / l;
+		e->s.amb_lit_sh.p.b = e->s.amb_lit_c.p.b / l;
+	}
+	else
+		e->s.amb_lit_sh = e->s.amb_lit_c;
 	if (e->glb.d)
 		debug(e->s, 1);
 }

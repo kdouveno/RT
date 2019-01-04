@@ -10,6 +10,14 @@ static int		check_arg(t_env *e, t_scene *s, char *l1, char *l2)
 			wrong_type(e, l1, 0, 0);
 		return (0);
 	}
+	else if (!(ft_strcmp(l1, "amb_l")))
+	{
+		if (l2[0] == '#')
+			e->glb.amb_l.i = (unsigned)atoi_hexa(&l2[1]);
+		else
+			e->glb.amb_l.i = ft_atoi(l2);
+		return (0);
+	}
 	return (1);
 }
 

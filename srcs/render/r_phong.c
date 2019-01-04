@@ -60,31 +60,42 @@ t_color					phong(t_lit l, t_reslist res)
 	return (rgbadd(rgbadd((t_color)AMASK, specular), diffuse));
 }
 
+t_color			soft_shadow2(t_rendering *r, t_reslist res, t_lit l, int rec)
+{
+	t_pt		pts[6];
+	t_color		out;
+	int			i;
+
+	i = 0;
+	pts[0] = (t_pt){l.cpt.x + l.radius, l.cpt.y, l.cpt.z};
+	pts[1] = (t_pt){l.cpt.x - l.radius, l.cpt.y, l.cpt.z};
+	pts[2] = (t_pt){l.cpt.x, l.cpt.y + l.radius, l.cpt.z};
+	pts[3] = (t_pt){l.cpt.x, l.cpt.y - l.radius, l.cpt.z};
+	pts[4] = (t_pt){l.cpt.x, l.cpt.y, l.cpt.z + l.radius};
+	pts[5] = (t_pt){l.cpt.x, l.cpt.y, l.cpt.z - l.radius};
+	while (((i++) || 1) && (i < 6) | (int)(l.cpt = pts[i]).x)
+		out = rgbadd(out, rgbpro(soft_shadow(r, res, l, rec + 1),
+		SHADOW_C));
+	return (out);
+}
 t_color			soft_shadow(t_rendering *r, t_reslist res, t_lit l, int rec)
 {
 	t_color		out;
 	t_reslist	obj;
-	t_pt		pts[6];
-	int			i;
 
 	out = (t_color)(unsigned)AMASK;
-	if (rec > SHADOW_REC && !(i = 0))
+	if (rec > SHADOW_REC)
 		return (out);
-	out = rgbadd(out,
-		ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt, NULL), AMB_L));
 	if ((obj = intersec(r, get_line(l.cpt, res.pt))).t > 1 - PRE)
-		out = rgbadd(out, phong(l, res));
-	else if (l.radius != 0.0f && obj.o != res.o)
 	{
-		pts[0] = (t_pt){l.cpt.x + l.radius, l.cpt.y, l.cpt.z};
-		pts[1] = (t_pt){l.cpt.x - l.radius, l.cpt.y, l.cpt.z};
-		pts[2] = (t_pt){l.cpt.x, l.cpt.y + l.radius, l.cpt.z};
-		pts[3] = (t_pt){l.cpt.x, l.cpt.y - l.radius, l.cpt.z};
-		pts[4] = (t_pt){l.cpt.x, l.cpt.y, l.cpt.z + l.radius};
-		pts[5] = (t_pt){l.cpt.x, l.cpt.y, l.cpt.z - l.radius};
-		while (((i++) || 1) && (i < 6) | (int)(l.cpt = pts[i]).x)
-			out = rgbadd(out, rgbpro(soft_shadow(r, res, l, rec + 1),
-			SHADOW_C));
+		out = rgbadd(out, phong(l, res));
+		out = rgbadd(out,
+			ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt, NULL), AMB_L));
 	}
+	else if (l.radius != 0.0f && obj.o != res.o)
+		out = rgbadd(soft_shadow2(r, res, l, rec), out);
+	else
+		out = rgbadd(out,
+			ambiant_light(r->e->s.amb_lit_sh, get_pt_color(*res.o, res.pt, NULL), AMB_L));
 	return (out);
 }
