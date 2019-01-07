@@ -60,12 +60,19 @@ t_color	spherical_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 	ang = get_rot(rtrans_pt(pt, &obj.m), 0);
 	x = ang.z + M_PI;
 	y = ang.y + M_PI_2;
-	x = (txt->w * x) / (2 * M_PI) + (txt->w * obj.mat.offx / 100);
-	y = (txt->h * y) / M_PI + (txt->h * obj.mat.offy / 100);
-	if ((int)x > txt->w)
+	x = (txt->w * x) / (2 * M_PI) + ((double)txt->w * (obj.mat.offx / 100.0f));
+	y = (txt->h * y) / M_PI + ((double)txt->h * (obj.mat.offy / 100.0f));
+	if ((int)x >= txt->w)
 		x = (int)x % txt->w;
-	if ((int)y > txt->h)
+	if ((int)y >= txt->h)
+	{
 		y = (int)y % txt->h;
+		if ((int)y > 50)
+		{
+			y = txt->h - y;
+			x = txt->w - x;
+		}
+	}
 	out = get_text_color(x, y, txt->w, pixels);
 	if (pert && obj.mat.txt_bm && !(ft_strcmp(obj.mat.txt_bm->userdata, "fill"))
 		&& txt == obj.mat.txt_bm)

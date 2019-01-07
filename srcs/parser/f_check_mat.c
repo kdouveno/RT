@@ -14,12 +14,12 @@ int		check_mat3(t_env *e, t_obj *obj, char *l1, char *l2)
 	(void)e;
 	if(!(ft_strcmp(l1, "offx")))
 	{
-		obj->mat.offx = ft_atod(l2);
+		obj->mat.offx = ft_atod(l2) < 0.0f ? -ft_atod(l2) : ft_atod(l2);
 		return (0);
 	}
 	else if(!(ft_strcmp(l1, "offy")))
 	{
-		obj->mat.offy = ft_atod(l2);
+		obj->mat.offy = ft_atod(l2) < 0.0f ? -ft_atod(l2) : ft_atod(l2);
 		return (0);
 	}
 	else
