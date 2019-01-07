@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:27:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/04 10:55:28 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/07 11:14:30 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_color	spherical_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 	char	*pixels;
 
 	pixels = txt->pixels;
-	ang = get_rot(unrot(get_vector(obj.m.t, pt), obj.m.rot), 0);
+	ang = get_rot(rtrans_pt(pt, &obj.m), 0);
 	x = ang.z + M_PI;
 	y = ang.y + M_PI_2;
 	x = (txt->w * x) / (2 * M_PI) + (txt->w * obj.mat.offx / 100);
