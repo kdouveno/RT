@@ -25,12 +25,16 @@ light{
 sphere{
 	id: 58
 	v: 10
-	pos: 10, 20, ~
+	pos: 50, 100, ~
 	scale: 1.5
 	rotz: 45
 	link: 10
 	color: 59
 	spec: 1
+	tr: 1
+}
+light{
+	link: 10;
 }
 grad{
 	id: 59

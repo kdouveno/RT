@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/07 16:25:56 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/07 18:46:12 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,22 @@
 
 t_color		refraction(t_rendering *r, t_reslist res, int bounce, t_ri ri)
 {
-	
+	float	n[3];
+	double	c[2];
+	t_vec	t;
+
+
+	n[1] = ri.n;
+	n[2] = res.o->mat.n;
+	ri.n = n[2];
+	printf("%f %f %f\n", res.pt.x, res.pt.y, res.pt.z);
+	if (n[2] == n[1])
+		return raytrace(r, (t_line){res.pt, res.cam}, bounce, &ri);
+	n[0] = n[1] / n[2];
+	c[0] = scalar_product(res.cam, res.n);
+	c[1] = sqrt(1 - sq(n[0]) * (1 - sq(c[0])));
+	t = apply(vecpro(res.cam, n[0]), vecpro(res.n, n[0] * c[0] - c[1]));
+	return raytrace(r, (t_line){res.pt, t}, bounce, &ri);
 }
 
 t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
@@ -51,6 +66,6 @@ t_color		raytrace(t_rendering *r, t_line l, int bounce, t_ri *ri)
 	out = (t_color)(unsigned)AMASK;
 	res = intersec(r, l);
 	if (res.o)
-		out.i |= lites(r, res, bounce, &ri).i;
+		out.i |= lites(r, res, bounce, ri).i;
 	return (out);
 }
