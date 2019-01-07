@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:27:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/07 11:14:30 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/07 15:12:02 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ t_color	plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 		*pert = normalise(perturbation(x, y, txt->w, pixels));
 	return (out);
 }
-
 
 t_color	texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 {
