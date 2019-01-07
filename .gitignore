@@ -3,3 +3,5 @@ Makefile
 objs
 libft.a
 rt
+.vscode
+includes/libft.h
