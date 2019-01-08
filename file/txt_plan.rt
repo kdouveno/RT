@@ -19,7 +19,7 @@ camera{
 }
 
 camera{
-	pos: -150, 10, 300
+	pos: 100, 10, 30
 	rotx:200
 	roty:-30
 	rotz:0
@@ -28,14 +28,14 @@ camera{
 }
 
 light{
-	pos: -80, 10, 10
+	pos: 0, -30, ~
 }
 
 plane
 {
 	pos: 200, -30, ~
 	c:#00FFFF
-	texture: none.bmp
+	texture: monde_mini.bmp
 }
 
 preset{

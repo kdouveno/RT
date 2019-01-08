@@ -100,17 +100,22 @@ t_color	plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 	t_color	out;
 	char	*pixels;
 
+	(void)obj;
+	(void)pert;
+	pt = rtrans_pt(pt, &obj.m);
 	pixels = txt->pixels;
-	x = pt.x;
-	y = pt.y;
-	if ((int)x > txt->w)
+	printf("%d %d \n", (int)pt.y, (int)pt.z);
+	pt = (t_pt){pt.x + OFFSET, pt.y - OFFSET, pt.z - OFFSET};
+	x = pt.y >= 0 ? pt.y * 20 : -pt.y * 20;
+	y = pt.z >= 0 ? pt.z * 20 : -pt.z * 20;
+	if ((int)x >= txt->w)
 		x = (int)x % txt->w;
-	if ((int)y > txt->h)
+	if ((int)y >= txt->h)
 		y = (int)y % txt->h;
 	out = get_text_color(x, y, txt->w, pixels);
-	if (pert && obj.mat.txt_bm && !(ft_strcmp(obj.mat.txt_bm->userdata, "fill"))
+/*	if (pert && obj.mat.txt_bm && !(ft_strcmp(obj.mat.txt_bm->userdata, "fill"))
 		&& txt == obj.mat.txt_bm)
-		*pert = normalise(perturbation(x, y, txt->w, pixels));
+		*pert = normalise(perturbation(x, y, txt->w, pixels));*/
 	return (out);
 }
 
