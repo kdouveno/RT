@@ -53,8 +53,9 @@ t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 	t_color	c[2];
 	int		scale;
 	(void)pert;
-	if (obj.type == 6)
-	{
+	pt = rtrans_pt(pt, &obj.m);
+	// if (obj.type == 6)
+	// {
 		scale = 0;
 		fill_color_scale(obj, c, &scale);
 		if (((int)((pt.y + OFFSET) / scale) % 2 == 0)
@@ -64,8 +65,8 @@ t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 		else
 			out = c[1];
 		return (out);
-	}
-	return (perlin_noise(obj, pt));
+	// }
+	// return (perlin_noise(obj, pt));
 }
 
 t_color	get_grad_color(t_pt pt, t_grad *grad)

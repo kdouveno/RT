@@ -1,5 +1,5 @@
 scene{
-	amb_l: #FFFF00
+	amb_l: #FF00FF
 }
 
 camera{
@@ -11,7 +11,7 @@ camera{
 }
 
 camera{
-	pos: ~, -100, ~
+	pos: -100, 10, 40
 	rotx:100
 	roty:10
 	rotz:40
@@ -20,7 +20,7 @@ camera{
 }
 
 camera{
-	pos: -150, 10, 40
+	pos: -150, 10, 300
 	rotx:100
 	roty:10
 	rotz:40
@@ -32,16 +32,17 @@ light{
 	pos: -80, 10, 10
 }
 
-sphere{
+cuboid{
 	pos: 100, 10, 40
 	diff:0.5
 	spec:0.7
-	rotz:180
+	rotz:45
 	offx:0.5
 	offy:0
 	v1:40
-	txt: monde.bmp
-	txt_bm: monde.bmp
+	v2:40
+	v3:40
+	txt: none.bmp
 }
 
 plane
