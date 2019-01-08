@@ -48,6 +48,26 @@ t_vec	perturbation(double x, double y, int width, char *pixels)
 	return (out);
 }
 
+void	offset_txt(t_obj obj, double *x, double *y, SDL_Surface *txt)
+{
+	int		divi;
+
+	*x = *x + ((double)txt->w * (obj.mat.offx / 100.0f));
+	*y = *y + ((double)txt->h * (obj.mat.offy / 50.0f));
+	if ((int)*x >= txt->w)
+		*x = (int)*x % txt->w;
+	if ((int)*y >= txt->h)
+	{
+		divi = (int)*y / txt->h;
+		*y = (int)*y % txt->h;
+		if (divi % 2 > 0)
+		{
+			*y = (int)(txt->h - *y);
+			*x = (int)(*x + txt->w / 2) % txt->w;
+		}
+	}
+}
+
 t_color	spherical_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 {
 	double	x;
@@ -60,19 +80,12 @@ t_color	spherical_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 	ang = get_rot(rtrans_pt(pt, &obj.m), 0);
 	x = ang.z + M_PI;
 	y = ang.y + M_PI_2;
-	x = (txt->w * x) / (2 * M_PI) + ((double)txt->w * (obj.mat.offx / 100.0f));
-	y = (txt->h * y) / M_PI + ((double)txt->h * (obj.mat.offy / 100.0f));
-	if ((int)x >= txt->w)
-		x = (int)x % txt->w;
-	if ((int)y >= txt->h)
-	{
-		y = (int)y % txt->h;
-		if ((int)y > 50)
-		{
-			y = txt->h - y;
-			x = txt->w - x;
-		}
-	}
+	x = (txt->w * x) / (2 * M_PI);
+	y = (txt->h * y) / M_PI;
+	if (txt != obj.mat.txt_bm)
+		offset_txt(obj, &x, &y, txt);
+	x = ((int)x >= txt->w) ? 0 : x;
+	y = ((int)y >= txt->h) ? 0 : y;
 	out = get_text_color(x, y, txt->w, pixels);
 	if (pert && obj.mat.txt_bm && !(ft_strcmp(obj.mat.txt_bm->userdata, "fill"))
 		&& txt == obj.mat.txt_bm)

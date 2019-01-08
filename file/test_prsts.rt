@@ -37,10 +37,11 @@ sphere{
 	diff:0.5
 	spec:0.7
 	rotz:180
-	offy:100
+	offx:0.5
+	offy:0
 	v1:40
 	txt: monde.bmp
-	txt_bm: test2.bmp
+	txt_bm: monde.bmp
 }
 
 plane
