@@ -1,0 +1,44 @@
+scene{
+}
+
+camera{
+	pos: ~, -100, 40
+	rotx:200
+	roty:-30
+	rotz:0
+	r:0
+}
+
+camera{
+	pos: 0, -30, ~
+	rotx:200
+	roty:-30
+	rotz:0
+	fov: 60
+	r:0
+}
+
+camera{
+	pos: -150, 10, 300
+	rotx:200
+	roty:-30
+	rotz:0
+	fov: 60
+	r:0
+}
+
+light{
+	pos: -80, 10, 10
+}
+
+plane
+{
+	pos: 200, -30, ~
+	c:#00FFFF
+	texture: none.bmp
+}
+
+preset{
+	tx:	20
+	src: test_prsts.rt
+}

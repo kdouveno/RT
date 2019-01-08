@@ -67,6 +67,7 @@ t_color			soft_shadow2(t_rendering *r, t_reslist res, t_lit l, int rec)
 	int			i;
 
 	i = 0;
+	out.i = 0;
 	pts[0] = (t_pt){l.cpt.x + l.radius, l.cpt.y, l.cpt.z};
 	pts[1] = (t_pt){l.cpt.x - l.radius, l.cpt.y, l.cpt.z};
 	pts[2] = (t_pt){l.cpt.x, l.cpt.y + l.radius, l.cpt.z};
@@ -74,8 +75,7 @@ t_color			soft_shadow2(t_rendering *r, t_reslist res, t_lit l, int rec)
 	pts[4] = (t_pt){l.cpt.x, l.cpt.y, l.cpt.z + l.radius};
 	pts[5] = (t_pt){l.cpt.x, l.cpt.y, l.cpt.z - l.radius};
 	while (((i++) || 1) && (i < 6) | (int)(l.cpt = pts[i]).x)
-		out = rgbadd(out, rgbpro(soft_shadow(r, res, l, rec + 1),
-		SHADOW_C));
+		out = rgbadd(out, rgbpro(soft_shadow(r, res, l, rec + 1), SHADOW_C));
 	return (out);
 }
 t_color			soft_shadow(t_rendering *r, t_reslist res, t_lit l, int rec)

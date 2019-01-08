@@ -1,5 +1,4 @@
 scene{
-	amb_l: #FF00FF
 }
 
 camera{
@@ -32,17 +31,16 @@ light{
 	pos: -80, 10, 10
 }
 
-cuboid{
+sphere{
 	pos: 100, 10, 40
 	diff:0.5
 	spec:0.7
-	rotz:45
-	offx:0.5
+	rotz:90
+	offx:0.2
 	offy:0
 	v1:40
-	v2:40
-	v3:40
-	txt: none.bmp
+	txt: monde.bmp
+	txt_bm: monde.bmp
 }
 
 plane
@@ -50,7 +48,6 @@ plane
 	pos: 200, -30, ~
 	roty : 90
 	c:#00FFFF
-	texture: none
 }
 
 preset{
