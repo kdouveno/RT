@@ -141,13 +141,12 @@ t_color	plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 	return (out);
 }
 
-
 t_color	texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 {
 	pt = rtrans_pt(pt, &obj.m);
 	if (obj.type == 3)
 		return (spherical_texture(obj, pt, pert, txt));
-	else if (obj.type == 5)
+	else if (obj.type == 4 || obj.type == 5)
 		return (cylinder_texture(obj, pt, pert, txt));
 	else if (obj.type == 6)
 		return (plane_texture(obj, pt, pert, txt));
