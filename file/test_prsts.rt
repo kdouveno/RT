@@ -48,7 +48,7 @@ plane
 	pos: 200, -30, ~
 	roty : 90
 	c:#00FFFF
-	texture: none
+	texture: monde.bmp
 }
 
 preset{
