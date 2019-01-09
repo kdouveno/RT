@@ -31,11 +31,11 @@ light{
 	pos: -80, 10, 10
 }
 
-sphere{
+cylinder{
 	pos: 100, 10, 40
 	diff:0.5
 	spec:0.7
-	rotz:90
+	rotz:180
 	offx:0.2
 	offy:0
 	v1:40

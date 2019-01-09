@@ -78,11 +78,35 @@ t_color	spherical_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 	t_vec	ang;
 	t_color	out;
 
-	ang = get_rot(rtrans_pt(pt, &obj.m), 0);
+	ang = get_rot(pt, 0);
 	x = ang.z + M_PI;
 	y = ang.y + M_PI_2;
 	x = (txt->w * x) / (2 * M_PI);
 	y = (txt->h * y) / M_PI;
+	if (txt != obj.mat.txt_bm)
+		offset_txt(obj, &x, &y, txt);
+	out = get_text_color(x, y, txt, (char*)(txt->pixels));
+	if (pert && obj.mat.txt_bm && !(ft_strcmp(obj.mat.txt_bm->userdata, "fill"))
+		&& txt == obj.mat.txt_bm)
+		*pert = normalise(perturbation(x, y, txt, (char*)(txt->pixels)));
+	return (out);
+}
+
+t_color	cylinder_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
+{
+	double	x;
+	double	y;
+	t_vec	ang;
+	t_color	out;
+
+	ang = get_rot(pt, 0);
+	x = ang.z + M_PI;
+	y = -pt.z * 6;
+	x = (txt->w * x) / (2 * M_PI);
+	if ((int)y >= txt->h)
+		y = (int)y % txt->h;
+	else if ((int)y < 0)
+		y = txt->h - ((int)-y % txt->h);
 	if (txt != obj.mat.txt_bm)
 		offset_txt(obj, &x, &y, txt);
 	out = get_text_color(x, y, txt, (char*)(txt->pixels));
@@ -98,7 +122,6 @@ t_color	plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 	double	y;
 	t_color	out;
 
-	pt = rtrans_pt(pt, &obj.m);
 	x = -pt.y * 10;
 	y = -pt.z * 10;
 	if ((int)x >= txt->w)
@@ -121,8 +144,11 @@ t_color	plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 
 t_color	texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 {
+	pt = rtrans_pt(pt, &obj.m);
 	if (obj.type == 3)
 		return (spherical_texture(obj, pt, pert, txt));
+	else if (obj.type == 5)
+		return (cylinder_texture(obj, pt, pert, txt));
 	else if (obj.type == 6)
 		return (plane_texture(obj, pt, pert, txt));
 	else
