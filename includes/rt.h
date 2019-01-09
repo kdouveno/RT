@@ -347,6 +347,14 @@ t_cam					*render_cam(t_env *e, int ncam);
 t_color					raytrace(t_rendering *r, t_line l, int bounce);
 t_color					get_pt_color(t_obj obj, t_pt pt, t_vec *pert);
 t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
+
+t_color					spherical_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
+t_color					cylinder_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
+t_color					plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
+void					offset_txt(t_obj obj, double *x, double *y, SDL_Surface *txt);
+t_vec					perturbation(double x, double y, SDL_Surface *txt, char *pixels);
+t_color					get_text_color(int x, int y, SDL_Surface *txt, char *pixels);
+
 t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
 	int rec);
 t_color					perlin_noise(t_obj obj, t_pt pt);

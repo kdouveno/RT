@@ -20,11 +20,11 @@ camera{
 
 camera{
 	pos: 100, 10, 30
-	rotx:200
-	roty:-30
-	rotz:0
+	rotx: 200
+	roty: -30
+	rotz: 0
 	fov: 60
-	r:0
+	r: 0
 }
 
 light{

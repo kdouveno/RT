@@ -31,7 +31,7 @@ light{
 	pos: -80, 10, 10
 }
 
-cuboid{
+sphere{
 	pos: 100, 10, 40
 	diff:0.5
 	spec:0.7
@@ -39,11 +39,7 @@ cuboid{
 	offx:0.2
 	offy:0
 	v1:40
-	v2:40
-	v3:40
-	v4:40
-	txt: monde.bmp
-	txt_bm: monde.bmp
+	txt: none
 }
 
 plane
@@ -51,7 +47,7 @@ plane
 	pos: 200, -30, ~
 	roty : 90
 	c:#00FFFF
-	texture: monde.bmp
+	texture: none
 }
 
 preset{
