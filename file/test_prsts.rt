@@ -10,7 +10,8 @@ camera{
 	link: 10
 }
 camera{
-	pos: ~, ~, 100
+	id: 129
+	pos: ~, ~, 20
 	r: 0
 	para: 1
 	fov: 30
@@ -25,17 +26,16 @@ light{
 sphere{
 	id: 58
 	v: 10
-	pos: 50, 100, ~
+	pos: 10, 20, ~
 	scale: 1.5
 	rotz: 45
 	link: 10
 	color: 59
 	spec: 1
+	n: 0.9999
 	tr: 1
 }
-light{
-	link: 10;
-}
+
 grad{
 	id: 59
 	pos: 5, ~, ~
@@ -63,8 +63,7 @@ cylinder{
 }
 plane
 {
-	tx: 200
-	tz: -30
+	pos: ~, ~, -30
 	roty: 90
 	c: #584d73
 }

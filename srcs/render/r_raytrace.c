@@ -18,14 +18,14 @@ t_color		refraction(t_rendering *r, t_reslist res, int bounce, t_ri ri)
 	double	c[2];
 	t_vec	t;
 
-
+	res.cam = rev_3d(res.cam);
 	n[1] = ri.n;
 	n[2] = res.o->mat.n;
 	ri.n = n[2];
-	printf("%f %f %f\n", res.pt.x, res.pt.y, res.pt.z);
-	if (n[2] == n[1])
-		return raytrace(r, (t_line){res.pt, res.cam}, bounce, &ri);
+	// if (n[2] == n[1])
+	// 	return raytrace(r, (t_line){res.pt, res.cam}, bounce, &ri);
 	n[0] = n[1] / n[2];
+	printf("%f\n", n[0]);
 	c[0] = scalar_product(res.cam, res.n);
 	c[1] = sqrt(1 - sq(n[0]) * (1 - sq(c[0])));
 	t = apply(vecpro(res.cam, n[0]), vecpro(res.n, n[0] * c[0] - c[1]));
@@ -47,8 +47,10 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 			out = rgbmid(out, raytrace(r, (t_line){res.pt, apply(rev_3d(res.cam),
 			vecpro(res.n, 2 * scalar_product(res.cam, res.n)))}, bounce + 1, ri), res.o->mat.refl);
 		}
-		if (res.o->mat.tr)
+		if (res.o->mat.tr){
 			out = rgbmid(out, refraction(r, res, bounce, (!ri ? (t_ri){1.0, '.', NULL} : *ri)), res.o->mat.tr);
+			//printf("\n\n");
+		}
 		l = l->next;
 	}
 	return (out);

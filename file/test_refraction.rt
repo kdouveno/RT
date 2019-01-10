@@ -1,0 +1,49 @@
+camera{
+    link: 2
+    tx: -70 
+}
+
+camera{
+    link: 2
+    tx: -70 
+    rot: ~, 0, 45
+}
+
+sphere{
+    id:2
+    v:20
+    tr: 1
+}
+
+light{
+    pos: 30, 30, 30
+}
+
+plane{
+    tx: 100;
+    color: #ff3030
+}
+plane{
+    tx: -100;
+    color: #30ff30
+}
+plane{
+    rotz: 90;
+    ty: 100;
+    color: #3030ff
+}
+plane{
+    rotz: 90;
+    ty: -100;
+    color: #30ffff
+}
+plane{
+    roty: 90;
+    tz: 100;
+    color: #ff30ff
+}
+plane{
+    roty: 90;
+    tz: -100;
+    color: #ffff30
+}
