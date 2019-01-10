@@ -4,46 +4,52 @@ camera{
 }
 
 camera{
+    id: 3
     link: 2
     tx: -70 
-    rot: ~, 0, 45
+    rot: ~, 35, 45
 }
 
 sphere{
-    id:2
-    v:20
-    tr: 1
+    id: 2
+    v: 20
+    tr: .5
+    n: 2
+    spec: 1
+    color: #ffffff
+    txt_bm: test2.bmp
 }
 
 light{
-    pos: 30, 30, 30
+    link: 3
+    pos: 20, 40 , ~
 }
 
 plane{
-    tx: 100;
+    pos: 100, ~, ~
     color: #ff3030
 }
 plane{
-    tx: -100;
+    pos: -100, ~, ~
     color: #30ff30
 }
 plane{
-    rotz: 90;
-    ty: 100;
+    rotz: 90
+    pos: ~, 100, ~
     color: #3030ff
 }
 plane{
-    rotz: 90;
-    ty: -100;
+    rotz: 90
+    pos: ~, -100, ~
     color: #30ffff
 }
 plane{
-    roty: 90;
-    tz: 100;
+    roty: 90
+    pos: ~, ~, 100
     color: #ff30ff
 }
 plane{
-    roty: 90;
-    tz: -100;
+    roty: 90
+    pos: ~, ~, -100
     color: #ffff30
 }

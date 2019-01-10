@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/07 16:25:50 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/10 17:19:30 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct			s_fd
 
 typedef struct			s_ri
 {
-	float				n;
+	t_obj				*o;
 	char				c;
 	struct s_ri			*next;
 }						t_ri;
@@ -351,10 +351,10 @@ char					*file_name(char *str);
 
 void					*render(void *r);
 t_cam					*render_cam(t_env *e, int ncam);
-t_color					raytrace(t_rendering *r, t_line l, int bounce, t_ri *ri);
+t_color					raytrace(t_rendering *r, t_line l, int bounce, t_ri ri);
 t_color					get_pt_color(t_obj obj, t_pt pt, t_vec *pert);
 t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
-t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
+t_color					soft_shadow(t_rendering *r, t_reslist *res, t_lit l,
 	int rec);
 t_color					perlin_noise(t_obj obj, t_pt pt);	
 t_reslist				intersec(t_rendering *r, t_line line);

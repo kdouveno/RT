@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/07 16:52:55 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/10 17:22:44 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_color					rec_raytrace(t_rendering *r, t_line l, int m)
 		}));
 	}
 	else
-		return (raytrace(r, l, 0, &(t_ri){1.0, '.', NULL}));
+		return (raytrace(r, l, 0, (t_ri){NULL, 'c', NULL}));
 }
 
 inline static int		aaacolor(t_color a, t_color b)

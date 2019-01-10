@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:29:24 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/04 10:52:29 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/10 16:25:10 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,12 @@ void	fill_color_scale(t_obj obj, t_color c[2], int *scale)
 	}
 }
 
-t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
+t_color	texture_none(t_obj obj, t_pt pt)
 {
-	(void)pert;
 	t_color	out;
 	t_color	c[2];
 	int		scale;
-	(void)pert;
+
 	if (obj.type == 6)
 	{
 		scale = 0;
@@ -97,11 +96,10 @@ t_color get_pt_color(t_obj obj, t_pt pt, t_vec *pert)
 {
 	t_color	out;
 
-	(void)pert;
 	if (obj.mat.txt)
 	{
 		if (!(ft_strcmp(obj.mat.txt->userdata, "none")))
-			out = texture_none(obj, pt, NULL);
+			out = texture_none(obj, pt);
 		else
 			out = texture_color(obj, pt, NULL, obj.mat.txt);
 	}
@@ -112,7 +110,7 @@ t_color get_pt_color(t_obj obj, t_pt pt, t_vec *pert)
 	if (obj.mat.txt_bm)
 	{
 		if (!(ft_strcmp(obj.mat.txt_bm->userdata, "none")))
-			texture_none(obj, pt, pert);
+			texture_none(obj, pt);
 		else
 			texture_color(obj, pt, pert, obj.mat.txt_bm);
 	}
