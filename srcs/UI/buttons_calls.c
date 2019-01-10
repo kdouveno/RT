@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 04:59:25 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/11 16:01:40 by kdouveno         ###   ########.fr       */
+/*   Updated: 2018/12/19 04:03:12 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,39 @@ void				b_call_exit(void *e, int n)
 	rt_exit((t_env*)e);
 }
 
-void				b_call_open_win(void *e, int n)
+void				*s_thread_go(void *e)
 {
-	char	*title;
+	char	*s;
 	char	*number;
 	t_cam	*c;
 
-	if (!(number = ft_itoa(n)))
+	if (!(number = ft_itoa(((t_env*)e)->ui.local_cam_n)))
 		error((t_env*)e, MALLOC_ERROR);
-	if (!(title = ft_strjoin("RTv2 - Camera ", number)))
+	if (!(s = ft_strjoin("Camera ", number)))
 	{
 		ft_strdel(&number);
 		error((t_env*)e, MALLOC_ERROR);
 	}
 	ft_strdel(&number);
-	n--;
-	c = render_cam((t_env*)e, n);
+	if (!(s = ft_strjoin_free(s, " - ")))
+		error((t_env*)e, MALLOC_ERROR);
+	if (!(s = ft_strjoin_free(s, ((t_env*)e)->ui.file_name)))
+		error((t_env*)e, MALLOC_ERROR);
+	c = render_cam(e, ((t_env*)e)->ui.local_cam_n - 1);
 	list_win_add((t_env*)e, &(((t_env*)e)->ui.list_win), (t_list_win){0,
-		SDL_CreateWindow(title, 0, 0, c->data.dimx, c->data.dimy, 0), NULL, NULL});
+		SDL_CreateWindow(s, 0, 0, c->data.dimx, c->data.dimy, 0),
+		NULL, ((t_env*)e)->ui.local_cam_n, NULL});
 	SDL_BlitSurface(c->data.render, NULL,
 		((t_env*)e)->ui.list_win->render, NULL);
-	ft_strdel(&title);
+	ft_strdel(&s);
+	((t_env*)e)->ui.pbar.value = 0;
+	pthread_exit(NULL);
+}
+
+void				b_call_open_win(void *e, int n)
+{
+	pthread_t th;
+
+	((t_env*)e)->ui.local_cam_n = n;
+	pthread_create(&th, NULL, s_thread_go, e);
 }

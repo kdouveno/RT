@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/03 15:49:25 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/10 14:16:58 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	*render(void *r)
 		render_next_line(d);
 		((int*)d->render->pixels)[iy * d->dimx + ix] = rec_raytrace(
 			r, l, !d->aaa).i;
+		((t_rendering*)r)->e->ui.pbar.value = (((double)iy
+			/ (double)d->dimy)) * (1.0 - ((double)d->ssaa / 32.0));
 	}
 	pthread_mutex_unlock(&((t_rendering*)r)->lock);
 	pthread_exit(NULL);
@@ -68,6 +70,8 @@ t_cam	*render_cam(t_env *e, int ncam)
 	if (!c)
 		return (NULL);
 	r = (t_rendering){PTHREAD_MUTEX_INITIALIZER, e, c};
+	if (r.c->data.iy >= r.c->data.dimy)
+		return (c);
 	i = 0;
 	while (i < e->glb.thread_count)
 	{

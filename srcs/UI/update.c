@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:44:37 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/10 05:26:10 by schaaban         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:55:13 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void				ft_update(t_env *e)
 	{
 		if (e->ui.mouse_win->id == e->ui.id_main_win)
 			list_btn_update(e, e->ui.gui.actual_menu->list_btn, 0);
+		else
+			list_btn_update(e, e->ui.gui.actual_menu->list_btn, 1);
 	}
 	else
 		list_btn_update(e, e->ui.gui.actual_menu->list_btn, 1);
+	pbar_update(e);
 }

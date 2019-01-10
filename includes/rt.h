@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/10 14:02:50 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/10 14:13:43 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,9 +248,11 @@ int					count_cams(t_env *e);
 
 void				button_pressed(t_env *e);
 
-
 int					aabb_col_pt(t_aabb aabb, t_vec pt);
 
+void				pbar_init(t_env *e);
+void				pbar_update(t_env *e);
+void				pbar_draw(t_env *e);
 
 void				list_btn_add(t_env *e, t_list_btn **list, t_list_btn new);
 void				list_btn_del(t_list_btn *list);
@@ -276,8 +278,6 @@ void				b_call_menu_main(void *e, int n);
 void				b_call_exit(void *e, int n);
 void				b_call_open_win(void *e, int n);
 
-
-void				error_handler(t_env *e, int error_code);
 void				rt_exit(t_env *e);
 
 
@@ -290,7 +290,7 @@ void				ft_update(t_env *e);
 
 SDL_Surface			*sdl_img_import(char *filename);
 void				sdl_img_export(SDL_Surface *img, char *filename);
-void				rt_export_screenshoot(t_env *e, char *filename);
+void				rt_export_screenshoot(t_env *e, t_list_win *win);
 
 
 void				ft_put_pixel(int x, int y, Uint32 c, t_list_win *win);
