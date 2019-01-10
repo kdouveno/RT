@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/10 13:36:15 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/10 14:02:50 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ typedef struct			s_fd
 	char				*file;
 }						t_fd;
 
+typedef struct			s_ri
+{
+	float				n;
+	char				c;
+	struct s_ri			*next;
+}						t_ri;
+
 typedef struct			s_bool
 {
 	unsigned char		c1 : 1;
@@ -79,6 +86,8 @@ typedef struct			s_mat
 	float				diff;
 	float				spec;
 	float				refl;
+	float				tr;
+	float				n;
 	float				offx;
 	float				offy;
 	SDL_Surface			*txt;
@@ -344,7 +353,7 @@ char					*file_name(char *str);
 
 void					*render(void *r);
 t_cam					*render_cam(t_env *e, int ncam);
-t_color					raytrace(t_rendering *r, t_line l, int bounce);
+t_color					raytrace(t_rendering *r, t_line l, int bounce, t_ri *ri);
 t_color					get_pt_color(t_obj obj, t_pt pt, t_vec *pert);
 t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
 

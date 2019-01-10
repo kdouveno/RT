@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/04 12:06:47 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/07 18:53:23 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,18 @@ static int		check_arg(t_env *e, t_obj *obj, char *l1, char *l2)
 	{
 		obj->id = ft_atoi(l2);
 		obj->id = obj->id < 0 ? -obj->id : obj->id;
-		return (0);
 	}
 	else if (!(ft_strcmp(l1, "clip")))
-	{
 		creat_clips(e, obj, l2);
-		return (0);
-	}
 	else if(!(ft_strcmp(l1, "scale")))
-	{
 		obj->m.scale = ft_atod(l2);
-		return (0);
-	}
-	return (1);
+	else if(!ft_strcmp(l1, "n") || !ft_strcmp(l1, "refraction_index"))
+		obj->mat.n = ft_atod(l2);
+	else if(!ft_strcmp(l1, "tr") || !ft_strcmp(l1, "transparency"))
+		obj->mat.tr = ft_atod(l2);
+	else
+		return (1);
+	return (0);
 }
 
 void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
@@ -61,8 +60,9 @@ t_obj	*parse_obj_2(t_env *e, int type, int fd)
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
 	*obj = (t_obj){NULL, zero_matrix(), -1, type, {},
-		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 1, 0, 0, 0, 0, NULL, NULL},
+		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 1, 0, 0, 0, 1, 0, 0, NULL, NULL},
 		{0, 0, 0, 0}, NULL, NULL, NULL};
+	// printf("%f\n", obj->mat.n);
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{
