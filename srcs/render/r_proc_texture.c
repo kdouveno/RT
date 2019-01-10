@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:29:24 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/04 10:52:29 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/10 13:36:29 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,21 @@ void	fill_color_scale(t_obj obj, t_color c[2], int *scale)
 
 t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
 {
-	(void)pert;
 	t_color	out;
 	t_color	c[2];
 	int		scale;
 
 	(void)pert;
 	pt = rtrans_pt(pt, &obj.m);
-	if (obj.type == 6)
-	{
-		scale = 0;
-		fill_color_scale(obj, c, &scale);
-		if (((int)((pt.y + OFFSET) / scale) % 2 == 0)
-			^ ((int)((pt.z + OFFSET) / scale) % 2 == 0)
-			^ ((int)((pt.x + OFFSET) / scale) % 2 == 0))
-			out = c[0];
-		else
-			out = c[1];
-		return (out);
-	}
-	return (perlin_noise(obj, pt));
+	scale = 0;
+	fill_color_scale(obj, c, &scale);
+	if (((int)((pt.y + OFFSET) / scale) % 2 == 0)
+		^ ((int)((pt.z + OFFSET) / scale) % 2 == 0)
+		^ ((int)((pt.x + OFFSET) / scale) % 2 == 0))
+		out = c[0];
+	else
+		out = c[1];
+	return (out);
 }
 
 t_color	get_grad_color(t_pt pt, t_grad *grad)
@@ -104,6 +99,8 @@ t_color get_pt_color(t_obj obj, t_pt pt, t_vec *pert)
 	{
 		if (!(ft_strcmp(obj.mat.txt->userdata, "none")))
 			out = texture_none(obj, pt, NULL);
+		else if (!(ft_strcmp(obj.mat.txt->userdata, "perlin")))
+			out = perlin_noise(pt);
 		else
 			out = texture_color(obj, pt, NULL, obj.mat.txt);
 	}

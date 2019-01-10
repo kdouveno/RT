@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/04 10:48:54 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/10 13:36:15 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,7 +357,7 @@ t_color					get_text_color(int x, int y, SDL_Surface *txt, char *pixels);
 
 t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
 	int rec);
-t_color					perlin_noise(t_obj obj, t_pt pt);
+t_color					perlin_noise(t_pt pt);
 t_reslist				intersec(t_rendering *r, t_line line);
 void					aaa(t_rendering *r);
 t_color					rec_raytrace(t_rendering *r, t_line l, int m);
