@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:08:07 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/19 03:50:24 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/08 14:36:37 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ struct				s_ui
 	t_pbar			pbar;
 	t_aabb			btn_zone;
 	Uint32			id_main_win;
+	pthread_t		th_pb;
 	char			*file_name;
 	int				local_cam_n;
 	int				exit;

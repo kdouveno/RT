@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 04:59:25 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/19 04:03:12 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/08 14:37:26 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,12 @@ void				*s_thread_go(void *e)
 		((t_env*)e)->ui.list_win->render, NULL);
 	ft_strdel(&s);
 	((t_env*)e)->ui.pbar.value = 0;
+	pthread_join(((t_env*)e)->ui.th_pb, NULL);
 	pthread_exit(NULL);
 }
 
 void				b_call_open_win(void *e, int n)
 {
-	pthread_t th;
-
 	((t_env*)e)->ui.local_cam_n = n;
-	pthread_create(&th, NULL, s_thread_go, e);
+	pthread_create(&((t_env*)e)->ui.th_pb, NULL, s_thread_go, e);
 }
