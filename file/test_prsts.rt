@@ -1,4 +1,5 @@
 scene{
+	amb_l:#FF000F
 }
 
 camera{
@@ -10,7 +11,7 @@ camera{
 }
 
 camera{
-	pos: 29, 10, 40
+	pos: -300, 10, 40
 	rotx:100
 	roty:10
 	rotz:40
@@ -38,7 +39,7 @@ sphere{
 	rotz:180
 	offx:0.2
 	offy:0
-	v1:70
+	v1:40
 	txt: none
 }
 
