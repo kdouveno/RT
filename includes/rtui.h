@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:08:07 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/11 14:36:39 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 15:16:59 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ struct				s_ui
 	t_list_win		*focus_win;
 	t_list_win		*mouse_win;
 	SDL_Surface		*digits[10];
+	SDL_Surface		*btn_gray;
 	t_gui			gui;
 	t_pbar			pbar;
 	t_aabb			btn_zone;

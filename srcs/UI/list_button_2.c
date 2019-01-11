@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 04:13:24 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/11 14:43:04 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 15:27:07 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,18 @@ void				list_btn_update(t_env *e, t_list_btn *list, int mouse_out)
 			s_btn_update(e, it);
 		else
 		{
-			if (!(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)))
-				it->st_pressing = 0;
+			it->st_pressing = 0;
 			it->st_hover = 0;
-		}
-		if (mouse_out == 2)
-		{
-			SDL_GetMouseState(&mpos_i[0], &mpos_i[1]);
-			mouse_v2 = (t_vec){(double)mpos_i[0], (double)mpos_i[1], 0};
-			if (aabb_col_pt(it->aabb, mouse_v2)
-				&& aabb_col_pt(e->ui.btn_zone, mouse_v2))
-				it->st_hover = 1;
-			else
-				it->st_hover = 0;
+			if (mouse_out == 2)
+			{
+				SDL_GetMouseState(&mpos_i[0], &mpos_i[1]);
+				mouse_v2 = (t_vec){(double)mpos_i[0], (double)mpos_i[1], 0};
+				if (aabb_col_pt(it->aabb, mouse_v2)
+					&& aabb_col_pt(e->ui.btn_zone, mouse_v2))
+					it->st_hover = 1;
+				else
+					it->st_hover = 0;
+			}
 		}
 		it = it->next;
 	}
@@ -97,6 +96,12 @@ static void			s_draw_digits(t_env *e, t_list_win *win, t_list_btn *btn)
 	}
 }
 
+static void			s_draw_gray(t_env *e, t_list_win *win, t_list_btn *btn)
+{
+	SDL_BlitSurface(e->ui.btn_gray, NULL, win->render, &((SDL_Rect)
+		{btn->aabb.x, btn->aabb.y, btn->aabb.w, btn->aabb.h}));
+}
+
 void				list_btn_draw(t_env *e, t_list_win *win, t_list_btn *list)
 {
 	t_list_btn	*it;
@@ -120,6 +125,8 @@ void				list_btn_draw(t_env *e, t_list_win *win, t_list_btn *list)
 		}
 		if (it->cam_n >= 0)
 			s_draw_digits(e, win, it);
+		if (e->ui.is_rendering)
+			s_draw_gray(e, win, it);
 		it = it->next;
 	}
 }

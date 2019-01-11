@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 12:41:54 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 15:21:17 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ inline static void	s_init_ptrs(t_env *e)
 	e->ui.mouse_win = NULL;
 	e->ui.gui.menu_main = NULL;
 	e->ui.gui.menu_cam = NULL;
+	e->ui.pbar.frame = NULL;
+	e->ui.pbar.fill = NULL;
+	e->ui.btn_gray = NULL;
 }
 
 static char			*get_file_name(char *path)
