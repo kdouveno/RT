@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 12:41:42 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 17:44:41 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define AMB_L 0.075
 # define CONE 4
 # define AAA_THRESH 20
-# define BMP_LEVEL 2
 # define AMASK 0xFF000000U
 # define RMASK 0x00FF0000U
 # define GMASK 0x0000FF00U
@@ -90,6 +89,7 @@ typedef struct			s_mat
 	float				n;
 	float				offx;
 	float				offy;
+	int					b_lvl;
 	SDL_Surface			*txt;
 	SDL_Surface			*txt_bm;
 }						t_mat;
@@ -362,7 +362,7 @@ t_color					spherical_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 t_color					cylinder_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
 t_color					plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
 void					offset_txt(t_obj obj, double *x, double *y, SDL_Surface *txt);
-t_vec					perturbation(double x, double y, SDL_Surface *txt, char *pixels);
+t_vec					perturbation(double x, double y, SDL_Surface *txt, t_obj obj);
 t_color					get_text_color(int x, int y, SDL_Surface *txt, char *pixels);
 
 t_color					filter(t_rendering *r, t_color p_color);

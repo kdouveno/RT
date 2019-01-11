@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 15:14:11 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 15:15:58 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 17:33:24 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int		check_mat3(t_env *e, t_obj *obj, char *l1, char *l2)
 	else if (!(ft_strcmp(l1, "offy")))
 	{
 		obj->mat.offy = ft_atod(l2) < 0.0f ? -ft_atod(l2) : ft_atod(l2);
+		return (0);
+	}
+	else if (!(ft_strcmp(l1, "b_lvl")) || !(ft_strcmp(l1, "bump_level")))
+	{
+		obj->mat.b_lvl = ft_atoi(l2);
 		return (0);
 	}
 	else
