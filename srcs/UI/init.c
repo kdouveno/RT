@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:03:49 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/19 03:53:28 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/04 16:00:44 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void				s_init_gui(t_env *e)
 	s_init_menu_main(e);
 	s_init_menu_cam(e, count_cams(e));
 	pbar_init(e);
-	e->ui.gui.actual_menu = e->ui.gui.menu_main;
+	e->ui.gui.actual_menu = e->ui.gui.menu_cam;
 	gui_set_button_pos(e->ui.gui.menu_main);
 	gui_set_button_pos(e->ui.gui.menu_cam);
 }
