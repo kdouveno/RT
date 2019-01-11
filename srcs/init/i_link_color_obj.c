@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 15:43:14 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/21 17:52:42 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 14:57:53 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		color_obj(t_obj *objs, t_grad *save_g)
 	objs->mat.color.i = 0;
 }
 
-void		link_color_obj(t_env *e)
+void			link_color_obj(t_env *e)
 {
 	t_obj	*objs;
 

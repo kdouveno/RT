@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/10 15:16:05 by schaaban          #+#    #+#             */
-/*   Updated: 2018/11/11 05:53:03 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/11 17:06:22 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ static Uint32		s_get_rgba(Uint32 base_color, t_list_win *win)
 
 void				ft_put_pixel(int x, int y, Uint32 c, t_list_win *win)
 {
-    Uint8 *p;
-
+	Uint8 *p;
 
 	c = s_get_rgba(c, win);
 	p = (Uint8*)win->render->pixels + y * win->render->pitch
 		+ x * win->render->format->BytesPerPixel;
-    *(Uint32*)p = c;
+	*(Uint32*)p = c;
 	if (win->render->format->BytesPerPixel == 1)
 		*p = c;
 	else if (win->render->format->BytesPerPixel == 2)

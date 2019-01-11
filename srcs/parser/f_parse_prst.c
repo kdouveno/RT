@@ -6,40 +6,39 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 18:54:01 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/12 14:53:34 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:46:43 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int		check_arg(t_env *e, t_prst *prst, char *l1, char *l2)
+static int	check_arg(t_env *e, t_prst *prst, char *l1, char *l2)
 {
 	char	*join;
 
 	if (!(ft_strcmp(l1, "src")))
- 	{
- 		if (check_file_ext(l2, ".rt") && l2[0])
- 			wrong_type(e, l1, 0, 0);
- 		else if (l2[0])
+	{
+		if (check_file_ext(l2, ".rt") && l2[0])
+			wrong_type(e, l1, 0, 0);
+		else if (l2[0])
 		{
 			join = ft_strjoin("file/", l2);
 			if (join != NULL)
- 				parse(e, join, prst);
+				parse(e, join, prst);
 			else
 				error(e, MALLOC_ERROR);
 		}
 		return (0);
- 	}
+	}
 	if (!(ft_strcmp(l1, "scale")))
 	{
 		prst->scale = ft_atod(l2);
 		return (0);
 	}
-
 	return (1);
 }
 
-void	stock_prst(t_env *e, t_prst *prst, char *l1, char *l2)
+void		stock_prst(t_env *e, t_prst *prst, char *l1, char *l2)
 {
 	char	*cp;
 	int		i;
@@ -57,14 +56,14 @@ void	stock_prst(t_env *e, t_prst *prst, char *l1, char *l2)
 	ft_memdel((void**)&cp);
 }
 
-void	parse_prst_2(t_env *e, t_prst *p)
+void		parse_prst_2(t_env *e, t_prst *p)
 {
 	t_prst	*save;
 
 	save = e->s.prsts;
 	if (save != NULL)
 	{
-		while(save->next != NULL)
+		while (save->next != NULL)
 			save = save->next;
 		save->next = p;
 	}
@@ -72,7 +71,7 @@ void	parse_prst_2(t_env *e, t_prst *p)
 		e->s.prsts = p;
 }
 
-void	parse_prst(t_env *e, int type, int fd, t_scene *s)
+void		parse_prst(t_env *e, int type, int fd, t_scene *s)
 {
 	char	*line;
 	int		res;
@@ -86,7 +85,7 @@ void	parse_prst(t_env *e, int type, int fd, t_scene *s)
 		error(e, MALLOC_ERROR);
 	parse_prst_2(e, prst);
 	*prst = (t_prst){{0, 0, 0}, {0, 0, 0}, 1, {NULL, NULL, NULL, NULL, NULL, 0,
-		(t_color){(t_rgb){0,0,0,0}}, (t_color){(t_rgb){0,0,0,0}}}, NULL};
+		(t_color){(t_rgb){0, 0, 0, 0}}, (t_color){(t_rgb){0, 0, 0, 0}}}, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{

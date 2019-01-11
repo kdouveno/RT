@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 17:31:48 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/21 14:59:30 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 16:06:22 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vec	cone_norm(t_pt pt, t_obj obj, t_vec v)
 	double	tmp;
 
 	(void)v;
-	out = trans_vec((t_vec){pt.x, pt.y, -sq(tan(obj.v[0] )) * pt.z}, &obj.m);
+	out = trans_vec((t_vec){pt.x, pt.y, -sq(tan(obj.v[0])) * pt.z}, &obj.m);
 	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
 		out = rev_3d(out);
 	return (out);
@@ -66,7 +66,7 @@ t_vec	cuboid_norm(t_pt pt, t_obj obj, t_vec v)
 	double	d1;
 	double	t;
 	t_vec	out;
-	int i;
+	int		i;
 
 	i = 0;
 	d = (t_line){pt, v};

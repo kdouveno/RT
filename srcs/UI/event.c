@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:19:24 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/11 13:21:26 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 17:07:37 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ static void			s_event_window(t_env *e)
 		e->ui.mouse_win = NULL;
 	}
 	else if (e->ui.event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
-		e->ui.focus_win = list_win_get(e->ui.list_win, e->ui.event.window.windowID);
+		e->ui.focus_win = list_win_get(e->ui.list_win,
+			e->ui.event.window.windowID);
 	else if (e->ui.event.window.event == SDL_WINDOWEVENT_ENTER)
-		e->ui.mouse_win = list_win_get(e->ui.list_win, e->ui.event.window.windowID);
+		e->ui.mouse_win = list_win_get(e->ui.list_win,
+			e->ui.event.window.windowID);
 	else if (e->ui.event.window.event == SDL_WINDOWEVENT_LEAVE)
 		e->ui.mouse_win = NULL;
 }

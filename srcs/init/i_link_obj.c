@@ -6,13 +6,13 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/23 12:26:32 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:08:37 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	add_objlist(t_env *e, t_objlist **list, t_obj *ajout)
+void		add_objlist(t_env *e, t_objlist **list, t_obj *ajout)
 {
 	t_objlist	*add;
 
@@ -22,14 +22,14 @@ void	add_objlist(t_env *e, t_objlist **list, t_obj *ajout)
 	*list = add;
 }
 
-static void	link_clip(t_env *e, t_obj* check, t_clip *clip, t_obj *obj)
+static void	link_clip(t_env *e, t_obj *check, t_clip *clip, t_obj *obj)
 {
 	check->b.clip = 1;
 	clip->obj = check;
 	add_objlist(e, &check->clipping, obj);
 }
 
-void	link_clips(t_env *e)
+void		link_clips(t_env *e)
 {
 	t_obj	*objs;
 	t_obj	*check;

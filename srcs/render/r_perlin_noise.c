@@ -6,13 +6,13 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:38:39 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/10 13:36:19 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 16:00:39 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double		rand_noise(int t)
+double	rand_noise(int t)
 {
 	t = (t << 9) ^ t;
 	t = t * (t * (t * t * 15731 + 789221) + 1376312589);
@@ -42,7 +42,7 @@ double	noise(int octaves, double frequency, double persistence, t_pt pt)
 		frequency *= 2;
 		i++;
 	}
-	return out * ((1 - persistence) / (1 - amplitude));
+	return (out * ((1 - persistence) / (1 - amplitude)));
 }
 
 t_color	perlin_noise(t_pt pt)

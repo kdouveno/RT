@@ -6,11 +6,27 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:29:24 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/10 13:36:29 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 16:59:07 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+void	fill_color_scale_next(t_obj obj, t_color c[2], int *scale)
+{
+	if (obj.type == 9)
+	{
+		*scale = (obj.v[0] + obj.v[1] + obj.v[2]) / 6;
+		c[0].i = 0x000000;
+		c[1].i = 0x00FFFF;
+	}
+	else
+	{
+		*scale = 4;
+		c[0].i = 0x000000;
+		c[1].i = 0xFFFFFF;
+	}
+}
 
 void	fill_color_scale(t_obj obj, t_color c[2], int *scale)
 {
@@ -32,18 +48,8 @@ void	fill_color_scale(t_obj obj, t_color c[2], int *scale)
 		c[0].i = 0x000000;
 		c[1].i = 0x00FF00;
 	}
-	else if (obj.type == 9)
-	{
-		*scale = (obj.v[0] + obj.v[1] + obj.v[2]) / 6;
-		c[0].i = 0x000000;
-		c[1].i = 0x00FFFF;
-	}
 	else
-	{
-		*scale = 4;
-		c[0].i = 0x000000;
-		c[1].i = 0xFFFFFF;
-	}
+		fill_color_scale_next(obj, c, scale);
 }
 
 t_color	texture_none(t_obj obj, t_pt pt, t_vec *pert)
@@ -90,7 +96,7 @@ t_color	get_grad_color(t_pt pt, t_grad *grad)
 	return (rgbmid(grad->c1, grad->c2, t));
 }
 
-t_color get_pt_color(t_obj obj, t_pt pt, t_vec *pert)
+t_color	get_pt_color(t_obj obj, t_pt pt, t_vec *pert)
 {
 	t_color	out;
 
@@ -104,7 +110,7 @@ t_color get_pt_color(t_obj obj, t_pt pt, t_vec *pert)
 		else
 			out = texture_color(obj, pt, NULL, obj.mat.txt);
 	}
-	else if(obj.grad)
+	else if (obj.grad)
 		out = get_grad_color(pt, obj.grad);
 	else
 		out = obj.mat.color;
