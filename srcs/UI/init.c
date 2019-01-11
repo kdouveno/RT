@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:03:49 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/11 14:29:53 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 14:37:46 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void				rtui_init(t_env *e)
 
 	if (!(win_title = ft_strjoin("RT - ", e->ui.file_name)))
 		error(e, MALLOC_ERROR);
+	e->ui.is_rendering = 0;
 	s_init_gui(e);
 	list_win_add(e, &(e->ui.list_win), (t_list_win){0,
 		SDL_CreateWindow(win_title, SDL_WINDOWPOS_CENTERED,

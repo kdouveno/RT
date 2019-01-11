@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 04:59:25 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/11 13:19:20 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 14:37:26 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void				*s_thread_go(void *e)
 	char	*number;
 	t_cam	*c;
 
+	((t_env*)e)->ui.is_rendering = 1;
 	if (!(number = ft_itoa(((t_env*)e)->ui.local_cam_n)))
 		error((t_env*)e, MALLOC_ERROR);
 	if (!(s = ft_strjoin("Camera ", number)))
@@ -57,6 +58,7 @@ void				*s_thread_go(void *e)
 	ft_strdel(&s);
 	((t_env*)e)->ui.pbar.value = 0;
 	pthread_join(((t_env*)e)->ui.th_pb, NULL);
+	((t_env*)e)->ui.is_rendering = 0;
 	pthread_exit(NULL);
 }
 

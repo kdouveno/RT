@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:08:07 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/08 14:36:37 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/11 14:36:39 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ struct				s_ui
 	pthread_t		th_pb;
 	char			*file_name;
 	int				local_cam_n;
+	int				is_rendering;
 	int				exit;
 };
 
