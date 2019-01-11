@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/19 15:12:54 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 11:33:50 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		is_powertwo(int nb)
 	return (0);
 }
 
-static int check_dimx_dimy(t_cam *cam, char *l1, char *l2)
+static int	check_dimx_dimy(t_cam *cam, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "dimx")))
 	{
@@ -29,6 +29,14 @@ static int check_dimx_dimy(t_cam *cam, char *l1, char *l2)
 	if (!(ft_strcmp(l1, "dimy")))
 	{
 		cam->data.dimy = ft_atoi(l2);
+		return (0);
+	}
+	if (!(ft_strcmp(l1, "filter")))
+	{
+		if (!(ft_strcmp(l2, "black")))
+			cam->data.filter = 'b';
+		if (!(ft_strcmp(l2, "sepia")))
+			cam->data.filter = 's';
 		return (0);
 	}
 	return (1);
@@ -102,7 +110,7 @@ t_cam	*parse_cam_2(t_env *e, int fd)
 	if (!(cam = malloc(sizeof(t_cam))))
 		error(e, MALLOC_ERROR);
 	*cam = (t_cam){NULL, zero_matrix(), -1,
-		{{}, {}, {}, {}, {}, FOV, NULL, 0, 0, 0, 0, 1, 1, 0}};
+		{{}, {}, {}, {}, {}, FOV, NULL, 0, 0, 0, 0, 1, 1, 0, '\0'}};
 	while ((res = get_next_line(fd, &line)) > 0 &&
 		get_prop(e, line, &l1, &l2) != 1)
 	{

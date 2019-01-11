@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:25:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/04 11:08:51 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:08:38 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ inline static t_reslist	get_touch(t_reslist *list, t_line line)
 {
 	t_reslist	out;
 	t_obj		*tmpobj;
+	t_reslist	*tmplist;
 
+	tmplist = list;
 	while (list)
 	{
 		list->pt = get_linept(line, list->t);
@@ -77,12 +79,12 @@ inline static t_reslist	get_touch(t_reslist *list, t_line line)
 			out.o = tmpobj;
 			out.cam = normalise(get_line(list->pt, line.m).v);
 			out.n = normalise(g_ref[list->o->type].norm(rtrans_pt(list->pt, &list->o->m), *list->o, out.cam));
-			free(list);
+			free_res(tmplist);
 			return (out);
 		}
 		list = list->next;
 	}
-	free(list);
+	free_res(tmplist);
 	return ((t_reslist){NULL, {}, {}, {}, {}, 0, NULL});
 }
 

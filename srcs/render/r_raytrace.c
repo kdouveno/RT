@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/07 18:46:12 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:42:00 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 		}
 		l = l->next;
 	}
-	return (out);
+	return (filter(r, out));
 }
 
 /*

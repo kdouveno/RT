@@ -26,6 +26,7 @@ camera{
 	rotz:40
 	fov: 60
 	r:0
+	filter:black
 }
 
 light{
