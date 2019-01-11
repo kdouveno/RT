@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:03:49 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/04 16:00:44 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/11 14:29:53 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void			s_init_digits(t_env *e)
 			ft_strdel(&s);
 			error(e, MALLOC_ERROR);
 		}
-		SDL_SetColorKey(e->ui.digits[i], SDL_TRUE, 0);
+		SDL_SetColorKey(e->ui.digits[i], SDL_TRUE,
+			SDL_MapRGB(e->ui.digits[i]->format, 0, 0, 0));
 	}
 	ft_strdel(&s);
 }

@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 18:52:27 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/19 03:37:25 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/11 14:31:04 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void				pbar_init(t_env *e)
 			SDL_FreeSurface(e->ui.pbar.frame);
 		error(e, MALLOC_ERROR);
 	}
-	SDL_SetColorKey(e->ui.pbar.fill, SDL_TRUE, 0);
+	SDL_SetColorKey(e->ui.pbar.fill, SDL_TRUE,
+		SDL_MapRGB(e->ui.pbar.fill->format, 0, 0, 0));
 	e->ui.pbar.value = 1;
 	e->ui.pbar.shown = 0;
 	e->ui.pbar.pos = (t_vec){UI_WIDTH / 2, UI_HEIGHT - (UI_BTN_DOWN_Y / 2), 0};
@@ -53,13 +54,13 @@ static void			s_draw_number(t_env *e, t_list_win *win,
 		SDL_BlitSurface(
 			e->ui.digits[(int)(value / 10)], NULL, win->render, &((SDL_Rect){
 				pos.x - (e->ui.digits[(int)(value / 10)]->w) - (UI_BTN_DG_SPC
-				/ 2), pos.y - (e->ui.digits[(int)(value / 10)]->h / 2), 
+				/ 2), pos.y - (e->ui.digits[(int)(value / 10)]->h / 2),
 				e->ui.digits[(int)(value) / 10]->w,
 				e->ui.digits[(int)(value) / 10]->h}));
 		SDL_BlitSurface(
 			e->ui.digits[(int)(value % 10)], NULL, win->render, &((SDL_Rect){
 				pos.x + (UI_BTN_DG_SPC / 2), pos.y
-				- (e->ui.digits[(int)(value % 10)]->h / 2), 
+				- (e->ui.digits[(int)(value % 10)]->h / 2),
 				e->ui.digits[(int)(value % 10)]->w,
 				e->ui.digits[(int)(value % 10)]->h}));
 	}
