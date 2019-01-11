@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/10 17:18:11 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 11:38:24 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,7 +356,7 @@ void					offset_txt(t_obj obj, double *x, double *y, SDL_Surface *txt);
 t_vec					perturbation(double x, double y, SDL_Surface *txt, char *pixels);
 t_color					get_text_color(int x, int y, SDL_Surface *txt, char *pixels);
 
-t_color					filter(t_rendering *r, t_reslist res, int bounce, t_color p_color);
+t_color					filter(t_rendering *r, t_color p_color);
 
 t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
 	int rec);

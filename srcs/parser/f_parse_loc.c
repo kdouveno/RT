@@ -6,18 +6,11 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 11:12:40 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/21 16:52:52 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:17:00 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-void	free_tab(char **tab)
-{
-	while (tab)
-		free(*(tab++));
-	free(tab);
-}
 
 int		parse_3d(t_env *e, t_pt *pt, char *l2)
 {
@@ -34,7 +27,7 @@ int		parse_3d(t_env *e, t_pt *pt, char *l2)
 		ft_atod(tab[i]) : *((double*)pt + i);
 		i++;
 	}
-	free(tab);
+	ft_free_tab(tab);
 	if (i == 3)
 	{
 		*pt = tmp;

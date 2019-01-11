@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:48:27 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/10 17:21:02 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 11:37:59 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,7 @@ t_color	sepia(t_color p_color, double c)
 	return (p_color);
 }
 
-t_color		stereoscopic(t_rendering *r, t_reslist res, int bounce, t_color c)
-{
-	(void)r;
-	(void)res;
-	(void)bounce;
-
-	return (c);
-}
-
-t_color		filter(t_rendering *r, t_reslist res, int bounce, t_color p_color)
+t_color		filter(t_rendering *r, t_color p_color)
 {
 	t_color	out;
 	int		c;
@@ -59,8 +50,5 @@ t_color		filter(t_rendering *r, t_reslist res, int bounce, t_color p_color)
 			out = sepia(out, (double)c);
 		return (out);
 	}
-	else if (r->c->data.filter == 'g')
-		return (stereoscopic(r, res, bounce, p_color));
-	else
-		return (p_color);
+	return (p_color);
 }
