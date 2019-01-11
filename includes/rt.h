@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/10 17:19:30 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 17:52:30 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define AMB_L 0.075
 # define CONE 4
 # define AAA_THRESH 20
-# define BMP_LEVEL 2
+# define BMP_LEVEL 1.5
 # define AMASK 0xFF000000U
 # define RMASK 0x00FF0000U
 # define GMASK 0x0000FF00U
@@ -63,13 +63,6 @@ typedef struct			s_fd
 	int					fd;
 	char				*file;
 }						t_fd;
-
-typedef struct			s_ri
-{
-	t_obj				*o;
-	char				c;
-	struct s_ri			*next;
-}						t_ri;
 
 typedef struct			s_bool
 {
@@ -179,11 +172,22 @@ typedef struct			s_obj
 	t_grad				*grad;
 }						t_obj;
 
+typedef struct			s_ri
+{
+	struct s_ri			*next;
+	t_obj				*o;
+	t_obj				*co;
+	float				n;
+	char				c;
+}						t_ri;
+
 typedef struct			s_reslist
 {
 	t_obj				*o;
+	t_obj				*co;
 	t_pt				pt;
 	t_vec				n;
+	t_vec				tn;
 	t_vec				cam;
 	t_vec				pert;
 	double				t;
@@ -352,14 +356,17 @@ char					*file_name(char *str);
 void					*render(void *r);
 t_cam					*render_cam(t_env *e, int ncam);
 t_color					raytrace(t_rendering *r, t_line l, int bounce, t_ri ri);
+void					aaa(t_rendering *r);
+t_color					rec_raytrace(t_rendering *r, t_line l, int m);
+
 t_color					get_pt_color(t_obj obj, t_pt pt, t_vec *pert);
 t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
 t_color					soft_shadow(t_rendering *r, t_reslist *res, t_lit l,
 	int rec);
 t_color					perlin_noise(t_obj obj, t_pt pt);	
 t_reslist				intersec(t_rendering *r, t_line line);
-void					aaa(t_rendering *r);
-t_color					rec_raytrace(t_rendering *r, t_line l, int m);
+t_color					refraction(t_rendering *r, t_reslist res, int bounce, t_ri *ri);
+
 t_line					trans_line(t_line in, t_matrix *o);
 t_line					rtrans_line(t_line in, t_matrix *o);
 t_pt					trans_pt(t_pt in, t_matrix *o);

@@ -10,11 +10,17 @@ camera{
     rot: ~, 35, 45
 }
 
+camera{
+    link: 2
+    tx: -70 
+    rot: ~, 30, 30
+}
+
 sphere{
     id: 2
     v: 20
     tr: .5
-    n: 2
+    n: 0.8
     spec: 1
     color: #ffffff
     txt_bm: test2.bmp

@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 17:31:48 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/10 17:07:58 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:48:43 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,48 +15,38 @@
 t_vec	cylinder_norm(t_pt pt, t_obj obj, t_vec v)
 {
 	t_vec	out;
-	double	tmp;
 
 	(void)v;
 	out = trans_vec((t_vec){pt.x, pt.y, 0}, &obj.m);
-	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
-		out = rev_3d(out);
 	return (out);
 }
 
 t_vec	cone_norm(t_pt pt, t_obj obj, t_vec v)
 {
 	t_vec	out;
-	double	tmp;
 
 	(void)v;
 	out = trans_vec((t_vec){pt.x, pt.y, -sq(tan(obj.v[0] )) * pt.z}, &obj.m);
-	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
-		out = rev_3d(out);
 	return (out);
 }
 
 t_vec	sphere_norm(t_pt pt, t_obj obj, t_vec v)
 {
 	t_vec	out;
-	double	tmp;
 
 	(void)obj;
+	(void)v;
 	out = trans_vec(pt, &obj.m);
-	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
-		out = rev_3d(out);
 	return (out);
 }
 
 t_vec	plane_norm(t_pt pt, t_obj obj, t_vec v)
 {
 	t_vec	out;
-	double	tmp;
 
 	out = trans_vec((t_vec){1, 0, 0}, &obj.m);
-	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
-		out = rev_3d(out);
 	(void)pt;
+	(void)v;
 	return (out);
 }
 
@@ -84,7 +74,5 @@ t_vec	cuboid_norm(t_pt pt, t_obj obj, t_vec v)
 		i++;
 	}
 	out = trans_vec(out, &obj.m);
-	if ((tmp = scalar_product(normalise(out), v)) > 1 || tmp < 0)
-		out = rev_3d(out);
 	return (out);
 }

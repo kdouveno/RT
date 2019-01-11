@@ -6,24 +6,13 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/10 17:30:12 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:58:52 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_color		refraction(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
-{
-	double	n[3];
-	t_vec	t;
 
-	res.n = res.pert.x == 0 && res.pert.y == 0 && res.pert.z == 0 ? res.n : rot(res.pert, get_rot(res.n, 0));
-	n[0] = ri->o ? ri->o->mat.n : 1 / res.o->mat.n; //nr
-	n[1] = scalar_product(res.cam, res.n); // ci
-	n[2] = sqrt(1 - sq(n[0]) * (1 - sq(n[1]))); // ct
-	t = apply(rev_3d(vecpro(res.cam, n[0])), vecpro(res.n, n[0] * n[1] - n[2])); // T
-	return (raytrace(r, (t_line){res.pt, t}, bounce, (t_ri){res.o, '+', ri}));
-}
 
 t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 {
@@ -38,7 +27,7 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 		if (res.o->mat.refl && bounce < REC_BOUNCE)
 		{
 			out = rgbmid(out, raytrace(r, (t_line){res.pt, apply(rev_3d(res.cam),
-			vecpro(res.n, 2 * scalar_product(res.cam, res.n)))}, bounce + 1, ri), res.o->mat.refl);
+			vecpro(res.n, 2 * scalar_product(res.cam, res.n)))}, bounce + 1, *ri), res.o->mat.refl);
 		}
 		if (res.o->mat.tr)
 		{
