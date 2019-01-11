@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:03:49 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/11 15:36:49 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:40:59 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void				rtui_init(t_env *e)
 		error(e, MALLOC_ERROR);
 	SDL_SetColorKey(e->ui.btn_gray, SDL_TRUE,
 		SDL_MapRGB(e->ui.btn_gray->format, 0, 0, 0));
-	SDL_SetSurfaceAlphaMod(e->ui.btn_gray, 0);
+	SDL_SetSurfaceBlendMode(e->ui.btn_gray, SDL_BLENDMODE_BLEND);
+	SDL_SetSurfaceAlphaMod(e->ui.btn_gray, 128);
 	s_init_gui(e);
 	list_win_add(e, &(e->ui.list_win), (t_list_win){0,
 		SDL_CreateWindow(win_title, SDL_WINDOWPOS_CENTERED,
