@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 04:59:25 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/11 14:37:26 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/12 14:27:39 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,12 @@ void				b_call_exit(void *e, int n)
 
 void				*s_thread_go(void *e)
 {
-	char	*s;
-	char	*number;
 	t_cam	*c;
 
 	((t_env*)e)->ui.is_rendering = 1;
-	if (!(number = ft_itoa(((t_env*)e)->ui.local_cam_n)))
-		error((t_env*)e, MALLOC_ERROR);
-	if (!(s = ft_strjoin("Camera ", number)))
-	{
-		ft_strdel(&number);
-		error((t_env*)e, MALLOC_ERROR);
-	}
-	ft_strdel(&number);
-	if (!(s = ft_strjoin_free(s, " - ")))
-		error((t_env*)e, MALLOC_ERROR);
-	if (!(s = ft_strjoin_free(s, ((t_env*)e)->ui.file_name)))
-		error((t_env*)e, MALLOC_ERROR);
 	c = render_cam(e, ((t_env*)e)->ui.local_cam_n - 1);
-	list_win_add((t_env*)e, &(((t_env*)e)->ui.list_win), (t_list_win){0,
-		SDL_CreateWindow(s, 0, 0, c->data.dimx, c->data.dimy, 0),
-		NULL, ((t_env*)e)->ui.local_cam_n, NULL});
-	SDL_BlitSurface(c->data.render, NULL,
-		((t_env*)e)->ui.list_win->render, NULL);
-	ft_strdel(&s);
-	((t_env*)e)->ui.pbar.value = 0;
-	pthread_join(((t_env*)e)->ui.th_pb, NULL);
-	((t_env*)e)->ui.is_rendering = 0;
-	pthread_exit(NULL);
+	((t_env*)e)->ui.is_rendering = 2;
+	pthread_exit((void*)c);
 }
 
 void				b_call_open_win(void *e, int n)
