@@ -6,13 +6,19 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/11 12:58:52 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/12 18:30:32 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
+static t_color	ambiant_light(t_color amb_lit_c, t_color obj_color, double coef)
+{
+	t_color	out;
 
+	out = (t_color)rgbmin(amb_lit_c, rgbneg(obj_color));
+	return ((t_color)rgbpro(out, coef));
+}
 
 t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 {
@@ -23,7 +29,9 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 	l = r->e->s.lits;
 	while (l)
 	{
-		out = rgbadd(out, soft_shadow(r, &res, *l, 1));
+		out = rgbadd(out,
+			ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt, &res.pert), AMB_L));		
+		out = rgbadd(out, phong(*l, &res, catch_light(r, l, &res)));    
 		if (res.o->mat.refl && bounce < REC_BOUNCE)
 		{
 			out = rgbmid(out, raytrace(r, (t_line){res.pt, apply(rev_3d(res.cam),
