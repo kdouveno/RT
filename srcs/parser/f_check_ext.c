@@ -6,11 +6,11 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:17:56 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:17:57 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 15:25:02 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "rt.h"
+#include "rt.h"
 
 int		check_file_ext(const char *str, const char *ext)
 {
@@ -54,7 +54,7 @@ char	*file_name(char *str)
 	out = NULL;
 	if (len > 4)
 	{
-		if(!(out = malloc(sizeof(char) * len - last - 4 + 1)))
+		if (!(out = malloc(sizeof(char) * len - last - 4 + 1)))
 			return (NULL);
 		i = 0;
 		while (last + 1 < len - 4)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_check_mat.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/11 15:14:11 by gperez            #+#    #+#             */
+/*   Updated: 2019/01/11 17:33:24 by gperez           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 double	get_coef(double nb)
@@ -12,14 +24,19 @@ double	get_coef(double nb)
 int		check_mat3(t_env *e, t_obj *obj, char *l1, char *l2)
 {
 	(void)e;
-	if(!(ft_strcmp(l1, "offx")))
+	if (!(ft_strcmp(l1, "offx")))
 	{
 		obj->mat.offx = ft_atod(l2) < 0.0f ? -ft_atod(l2) : ft_atod(l2);
 		return (0);
 	}
-	else if(!(ft_strcmp(l1, "offy")))
+	else if (!(ft_strcmp(l1, "offy")))
 	{
 		obj->mat.offy = ft_atod(l2) < 0.0f ? -ft_atod(l2) : ft_atod(l2);
+		return (0);
+	}
+	else if (!(ft_strcmp(l1, "b_lvl")) || !(ft_strcmp(l1, "bump_level")))
+	{
+		obj->mat.b_lvl = ft_atoi(l2);
 		return (0);
 	}
 	else
@@ -33,7 +50,7 @@ int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
 		parse_color(obj, l2, NULL, 0);
 		return (0);
 	}
-	else if(!(ft_strcmp(l1, "reflexion")))
+	else if (!(ft_strcmp(l1, "reflexion")))
 	{
 		obj->mat.refl = get_coef(ft_atod(l2));
 		return (0);
@@ -55,13 +72,13 @@ int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
 int		check_mat(t_env *e, t_obj *obj, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "mat")))
- 	{
- 		if (check_file_ext(l2, ".mat") && l2[0])
- 			wrong_type(e, l1, 0, 0);
- 		else if (l2[0])
- 			link_mat(e, obj, ft_strjoin("mat/", l2));
- 		return (0);
- 	}
+	{
+		if (check_file_ext(l2, ".mat") && l2[0])
+			wrong_type(e, l1, 0, 0);
+		else if (l2[0])
+			link_mat(e, obj, ft_strjoin("mat/", l2));
+		return (0);
+	}
 	else if (!(ft_strcmp(l1, "spec")))
 	{
 		obj->mat.spec = get_coef(ft_atod(l2));

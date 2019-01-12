@@ -1,0 +1,5 @@
+world{
+	txt: monde.bmp
+	txt_bm: monde.bmp
+	b_lvl:-10
+}

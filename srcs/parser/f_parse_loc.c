@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 11:12:40 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/11 12:17:00 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 15:24:47 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		parse_3d(t_env *e, t_pt *pt, char *l2)
 {
 	char	**tab;
-	int 	i;
+	int		i;
 	t_pt	tmp;
 
 	if (!(tab = ft_strsplit(l2, ',')))

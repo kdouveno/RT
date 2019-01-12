@@ -6,13 +6,13 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:44:45 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/14 11:11:13 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:03:54 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_matrix	zero_matrix()
+t_matrix	zero_matrix(void)
 {
 	return ((t_matrix){{-1, NULL}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, -1, 1});
 }

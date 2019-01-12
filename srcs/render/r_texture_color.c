@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:27:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/10 14:03:19 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 17:45:43 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_color	get_text_color(int x, int y, SDL_Surface *txt, char *pixels)
 	return (out);
 }
 
-t_vec	perturbation(double x, double y, SDL_Surface *txt, char *pixels)
+t_vec	perturbation(double x, double y, SDL_Surface *txt, t_obj obj)
 {
 	t_vec	proj;
 	t_vec	dir;
@@ -33,17 +33,21 @@ t_vec	perturbation(double x, double y, SDL_Surface *txt, char *pixels)
 	t_vec	out;
 	float	lvl;
 
-	lvl = BMP_LEVEL;
+	lvl = obj.mat.b_lvl;
 	dir = normalise((t_vec){1, 1, 0});
 	proj = vecpro(dir,
-		scalar_product(get_vector((t_pt){0, (int)x, (int)-y}, (t_pt){0 ,x, -y})
-		, dir));
-	p[1] = (t_pt){rgb_litlevel(get_text_color((int)x + 1, (int)y, txt, pixels)) * lvl, (int)x + 1, (int)-y};
-	p[2] = (t_pt){rgb_litlevel(get_text_color((int)x, (int)y + 1, txt, pixels)) * lvl, (int)x, (int)-y - 1};
+		scalar_product(get_vector((t_pt){0, (int)x,
+			(int)-y}, (t_pt){0, x, -y}), dir));
+	p[1] = (t_pt){rgb_litlevel(get_text_color((int)x + 1,
+		(int)y, txt, (char*)(txt->pixels))) * lvl, (int)x + 1, (int)-y};
+	p[2] = (t_pt){rgb_litlevel(get_text_color((int)x,
+		(int)y + 1, txt, (char*)(txt->pixels))) * lvl, (int)x, (int)-y - 1};
 	if (get_norm(proj) > sqrt(2) / 2)
-		p[0] = (t_pt){rgb_litlevel(get_text_color((int)x + 1,(int) y + 1, txt, pixels)) * lvl, (int)x + 1, (int)-y - 1};
+		p[0] = (t_pt){rgb_litlevel(get_text_color((int)x + 1,
+			(int)y + 1, txt, (char*)(txt->pixels))) * lvl, (int)x + 1, (int)-y - 1};
 	else
-		p[0] = (t_pt){ rgb_litlevel(get_text_color((int)x, (int)y, txt, pixels)) * lvl, (int)x, (int)-y};
+		p[0] = (t_pt){ rgb_litlevel(get_text_color((int)x,
+			(int)y, txt, (char*)(txt->pixels))) * lvl, (int)x, (int)-y};
 	out = get_norm_plan(p[0], p[1], p[2]);
 	if (scalar_product(out, (t_vec){1, 0, 0}) < 0)
 		out = rev_3d(out);

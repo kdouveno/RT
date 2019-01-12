@@ -6,13 +6,13 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:48:27 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 11:37:59 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 15:26:54 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_color	black(t_color p_color, int *c)
+t_color		black(t_color p_color, int *c)
 {
 	t_color out;
 
@@ -27,7 +27,7 @@ t_color	black(t_color p_color, int *c)
 	return (out);
 }
 
-t_color	sepia(t_color p_color, double c)
+t_color		sepia(t_color p_color, double c)
 {
 	c /= 255;
 	p_color.p.r = c * 255;

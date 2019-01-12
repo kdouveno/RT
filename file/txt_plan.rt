@@ -35,16 +35,14 @@ sphere
 	pos: 200, ~, ~
 	c:#00FFFF
 	v1:20
-	texture: monde.bmp
+	mat:world.mat
 }
 
 plane
 {
 	pos: 200, -30, -10
 	c:#00FFFF
-	offx:100
-	offy:100
-	texture: monde.bmp
+	mat:world.mat
 }
 
 preset{

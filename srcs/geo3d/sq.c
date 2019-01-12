@@ -6,11 +6,11 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 16:59:48 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/10/18 17:00:41 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 14:54:56 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "geo3d.h"
+#include "geo3d.h"
 
 double	sq(double a)
 {

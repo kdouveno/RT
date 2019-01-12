@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 14:36:38 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/11/19 14:57:58 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 17:01:57 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ t_polyres	solve_polynome(double a, double b, double c)
 	return (out);
 }
 
-t_line	get_line(t_pt a, t_pt b)
+t_line		get_line(t_pt a, t_pt b)
 {
 	return ((t_line){a, get_vector(a, b)});
 }
 
-t_pt	get_linept(t_line d, double t)
+t_pt		get_linept(t_line d, double t)
 {
 	t_pt out;
 
@@ -51,7 +51,7 @@ t_pt	get_linept(t_line d, double t)
 	return (out);
 }
 
-double	dist(t_pt a, t_pt b)
+double		dist(t_pt a, t_pt b)
 {
 	return (sqrt(sq(a.x - b.x) + sq(a.y - b.y) + sq(a.z - b.z)));
 }

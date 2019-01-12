@@ -6,13 +6,13 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/03 17:39:45 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:24:19 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void check_clip_loop(t_env *e, t_obj *o, t_obj *original, int i)
+static void	check_clip_loop(t_env *e, t_obj *o, t_obj *original, int i)
 {
 	t_objlist	*clpin;
 
@@ -41,7 +41,7 @@ void		init_grad(t_scene *s)
 	}
 }
 
-void 		init_objs(t_env *e, t_scene *s)
+void		init_objs(t_env *e, t_scene *s)
 {
 	t_obj	*objs;
 
@@ -77,8 +77,8 @@ void		init_cam_vecs(t_cam *cams)
 			&cams->m), d->pt_ul);
 	}
 	else
-		d->vp_ul = trans_vec((t_vec){(double)(d->dimx / 2) /
-			tan(rad(d->fov) / 2), d->dimx / 2, d->dimy / 2}, &cams->m);
+		d->vp_ul = trans_vec((t_vec){(double)(d->dimx / 2)
+			/ tan(rad(d->fov) / 2), d->dimx / 2, d->dimy / 2}, &cams->m);
 	d->x = trans_vec((t_vec){0, -step, 0}, &cams->m);
 	d->y = trans_vec((t_vec){0, 0, -step}, &cams->m);
 	d->xy = trans_vec((t_vec){0, step * (d->dimx - 1), -step}, &cams->m);
@@ -94,7 +94,8 @@ void		init_cam(t_env *e, t_scene *s)
 	{
 		d = &cams->data;
 		if (cams->m.r >= 0)
-			cams->m.rot = get_rot(get_vector(cams->m.pt, cams->m.rot), cams->m.r);
+			cams->m.rot = get_rot(get_vector(cams->m.pt, cams->m.rot),
+			cams->m.r);
 		else
 			cams->m.rot = (t_3d){rad(cams->m.rot.x),
 			rad(cams->m.rot.y), rad(cams->m.rot.z)};
@@ -124,7 +125,8 @@ t_color		init_lit_scene(t_env *e, t_scene *s, int *nb_l)
 		(*nb_l)++;
 		while (p)
 		{
-			e->s.amb_lit_c = rgbadd(init_lit_scene(e, &(p->s), nb_l), e->s.amb_lit_c);
+			e->s.amb_lit_c = rgbadd(init_lit_scene(e, &(p->s), nb_l),
+				e->s.amb_lit_c);
 			p = p->next;
 		}
 		l = l->next;
@@ -154,7 +156,7 @@ void		init_light_auto(t_scene *s)
 
 	c = nb_light(s);
 	if (c == 1)
-		return;
+		return ;
 	l = s->lits;
 	while (l)
 	{

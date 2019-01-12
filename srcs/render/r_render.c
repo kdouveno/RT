@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/10 14:16:58 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 16:29:43 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	render_next_line(t_cam_render *d)
 		d->vp_ul = apply(d->x, d->vp_ul);
 }
 
-void	*render(void *r)
+void		*render(void *r)
 {
 	int				ix;
 	int				iy;
@@ -56,7 +56,7 @@ void	*render(void *r)
 	return (NULL);
 }
 
-t_cam	*render_cam(t_env *e, int ncam)
+t_cam		*render_cam(t_env *e, int ncam)
 {
 	t_rendering		r;
 	pthread_t		thds[e->glb.thread_count];
@@ -74,11 +74,8 @@ t_cam	*render_cam(t_env *e, int ncam)
 		return (c);
 	i = 0;
 	while (i < e->glb.thread_count)
-	{
-		if (pthread_create(thds + i, NULL, &render, &r))
+		if (pthread_create(thds + i++, NULL, &render, &r))
 			error(e, PTHR_ERROR);
-		i++;
-	}
 	i = 0;
 	while (i < e->glb.thread_count)
 		pthread_join(thds[i++], NULL);

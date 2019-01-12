@@ -50,6 +50,7 @@ plane
 	roty : 90
 	c:#00FFFF
 	texture: none
+	txt_bm: test3.bmp
 }
 
 preset{

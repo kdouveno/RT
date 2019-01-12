@@ -6,13 +6,13 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:18:00 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/19 10:46:00 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:17:55 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "rt.h"
+#include "rt.h"
 
-void	stock_mat(t_env *e, t_obj *obj, char *l1, char *l2)
+void		stock_mat(t_env *e, t_obj *obj, char *l1, char *l2)
 {
 	char	*cp;
 	int		i;
@@ -29,7 +29,7 @@ void	stock_mat(t_env *e, t_obj *obj, char *l1, char *l2)
 	ft_memdel((void**)&cp);
 }
 
-void	link_obj_mat(t_env *e, t_obj *obj, int fd)
+void		link_obj_mat(t_env *e, t_obj *obj, int fd)
 {
 	char	*line;
 	int		res;
@@ -76,7 +76,7 @@ static void	parse_line(t_env *e, t_obj *obj, char *line, t_fd fd)
 	ft_memdel((void**)&line);
 }
 
-void	link_mat(t_env *e, t_obj *obj, char *file)
+void		link_mat(t_env *e, t_obj *obj, char *file)
 {
 	t_fd		fd;
 	int			check;
@@ -89,7 +89,7 @@ void	link_mat(t_env *e, t_obj *obj, char *file)
 		ft_putstr(file);
 		ft_putstr("\033[0m");
 		ft_putchar('\n');
-		return;
+		return ;
 	}
 	while ((check = get_next_line(fd.fd, &line)) > 0)
 		parse_line(e, obj, line, fd);

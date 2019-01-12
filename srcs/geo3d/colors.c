@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 15:49:54 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/10 14:14:18 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 14:51:12 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_color	rgbadd(t_color c1, t_color c2)
 
 t_color	rgbneg(t_color c)
 {
-	t_color out;
+	t_color	out;
 
 	out.p.r = 255 - c.p.r;
 	out.p.g = 255 - c.p.g;
@@ -82,10 +82,10 @@ t_color	rgbmin(t_color c1, t_color c2)
 
 t_color	rgbmid(t_color c1, t_color c2, float mid)
 {
-	int a;
-	int r;
-	int g;
-	int b;
+	int	a;
+	int	r;
+	int	g;
+	int	b;
 
 	a = (signed)c1.p.a + ((signed)c2.p.a - c1.p.a) * mid;
 	r = (signed)c1.p.r + ((signed)c2.p.r - c1.p.r) * mid;
@@ -94,7 +94,7 @@ t_color	rgbmid(t_color c1, t_color c2, float mid)
 	return ((t_color){{b, g, r, a}});
 }
 
-double rgb_litlevel(t_color c)
+double	rgb_litlevel(t_color c)
 {
 	return ((double)((c.p.r + c.p.g + c.p.b) / 3) / 255);
 }

@@ -1,4 +1,16 @@
-# include "rt.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   r_shape_texture.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/11 17:06:43 by gperez            #+#    #+#             */
+/*   Updated: 2019/01/11 17:45:33 by gperez           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rt.h"
 
 void	offset_txt(t_obj obj, double *x, double *y, SDL_Surface *txt)
 {
@@ -38,7 +50,7 @@ t_color	spherical_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 	out = get_text_color(x, y, txt, (char*)(txt->pixels));
 	if (pert && obj.mat.txt_bm && !(ft_strcmp(obj.mat.txt_bm->userdata, "fill"))
 		&& txt == obj.mat.txt_bm)
-		*pert = normalise(perturbation(x, y, txt, (char*)(txt->pixels)));
+		*pert = normalise(perturbation(x, y, txt, obj));
 	return (out);
 }
 
@@ -62,7 +74,7 @@ t_color	cylinder_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 	out = get_text_color(x, y, txt, (char*)(txt->pixels));
 	if (pert && obj.mat.txt_bm && !(ft_strcmp(obj.mat.txt_bm->userdata, "fill"))
 		&& txt == obj.mat.txt_bm)
-		*pert = normalise(perturbation(x, y, txt, (char*)(txt->pixels)));
+		*pert = normalise(perturbation(x, y, txt, obj));
 	return (out);
 }
 
@@ -87,6 +99,6 @@ t_color	plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt)
 	out = get_text_color(x, y, txt, (char*)(txt->pixels));
 	if (pert && obj.mat.txt_bm && !(ft_strcmp(obj.mat.txt_bm->userdata, "fill"))
 		&& txt == obj.mat.txt_bm)
-		*pert = normalise(perturbation(x, y, txt, (char*)(txt->pixels)));
+		*pert = normalise(perturbation(x, y, txt, obj));
 	return (out);
 }

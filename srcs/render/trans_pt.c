@@ -6,13 +6,13 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 10:54:04 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/03 15:08:22 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 17:02:09 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_pt	trans_pt(t_pt in, t_matrix *o)
+t_pt		trans_pt(t_pt in, t_matrix *o)
 {
 	while (o)
 	{
@@ -35,7 +35,7 @@ static void	rtfr_pt(t_pt *out, t_matrix *o)
 	*out = apply(rev_3d(o->t), *out);
 }
 
-t_pt	rtrans_pt(t_pt in, t_matrix *o)
+t_pt		rtrans_pt(t_pt in, t_matrix *o)
 {
 	rtfr_pt(&in, o);
 	return (in);
