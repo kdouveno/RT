@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 15:24:19 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 17:00:24 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,4 @@ void		init(t_env *e)
 	}
 	else
 		e->s.amb_lit_sh = e->s.amb_lit_c;
-	if (e->glb.d)
-		debug(e->s, 1);
 }

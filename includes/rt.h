@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 16:06:13 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 16:59:49 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -467,7 +467,6 @@ void					free_res(t_reslist *list);
 
 int						arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);
-void					debug(t_scene s, int rec);
 void					error(t_env *e, const char *msg);
 void					error_prst(t_prst *p, char *msg);
 void					free_prst(t_prst *p);

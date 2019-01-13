@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msgs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 17:14:10 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/12 14:32:33 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:58:56 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define FILE_ERROR "Wrong file format, aborting"
 # define EXT_ERROR "Wrong file extension"
 # define SDL_ERROR "An error occured while attempting to intiate SDL"
-# define USAGE "Usage : ./rt <rt file> <args>\nargs: --debug\n\t--threads\n\t--recursive\n"
+# define USAGE "Usage : ./rt <rt file> <args>\nargs: --threads\n\t--recursive\n"
 # define OPEN_ERROR "Fail to open the file"
 # define READ_ERROR "Fail to read the file"
 # define CLOSE_ERROR "Fail to close the file"
