@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 14:45:03 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 14:58:11 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 		out = rgbadd(out, soft_shadow(r, res, *l, 1));
 		if (res.o->mat.refl && bounce < REC_BOUNCE)
 		{
-			out = rgbmid(out, raytrace(r, (t_line){res.pt, apply(rev_3d(res.cam),
-			vecpro(res.n, 2 * scalar_product(res.cam, res.n)))}, bounce + 1, *ri), res.o->mat.refl);
+			out = rgbmid(out, raytrace(r, (t_line){res.pt,
+				apply(rev_3d(res.cam), vecpro(res.n,
+				2 * scalar_product(res.cam, res.n)))}, bounce + 1, *ri),
+				res.o->mat.refl);
 		}
 		if (res.o->mat.tr)
 		{

@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:27:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/11 17:45:43 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 14:55:07 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ t_vec	perturbation(double x, double y, SDL_Surface *txt, t_obj obj)
 	p[2] = (t_pt){rgb_litlevel(get_text_color((int)x,
 		(int)y + 1, txt, (char*)(txt->pixels))) * lvl, (int)x, (int)-y - 1};
 	if (get_norm(proj) > sqrt(2) / 2)
-		p[0] = (t_pt){rgb_litlevel(get_text_color((int)x + 1,
-			(int)y + 1, txt, (char*)(txt->pixels))) * lvl, (int)x + 1, (int)-y - 1};
+		p[0] = (t_pt){rgb_litlevel(get_text_color((int)x + 1, (int)y + 1, txt,
+			(char*)(txt->pixels))) * lvl, (int)x + 1, (int)-y - 1};
 	else
 		p[0] = (t_pt){ rgb_litlevel(get_text_color((int)x,
 			(int)y, txt, (char*)(txt->pixels))) * lvl, (int)x, (int)-y};

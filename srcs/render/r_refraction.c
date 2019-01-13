@@ -6,13 +6,13 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 12:57:00 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/12 14:24:07 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 14:57:05 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void			n_rec_clip(t_obj *wanted, int *n_rec, int n, t_obj *cur)
+static void	n_rec_clip(t_obj *wanted, int *n_rec, int n, t_obj *cur)
 {
 	t_objlist	*c;
 
@@ -26,7 +26,7 @@ static void			n_rec_clip(t_obj *wanted, int *n_rec, int n, t_obj *cur)
 	}
 }
 
-inline static void	compute_n(t_ri *ri, t_reslist res)
+static void	compute_n(t_ri *ri, t_reslist res)
 {
 	int		n_rec;
 	t_vec	inout;
@@ -49,19 +49,20 @@ inline static void	compute_n(t_ri *ri, t_reslist res)
 	}
 	if (i <= 0)
 		ri->c = '.';
-	ri->n =  ri->n / (double)i;
+	ri->n = ri->n / (double)i;
 }
 
-t_color				refraction(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
+t_color		refraction(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 {
 	double	n;
-	double  c[2];
+	double	c[2];
 	t_vec	t;
 	t_ri	out;
 
 	out = (t_ri){ri, res.o, res.co, 0, '+'};
 	compute_n(&out, res);
-	res.n = res.pert.x == 0 && res.pert.y == 0 && res.pert.z == 0 ? res.n : rot(res.pert, get_rot(res.n, 0));
+	res.n = res.pert.x == 0 && res.pert.y == 0 && res.pert.z == 0
+		? res.n : rot(res.pert, get_rot(res.n, 0));
 	n = (ri->o ? ri->n : 1) / out.o->mat.n;
 	c[0] = scalar_product(res.cam, res.n);
 	c[1] = sqrt(1 - sq(n) * (1 - sq(c[0])));

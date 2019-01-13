@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/11 17:29:52 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 15:12:48 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ t_obj	*parse_obj_2(t_env *e, int type, int fd)
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
 	*obj = (t_obj){NULL, zero_matrix(), -1, type, {},
-		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 1, 0, 0, 0, 1, 0, 0, 2,
-		NULL, NULL}, {0, 0, 0, 0}, NULL, NULL, NULL};
+		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 1, 0, 0, 0, 1, 0, 0,
+		BMP_LEVEL, NULL, NULL}, {0, 0, 0, 0}, NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{

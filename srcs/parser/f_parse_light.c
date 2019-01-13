@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/03 16:28:14 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 15:06:07 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)
 
 	i = 0;
 	cp = ft_str_tolower(l1);
-	if (check_loc(e, lit, cp, l2) && check_pt(lit, cp, l2) == 1 && check_arg(lit, cp, l2 ) == 1
+	if (check_loc(e, lit, cp, l2) && check_pt(lit, cp, l2) == 1
+		&& check_arg(lit, cp, l2 ) == 1
 		&& check_arg2(lit, cp, l2 ) == 1)
 	{
 		while (is_ignored(l1[i]) == 1)
@@ -70,8 +71,10 @@ t_lit	*parse_light_2(t_env *e, int fd)
 
 	if (!(lit = malloc(sizeof(t_lit))))
 		error(e, MALLOC_ERROR);
-	*lit = (t_lit){NULL, zero_matrix(), -1, 1.0f, 0.0f, {}, (t_color){(t_rgb){255,255,255,255}}, {0, 0, 0, 0}};
-	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
+	*lit = (t_lit){NULL, zero_matrix(), -1, 1.0f, 0.0f, {},
+		(t_color){(t_rgb){255,255,255,255}}, {0, 0, 0, 0}};
+	while ((res = get_next_line(fd, &line)) > 0
+		&& get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_light(e, lit, l1, l2);
 		ft_memdel((void**)&l1);
