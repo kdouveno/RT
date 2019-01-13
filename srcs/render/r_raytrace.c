@@ -6,19 +6,11 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 14:38:27 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 14:45:03 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static t_color	ambiant_light(t_color amb_lit_c, t_color obj_color, double coef)
-{
-	t_color	out;
-
-	out = (t_color)rgbmin(amb_lit_c, rgbneg(obj_color));
-	return ((t_color)rgbpro(out, coef));
-}
 
 t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 {
@@ -29,9 +21,7 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 	l = r->e->s.lits;
 	while (l)
 	{
-		out = rgbadd(out,
-			ambiant_light(r->e->s.amb_lit_c, get_pt_color(*res.o, res.pt, &res.pert), AMB_L));		
-		out = rgbadd(out, phong(*l, &res, catch_light(r, l, &res)));    
+		out = rgbadd(out, soft_shadow(r, res, *l, 1));
 		if (res.o->mat.refl && bounce < REC_BOUNCE)
 		{
 			out = rgbmid(out, raytrace(r, (t_line){res.pt, apply(rev_3d(res.cam),
@@ -41,9 +31,6 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 		{
 			out = rgbmid(out, refraction(r, res, bounce, ri), res.o->mat.tr);
 		}
-		if (res.o->mat.tr)
-			out = rgbmid(out, refraction(r, res, bounce,
-				(!ri ? (t_ri){1.0, '.', NULL} : *ri)), res.o->mat.tr);
 		l = l->next;
 	}
 	return (filter(r, out));

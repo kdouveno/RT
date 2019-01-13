@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 14:39:47 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 14:41:03 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,7 +363,7 @@ t_color					raytrace(t_rendering *r, t_line l, int bounce, t_ri ri);
 void					aaa(t_rendering *r);
 t_color					rec_raytrace(t_rendering *r, t_line l, int m);
 
-t_color					phong(t_lit l, t_reslist *res, t_color lc);
+t_color					phong(t_lit l, t_reslist res);
 t_color					catch_light(t_rendering *r, t_lit *l, t_reslist *res);
 t_color					get_pt_color(t_obj obj, t_pt pt, t_vec *pert);
 t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
