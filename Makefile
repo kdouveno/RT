@@ -17,6 +17,7 @@ rwildcard = $(if $1,$(if $(wildcard $1/*),$(foreach p,$(wildcard $1/*),$(call rw
 SRCS = $(call rwildcard,srcs,*.c)
 INCS = ./includes /Library/Frameworks/SDL2.framework/Headers $(call rwildcard,libs,*/includes)
 MKES = $(dir $(wildcard libs/*/Makefile))
+FMKS = $(addprefix make -C ,$(addsuffix ;,$(MKES)))
 ARCH = $(addsuffix .a, $(patsubst %/,%,$(MKES)))
 ARCF = $(filter-out $(ARCH), $(wildcard libs/*.a))
 INCSDIR = $(addprefix -I,$(INCS))
@@ -34,7 +35,7 @@ WHITE = \033[37m
 
 all:
 ifneq ($(strip $(MKES)),)
-	@make -C $(MKES)
+	$(FMKS)
 endif
 	@make $(TARGET)
 
