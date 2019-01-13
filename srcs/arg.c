@@ -24,9 +24,9 @@ static void	parameter_thread_rec(t_env *e, char *argv, int i, int r)
 			e->glb.thread_count = res;
 		else
 			e->glb.rec_lim_file = res;
-		r ? printf("\033[38;5;40mRecursive limit changed to : %d\n\033[0m",
+		r ? ft_printf("\033[38;5;40mRecursive limit changed to : %d\n\033[0m",
 			e->glb.rec_lim_file)
-			: printf("\033[38;5;40mThreads changed to : %d\n\033[0m",
+			: ft_printf("\033[38;5;40mThreads changed to : %d\n\033[0m",
 			e->glb.thread_count);
 	}
 	else
