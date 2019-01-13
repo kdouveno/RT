@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 17:48:27 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 17:54:39 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct		s_3d
 typedef t_3d	t_vec;
 typedef t_3d	t_pt;
 typedef t_3d	t_rot;
-
 
 typedef struct		s_rgb
 {
