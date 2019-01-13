@@ -19,8 +19,8 @@ camera{
 sphere{
     id: 2
     v: 20
-    tr: .5
-    n: 0.8
+    tr: 1
+    n: 1.2
     spec: 1
     color: #ffffff
     txt_bm: test2.bmp

@@ -1,0 +1,74 @@
+scene{
+	lights:auto
+}
+
+camera{
+	t: 60, 30, 60
+	r: 0
+	fov: 85
+	rotx: -100
+	para:
+}
+
+camera{
+	r: 0
+	rotx: -100
+	pos: 300, 0,0
+}
+
+camera{
+	ty: 30
+	r: 20
+	rotx: -100
+}
+
+light{
+	id: 12
+	t: -100, -30, ~
+}
+
+
+sphere{
+	spec:0.5
+	v1:12
+	t:-100, ~, ~
+	color: 65
+	tr: .5
+	n: 1
+}
+
+sphere{
+	spec:0.5
+	v1:12
+	t:-100, -30, ~
+	txt: monde.bmp
+	tr: .5
+	n: 1
+}
+
+sphere{
+	spec:0.5
+	v1:12
+	t:-100, 30, ~
+	color: 65
+	tr: .1
+	n: 1
+}
+
+plane{
+	tx:-200
+	color:67
+}
+
+grad{
+	id:65
+	pos: -100, -12, ~
+	dir: -100, 12, ~
+	c1: #FF0000
+	c2: #0000FF
+}
+
+grad{
+	id:67
+	c1:#FFFFFF
+}
