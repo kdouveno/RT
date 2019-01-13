@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 16:29:43 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 17:38:00 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void		*render(void *r)
 		iy = d->iy;
 		l = (t_line){d->pt_ul, d->vp_ul};
 		render_next_line(d);
-		((int*)d->render->pixels)[iy * d->dimx + ix] = rec_raytrace(
-			r, l, !d->aaa).i;
+		((int*)d->render->pixels)[iy * d->dimx + ix] = rec_raytrace(r,
+			l, !d->aaa).i;
 		((t_rendering*)r)->e->ui.pbar.value = (((double)iy
 			/ (double)d->dimy)) * (1.0 - ((double)d->ssaa / 32.0));
 	}

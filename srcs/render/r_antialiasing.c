@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 15:01:20 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 17:25:49 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,9 @@ t_color					rec_raytrace(t_rendering *r, t_line l, int m)
 	if (m < d->ssaa && m)
 	{
 		assign_lines(ls, l, m, d);
-		return (rgbmoy4((t_color[]){
-			rec_raytrace(r, ls[0], m * 2),
-			rec_raytrace(r, ls[1], m * 2),
-			rec_raytrace(r, ls[2], m * 2),
-			rec_raytrace(r, ls[3], m * 2),
-		}));
+		return (rgbmoy4((t_color[]){rec_raytrace(r, ls[0], m * 2),
+			rec_raytrace(r, ls[1], m * 2), rec_raytrace(r, ls[2], m * 2),
+			rec_raytrace(r, ls[3], m * 2)}));
 	}
 	else
 		return (raytrace(r, l, 0, (t_ri){NULL, NULL, NULL, 1, 'c'}));
@@ -113,9 +110,9 @@ void					aaa(t_rendering *r)
 	while (i < max)
 	{
 		if ((i > d->dimx && aaacolor(p[i], p[i - d->dimx]))
-		|| ((i + 1) % d->dimx != 1 && aaacolor(p[i], p[i - 1]))
-		|| ((i + 1) % d->dimx && aaacolor(p[i], p[i + 1]))
-		|| (i < max - d->dimx && aaacolor(p[i], p[i + d->dimx])))
+			|| ((i + 1) % d->dimx != 1 && aaacolor(p[i], p[i - 1]))
+			|| ((i + 1) % d->dimx && aaacolor(p[i], p[i + 1]))
+			|| (i < max - d->dimx && aaacolor(p[i], p[i + d->dimx])))
 			p[i] = rec_raytrace(r, get_camline(*r->c, i), 1);
 		i++;
 	}

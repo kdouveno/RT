@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 11:12:40 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/11 15:24:47 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 17:11:57 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int		parse_3d(t_env *e, t_pt *pt, char *l2)
 	i = 0;
 	while (tab[i])
 	{
-		*((double*)&tmp + i) = tab[i][0] != '~' ?
-		ft_atod(tab[i]) : *((double*)pt + i);
+		*((double*)&tmp + i) = tab[i][0] != '~'
+			? ft_atod(tab[i]) : *((double*)pt + i);
 		i++;
 	}
 	ft_free_tab(tab);

@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:15:27 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 15:05:22 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 17:10:52 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void			parse_grad(t_env *e, int type, int fd, t_scene *s)
 	save = s->grads;
 	if (save != NULL)
 	{
-		while(save->next != NULL)
+		while (save->next != NULL)
 			save = save->next;
 		save->next = parse_grad_2(e, fd);
 	}

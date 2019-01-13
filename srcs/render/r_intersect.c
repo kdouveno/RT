@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:25:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 15:00:31 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 17:27:13 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static t_obj			*is_tangible(t_obj *o, t_pt pt, t_obj *last)
 	if (!o->b.clip && !last)
 		last = o;
 	while (c){
-		if (c->obj && c->obj != last && is_tangible(c->obj, pt, o) &&
-		g_ref[c->obj->type].isptin(pt, *c->obj))
+		if (c->obj && c->obj != last && is_tangible(c->obj, pt, o)
+			&& g_ref[c->obj->type].isptin(pt, *c->obj))
 		{
 			pc = 0;
 			break ;

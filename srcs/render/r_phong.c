@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:24:37 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 14:44:47 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 17:31:01 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,8 @@ static double	spec_light(t_vec lnc[3])
 	double	out;
 	t_vec	h;
 
-	h = normalise((t_vec){
-		(lnc[0].x + lnc[2].x) / 2,
-		(lnc[0].y + lnc[2].y) / 2,
-		(lnc[0].z + lnc[2].z) / 2
-	});
+	h = normalise((t_vec){(lnc[0].x + lnc[2].x) / 2, (lnc[0].y + lnc[2].y) / 2,
+		(lnc[0].z + lnc[2].z) / 2});
 	out = pow(scalar_product(h, lnc[1]), 100);
 	return (out);
 }

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 16:03:19 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 17:09:16 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ t_cam	*parse_cam_2(t_env *e, int fd)
 		error(e, MALLOC_ERROR);
 	*cam = (t_cam){NULL, zero_matrix(), -1,
 		{{}, {}, {}, {}, {}, FOV, NULL, 0, 0, 0, 0, 1, 1, 0, '\0'}};
-	while ((res = get_next_line(fd, &line)) > 0 &&
-		get_prop(e, line, &l1, &l2) != 1)
+	while ((res = get_next_line(fd, &line)) > 0
+		&& get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_cam(e, cam, l1, l2);
 		ft_memdel((void**)&l1);
