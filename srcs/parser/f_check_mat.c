@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 15:14:11 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 16:07:36 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 16:16:54 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ double	get_coef(double nb)
 {
 	if (nb < 0.0f)
 		return (0.0f);
-	if (nb > 1.0f)
+	else if (nb > 1.0f)
 		return (1.0f);
 	return (nb);
 }

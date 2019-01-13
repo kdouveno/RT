@@ -20,9 +20,11 @@ ________________________________________________________________________________
 ________________________________________________________________________________
 scene{
 	lights: auto
+	amb_l: (HEX6)
 }
 
 camera{
+	pos: (triplet)
 	t: (triplet)
 	tx: (double)
 	ty: (double)
@@ -36,6 +38,8 @@ camera{
 	dimx: (int)
 	dimy: (int)
 
+	filter: black | sepia
+
 	id: (ID)
 	fov: (double)
 	ssaa: [1 | 2 | 4 | 8 | 16]
@@ -44,6 +48,7 @@ camera{
 }
 
 light{
+	pos: (triplet)
 	t: (triplet)
 	tx: (double)
 	ty: (double)
@@ -53,6 +58,7 @@ light{
 	dirx: (double)
 	diry: (double)
 	dirz: (double)
+
 	power: (double)
 	radius: (double)
 	c / color : (ID) | (HEX6)
@@ -75,6 +81,9 @@ grad{
 }
 
 sphere / cylinder / cone / plane / cuboid{
+
+	pos: (triplet)
+	t: (triplet)
 	tx: (double)
 	ty: (double)
 	tz: (double)
@@ -89,16 +98,17 @@ sphere / cylinder / cone / plane / cuboid{
 
 	mat: (PATH.mat)
 	spec: (coef)
+	diff: (coef)
 	reflexion: (coef)
 	n / refraction_index : (coef)
 	tr / transparency : (coef)
 	c / color: [(ID) | (HEX6)]
 
 	b_lvl / bump_level : (float)
-	texture: [(FILE.rt) | none]
-	texture: [(FILE.rt) | none]
-	offx: (int)
-	offy: (int)
+	txt / texture: [(FILE.rt) | none]
+	txt_bm / texture_bump: [(FILE.rt) | none]
+	offx: (float)(%)
+	offy: (float)(%)
 
 	v / v1: (double)
 	v2: (double)
@@ -106,17 +116,4 @@ sphere / cylinder / cone / plane / cuboid{
 	v4: (double)
 }
 
-preset{
-	tx: (double)
-	ty: (double)
-	tz: (double)
-
-	dirx: (double)
-	diry: (double)
-	dirz: (double)
-
-	scale : (coef)
-
-	src : (FILE.rt)
-}
 ________________________________________________________________________________
