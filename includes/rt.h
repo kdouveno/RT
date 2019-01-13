@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 15:36:33 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 16:06:13 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,6 +307,7 @@ void				ft_clear_screen(Uint32 color, t_list_win *win);
 **	PARSER
 */
 
+double					get_coef(double nb);
 int						is_name_char(char c);
 int						is_ignored(char c);
 int						is_vec_null(t_vec vec);

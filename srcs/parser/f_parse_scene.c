@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 15:50:52 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 15:50:53 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 16:04:43 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	check_arg(t_env *e, t_scene *s, char *l1, char *l2)
 			s->auto_l = 1;
 		else
 			wrong_type(e, l1, 0, 0);
-		return (0);
 	}
 	else if (!(ft_strcmp(l1, "amb_l")))
 	{
@@ -28,9 +27,10 @@ static int	check_arg(t_env *e, t_scene *s, char *l1, char *l2)
 			e->glb.amb_l.i = (unsigned)atoi_hexa(&l2[1]);
 		else
 			e->glb.amb_l.i = ft_atoi(l2);
-		return (0);
 	}
-	return (1);
+	else
+		return (1);
+	return (0);
 }
 
 void		stock_scene(t_env *e, char *l1, char *l2, t_scene *s)

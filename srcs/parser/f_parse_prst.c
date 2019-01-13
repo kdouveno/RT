@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 18:54:01 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 15:46:43 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 16:08:12 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int	check_arg(t_env *e, t_prst *prst, char *l1, char *l2)
 			else
 				error(e, MALLOC_ERROR);
 		}
-		return (0);
 	}
-	if (!(ft_strcmp(l1, "scale")))
+	else if (!(ft_strcmp(l1, "scale")))
 	{
 		prst->scale = ft_atod(l2);
-		return (0);
 	}
-	return (1);
+	else
+		return (1);
+	return (0);
 }
 
 void		stock_prst(t_env *e, t_prst *prst, char *l1, char *l2)

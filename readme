@@ -74,7 +74,7 @@ grad{
 	c2 / color2: (ID) | (HEX6)
 }
 
-sphere / cylinder / cone / plane / pyramid / torus / cuboid{
+sphere / cylinder / cone / plane / cuboid{
 	tx: (double)
 	ty: (double)
 	tz: (double)
@@ -90,7 +90,12 @@ sphere / cylinder / cone / plane / pyramid / torus / cuboid{
 	mat: (PATH.mat)
 	spec: (coef)
 	reflexion: (coef)
+	n / refraction_index : (coef)
+	tr / transparency : (coef)
 	c / color: [(ID) | (HEX6)]
+
+	b_lvl / bump_level : (float)
+	texture: [(FILE.rt) | none]
 	texture: [(FILE.rt) | none]
 	offx: (int)
 	offy: (int)

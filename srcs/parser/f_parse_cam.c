@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 15:10:48 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 16:03:19 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,39 +22,23 @@ static int		is_powertwo(int nb)
 static int	check_dimx_dimy(t_cam *cam, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "dimx")))
-	{
-		cam->data.dimx = ft_atoi(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "dimy")))
-	{
-		cam->data.dimy = ft_atoi(l2);
-		return (0);
-	}
-	if (!(ft_strcmp(l1, "filter")))
+		cam->data.dimx = ft_atoi(l2) < 0 ? -ft_atoi(l2) : ft_atoi(l2);
+	else if (!(ft_strcmp(l1, "dimy")))
+		cam->data.dimy = ft_atoi(l2) < 0 ? -ft_atoi(l2) : ft_atoi(l2);
+	else if (!(ft_strcmp(l1, "filter")))
 	{
 		if (!(ft_strcmp(l2, "black")))
 			cam->data.filter = 'b';
 		if (!(ft_strcmp(l2, "sepia")))
 			cam->data.filter = 's';
-		return (0);
 	}
-	return (1);
-}
-
-static int		check_arg_next(t_cam *cam, char *l1)
-{
-	if (!(ft_strcmp(l1, "aaa")))
-	{
+	else if (!(ft_strcmp(l1, "aaa")))
 		cam->data.aaa = 0;
-		return (0);
-	}
 	else if (!(ft_strcmp(l1, "para")))
-	{
 		cam->data.para = 1;
-		return (0);
-	}
-	return(1);
+	else
+		return (1);
+	return (0);
 }
 
 static int		check_arg(t_cam *cam, char *l1, char *l2)
@@ -63,13 +47,11 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	{
 		cam->id = ft_atoi(l2);
 		cam->id = cam->id < 0 ? -cam->id : cam->id;
-		return (0);
 	}
 	else if (!(ft_strcmp(l1, "fov")))
 	{
 		cam->data.fov = ft_atod(l2);
 		cam->data.fov = cam->data.fov < 0 ? -cam->data.fov : cam->data.fov;
-		return (0);
 	}
 	else if (!(ft_strcmp(l1, "ssaa")))
 	{
@@ -80,9 +62,10 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 			cam->data.ssaa = 1;
 			ft_putstr("\033[2;49;91mssaa is invalid -> changed to 1\n");
 		}
-		return (0);
 	}
-	return (check_arg_next(cam, l1));
+	else
+		return (1);
+	return (0);
 }
 
 void	stock_cam(t_env *e, t_cam *cam, char *l1, char *l2)

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 15:14:11 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 17:33:24 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 16:07:36 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,52 +21,25 @@ double	get_coef(double nb)
 	return (nb);
 }
 
-int		check_mat3(t_env *e, t_obj *obj, char *l1, char *l2)
-{
-	(void)e;
-	if (!(ft_strcmp(l1, "offx")))
-	{
-		obj->mat.offx = ft_atod(l2) < 0.0f ? -ft_atod(l2) : ft_atod(l2);
-		return (0);
-	}
-	else if (!(ft_strcmp(l1, "offy")))
-	{
-		obj->mat.offy = ft_atod(l2) < 0.0f ? -ft_atod(l2) : ft_atod(l2);
-		return (0);
-	}
-	else if (!(ft_strcmp(l1, "b_lvl")) || !(ft_strcmp(l1, "bump_level")))
-	{
-		obj->mat.b_lvl = ft_atoi(l2);
-		return (0);
-	}
-	else
-		return (1);
-}
-
 int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "c")) || !(ft_strcmp(l1, "color")))
-	{
 		parse_color(obj, l2, NULL, 0);
-		return (0);
-	}
 	else if (!(ft_strcmp(l1, "reflexion")))
-	{
 		obj->mat.refl = get_coef(ft_atod(l2));
-		return (0);
-	}
 	else if (!(ft_strcmp(l1, "txt")) || !(ft_strcmp(l1, "texture")))
-	{
 		link_texture(e, obj, ft_strjoin("textures/", l2), 't');
-		return (0);
-	}
 	else if (!(ft_strcmp(l1, "txt_bm")) || !(ft_strcmp(l1, "texture_bump")))
-	{
 		link_texture(e, obj, ft_strjoin("textures/", l2), 'b');
-		return (0);
-	}
+	else if (!(ft_strcmp(l1, "offx")))
+		obj->mat.offx = ft_atod(l2) < 0.0f ? -ft_atod(l2) : ft_atod(l2);
+	else if (!(ft_strcmp(l1, "offy")))
+		obj->mat.offy = ft_atod(l2) < 0.0f ? -ft_atod(l2) : ft_atod(l2);
+	else if (!(ft_strcmp(l1, "b_lvl")) || !(ft_strcmp(l1, "bump_level")))
+		obj->mat.b_lvl = ft_atod(l2);
 	else
-		return (check_mat3(e, obj, l1, l2));
+		return (1);
+	return (0);
 }
 
 int		check_mat(t_env *e, t_obj *obj, char *l1, char *l2)
@@ -77,18 +50,12 @@ int		check_mat(t_env *e, t_obj *obj, char *l1, char *l2)
 			wrong_type(e, l1, 0, 0);
 		else if (l2[0])
 			link_mat(e, obj, ft_strjoin("mat/", l2));
-		return (0);
 	}
 	else if (!(ft_strcmp(l1, "spec")))
-	{
 		obj->mat.spec = get_coef(ft_atod(l2));
-		return (0);
-	}
 	else if (!(ft_strcmp(l1, "diff")))
-	{
 		obj->mat.diff = get_coef(ft_atod(l2));
-		return (0);
-	}
 	else
 		return (check_mat2(e, obj, l1, l2));
+	return (0);
 }
