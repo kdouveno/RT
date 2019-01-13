@@ -6,14 +6,13 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/11 17:33:33 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 15:01:20 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-inline static void		assign_lines(t_line ls[4], t_line l, int m,
-	t_cam_render *d)
+static void		assign_lines(t_line ls[4], t_line l, int m, t_cam_render *d)
 {
 	double c;
 
@@ -84,7 +83,9 @@ inline static t_line	get_camline(t_cam c, int i)
 	if (d->para)
 	{
 		step = d->fov / d->dimx;
-		out.m = apply(trans_vec((t_vec){0, d->fov / 2 - step * (i % d->dimx + 1), d->dimy * step / 2 - step * (i / d->dimx + 1)}, &c.m), d->pt_ul);
+		out.m = apply(trans_vec((t_vec){0, d->fov / 2 - step
+			* (i % d->dimx + 1), d->dimy * step / 2 - step
+			* (i / d->dimx + 1)}, &c.m), d->pt_ul);
 		out.v = d->vp_ul;
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 16:36:07 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/11 15:46:25 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 14:59:05 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	cone_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 		return ;
 	add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, res.a, NULL});
 	if (res.type == TWORES)
-		add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, res.b, NULL});
+		add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {},
+			res.b, NULL});
 }
 
 void	cylinder_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
@@ -41,7 +42,8 @@ void	cylinder_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 		return ;
 	add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, res.a, NULL});
 	if (res.type == TWORES)
-		add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, res.b, NULL});
+		add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {},
+			res.b, NULL});
 }
 
 void	sphere_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
@@ -56,14 +58,16 @@ void	sphere_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 		return ;
 	add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, res.a, NULL});
 	if (res.type == TWORES)
-		add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, res.b, NULL});
+		add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {},
+			res.b, NULL});
 }
 
 void	plane_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 {
 	if (!d.v.x)
 		return ;
-	add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, -d.m.x / d.v.x, NULL});
+	add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, -d.m.x / d.v.x,
+		NULL});
 }
 
 void	cuboid_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 11:33:50 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 15:10:48 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,21 @@ static int	check_dimx_dimy(t_cam *cam, char *l1, char *l2)
 	return (1);
 }
 
+static int		check_arg_next(t_cam *cam, char *l1)
+{
+	if (!(ft_strcmp(l1, "aaa")))
+	{
+		cam->data.aaa = 0;
+		return (0);
+	}
+	else if (!(ft_strcmp(l1, "para")))
+	{
+		cam->data.para = 1;
+		return (0);
+	}
+	return(1);
+}
+
 static int		check_arg(t_cam *cam, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "id")))
@@ -67,17 +82,7 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 		}
 		return (0);
 	}
-	else if (!(ft_strcmp(l1, "aaa")))
-	{
-		cam->data.aaa = 0;
-		return (0);
-	}
-	else if (!(ft_strcmp(l1, "para")))
-	{
-		cam->data.para = 1;
-		return (0);
-	}
-	return(1);
+	return (check_arg_next(cam, l1));
 }
 
 void	stock_cam(t_env *e, t_cam *cam, char *l1, char *l2)

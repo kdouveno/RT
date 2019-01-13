@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 14:41:03 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 15:12:38 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct			s_mat
 	float				n;
 	float				offx;
 	float				offy;
-	int					b_lvl;
+	float				b_lvl;
 	SDL_Surface			*txt;
 	SDL_Surface			*txt_bm;
 }						t_mat;

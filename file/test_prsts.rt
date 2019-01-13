@@ -42,6 +42,8 @@ sphere{
 	offy:0
 	v1:40
 	txt: none
+	b_lvl:-5
+	txt_bm: earthcol.bmp
 }
 
 plane
