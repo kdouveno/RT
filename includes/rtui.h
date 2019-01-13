@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:08:07 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/11 15:16:59 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/13 17:48:48 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ struct				s_list_btn
 	t_list_btn		*next;
 };
 
-
 struct				s_pbar
 {
 	SDL_Surface		*frame;
@@ -84,7 +83,6 @@ struct				s_pbar
 	double			value;
 	int				shown;
 };
-
 
 struct				s_menu
 {

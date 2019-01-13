@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 18:00:25 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/04 10:48:40 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 17:48:27 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ typedef struct		s_polyres
 	double			b;
 }					t_polyres;
 
-t_3d			xrot(t_3d td, double a);
-t_3d			yrot(t_3d td, double a);
-t_3d			zrot(t_3d td, double a);
-t_3d			rot(t_3d td, t_rot r);
-t_3d			unrot(t_3d td, t_rot r);
+t_3d				xrot(t_3d td, double a);
+t_3d				yrot(t_3d td, double a);
+t_3d				zrot(t_3d td, double a);
+t_3d				rot(t_3d td, t_rot r);
+t_3d				unrot(t_3d td, t_rot r);
 
 t_vec				get_vector(t_pt a, t_pt b);
 t_line				get_line(t_pt a, t_pt b);

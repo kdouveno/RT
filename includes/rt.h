@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 16:59:49 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 17:53:24 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct			s_wininfo
 	int					x;
 	int					y;
 }						t_wininfo;
-
 
 typedef struct			s_fd
 {
@@ -251,57 +250,50 @@ typedef struct			s_rendering
 **	UI
 */
 
-int					count_cams(t_env *e);
+int						count_cams(t_env *e);
 
-void				button_pressed(t_env *e);
+void					button_pressed(t_env *e);
 
-int					aabb_col_pt(t_aabb aabb, t_vec pt);
+int						aabb_col_pt(t_aabb aabb, t_vec pt);
 
-void				pbar_init(t_env *e);
-void				pbar_update(t_env *e);
-void				pbar_draw(t_env *e);
+void					pbar_init(t_env *e);
+void					pbar_update(t_env *e);
+void					pbar_draw(t_env *e);
 
-void				list_btn_add(t_env *e, t_list_btn **list, t_list_btn new);
-void				list_btn_del(t_list_btn *list);
-void				list_btn_update(t_env *e, t_list_btn *list, int mouse_out);
-void				list_btn_draw(t_env *e, t_list_win *win, t_list_btn *list);
-void				list_btn_cam(t_env *e, int add);
+void					list_btn_add(t_env *e, t_list_btn **list,
+	t_list_btn new);
+void					list_btn_del(t_list_btn *list);
+void					list_btn_update(t_env *e, t_list_btn *list,
+	int mouse_out);
+void					list_btn_draw(t_env *e, t_list_win *win,
+	t_list_btn *list);
+void					list_btn_cam(t_env *e, int add);
 
+void					list_win_add(t_env *e, t_list_win **list,
+	t_list_win new);
+void					list_win_del(t_list_win *list);
+void					list_win_delone(t_list_win **list, t_list_win *el);
+t_list_win				*list_win_get(t_list_win *list, Uint32 id);
 
-void				list_win_add(t_env *e, t_list_win **list, t_list_win new);
-void				list_win_del(t_list_win *list);
-void				list_win_delone(t_list_win **list, t_list_win *el);
-t_list_win			*list_win_get(t_list_win *list, Uint32 id);
+void					rtui_init(t_env *e);
 
+void					gui_set_button_pos(t_menu *menu);
 
-void				rtui_init(t_env *e);
+void					b_call_menu_cam(void *e, int n);
+void					b_call_menu_main(void *e, int n);
+void					b_call_exit(void *e, int n);
+void					b_call_open_win(void *e, int n);
 
+void					rt_exit(t_env *e);
 
-void				gui_set_button_pos(t_menu *menu);
-
-
-void				b_call_menu_cam(void *e, int n);
-void				b_call_menu_main(void *e, int n);
-void				b_call_exit(void *e, int n);
-void				b_call_open_win(void *e, int n);
-
-void				rt_exit(t_env *e);
-
-
-void				sdl_loop(t_env *e);
-void				sdl_event_manager(t_env *e);
-
-
-void				ft_update(t_env *e);
-
-
-SDL_Surface			*sdl_img_import(char *filename);
-void				sdl_img_export(SDL_Surface *img, char *filename);
-void				rt_export_screenshoot(t_env *e, t_list_win *win);
-
-
-void				ft_put_pixel(int x, int y, Uint32 c, t_list_win *win);
-void				ft_clear_screen(Uint32 color, t_list_win *win);
+void					sdl_loop(t_env *e);
+void					sdl_event_manager(t_env *e);
+void					ft_update(t_env *e);
+SDL_Surface				*sdl_img_import(char *filename);
+void					sdl_img_export(SDL_Surface *img, char *filename);
+void					rt_export_screenshoot(t_env *e, t_list_win *win);
+void					ft_put_pixel(int x, int y, Uint32 c, t_list_win *win);
+void					ft_clear_screen(Uint32 color, t_list_win *win);
 
 /*
 **	PARSER
@@ -312,7 +304,6 @@ int						is_name_char(char c);
 int						is_ignored(char c);
 int						is_vec_null(t_vec vec);
 void					wrong_type(t_env *e, char *l_type, int fd, int skip);
-
 t_matrix				zero_matrix();
 int						get_prop(t_env *e, char *line, char **l1, char **l2);
 char					*get_name(t_env *e, char *line, int i, int *l);
@@ -326,15 +317,12 @@ void					parse_prst(t_env *e, int type, int fd, t_scene *s);
 void					parse_color(t_obj *obj, char *l2, t_grad *grad, int nb);
 void					creat_clips(t_env *e, t_obj *obj, char *l2);
 void					stock_obj(t_env *e, t_obj *obj, char *l1, char *l2);
-
-void					parse_loc(t_env *e, t_obj *o, char *l2); // UNUSED
 int						parse_3d(t_env *e, t_pt *pt, char *l2);
-
-int						check_pt(void *cam, char* l1, char *l2);
-int						check_dir(void *cam, char* l1, char *l2);
+int						check_pt(void *cam, char *l1, char *l2);
+int						check_dir(void *cam, char *l1, char *l2);
 int						check_rot(void *cam, char *l1, char *l2);
 int						check_value(t_obj *obj, char *l1, char *l2);
-int						check_mat(t_env *e, t_obj *obj, char* l1, char *l2);
+int						check_mat(t_env *e, t_obj *obj, char *l1, char *l2);
 int						check_loc(t_env *e, void *obj, char *l1, char *l2);
 
 /*
@@ -347,11 +335,10 @@ t_color					init_lit_scene(t_env *e, t_scene *s, int *l);
 void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);
 void					link_color_grad(t_env *e);
-void					link_texture(t_env *e, t_obj *obj, char *file, char type);
+void					link_texture(t_env *e, t_obj *obj, char *file,
+	char type);
 void					link_locs(t_scene *s, void *o);
-
 void					link_mat(t_env *e, t_obj *obj, char *file);
-
 int						check_file_ext(const char *str, const char *ext);
 char					*file_name(char *str);
 
@@ -364,34 +351,36 @@ t_cam					*render_cam(t_env *e, int ncam);
 t_color					raytrace(t_rendering *r, t_line l, int bounce, t_ri ri);
 void					aaa(t_rendering *r);
 t_color					rec_raytrace(t_rendering *r, t_line l, int m);
-
 t_color					phong(t_lit l, t_reslist res);
 t_color					catch_light(t_rendering *r, t_lit *l, t_reslist *res);
 t_color					get_pt_color(t_obj obj, t_pt pt, t_vec *pert);
-t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
-
-t_color					spherical_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
-t_color					cylinder_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
-t_color					plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
-void					offset_txt(t_obj obj, double *x, double *y, SDL_Surface *txt);
-t_vec					perturbation(double x, double y, SDL_Surface *txt, t_obj obj);
-t_color					get_text_color(int x, int y, SDL_Surface *txt, char *pixels);
-
+t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert,
+	SDL_Surface *txt);
+t_color					spherical_texture(t_obj obj, t_pt pt, t_vec *pert,
+	SDL_Surface *txt);
+t_color					cylinder_texture(t_obj obj, t_pt pt, t_vec *pert,
+	SDL_Surface *txt);
+t_color					plane_texture(t_obj obj, t_pt pt, t_vec *pert,
+	SDL_Surface *txt);
+void					offset_txt(t_obj obj, double *x, double *y,
+	SDL_Surface *txt);
+t_vec					perturbation(double x, double y, SDL_Surface *txt,
+	t_obj obj);
+t_color					get_text_color(int x, int y, SDL_Surface *txt,
+	char *pixels);
 t_color					filter(t_rendering *r, t_color p_color);
-
 t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
 	int rec);
 t_color					perlin_noise(t_pt pt);
 t_reslist				intersec(t_rendering *r, t_line line);
-t_color					refraction(t_rendering *r, t_reslist res, int bounce, t_ri *ri);
-
+t_color					refraction(t_rendering *r, t_reslist res, int bounce,
+	t_ri *ri);
 t_line					trans_line(t_line in, t_matrix *o);
 t_line					rtrans_line(t_line in, t_matrix *o);
 t_pt					trans_pt(t_pt in, t_matrix *o);
 t_pt					rtrans_pt(t_pt in, t_matrix *o);
 t_vec					trans_vec(t_vec in, t_matrix *o);
 t_vec					rtrans_vec(t_vec in, t_matrix *o);
-
 void					sphere_line(t_env *e, t_line d, t_obj *o,
 	t_reslist **rlist);
 void					cone_line(t_env *e, t_line d, t_obj *o,
@@ -402,19 +391,16 @@ void					plane_line(t_env *e, t_line d, t_obj *o,
 	t_reslist **rlist);
 void					cuboid_line(t_env *e, t_line d, t_obj *o,
 	t_reslist **rlist);
-
 t_vec					sphere_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					cone_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					cylinder_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					plane_norm(t_pt pt, t_obj obj, t_vec v);
 t_vec					cuboid_norm(t_pt pt, t_obj obj, t_vec v);
-
 int						sphere_isptin(t_pt pt, t_obj o);
 int						cylinder_isptin(t_pt pt, t_obj o);
 int						cone_isptin(t_pt pt, t_obj o);
 int						plane_isptin(t_pt pt, t_obj o);
 int						cuboid_isptin(t_pt pt, t_obj o);
-
 double					get_norm(t_vec a);
 
 typedef struct			s_objfx
@@ -449,13 +435,10 @@ static const t_objfx	g_ref[] = {
 */
 
 int						atoi_hexa(char const *str);
-
 void					set_camera(t_env *e, t_vec t, t_rot r, double a);
 int						add_obj(t_env *e, t_obj obj);
 int						add_light(t_env *e, t_lit light);
-
 int						key_hook(int key, t_env *e);
-
 t_polyres				solve_polynome(double a, double b, double c);
 double					dist(t_pt a, t_pt b);
 void					add_res(t_env *e, t_reslist **cur, t_reslist t);
@@ -470,7 +453,6 @@ void					free_scene(t_scene *s);
 void					error(t_env *e, const char *msg);
 void					error_prst(t_prst *p, char *msg);
 void					free_prst(t_prst *p);
-
 int						my_key(int key, t_env *e);
 void					k_escape(t_env *e);
 void					quit(t_env *e, char *msg);

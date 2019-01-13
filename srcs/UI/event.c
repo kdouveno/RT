@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:19:24 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/13 17:41:07 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 17:46:30 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ static void			s_event_wheel(t_env *e)
 		{
 			if ((UI_HEIGHT - e->ui.gui.actual_menu->max_y
 				- UI_BTN_Y - UI_BTN_DOWN_Y) <= 0)
-				e->ui.gui.actual_menu->cam_y
-				= (UI_HEIGHT - e->ui.gui.actual_menu->max_y
+				e->ui.gui.actual_menu->cam_y = (UI_HEIGHT
+					- e->ui.gui.actual_menu->max_y
 					- UI_BTN_Y - UI_BTN_DOWN_Y);
 		}
 		else
