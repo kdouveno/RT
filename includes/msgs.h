@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msgs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 17:14:10 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/16 02:32:59 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/12 14:32:33 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@
 # define EMPTY_SCENE "The scene is empty"
 # define TEXT_ERROR "A texture can't be load"
 # define CLIP_CIRCLE_ERROR "Infinite clip-path loop"
+# define THREAD_J_ERROR "Thread joining failed"
 #endif

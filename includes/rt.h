@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/12 18:17:36 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 14:39:47 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct			s_global
 	int					rec_lim_file;
 	int					rec_nb_file;
 	int					thread_count;
+	t_color				amb_l;
 }						t_global;
 
 typedef struct			s_wininfo
@@ -80,8 +81,9 @@ typedef struct			s_mat
 	float				refl;
 	float				tr;
 	float				n;
-	int					offx;
-	int					offy;
+	float				offx;
+	float				offy;
+	int					b_lvl;
 	SDL_Surface			*txt;
 	SDL_Surface			*txt_bm;
 }						t_mat;
@@ -124,6 +126,7 @@ typedef struct			s_cam_render
 	int					ssaa;
 	int					aaa;
 	int					para;
+	char				filter;
 }						t_cam_render;
 
 typedef struct			s_lit
@@ -216,6 +219,7 @@ typedef struct			s_scene
 	struct s_prst		*prsts;
 	int					auto_l;
 	t_color				amb_lit_c;
+	t_color				amb_lit_sh;
 }						t_scene;
 
 typedef struct			s_prst
@@ -250,9 +254,11 @@ int					count_cams(t_env *e);
 
 void				button_pressed(t_env *e);
 
-
 int					aabb_col_pt(t_aabb aabb, t_vec pt);
 
+void				pbar_init(t_env *e);
+void				pbar_update(t_env *e);
+void				pbar_draw(t_env *e);
 
 void				list_btn_add(t_env *e, t_list_btn **list, t_list_btn new);
 void				list_btn_del(t_list_btn *list);
@@ -278,8 +284,6 @@ void				b_call_menu_main(void *e, int n);
 void				b_call_exit(void *e, int n);
 void				b_call_open_win(void *e, int n);
 
-
-void				error_handler(t_env *e, int error_code);
 void				rt_exit(t_env *e);
 
 
@@ -292,7 +296,7 @@ void				ft_update(t_env *e);
 
 SDL_Surface			*sdl_img_import(char *filename);
 void				sdl_img_export(SDL_Surface *img, char *filename);
-void				rt_export_screenshoot(t_env *e, char *filename);
+void				rt_export_screenshoot(t_env *e, t_list_win *win);
 
 
 void				ft_put_pixel(int x, int y, Uint32 c, t_list_win *win);
@@ -337,7 +341,7 @@ int						check_loc(t_env *e, void *obj, char *l1, char *l2);
 
 void					init(t_env *e);
 void					init_objs(t_env *e, t_scene *s);
-t_color					init_lit_scene(t_env *e, t_scene *s);
+t_color					init_lit_scene(t_env *e, t_scene *s, int *l);
 void					link_obj(t_env *e);
 void					link_color_obj(t_env *e);
 void					link_color_grad(t_env *e);
@@ -363,9 +367,19 @@ t_color					phong(t_lit l, t_reslist *res, t_color lc);
 t_color					catch_light(t_rendering *r, t_lit *l, t_reslist *res);
 t_color					get_pt_color(t_obj obj, t_pt pt, t_vec *pert);
 t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
-t_color					soft_shadow(t_rendering *r, t_reslist *res, t_lit l,
+
+t_color					spherical_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
+t_color					cylinder_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
+t_color					plane_texture(t_obj obj, t_pt pt, t_vec *pert, SDL_Surface *txt);
+void					offset_txt(t_obj obj, double *x, double *y, SDL_Surface *txt);
+t_vec					perturbation(double x, double y, SDL_Surface *txt, t_obj obj);
+t_color					get_text_color(int x, int y, SDL_Surface *txt, char *pixels);
+
+t_color					filter(t_rendering *r, t_color p_color);
+
+t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
 	int rec);
-t_color					perlin_noise(t_obj obj, t_pt pt);	
+t_color					perlin_noise(t_pt pt);
 t_reslist				intersec(t_rendering *r, t_line line);
 t_color					refraction(t_rendering *r, t_reslist res, int bounce, t_ri *ri);
 

@@ -6,13 +6,28 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 14:48:22 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:15 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 16:05:32 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-char	*get_name(t_env *e, char *line, int i, int *l)
+char		*get_name_next(char *cp, char *line, int i, int i_cp)
+{
+	while (line[i] != '{' && line[i] != '\0')
+	{
+		if (is_ignored(line[i]) == 0)
+		{
+			cp[i_cp] = line[i];
+			i_cp++;
+		}
+		i++;
+	}
+	cp[i_cp] = '\0';
+	return (cp);
+}
+
+char		*get_name(t_env *e, char *line, int i, int *l)
 {
 	char	*cp;
 	int		i_cp;
@@ -35,17 +50,7 @@ char	*get_name(t_env *e, char *line, int i, int *l)
 		ft_memdel((void**)&line);
 		error(e, MALLOC_ERROR);
 	}
-	while (line[i] != '{' && line[i] != '\0')
-	{
-		if (is_ignored(line[i]) == 0)
-		{
-			cp[i_cp] = line[i];
-			i_cp++;
-		}
-		i++;
-	}
-	cp[i_cp] = '\0';
-	return (cp);
+	return (get_name_next(cp, line, i, i_cp));
 }
 
 static int	link_name(char *name)

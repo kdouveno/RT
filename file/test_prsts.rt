@@ -1,69 +1,59 @@
-anchor{
-	id: -1
-	pos: 20, 200, 50
-	rot: 40, 75, 90
+scene{
+	amb_l:#FF000F
 }
 
 camera{
-	pos: 0, 200, 100
-	r: 0
-	link: 10
+	pos: ~, -100, 40
+	rotx:100
+	roty:10
+	rotz:40
+	r:0
 }
+
 camera{
-	id: 129
-	pos: ~, ~, 20
-	r: 0
-	para: 1
-	fov: 30
-	link: 58
+	pos: -300, 10, 40
+	rotx:100
+	roty:10
+	rotz:40
+	fov: 60
+	r:0
+}
+
+camera{
+	pos: -150, 10, 300
+	rotx:100
+	roty:10
+	rotz:40
+	fov: 60
+	r:0
+	filter:black
 }
 
 light{
-	pos: ~, 200, 100
-	link: 10
+	pos: -80, 10, 100
 }
 
 sphere{
-	id: 58
-	v: 10
-	pos: 10, 20, ~
-	scale: 1.5
-	rotz: 45
-	link: 10
-	color: 59
-	spec: 1
-	n: 0.9999
-	tr: 1
+	pos: 100, 10, 40
+	diff:0.5
+	spec:0.7
+	rotz:180
+	offx:0.2
+	offy:0
+	v1:40
+	txt: none
 }
 
-grad{
-	id: 59
-	pos: 5, ~, ~
-	dir: -5, ~, ~
-	c1: #d814c8
-	c2: #3db969
-	link: 58
-}
-sphere{
-	rotz: 90
-	v1: 10
-	tx: 100
-}
-cylinder{
-	v: 2
-	tz: -30
-	roty: 90
-	color: #4cbf95;
-}
-cylinder{
-	v: 2
-	tz: -30
-	rotx: 90
-	color: #9dbf4c;
-}
 plane
 {
-	pos: ~, ~, -30
-	roty: 90
-	c: #584d73
+	pos: 200, -30, ~
+	roty : 90
+	c:#00FFFF
+	texture: none
+	txt_bm: test3.bmp
+}
+
+preset{
+	tx:	20
+	src: test_prsts.rt
 }

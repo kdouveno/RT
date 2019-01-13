@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:19:24 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/11 14:36:22 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/11 17:07:37 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ static void			s_event_window(t_env *e)
 			list_win_delone(&(e->ui.list_win),
 				list_win_get(e->ui.list_win, e->ui.event.window.windowID));
 		e->ui.focus_win = list_win_get(e->ui.list_win, e->ui.id_main_win);
-		e->ui.mouse_win = list_win_get(e->ui.list_win, e->ui.id_main_win);
+		e->ui.mouse_win = NULL;
 	}
 	else if (e->ui.event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
-		e->ui.focus_win = list_win_get(e->ui.list_win, e->ui.event.window.windowID);
+		e->ui.focus_win = list_win_get(e->ui.list_win,
+			e->ui.event.window.windowID);
 	else if (e->ui.event.window.event == SDL_WINDOWEVENT_ENTER)
-		e->ui.mouse_win = list_win_get(e->ui.list_win, e->ui.event.window.windowID);
+		e->ui.mouse_win = list_win_get(e->ui.list_win,
+			e->ui.event.window.windowID);
 	else if (e->ui.event.window.event == SDL_WINDOWEVENT_LEAVE)
 		e->ui.mouse_win = NULL;
 }
@@ -36,12 +38,23 @@ static void			s_event_keys(t_env *e)
 {
 	if (e->ui.event.key.keysym.sym == SDLK_ESCAPE)
 	{
-		if (e->ui.focus_win->id == e->ui.id_main_win)
-			e->ui.exit = 1;
+		if (e->ui.focus_win)
+		{
+			if (e->ui.focus_win->id == e->ui.id_main_win)
+				e->ui.exit = 1;
+			else
+				list_win_delone(&(e->ui.list_win), e->ui.focus_win);
+		}
 		else
-			list_win_delone(&(e->ui.list_win), e->ui.focus_win);
+			list_win_delone(&(e->ui.list_win), e->ui.list_win);
 		e->ui.focus_win = NULL;
-		e->ui.mouse_win = list_win_get(e->ui.list_win, e->ui.id_main_win);
+		e->ui.mouse_win = NULL;
+	}
+	else if (e->ui.event.key.keysym.sym == SDLK_e)
+	{
+		if (e->ui.focus_win)
+			if (e->ui.focus_win->id != e->ui.id_main_win)
+				rt_export_screenshoot(e, e->ui.focus_win);
 	}
 }
 
@@ -58,11 +71,14 @@ static void			s_event_wheel(t_env *e)
 	else
 	{
 		if ((e->ui.gui.actual_menu->cam_y - UI_SCROLL_SP) <
-			(UI_HEIGHT - e->ui.gui.actual_menu->max_y - UI_BTN_Y))
+			(UI_HEIGHT - e->ui.gui.actual_menu->max_y
+			- UI_BTN_Y - UI_BTN_DOWN_Y))
 		{
-			if ((UI_HEIGHT - e->ui.gui.actual_menu->max_y - UI_BTN_Y) <= 0)
+			if ((UI_HEIGHT - e->ui.gui.actual_menu->max_y
+				- UI_BTN_Y - UI_BTN_DOWN_Y) <= 0)
 				e->ui.gui.actual_menu->cam_y =
-					(UI_HEIGHT - e->ui.gui.actual_menu->max_y - UI_BTN_Y);
+					(UI_HEIGHT - e->ui.gui.actual_menu->max_y
+					- UI_BTN_Y - UI_BTN_DOWN_Y);
 		}
 		else
 			e->ui.gui.actual_menu->cam_y -= UI_SCROLL_SP;

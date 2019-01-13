@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 04:59:25 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/11 16:01:40 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/12 14:27:39 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,18 @@ void				b_call_exit(void *e, int n)
 	rt_exit((t_env*)e);
 }
 
-void				b_call_open_win(void *e, int n)
+void				*s_thread_go(void *e)
 {
-	char	*title;
-	char	*number;
 	t_cam	*c;
 
-	if (!(number = ft_itoa(n)))
-		error((t_env*)e, MALLOC_ERROR);
-	if (!(title = ft_strjoin("RTv2 - Camera ", number)))
-	{
-		ft_strdel(&number);
-		error((t_env*)e, MALLOC_ERROR);
-	}
-	ft_strdel(&number);
-	n--;
-	c = render_cam((t_env*)e, n);
-	list_win_add((t_env*)e, &(((t_env*)e)->ui.list_win), (t_list_win){0,
-		SDL_CreateWindow(title, 0, 0, c->data.dimx, c->data.dimy, 0), NULL, NULL});
-	SDL_BlitSurface(c->data.render, NULL,
-		((t_env*)e)->ui.list_win->render, NULL);
-	ft_strdel(&title);
+	((t_env*)e)->ui.is_rendering = 1;
+	c = render_cam(e, ((t_env*)e)->ui.local_cam_n - 1);
+	((t_env*)e)->ui.is_rendering = 2;
+	pthread_exit((void*)c);
+}
+
+void				b_call_open_win(void *e, int n)
+{
+	((t_env*)e)->ui.local_cam_n = n;
+	pthread_create(&((t_env*)e)->ui.th_pb, NULL, s_thread_go, e);
 }

@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:41 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:19:49 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 17:03:54 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@ SDL_Surface	*type_text(SDL_Surface *txt, char *file)
 		ft_putendl("\033[38;5;203m"TEXT_ERROR"\033[0m");
 		txt = SDL_CreateRGBSurface(0, 0, 0, 32,
 			RMASK, GMASK, BMASK, AMASK);
-		txt->userdata = "none";
+		if (file && !(ft_strcmp(file, "textures/perlin")))
+			txt->userdata = "perlin";
+		else
+			txt->userdata = "none";
 	}
 	else
 		txt->userdata = "fill";
 	return (txt);
 }
 
-void	link_texture(t_env *e, t_obj *obj, char *file, char type)
+void		link_texture(t_env *e, t_obj *obj, char *file, char type)
 {
 	if (!file)
 	{

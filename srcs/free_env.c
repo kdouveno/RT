@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:41 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:20:41 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 14:50:27 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,34 @@ static void	free_clip(t_clip *clip)
 	{
 		next = clip->next;
 		ft_memdel((void**)&clip);
-	//	printf("\033[38;5;164mClip clean\n");
 		clip = next;
+	}
+}
+
+static void	free_clipin(t_objlist *clipin)
+{
+	t_objlist	*next;
+
+	while (clipin != NULL)
+	{
+		next = clipin->next;
+		free(clipin);
+		clipin = next;
 	}
 }
 
 static void	free_obj(t_obj *obj)
 {
-	t_obj 	*next;
+	t_obj	*next;
 
 	while (obj != NULL)
 	{
 		next = obj->next;
 		free_clip(obj->clips);
+		free_clipin(obj->clipping);
 		SDL_FreeSurface(obj->mat.txt);
 		SDL_FreeSurface(obj->mat.txt_bm);
 		ft_memdel((void**)&obj);
-	//	printf("\033[38;5;164mObj clean\n");
 		obj = next;
 	}
 }
@@ -49,7 +60,6 @@ static void	free_lit(t_lit *lit)
 	{
 		next = lit->next;
 		ft_memdel((void**)&lit);
-	//	printf("\033[38;5;164mLit clean\n");
 		lit = next;
 	}
 }
@@ -62,7 +72,7 @@ static void	free_cam(t_cam *cam)
 	{
 		next = cam->next;
 		ft_memdel((void**)&cam);
-	//	printf("\033[38;5;164mCam clean\n");
+		SDL_FreeSurface(cam->data.render);
 		cam = next;
 	}
 }
@@ -75,7 +85,6 @@ static void	free_grad(t_grad *grad)
 	{
 		next = grad->next;
 		ft_memdel((void**)&grad);
-	//	printf("\033[38;5;164mGrad clean\n");
 		grad = next;
 	}
 }
@@ -87,5 +96,4 @@ void		free_scene(t_scene *s)
 	free_cam(s->cams);
 	free_grad(s->grads);
 	free_prst(s->prsts);
-//	printf("\033[0m\n");
 }

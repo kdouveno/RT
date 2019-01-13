@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/12 18:30:32 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/13 14:38:27 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 	t_lit		*l;
 	t_color		out;
 
-	out = (t_color) (unsigned)AMASK;
+	out = (t_color)(unsigned)AMASK;
 	l = r->e->s.lits;
 	while (l)
 	{
@@ -41,9 +41,12 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 		{
 			out = rgbmid(out, refraction(r, res, bounce, ri), res.o->mat.tr);
 		}
+		if (res.o->mat.tr)
+			out = rgbmid(out, refraction(r, res, bounce,
+				(!ri ? (t_ri){1.0, '.', NULL} : *ri)), res.o->mat.tr);
 		l = l->next;
 	}
-	return (out);
+	return (filter(r, out));
 }
 
 /*

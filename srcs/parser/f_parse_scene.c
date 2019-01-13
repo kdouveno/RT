@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_parse_scene.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/11 15:50:52 by gperez            #+#    #+#             */
+/*   Updated: 2019/01/11 15:50:53 by gperez           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
-static int		check_arg(t_env *e, t_scene *s, char *l1, char *l2)
+static int	check_arg(t_env *e, t_scene *s, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "lights")))
 	{
@@ -10,10 +22,18 @@ static int		check_arg(t_env *e, t_scene *s, char *l1, char *l2)
 			wrong_type(e, l1, 0, 0);
 		return (0);
 	}
+	else if (!(ft_strcmp(l1, "amb_l")))
+	{
+		if (l2[0] == '#')
+			e->glb.amb_l.i = (unsigned)atoi_hexa(&l2[1]);
+		else
+			e->glb.amb_l.i = ft_atoi(l2);
+		return (0);
+	}
 	return (1);
 }
 
-void	stock_scene(t_env *e, char *l1, char *l2, t_scene *s)
+void		stock_scene(t_env *e, char *l1, char *l2, t_scene *s)
 {
 	char	*cp;
 	int		i;
@@ -29,7 +49,8 @@ void	stock_scene(t_env *e, char *l1, char *l2, t_scene *s)
 	}
 	ft_memdel((void**)&cp);
 }
-void	parse_scene(t_env *e, int type, int fd, t_scene *s)
+
+void		parse_scene(t_env *e, int type, int fd, t_scene *s)
 {
 	char	*line;
 	int		res;
@@ -37,7 +58,8 @@ void	parse_scene(t_env *e, int type, int fd, t_scene *s)
 	char	*l2;
 
 	(void)type;
-	while ((res = get_next_line(fd, &line)) > 0 && get_prop(e, line, &l1, &l2) != 1)
+	while ((res = get_next_line(fd, &line)) > 0
+		&& get_prop(e, line, &l1, &l2) != 1)
 	{
 		stock_scene(e, l1, l2, s);
 		ft_memdel((void**)&l1);

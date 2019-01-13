@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/07 18:53:23 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 17:29:52 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 
 	i = 0;
 	cp = ft_str_tolower(l1);
-	if (check_loc(e, obj, cp, l2) && check_pt(obj, cp, l2) && check_arg(e, obj, cp, l2 ) && check_rot(obj, cp, l2) && check_mat(e, obj, cp, l2) && check_dir(obj, cp, l2) && check_value(obj, cp, l2))
+	if (check_loc(e, obj, cp, l2) && check_pt(obj, cp, l2)
+		&& check_arg(e, obj, cp, l2 ) && check_rot(obj, cp, l2)
+		&& check_mat(e, obj, cp, l2) && check_dir(obj, cp, l2)
+		&& check_value(obj, cp, l2))
 	{
 		while (is_ignored(l1[i]) == 1)
 			i++;
@@ -60,9 +63,8 @@ t_obj	*parse_obj_2(t_env *e, int type, int fd)
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
 	*obj = (t_obj){NULL, zero_matrix(), -1, type, {},
-		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 1, 0, 0, 0, 1, 0, 0, NULL, NULL},
-		{0, 0, 0, 0}, NULL, NULL, NULL};
-	// printf("%f\n", obj->mat.n);
+		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 1, 0, 0, 0, 1, 0, 0, 2,
+		NULL, NULL}, {0, 0, 0, 0}, NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{

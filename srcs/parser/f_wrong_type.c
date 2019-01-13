@@ -6,13 +6,13 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:46:05 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/12 17:18:17 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/11 15:25:22 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void skip_block(t_env *e, int fd)
+static void	skip_block(t_env *e, int fd)
 {
 	int		check;
 	char	*line;
@@ -27,7 +27,7 @@ static void skip_block(t_env *e, int fd)
 	ft_memdel((void**)&line);
 }
 
-void	wrong_type(t_env *e, char *l_type, int fd, int skip)
+void		wrong_type(t_env *e, char *l_type, int fd, int skip)
 {
 	ft_putstr("\033[2;49;91m");
 	if (l_type == NULL)

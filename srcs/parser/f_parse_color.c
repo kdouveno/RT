@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 17:10:28 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/21 18:07:48 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:23:21 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void		parse_color_obj(t_obj *obj, char *l2)
 	else
 		obj->mat.color.i = ft_atoi(l2);
 }
+
 static void		parse_color_grad(t_grad *grad, char *l2, int nb)
 {
 	if (nb == 1)
