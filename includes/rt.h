@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 15:32:05 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 15:36:33 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define REC_BOUNCE 10
 # define AMB_L 0.075
 # define CONE 4
-# define AAA_THRESH 20
+# define AAA_THRESH 35
 # define BMP_LEVEL 1.5
 # define AMASK 0xFF000000U
 # define RMASK 0x00FF0000U
