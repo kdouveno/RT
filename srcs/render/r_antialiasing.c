@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_antialiasing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 17:25:49 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/14 12:34:58 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void					aaa(t_rendering *r)
 			|| ((i + 1) % d->dimx && aaacolor(p[i], p[i + 1]))
 			|| (i < max - d->dimx && aaacolor(p[i], p[i + d->dimx])))
 			p[i] = rec_raytrace(r, get_camline(*r->c, i), 1);
+		((t_rendering*)r)->e->ui.pbar.value = ((double)i
+			/ (double)max);
 		i++;
 	}
 }

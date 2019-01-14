@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_render.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 17:38:00 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/14 12:34:36 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void		*render(void *r)
 		render_next_line(d);
 		((int*)d->render->pixels)[iy * d->dimx + ix] = rec_raytrace(r,
 			l, !d->aaa).i;
-		((t_rendering*)r)->e->ui.pbar.value = (((double)iy
-			/ (double)d->dimy)) * (1.0 - ((double)d->ssaa / 32.0));
+		((t_rendering*)r)->e->ui.pbar.value = ((double)iy
+			/ (double)d->dimy);
 	}
 	pthread_mutex_unlock(&((t_rendering*)r)->lock);
 	pthread_exit(NULL);
