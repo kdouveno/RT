@@ -50,7 +50,7 @@ int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
 		parse_color(obj, l2, NULL, 0);
 		return (0);
 	}
-	else if (!(ft_strcmp(l1, "reflexion")))
+	else if (!ft_strcmp(l1, "reflexion") || !ft_strcmp(l1, "refl"))
 	{
 		obj->mat.refl = get_coef(ft_atod(l2));
 		return (0);

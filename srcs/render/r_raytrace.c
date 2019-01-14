@@ -16,17 +16,20 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 {
 	t_lit		*l;
 	t_color		out;
+	t_vec		n;
 
 	out = (t_color)(unsigned)AMASK;
 	l = r->e->s.lits;
 	while (l)
 	{
-		out = rgbadd(out, soft_shadow(r, res, *l, 1));
+		out = rgbadd(out, soft_shadow(r, &res, *l, 1));
 		if (res.o->mat.refl && bounce < REC_BOUNCE)
 		{
+			n = res.pert.x == 0 && res.pert.y == 0 && res.pert.z == 0 ?
+			res.n : rot(res.pert, get_rot(res.n, 0));
 			out = rgbmid(out, raytrace(r, (t_line){res.pt,
-				apply(rev_3d(res.cam), vecpro(res.n,
-				2 * scalar_product(res.cam, res.n)))}, bounce + 1, *ri),
+				apply(rev_3d(res.cam), vecpro(n,
+				2 * scalar_product(res.cam, n)))}, bounce + 1, *ri),
 				res.o->mat.refl);
 		}
 		if (res.o->mat.tr)
