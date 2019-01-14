@@ -24,10 +24,11 @@ void	cone_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 		sq(d.m.x) + sq(d.m.y) - sq(d.m.z) * ta);
 	if (res.type == NORES)
 		return ;
-	add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, res.a, NULL});
+	add_res(e, rlist, (t_reslist){o, NULL, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
+		{0, 0, 0}, {0, 0, 0}, res.a, NULL});
 	if (res.type == TWORES)
-		add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {},
-			res.b, NULL});
+		add_res(e, rlist, (t_reslist){o, NULL, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
+			{0, 0, 0}, {0, 0, 0}, res.b, NULL});
 }
 
 void	cylinder_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
@@ -40,10 +41,11 @@ void	cylinder_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 		sq(d.m.x) + sq(d.m.y) - o->v[0] * o->v[0]);
 	if (res.type == NORES)
 		return ;
-	add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, res.a, NULL});
+	add_res(e, rlist, (t_reslist){o, NULL, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
+		{0, 0, 0}, {0, 0, 0}, res.a, NULL});
 	if (res.type == TWORES)
-		add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {},
-			res.b, NULL});
+		add_res(e, rlist, (t_reslist){o, NULL, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
+			{0, 0, 0}, {0, 0, 0}, res.b, NULL});
 }
 
 void	sphere_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
@@ -56,18 +58,19 @@ void	sphere_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 		sq(d.m.x) + sq(d.m.y) + sq(d.m.z) - o->v[0] * o->v[0]);
 	if (res.type == NORES)
 		return ;
-	add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, res.a, NULL});
+	add_res(e, rlist, (t_reslist){o, NULL, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
+		{0, 0, 0}, {0, 0, 0}, res.a, NULL});
 	if (res.type == TWORES)
-		add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {},
-			res.b, NULL});
+		add_res(e, rlist, (t_reslist){o, NULL, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
+			{0, 0, 0}, {0, 0, 0}, res.b, NULL});
 }
 
 void	plane_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 {
 	if (!d.v.x)
 		return ;
-	add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, -d.m.x / d.v.x,
-		NULL});
+	add_res(e, rlist, (t_reslist){o, NULL, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
+		{0, 0, 0}, {0, 0, 0}, -d.m.x / d.v.x, NULL});
 }
 
 void	cuboid_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
@@ -84,17 +87,20 @@ void	cuboid_line(t_env *e, t_line d, t_obj *o, t_reslist **rlist)
 		d2 = d.v.y * d1 + d.m.y;
 		d3 = d.v.z * d1 + d.m.z;
 		if (d1 > 0 && d2 < o->v[1] && d2 > -o->v[1] && d3 < o->v[2] && d3 > -o->v[2])
-			add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, d1, NULL});
+			add_res(e, rlist, (t_reslist){o, NULL, {0, 0, 0}, {0, 0, 0},
+				{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, d1, NULL});
 		d1 = ((i ? -1 : 1) * o->v[1] - d.m.y) / d.v.y;
 		d2 = d.v.x * d1 + d.m.x;
 		d3 = d.v.z * d1 + d.m.z;
 		if (d1 > 0 && d2 < o->v[0] && d2 > -o->v[0] && d3 < o->v[2] && d3 > -o->v[2])
-			add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, d1, NULL});
+			add_res(e, rlist, (t_reslist){o, NULL, {0, 0, 0}, {0, 0, 0},
+				{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, d1, NULL});
 		d1 = ((i ? -1 : 1) * o->v[2] - d.m.z) / d.v.z;
 		d2 = d.v.y * d1 + d.m.y;
 		d3 = d.v.x * d1 + d.m.x;
 		if (d1 > 0 && d2 < o->v[1] && d2 > -o->v[1] && d3 < o->v[0] && d3 > -o->v[0])
-			add_res(e, rlist, (t_reslist){o, NULL, {}, {}, {}, {}, {}, d1, NULL});
+			add_res(e, rlist, (t_reslist){o, NULL, {0, 0, 0}, {0, 0, 0},
+				{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, d1, NULL});
 		i++;
 	}
 }
