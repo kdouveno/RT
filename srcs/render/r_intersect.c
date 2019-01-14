@@ -90,7 +90,8 @@ inline static t_reslist	get_touch(t_reslist *list, t_line line)
 		list = list->next;
 	}
 	free_res(tmplist);
-	return ((t_reslist){NULL, NULL, {}, {}, {}, {}, {}, 0, NULL});
+	return ((t_reslist){NULL, NULL, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
+		{0, 0, 0}, 0, NULL});
 }
 
 t_reslist				intersec(t_rendering *r, t_line line)
@@ -101,7 +102,8 @@ t_reslist				intersec(t_rendering *r, t_line line)
 	t_reslist	*list;
 
 	list = NULL;
-	out = (t_reslist){NULL, NULL, {}, {}, {}, {}, {}, 0, NULL};
+	out = (t_reslist){NULL, NULL, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
+		{0, 0, 0}, 0, NULL};
 	b = r->e->s.objs;
 	while (b)
 	{

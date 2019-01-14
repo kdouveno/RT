@@ -75,7 +75,7 @@ inline static t_line	get_camline(t_cam c, int i)
 	t_cam_render	*d;
 
 	d = &c.data;
-	out = (t_line){d->pt_ul, {}};
+	out = (t_line){d->pt_ul, {0, 0, 0}};
 	i++;
 	if (d->para)
 	{
