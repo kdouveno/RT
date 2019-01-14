@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 17:53:24 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/13 18:32:53 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "SDL.h"
 # include <pthread.h>
 # include <fcntl.h>
-# define PRE 0.00000001
+# define PRE 0.000000001
 # define OFFSET 100000000
 # define SHADOW_REC 3
 # define SHADOW_RAY 6
@@ -351,7 +351,8 @@ t_cam					*render_cam(t_env *e, int ncam);
 t_color					raytrace(t_rendering *r, t_line l, int bounce, t_ri ri);
 void					aaa(t_rendering *r);
 t_color					rec_raytrace(t_rendering *r, t_line l, int m);
-t_color					phong(t_lit l, t_reslist res);
+
+t_color					phong(t_lit l, t_reslist *res, t_color lc);
 t_color					catch_light(t_rendering *r, t_lit *l, t_reslist *res);
 t_color					get_pt_color(t_obj obj, t_pt pt, t_vec *pert);
 t_color					texture_color(t_obj obj, t_pt pt, t_vec *pert,
@@ -369,7 +370,8 @@ t_vec					perturbation(double x, double y, SDL_Surface *txt,
 t_color					get_text_color(int x, int y, SDL_Surface *txt,
 	char *pixels);
 t_color					filter(t_rendering *r, t_color p_color);
-t_color					soft_shadow(t_rendering *r, t_reslist res, t_lit l,
+
+t_color					soft_shadow(t_rendering *r, t_reslist *res, t_lit l,
 	int rec);
 t_color					perlin_noise(t_pt pt);
 t_reslist				intersec(t_rendering *r, t_line line);

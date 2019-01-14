@@ -1,0 +1,11 @@
+camera{
+	tx: -100
+}
+
+sphere{
+	v: 20
+	tr: .5
+}
+
+light{
+}
