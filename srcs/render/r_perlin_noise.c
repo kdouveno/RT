@@ -52,7 +52,7 @@ t_color	perlin_noise(t_pt pt)
 	char	perlin_out;
 
 	coef = noise(7, 1, 0.8, pt);
-	perlin_out = coef * 255;
+	perlin_out = coef > 0 ? coef * 255 : coef * -255;
 	out.p.a = 0xFF;
 	out.p.r = perlin_out;
 	out.p.g = perlin_out;
