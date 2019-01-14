@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:32 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 16:58:07 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/14 12:28:23 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	parameter_thread_rec(t_env *e, char *argv, int i, int r)
 			e->glb.thread_count = res;
 		else
 			e->glb.rec_lim_file = res;
-		r ? ft_printf("\033[38;5;40mRecursive limit changed to : %d\n\033[0m",
+		r ? printf("\033[38;5;40mRecursive limit changed to : %d\n\033[0m",
 			e->glb.rec_lim_file)
-			: ft_printf("\033[38;5;40mThreads changed to : %d\n\033[0m",
+			: printf("\033[38;5;40mThreads changed to : %d\n\033[0m",
 			e->glb.thread_count);
 	}
 	else
