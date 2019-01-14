@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:19:24 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/13 17:46:30 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/14 21:07:35 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static void			s_event_window(t_env *e)
 {
 	if (e->ui.event.window.event == SDL_WINDOWEVENT_CLOSE)
 	{
-		if (e->ui.event.window.windowID == e->ui.id_main_win)
+		if (e->ui.event.window.windowID == e->ui.id_main_win
+			&& !e->ui.is_rendering)
 			e->ui.exit = 1;
 		else
 			list_win_delone(&(e->ui.list_win),
@@ -36,7 +37,7 @@ static void			s_event_window(t_env *e)
 
 static void			s_event_keys(t_env *e)
 {
-	if (e->ui.event.key.keysym.sym == SDLK_ESCAPE)
+	if (e->ui.event.key.keysym.sym == SDLK_ESCAPE && !e->ui.is_rendering)
 	{
 		if (e->ui.focus_win)
 		{
@@ -45,8 +46,6 @@ static void			s_event_keys(t_env *e)
 			else
 				list_win_delone(&(e->ui.list_win), e->ui.focus_win);
 		}
-		else
-			list_win_delone(&(e->ui.list_win), e->ui.list_win);
 		e->ui.focus_win = NULL;
 		e->ui.mouse_win = NULL;
 	}
@@ -95,7 +94,7 @@ void				sdl_event_manager(t_env *e)
 			s_event_window(e);
 		if (e->ui.event.type == SDL_MOUSEWHEEL)
 			s_event_wheel(e);
-		if (e->ui.event.type == SDL_QUIT)
+		if (e->ui.event.type == SDL_QUIT && !e->ui.is_rendering)
 			e->ui.exit = 1;
 	}
 	return ;
