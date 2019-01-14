@@ -24,9 +24,9 @@ static void	parameter_thread_rec(t_env *e, char *argv, int i, int r)
 			e->glb.thread_count = res;
 		else
 			e->glb.rec_lim_file = res;
-		r ? ft_printf("\033[38;5;40mRecursive limit changed to : %d\n\033[0m",
+		r ? printf("\033[38;5;40mRecursive limit changed to : %d\n\033[0m",
 			e->glb.rec_lim_file)
-			: ft_printf("\033[38;5;40mThreads changed to : %d\n\033[0m",
+			: printf("\033[38;5;40mThreads changed to : %d\n\033[0m",
 			e->glb.thread_count);
 	}
 	else
@@ -72,11 +72,10 @@ int		arg(t_env *e, int argc, char **argv)
 {
 	int	i;
 	int	d;
-	t_ui ui;
 
 	i = 2;
 	d = 0;
-	*e = (t_env){ui, {NULL, 0, 3, -1, THRD_CNT, (t_color){(t_rgb){0,0,0,0}}},
+	*e = (t_env){{}, {NULL, 0, 3, -1, THRD_CNT, (t_color){(t_rgb){0,0,0,0}}},
 		{0,0}, {NULL, NULL, NULL, NULL, NULL, 0,
 			(t_color){(t_rgb){0,0,0,0}}, (t_color){(t_rgb){0,0,0,0}}}};
 	while (i < argc)
