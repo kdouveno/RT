@@ -1,0 +1,84 @@
+camera
+{
+	pos: 0,0,0
+	fov: 90
+	dimx: 800
+	dimy: 800
+}
+
+plane
+{
+	pos: 0,0,-200
+	rot: 0,90,0
+	color: #ffffff
+	texture: damier.bmp
+	b_lvl: 10
+}
+
+plane
+{
+	pos: 0,0,200
+	rot:0,90,0
+	color: #cccccc
+}
+
+plane
+{
+	pos: 400,0,0
+	color: #cccccc
+}
+
+plane
+{
+	pos: 0,200,0
+	rot: 0,0,90
+	scale: 10
+	color: #ff0000
+	reflexion: 0.4
+	texture: test.bmp
+	texture_bump: test.bmp
+	b_lvl: 10
+}
+
+plane
+{
+	pos: 0,-200,0
+	rot: 0,0,90
+	scale: 10
+	color: #00ff00
+	reflexion: 1
+	texture_bump: test.bmp
+	b_lvl: 10
+}
+
+sphere
+{
+	pos: 350,0,-50
+	v: 50
+	color: #ffff00
+	spec: 1
+	reflexion: 0.3
+}
+
+sphere
+{
+	pos: 225,100,-100
+	v: 60
+	color: #00aaff
+	spec: 1
+	reflexion: 0.5
+}
+
+sphere
+{
+	pos: 275,-125,0
+	v: 15
+	color: #aaaaaa
+	spec: 1
+	reflexion: 0.7
+}
+
+light
+{
+	pos: 200,0,50
+}
