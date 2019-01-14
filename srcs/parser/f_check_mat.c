@@ -25,7 +25,7 @@ int		check_mat2(t_env *e, t_obj *obj, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "c")) || !(ft_strcmp(l1, "color")))
 		parse_color(obj, l2, NULL, 0);
-	else if (!(ft_strcmp(l1, "reflexion")))
+	else if (!(ft_strcmp(l1, "reflexion") || !ft_strcmp(l1, "refl")))
 		obj->mat.refl = get_coef(ft_atod(l2));
 	else if (!(ft_strcmp(l1, "txt")) || !(ft_strcmp(l1, "texture")))
 		link_texture(e, obj, ft_strjoin("textures/", l2), 't');
