@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:24:37 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 17:31:01 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 12:38:27 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ t_color			soft_shadow(t_rendering *r, t_reslist *res, t_lit l, int rec)
 	else
 		out = rgbadd(out,
 			ambiant_light(r->e->s.amb_lit_sh,
-				get_pt_color(*res->o, res->pt, &res->pert), AMB_L));
+				get_pt_color(*res->o, res->pt, &res->pert), AMB_SH));
 	return (out);
 }

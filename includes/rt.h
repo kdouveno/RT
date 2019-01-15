@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 18:32:53 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/15 12:56:50 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define REC_FILE 15
 # define REC_BOUNCE 10
 # define AMB_L 0.075
+# define AMB_SH 0.3
 # define CONE 4
 # define AAA_THRESH 35
 # define BMP_LEVEL 1.5
