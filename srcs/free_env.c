@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:41 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/15 14:46:27 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 16:01:08 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	free_clipin(t_objlist *clipin)
 	while (clipin != NULL)
 	{
 		next = clipin->next;
-		free(clipin);
+		ft_memdel((void**)&clipin);
 		clipin = next;
 	}
 }

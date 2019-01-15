@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 04:13:24 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/11 15:27:07 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/15 15:31:10 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,8 @@ void				list_btn_update(t_env *e, t_list_btn *list, int mouse_out)
 			{
 				SDL_GetMouseState(&mpos_i[0], &mpos_i[1]);
 				mouse_v2 = (t_vec){(double)mpos_i[0], (double)mpos_i[1], 0};
-				if (aabb_col_pt(it->aabb, mouse_v2)
-					&& aabb_col_pt(e->ui.btn_zone, mouse_v2))
-					it->st_hover = 1;
-				else
-					it->st_hover = 0;
+				it->st_hover = (aabb_col_pt(it->aabb, mouse_v2)
+					&& aabb_col_pt(e->ui.btn_zone, mouse_v2)) ? 1 : 0;
 			}
 		}
 		it = it->next;

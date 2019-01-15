@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 15:06:07 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 15:41:46 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		check_arg2(t_lit *lit, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "radius")))
-		lit->radius = ft_atod(l2);
+		lit->radius = get_coef(ft_atod(l2));
 	else
 		return (1);
 	return (0);
@@ -50,8 +50,8 @@ void	stock_light(t_env *e, t_lit *lit, char *l1, char *l2)
 	i = 0;
 	cp = ft_str_tolower(l1);
 	if (check_loc(e, lit, cp, l2) && check_pt(lit, cp, l2) == 1
-		&& check_arg(lit, cp, l2 ) == 1
-		&& check_arg2(lit, cp, l2 ) == 1)
+		&& check_arg(lit, cp, l2) == 1
+		&& check_arg2(lit, cp, l2) == 1)
 	{
 		while (is_ignored(l1[i]) == 1)
 			i++;
@@ -72,7 +72,7 @@ t_lit	*parse_light_2(t_env *e, int fd)
 	if (!(lit = malloc(sizeof(t_lit))))
 		error(e, MALLOC_ERROR);
 	*lit = (t_lit){NULL, zero_matrix(), -1, 1.0f, 0.0f, {0, 0, 0},
-		(t_color){(t_rgb){255,255,255,255}}, {0, 0, 0, 0}};
+		(t_color){(t_rgb){255, 255, 255, 255}}, {0, 0, 0, 0}};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{
@@ -95,7 +95,7 @@ void	parse_light(t_env *e, int type, int fd, t_scene *s)
 	save = s->lits;
 	if (save != NULL)
 	{
-		while(save->next != NULL)
+		while (save->next != NULL)
 			save = save->next;
 		save->next = parse_light_2(e, fd);
 	}

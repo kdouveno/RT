@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   i_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 17:00:24 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 15:53:51 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+
+static void		check_link_loop(t_env *e, t_matrix *o, t_matrix *obj)
+{
+	if (!obj)
+		return ;
+	if (o == obj)
+		error(e, LINK_CIRCLE_ERROR);
+	else
+	{
+		check_link_loop(e, o, obj->l.target);
+	}
+}
 
 static void	check_clip_loop(t_env *e, t_obj *o, t_obj *original, int i)
 {
@@ -27,7 +40,7 @@ static void	check_clip_loop(t_env *e, t_obj *o, t_obj *original, int i)
 	}
 }
 
-void		init_grad(t_scene *s)
+void		init_grad(t_env *e, t_scene *s)
 {
 	t_grad	*grads;
 
@@ -35,11 +48,13 @@ void		init_grad(t_scene *s)
 	while (grads)
 	{
 		link_locs(s, grads);
+		check_link_loop(e, &grads->m, grads->m.l.target);
 		grads->cpt = trans_pt((t_pt){0, 0, 0}, &grads->m);
 		grads->r = trans_vec(get_vector(grads->m.pt, grads->r), &grads->m);
 		grads = grads->next;
 	}
 }
+
 
 void		init_objs(t_env *e, t_scene *s)
 {
@@ -48,6 +63,9 @@ void		init_objs(t_env *e, t_scene *s)
 	objs = s->objs;
 	while (objs)
 	{
+		check_clip_loop(e, objs, objs, 0);
+		link_locs(s, objs);
+		check_link_loop(e, &objs->m, objs->m.l.target);
 		if (objs->m.r >= 0)
 			objs->m.rot = get_rot(objs->m.rot, objs->m.r);
 		else
@@ -55,8 +73,6 @@ void		init_objs(t_env *e, t_scene *s)
 			rad(objs->m.rot.y), rad(objs->m.rot.z)};
 		if (objs->type == CONE)
 			objs->v[0] = rad(objs->v[0]);
-		check_clip_loop(e, objs, objs, 0);
-		link_locs(s, objs);
 		objs = objs->next;
 	}
 }
@@ -93,16 +109,16 @@ void		init_cam(t_env *e, t_scene *s)
 	while (cams)
 	{
 		d = &cams->data;
+		link_locs(s, cams);
+		check_link_loop(e, &cams->m, cams->m.l.target);
 		if (cams->m.r >= 0)
 			cams->m.rot = get_rot(get_vector(cams->m.pt, cams->m.rot),
 			cams->m.r);
 		else
 			cams->m.rot = (t_3d){rad(cams->m.rot.x),
 			rad(cams->m.rot.y), rad(cams->m.rot.z)};
-		d->dimx = DIMX;
-		d->dimy = DIMY;
-		link_locs(s, cams);
 		init_cam_vecs(cams);
+
 		if (!(d->render = SDL_CreateRGBSurface(0, d->dimx, d->dimy,
 		32, RMASK, GMASK, BMASK, AMASK)))
 			error(e, SDL_GetError());
@@ -120,6 +136,7 @@ t_color		init_lit_scene(t_env *e, t_scene *s, int *nb_l)
 	while (l)
 	{
 		link_locs(s, l);
+		check_link_loop(e, &l->m, l->m.l.target);
 		l->cpt = trans_pt((t_pt){0, 0, 0}, &l->m);
 		s->amb_lit_c = rgbadd(s->amb_lit_c, l->color);
 		(*nb_l)++;
@@ -171,7 +188,7 @@ void		init_scene(t_env *e, t_scene *s)
 		init_light_auto(s);
 	init_objs(e, s);
 	init_cam(e, s);
-	init_grad(s);
+	init_grad(e, s);
 	if (s->prsts)
 		init_scene(e, &(s->prsts->s));
 }
