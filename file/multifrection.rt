@@ -23,12 +23,19 @@ camera{
 sphere{
     id: 2
     v: 20
-    link: 3
     refl: .6
-    b_lvl: 1
     tr: .5
     n: 1.5
-    txt_bm: test2.bmp
+}
+
+
+sphere{
+    link: 2
+    pos: 20, 20, ~
+    v: 20
+    refl: .6
+    tr: .5
+    n: 1.5
 }
 
 light{

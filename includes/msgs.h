@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msgs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 17:14:10 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 16:58:56 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 12:26:04 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@
 # define TEXT_ERROR "A texture can't be load"
 # define CLIP_CIRCLE_ERROR "Infinite clip-path loop"
 # define THREAD_J_ERROR "Thread joining failed"
+# define LINK_CIRCLE_ERROR "Infinite link loop"
 #endif
