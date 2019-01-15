@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_cam.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/15 15:43:12 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 17:04:18 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_cam			*parse_cam_2(t_env *e, int fd)
 		error(e, MALLOC_ERROR);
 	*cam = (t_cam){NULL, zero_matrix(), -1,
 		{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, FOV, NULL, 0,
-		0, 0, 0, 1, 1, 0, '\0'}};
+		0, DIMX, DIMY, 1, 1, 0, '\0'}};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{
