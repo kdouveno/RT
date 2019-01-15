@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   r_antialiasing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/14 12:34:58 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/15 15:46:14 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void		assign_lines(t_line ls[4], t_line l, int m, t_cam_render *d)
+static void				assi_lin(t_line ls[4], t_line l, int m, t_cam_render *d)
 {
 	double c;
 
@@ -48,7 +48,7 @@ t_color					rec_raytrace(t_rendering *r, t_line l, int m)
 	d = &r->c->data;
 	if (m < d->ssaa && m)
 	{
-		assign_lines(ls, l, m, d);
+		assi_lin(ls, l, m, d);
 		return (rgbmoy4((t_color[]){rec_raytrace(r, ls[0], m * 2),
 			rec_raytrace(r, ls[1], m * 2), rec_raytrace(r, ls[2], m * 2),
 			rec_raytrace(r, ls[3], m * 2)}));

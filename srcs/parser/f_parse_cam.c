@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 17:09:16 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 15:43:12 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		is_powertwo(int nb)
 	return (0);
 }
 
-static int	check_dimx_dimy(t_cam *cam, char *l1, char *l2)
+static int		check_dimx_dimy(t_cam *cam, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "dimx")))
 		cam->data.dimx = ft_atoi(l2) < 0 ? -ft_atoi(l2) : ft_atoi(l2);
@@ -68,7 +68,7 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	return (0);
 }
 
-void	stock_cam(t_env *e, t_cam *cam, char *l1, char *l2)
+void			stock_cam(t_env *e, t_cam *cam, char *l1, char *l2)
 {
 	char	*cp;
 	int		i;
@@ -87,7 +87,7 @@ void	stock_cam(t_env *e, t_cam *cam, char *l1, char *l2)
 	ft_memdel((void**)&cp);
 }
 
-t_cam	*parse_cam_2(t_env *e, int fd)
+t_cam			*parse_cam_2(t_env *e, int fd)
 {
 	char	*line;
 	int		res;
@@ -114,7 +114,7 @@ t_cam	*parse_cam_2(t_env *e, int fd)
 	return (cam);
 }
 
-void	parse_cam(t_env *e, int type, int fd, t_scene *s)
+void			parse_cam(t_env *e, int type, int fd, t_scene *s)
 {
 	t_cam	*save;
 
@@ -122,7 +122,7 @@ void	parse_cam(t_env *e, int type, int fd, t_scene *s)
 	save = s->cams;
 	if (save != NULL)
 	{
-		while(save->next != NULL)
+		while (save->next != NULL)
 			save = save->next;
 		save->next = parse_cam_2(e, fd);
 	}
