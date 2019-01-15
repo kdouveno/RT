@@ -31,9 +31,9 @@ camera{
 	tz: (double)
 
 	rot: (triplet)
-	dirx: (double)
-	diry: (double)
-	dirz: (double)
+	rotx: (double)
+	roty: (double)
+	rotz: (double)
 
 	dimx: (int)
 	dimy: (int)
@@ -55,12 +55,11 @@ light{
 	tz: (double)
 
 	rot: (triplet)
-	dirx: (double)
-	diry: (double)
-	dirz: (double)
+	rotx: (double)
+	roty: (double)
+	rotz: (double)
 
 	power: (double)
-	radius: (double)
 	c / color : (ID) | (HEX6)
 }
 
@@ -72,9 +71,9 @@ grad{
 	tz: (double)
 
 	rot: (triplet)
-	dirx: (double)
-	diry: (double)
-	dirz: (double)
+	rotx: (double)
+	roty: (double)
+	rotz: (double)
 
 	c1 / color1: (ID) | (HEX6)
 	c2 / color2: (ID) | (HEX6)
@@ -88,9 +87,9 @@ sphere / cylinder / cone / plane / cuboid{
 	ty: (double)
 	tz: (double)
 
-	dirx: (double)
-	diry: (double)
-	dirz: (double)
+	rotx: (double)
+	roty: (double)
+	rotz: (double)
 
 	id: (ID)
 	clip : (ID)

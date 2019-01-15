@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 14:21:48 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 18:34:19 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/15 15:43:54 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_color		cast_light(t_rendering *r, t_lit *l, t_reslist *res, t_line line)
 	{
 		tmp = cast_light(r, l, res, get_line(rl.pt, res->pt));
 		return (tmp.p.a == 1 ? tmp
-			: rgbpro(rgbmin(tmp, rgbneg(rgbmid(get_pt_color(*rl.o, rl.pt, NULL), (t_color)0xffffffU, rl.o->mat.tr))), rl.o->mat.tr));
+			: rgbpro(rgbmin(tmp, rgbneg(rgbmid(get_pt_color(*rl.o, rl.pt,
+				NULL), (t_color)0xffffffU, rl.o->mat.tr))), rl.o->mat.tr));
 	}
 	else
 		return (t_color){{0, 0, 0, 1}};

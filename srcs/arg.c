@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:32 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/15 14:36:22 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 16:19:04 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	parameter_thread_rec(t_env *e, char *argv, int i, int r)
 
 	res = ft_atoi(&(argv[i]));
 	res = res < 0 ? -res : res;
-	if ((res != 0 && !r )|| (r && res < REC_FILE))
+	if ((res != 0 && !r) || (r && res < REC_FILE))
 	{
 		if (!r)
 			e->glb.thread_count = res;
@@ -68,16 +68,16 @@ static void	parameter(t_env *e, char *argv)
 		parameter_shortcut(e, argv);
 }
 
-int		arg(t_env *e, int argc, char **argv)
+int			arg(t_env *e, int argc, char **argv)
 {
 	int	i;
 	int	d;
 
 	i = 2;
 	d = 0;
-	*e = (t_env){{}, {0, 3, -1, THRD_CNT, (t_color){(t_rgb){0,0,0,0}}},
-		{0,0}, {NULL, NULL, NULL, NULL, NULL, 0,
-			(t_color){(t_rgb){0,0,0,0}}, (t_color){(t_rgb){0,0,0,0}}}};
+	*e = (t_env){e->ui, {0, 3, -1, THRD_CNT, (t_color){(t_rgb){0, 0, 0, 0}}},
+		{0, 0}, {NULL, NULL, NULL, NULL, NULL, 0,
+		(t_color){(t_rgb){0, 0, 0, 0}}, (t_color){(t_rgb){0, 0, 0, 0}}}};
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')

@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 16:18:21 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 15:42:55 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ static int		check_arg(t_env *e, t_obj *obj, char *l1, char *l2)
 	}
 	else if (!(ft_strcmp(l1, "clip")))
 		creat_clips(e, obj, l2);
-	else if(!(ft_strcmp(l1, "scale")))
+	else if (!(ft_strcmp(l1, "scale")))
 		obj->m.scale = ft_atod(l2);
-	else if(!ft_strcmp(l1, "n") || !ft_strcmp(l1, "refraction_index"))
+	else if (!ft_strcmp(l1, "n") || !ft_strcmp(l1, "refraction_index"))
 	{
 		obj->mat.n = ft_atod(l2);
 		obj->mat.n = obj->mat.n >= 1 ? obj->mat.n : 1;
 	}
-	else if(!ft_strcmp(l1, "tr") || !ft_strcmp(l1, "transparency"))
+	else if (!ft_strcmp(l1, "tr") || !ft_strcmp(l1, "transparency"))
 		obj->mat.tr = get_coef(ft_atod(l2));
 	else
 		return (1);
 	return (0);
 }
 
-void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
+void			stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 {
 	char	*cp;
 	int		i;
@@ -43,7 +43,7 @@ void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 	i = 0;
 	cp = ft_str_tolower(l1);
 	if (check_loc(e, obj, cp, l2) && check_pt(obj, cp, l2)
-		&& check_arg(e, obj, cp, l2 ) && check_rot(obj, cp, l2)
+		&& check_arg(e, obj, cp, l2) && check_rot(obj, cp, l2)
 		&& check_mat(e, obj, cp, l2) && check_dir(obj, cp, l2)
 		&& check_value(obj, cp, l2))
 	{
@@ -55,7 +55,7 @@ void	stock_obj(t_env *e, t_obj *obj, char *l1, char *l2)
 	ft_memdel((void**)&cp);
 }
 
-t_obj	*parse_obj_2(t_env *e, int type, int fd)
+t_obj			*parse_obj_2(t_env *e, int type, int fd)
 {
 	char	*line;
 	int		res;
@@ -66,7 +66,7 @@ t_obj	*parse_obj_2(t_env *e, int type, int fd)
 	if (!(obj = malloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
 	*obj = (t_obj){NULL, zero_matrix(), -1, type, {0, 0, 0, 0},
-		(t_mat){(t_color){(t_rgb){255,255,255,255}}, 1, 0, 0, 0, 1, 0, 0,
+		(t_mat){(t_color){(t_rgb){255, 255, 255, 255}}, 1, 0, 0, 0, 1, 0, 0,
 		BMP_LEVEL, NULL, NULL}, {0, 0, 0, 0}, NULL, NULL, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
@@ -82,14 +82,14 @@ t_obj	*parse_obj_2(t_env *e, int type, int fd)
 	return (obj);
 }
 
-void	parse_obj(t_env *e, int type, int fd, t_scene *s)
+void			parse_obj(t_env *e, int type, int fd, t_scene *s)
 {
 	t_obj	*save;
 
 	save = s->objs;
 	if (save != NULL)
 	{
-		while(save->next != NULL)
+		while (save->next != NULL)
 			save = save->next;
 		save->next = parse_obj_2(e, type, fd);
 	}
