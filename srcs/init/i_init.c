@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/15 15:33:24 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/15 15:53:51 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 
 static void		check_link_loop(t_env *e, t_matrix *o, t_matrix *obj)
 {
-	printf("o: %p, %p", o, obj);
 	if (!obj)
 		return ;
 	if (o == obj)
 		error(e, LINK_CIRCLE_ERROR);
 	else
 	{
-		printf("sauce: %p\n", obj);
 		check_link_loop(e, o, obj->l.target);
 	}
 }
@@ -49,8 +47,8 @@ void		init_grad(t_env *e, t_scene *s)
 	grads = s->grads;
 	while (grads)
 	{
-		check_link_loop(e, &grads->m, grads->m.l.target);
 		link_locs(s, grads);
+		check_link_loop(e, &grads->m, grads->m.l.target);
 		grads->cpt = trans_pt((t_pt){0, 0, 0}, &grads->m);
 		grads->r = trans_vec(get_vector(grads->m.pt, grads->r), &grads->m);
 		grads = grads->next;
@@ -66,8 +64,8 @@ void		init_objs(t_env *e, t_scene *s)
 	while (objs)
 	{
 		check_clip_loop(e, objs, objs, 0);
-		check_link_loop(e, &objs->m, objs->m.l.target);
 		link_locs(s, objs);
+		check_link_loop(e, &objs->m, objs->m.l.target);
 		if (objs->m.r >= 0)
 			objs->m.rot = get_rot(objs->m.rot, objs->m.r);
 		else
@@ -111,8 +109,8 @@ void		init_cam(t_env *e, t_scene *s)
 	while (cams)
 	{
 		d = &cams->data;
-		check_link_loop(e, &cams->m, cams->m.l.target);
 		link_locs(s, cams);
+		check_link_loop(e, &cams->m, cams->m.l.target);
 		if (cams->m.r >= 0)
 			cams->m.rot = get_rot(get_vector(cams->m.pt, cams->m.rot),
 			cams->m.r);
@@ -120,6 +118,7 @@ void		init_cam(t_env *e, t_scene *s)
 			cams->m.rot = (t_3d){rad(cams->m.rot.x),
 			rad(cams->m.rot.y), rad(cams->m.rot.z)};
 		init_cam_vecs(cams);
+
 		if (!(d->render = SDL_CreateRGBSurface(0, d->dimx, d->dimy,
 		32, RMASK, GMASK, BMASK, AMASK)))
 			error(e, SDL_GetError());
@@ -136,8 +135,8 @@ t_color		init_lit_scene(t_env *e, t_scene *s, int *nb_l)
 	p = s->prsts;
 	while (l)
 	{
-		check_link_loop(e, &l->m, l->m.l.target);
 		link_locs(s, l);
+		check_link_loop(e, &l->m, l->m.l.target);
 		l->cpt = trans_pt((t_pt){0, 0, 0}, &l->m);
 		s->amb_lit_c = rgbadd(s->amb_lit_c, l->color);
 		(*nb_l)++;
