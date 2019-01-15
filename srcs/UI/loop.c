@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:15:01 by schaaban          #+#    #+#             */
-/*   Updated: 2018/12/12 21:48:10 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/15 15:01:42 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void				sdl_loop(t_env *e)
 {
 	t_list_win	*it_list_win;
 
-	while (!e->ui.exit)
+	while (42)
 	{
 		sdl_event_manager(e);
 		ft_update(e);

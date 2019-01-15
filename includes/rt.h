@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/15 14:16:40 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 14:35:06 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@
 
 typedef struct			s_global
 {
-	SDL_Window			*win;
 	int					d;
 	int					rec_lim_file;
 	int					rec_nb_file;

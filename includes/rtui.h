@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:08:07 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/13 17:48:48 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 15:02:33 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ struct				s_ui
 	char			*file_name;
 	int				local_cam_n;
 	int				is_rendering;
-	int				exit;
 };
 
 #endif

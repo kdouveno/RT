@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:32 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/14 12:28:23 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/15 14:36:22 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		arg(t_env *e, int argc, char **argv)
 
 	i = 2;
 	d = 0;
-	*e = (t_env){{}, {NULL, 0, 3, -1, THRD_CNT, (t_color){(t_rgb){0,0,0,0}}},
+	*e = (t_env){{}, {0, 3, -1, THRD_CNT, (t_color){(t_rgb){0,0,0,0}}},
 		{0,0}, {NULL, NULL, NULL, NULL, NULL, 0,
 			(t_color){(t_rgb){0,0,0,0}}, (t_color){(t_rgb){0,0,0,0}}}};
 	while (i < argc)

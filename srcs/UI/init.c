@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 05:03:49 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/11 15:40:59 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/15 15:02:46 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,5 @@ void				rtui_init(t_env *e)
 		SDL_WINDOWPOS_CENTERED, UI_WIDTH, UI_HEIGHT, 0), NULL, 0, NULL});
 	ft_strdel(&win_title);
 	e->ui.id_main_win = SDL_GetWindowID(e->ui.list_win->win);
-	e->ui.exit = 0;
 	s_init_digits(e);
 }

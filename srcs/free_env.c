@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:41 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 14:50:27 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 14:46:27 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static void	free_obj(t_obj *obj)
 		next = obj->next;
 		free_clip(obj->clips);
 		free_clipin(obj->clipping);
-		SDL_FreeSurface(obj->mat.txt);
-		SDL_FreeSurface(obj->mat.txt_bm);
+		(obj->mat.txt) ? SDL_FreeSurface(obj->mat.txt) : 0;
+		(obj->mat.txt_bm) ? SDL_FreeSurface(obj->mat.txt_bm) : 0;
 		ft_memdel((void**)&obj);
 		obj = next;
 	}
@@ -71,8 +71,8 @@ static void	free_cam(t_cam *cam)
 	while (cam != NULL)
 	{
 		next = cam->next;
+		(cam->data.render) ? SDL_FreeSurface(cam->data.render) : 0;
 		ft_memdel((void**)&cam);
-		SDL_FreeSurface(cam->data.render);
 		cam = next;
 	}
 }
