@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:38 by gperez            #+#    #+#             */
-/*   Updated: 2018/12/11 15:03:53 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/15 16:45:18 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void		error(t_env *e, const char *msg)
 	ft_putstr("\033[38;5;203m");
 	ft_putendl(msg);
 	ft_putstr("\033[0m");
-	free_scene(&(e->s));
 	rt_exit(e);
 }
 
