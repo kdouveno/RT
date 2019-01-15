@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:41:13 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 15:06:07 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/15 15:23:48 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		check_arg2(t_lit *lit, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "radius")))
-		lit->radius = ft_atod(l2);
+		lit->radius = get_coef(ft_atod(l2));
 	else
 		return (1);
 	return (0);
