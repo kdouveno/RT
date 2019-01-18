@@ -26,9 +26,12 @@ SRCS = \
 	srcs/atoi_hexa.c \
 	srcs/error.c \
 	srcs/free_env.c \
+	srcs/free_obj.c \
 	srcs/free_prst.c \
+	srcs/ft_putint.c \
 	srcs/geo3d/angles.c \
 	srcs/geo3d/colors.c \
+	srcs/geo3d/colors2.c \
 	srcs/geo3d/plan.c \
 	srcs/geo3d/rotation.c \
 	srcs/geo3d/sq.c \
@@ -38,7 +41,11 @@ SRCS = \
 	srcs/init/i_link_color_grad.c \
 	srcs/init/i_link_color_obj.c \
 	srcs/init/i_link_obj.c \
+	srcs/init/i_nit_cams.c \
+	srcs/init/i_nit_grad_obj.c \
+	srcs/init/i_nit_lit.c \
 	srcs/init/i_nit_locs.c \
+	srcs/init/i_nit_loop.c \
 	srcs/init/i_nit_trans.c \
 	srcs/main.c \
 	srcs/parser/f_check.c \
@@ -46,6 +53,7 @@ SRCS = \
 	srcs/parser/f_check_mat.c \
 	srcs/parser/f_creat_clips.c \
 	srcs/parser/f_get_prop.c \
+	srcs/parser/f_is_alia.c \
 	srcs/parser/f_is_ignored.c \
 	srcs/parser/f_is_name_char.c \
 	srcs/parser/f_is_vec_null.c \
@@ -75,6 +83,7 @@ SRCS = \
 	srcs/render/r_refraction.c \
 	srcs/render/r_render.c \
 	srcs/render/r_shape_texture.c \
+	srcs/render/r_soft_shadow.c \
 	srcs/render/r_texture_color.c \
 	srcs/render/r_tools1.c \
 	srcs/render/reslist.c \
