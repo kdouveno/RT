@@ -6,11 +6,17 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 14:56:58 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/11 17:16:05 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/18 15:18:14 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+t_reslist	blank_reslist(t_obj *o, double res)
+{
+	return ((t_reslist){o, NULL, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
+		{0, 0, 0}, {0, 0, 0}, res, NULL});
+}
 
 void	add_res(t_env *e, t_reslist **cur, t_reslist t)
 {

@@ -1,5 +1,5 @@
 scene{
-	amb_l:#FF000FF
+	amb_l:#FF00FF
 }
 
 camera{
@@ -8,7 +8,6 @@ camera{
 	roty:0
 	rotz:0
 	r:0
-	ssaa:4
 }
 
 camera{
@@ -18,7 +17,6 @@ camera{
 	rotz:0
 	fov: 60
 	r:0
-	ssaa:4
 }
 
 camera{
@@ -28,14 +26,12 @@ camera{
 	rotz:0
 	fov: 60
 	r:0
-	ssaa:4
 }
 
 camera{
 	pos: -150, 10, 300
 	rot: ~, 90, ~
 	fov: 60
-	ssaa:4
 }
 
 light{
