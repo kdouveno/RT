@@ -9,7 +9,9 @@ camera
     fov: 80
     rot: 27,0,-50
     pos: 0,0,0
-    r: 0
+    dimx: 1440
+	dimy: 1080
+	r: 0
 }
 
 camera
@@ -30,10 +32,13 @@ light
 
 plane
 {
-    color: #ff3030
     pos: 0,0,-50
     rot: 0,90,0
-    b_lvl: 6
+	scale: 0.5
+	reflexion: 0.3
+	txt_bm: test2.bmp
+	b_lvl: 3
+	color: #bb3030
 }
 
 plane
@@ -51,12 +56,6 @@ sphere
     v: 10
 }
 
-sphere
-{
-    pos: 40,-20,-40
-    mat: iron.mat
-    v: 10
-}
 
 sphere
 {
@@ -72,12 +71,6 @@ sphere
     v: 10
 }
 
-sphere
-{
-    pos: 40,20,-40
-    mat: iron.mat
-    v: 10
-}
 
 sphere
 {
@@ -193,12 +186,6 @@ sphere
     v: 10
 }
 
-sphere
-{
-    pos: 0,0,-40
-    mat: iron.mat
-    v: 10
-}
 
 sphere
 {

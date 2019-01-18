@@ -1,0 +1,142 @@
+scene{
+	amb_l:#FF000FF
+}
+
+camera{
+	pos: ~, -100, ~
+	rotx:100
+	roty:0
+	rotz:0
+	r:0
+	ssaa:4
+
+}
+
+camera{
+	pos: -300, 0, 0
+	rotx:100
+	roty:0
+	rotz:0
+	fov: 60
+	r:0
+	ssaa:4
+
+}
+
+camera{
+	pos: -150, 10, 300
+	rotx:100
+	roty:0
+	rotz:0
+	fov: 60
+	r:0
+	ssaa:4
+
+}
+
+camera{
+	pos: -150, 10, 300
+	rot: ~, 90, ~
+	fov: 60
+
+}
+
+light{
+	pos: -150, -50, 25
+}
+
+
+
+
+sphere{
+	pos: 100, 0, 0
+	v1:40
+	mat: procedural.mat
+}
+sphere{
+	pos: 110, 50, 50
+	v1:10
+	mat: procedural.mat
+}
+sphere{
+	pos: 100, 50, -50
+	v1:10
+	mat: procedural.mat
+}
+
+sphere{
+	pos: 110, -50, 50
+	v1:10
+	mat: procedural.mat
+}
+sphere{
+	pos: 100, -50, -50
+	v1:10
+	mat: procedural.mat
+}
+
+
+
+cylinder{
+	pos: 100, 100, 0
+	v1:40
+	mat: procedural.mat
+}
+cylinder{
+	pos: 100, -100, 0
+	v1:40
+	mat: procedural.mat
+}
+
+
+
+cone{
+	pos: 100, ~, 200
+	rot: 90, ~, ~
+	v1:10
+	mat: procedural.mat
+}
+
+cone{
+	pos: 100, ~, -200
+	rot: 90, ~, ~
+	v1:10
+	mat: procedural.mat
+}
+
+
+
+
+plane{
+	pos: 400, ~, ~
+	mat: procedural.mat
+}
+
+plane{
+	pos: -300, ~, ~
+	mat: procedural.mat
+}
+
+plane{
+	pos: ~, 300, ~
+	rot: ~, ~, 90
+	mat: procedural.mat
+}
+
+plane{
+	pos: ~, -300, ~
+	rot: ~, ~, 90
+	mat: procedural.mat
+}
+
+plane{
+	pos: ~, ~, 500
+	rot: ~, 90, ~
+	reflexion: 1
+}
+
+plane{
+	pos: ~, ~, -500
+	rot: ~, 90, ~
+	reflexion: 1
+}

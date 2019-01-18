@@ -1,5 +1,5 @@
 world{
-	txt: monde.bmp
-	txt_bm: monde.bmp
+	txt: world.bmp
+	txt_bm: world.bmp
 	b_lvl:-10
 }

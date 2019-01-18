@@ -1,0 +1,6 @@
+procedural{
+	txt:none
+	txt_bm:grains.bmp
+	diff:0.9
+	spec:0.2
+}
