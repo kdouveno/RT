@@ -1,0 +1,14 @@
+camera{
+	id: 12
+	link: 10
+	pos: -50
+}
+
+light{
+	id: 10
+	link: 12
+}
+
+sphere{
+	v: 10
+}

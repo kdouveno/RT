@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/15 14:35:06 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/18 13:53:26 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -393,11 +393,11 @@ void					plane_line(t_env *e, t_line d, t_obj *o,
 	t_reslist **rlist);
 void					cuboid_line(t_env *e, t_line d, t_obj *o,
 	t_reslist **rlist);
-t_vec					sphere_norm(t_pt pt, t_obj obj, t_vec v);
-t_vec					cone_norm(t_pt pt, t_obj obj, t_vec v);
-t_vec					cylinder_norm(t_pt pt, t_obj obj, t_vec v);
-t_vec					plane_norm(t_pt pt, t_obj obj, t_vec v);
-t_vec					cuboid_norm(t_pt pt, t_obj obj, t_vec v);
+t_vec					sphere_norm(t_pt pt, t_obj obj);
+t_vec					cone_norm(t_pt pt, t_obj obj);
+t_vec					cylinder_norm(t_pt pt, t_obj obj);
+t_vec					plane_norm(t_pt pt, t_obj obj);
+t_vec					cuboid_norm(t_pt pt, t_obj obj);
 int						sphere_isptin(t_pt pt, t_obj o);
 int						cylinder_isptin(t_pt pt, t_obj o);
 int						cone_isptin(t_pt pt, t_obj o);
@@ -411,7 +411,7 @@ typedef struct			s_objfx
 	void				(*parse)(t_env *e, int type, int fd, t_scene *s);
 	void				(*intersec)(t_env *e, t_line d, t_obj *o,
 		t_reslist **rlist);
-	t_vec				(*norm)(t_pt pt, t_obj obj, t_vec v);
+	t_vec				(*norm)(t_pt pt, t_obj obj);
 	int					(*isptin)(t_pt pt, t_obj o);
 }						t_objfx;
 

@@ -2,45 +2,33 @@ scene{
 	amb_l:#FF000F
 }
 
+
 camera{
-	pos: ~, -100, 40
-	rotx:100
-	roty:10
-	rotz:40
-	r:0
+	link: 10
+	tx: -150
 }
 
 camera{
-	pos: -300, 10, 40
-	rotx:100
-	roty:10
-	rotz:40
-	fov: 60
-	r:0
-}
-
-camera{
-	pos: -150, 10, 300
-	rotx:100
-	roty:10
-	rotz:40
-	fov: 60
-	r:0
-	filter:black
+	link: 10
+	tx: -150
+	rot: ~, 45, 45
 }
 
 light{
-	pos: -80, 10, 100
+	pos: -80, 10, 40
 }
 
-sphere{
+cuboid{
+	id: 10
 	pos: 100, 10, 40
 	diff:0.5
 	spec:0.7
-	rotz:180
 	offx:0.2
+	rotz:0
 	offy:0
 	v1:40
+	v2:40
+	v3:40
 	txt: none
 	b_lvl:-5
 	txt_bm: earthcol.bmp

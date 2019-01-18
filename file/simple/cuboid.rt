@@ -1,9 +1,9 @@
 camera{
-	tx: 100
+	tx: -100
 }
 
 light{
-	tx: 50
+	tx: -50
 	ty: 50
 	tz: 50
 }
@@ -12,6 +12,6 @@ cuboid{
 	v1: 20
 	v2: 20
 	v3: 20
-	rotz: 20
-	roty: 30
+	rotz: 0
+	roty: 0
 }
