@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 14:56:58 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/18 15:18:14 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/18 15:58:46 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_reslist	blank_reslist(t_obj *o, double res)
 		{0, 0, 0}, {0, 0, 0}, res, NULL});
 }
 
-void	add_res(t_env *e, t_reslist **cur, t_reslist t)
+void		add_res(t_env *e, t_reslist **cur, t_reslist t)
 {
 	t_reslist	*last;
 	t_reslist	*tmp;
@@ -42,7 +42,7 @@ void	add_res(t_env *e, t_reslist **cur, t_reslist t)
 		*cur = tmp;
 }
 
-void	free_res(t_reslist *list)
+void		free_res(t_reslist *list)
 {
 	t_reslist	*tmp;
 

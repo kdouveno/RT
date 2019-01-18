@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   i_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/15 15:53:51 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:59:41 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
 
 static void		check_link_loop(t_env *e, t_matrix *o, t_matrix *obj)
 {
@@ -54,7 +53,6 @@ void		init_grad(t_env *e, t_scene *s)
 		grads = grads->next;
 	}
 }
-
 
 void		init_objs(t_env *e, t_scene *s)
 {
@@ -118,7 +116,6 @@ void		init_cam(t_env *e, t_scene *s)
 			cams->m.rot = (t_3d){rad(cams->m.rot.x),
 			rad(cams->m.rot.y), rad(cams->m.rot.z)};
 		init_cam_vecs(cams);
-
 		if (!(d->render = SDL_CreateRGBSurface(0, d->dimx, d->dimy,
 		32, RMASK, GMASK, BMASK, AMASK)))
 			error(e, SDL_GetError());
