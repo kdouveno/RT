@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_check_mat.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 15:14:11 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/16 14:26:40 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/18 16:38:51 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int		check_mat(t_env *e, t_obj *obj, char *l1, char *l2)
 			link_mat(e, obj, ft_strjoin("mat/", l2));
 	}
 	else if (!(ft_strcmp(l1, "spec")))
-		obj->mat.spec = get_coef(ft_atod(l2));
+		obj->mat.spec = ft_atod(l2);
 	else if (!(ft_strcmp(l1, "diff")))
-		obj->mat.diff = get_coef(ft_atod(l2));
+		obj->mat.diff = ft_atod(l2);
 	else
 		return (check_mat2(e, obj, l1, l2));
 	return (0);

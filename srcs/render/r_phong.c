@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:24:37 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/18 11:22:12 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/18 16:52:51 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,6 @@ t_color			phong(t_lit l, t_reslist *res, t_color lc)
 		l.power * diffuse_light(lnc) * res->o->mat.diff);
 	specular = rgbpro(lc, l.power * spec_light(lnc) * res->o->mat.spec);
 	return (rgbadd(rgbadd((t_color)AMASK, specular), diffuse));
-}
-
-t_color			soft_shadow2(t_rendering *r, t_reslist *res, t_lit l, int rec)
-{
-	t_pt		pts[6];
-	t_color		out;
-	int			i;
-
-	i = 0;
-	out.i = 0;
-	pts[0] = (t_pt){l.cpt.x + l.radius, l.cpt.y, l.cpt.z};
-	pts[1] = (t_pt){l.cpt.x - l.radius, l.cpt.y, l.cpt.z};
-	pts[2] = (t_pt){l.cpt.x, l.cpt.y + l.radius, l.cpt.z};
-	pts[3] = (t_pt){l.cpt.x, l.cpt.y - l.radius, l.cpt.z};
-	pts[4] = (t_pt){l.cpt.x, l.cpt.y, l.cpt.z + l.radius};
-	pts[5] = (t_pt){l.cpt.x, l.cpt.y, l.cpt.z - l.radius};
-	while (((i++) || 1) && (i < 6) | (int)(l.cpt = pts[i]).x)
-		out = rgbadd(out, rgbpro(soft_shadow(r, res, l, rec + 1), SHADOW_C));
-	return (out);
 }
 
 t_color			soft_shadow(t_rendering *r, t_reslist *res, t_lit l, int rec)

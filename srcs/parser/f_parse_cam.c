@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_cam.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/15 17:04:18 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/18 16:49:34 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static int		is_powertwo(int nb)
-{
-	if (nb == 2 || nb == 4 || nb == 8 || nb == 16)
-		return (1);
-	return (0);
-}
 
 static int		check_dimx_dimy(t_cam *cam, char *l1, char *l2)
 {
@@ -57,7 +50,7 @@ static int		check_arg(t_cam *cam, char *l1, char *l2)
 	{
 		cam->data.ssaa = ft_atoi(l2);
 		cam->data.ssaa = cam->data.ssaa < 0 ? -cam->data.ssaa : cam->data.ssaa;
-		if (!(is_powertwo(cam->data.ssaa)) && cam->data.ssaa != 1)
+		if (!(is_alia(cam->data.ssaa)) && cam->data.ssaa != 1)
 		{
 			cam->data.ssaa = 1;
 			ft_putstr("\033[2;49;91mssaa is invalid -> changed to 1\n");

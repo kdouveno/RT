@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/18 15:15:37 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/18 17:03:44 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "libft.h"
 # include "gnl.h"
 # include "X.h"
-# include "ft_printf.h"
 # include "rtui.h"
 # include <stdlib.h>
 # include "SDL.h"
@@ -302,6 +301,7 @@ double					get_coef(double nb);
 int						is_name_char(char c);
 int						is_ignored(char c);
 int						is_vec_null(t_vec vec);
+int						is_alia(int nb);
 void					wrong_type(t_env *e, char *l_type, int fd, int skip);
 t_matrix				zero_matrix();
 int						get_prop(t_env *e, char *line, char **l1, char **l2);
@@ -330,8 +330,14 @@ int						check_loc(t_env *e, void *obj, char *l1, char *l2);
 
 void					init(t_env *e);
 void					init_objs(t_env *e, t_scene *s);
-t_color					init_lit_scene(t_env *e, t_scene *s, int *l);
+t_color					init_lit_scene(t_env *e, t_scene *s, int *nb_l);
+void					init_light_auto(t_scene *s);
+void					check_link_loop(t_env *e, t_matrix *o, t_matrix *obj);
+void					check_clip_loop(t_env *e, t_obj *o, t_obj *original,
+	int i);
 void					link_obj(t_env *e);
+void					init_cam(t_env *e, t_scene *s);
+void					init_grad(t_env *e, t_scene *s);
 void					link_color_obj(t_env *e);
 void					link_color_grad(t_env *e);
 void					link_texture(t_env *e, t_obj *obj, char *file,
@@ -369,7 +375,8 @@ t_vec					perturbation(double x, double y, SDL_Surface *txt,
 t_color					get_text_color(int x, int y, SDL_Surface *txt,
 	char *pixels);
 t_color					filter(t_rendering *r, t_color p_color);
-
+t_color					soft_shadow2(t_rendering *r, t_reslist *res, t_lit l,
+	int rec);
 t_color					soft_shadow(t_rendering *r, t_reslist *res, t_lit l,
 	int rec);
 t_color					perlin_noise(t_pt pt);
@@ -445,6 +452,7 @@ double					dist(t_pt a, t_pt b);
 void					add_res(t_env *e, t_reslist **cur, t_reslist t);
 void					free_res(t_reslist *list);
 t_reslist				blank_reslist(t_obj *o, double res);
+void					ft_putint(char *str, int d);
 
 /*
 **	ATEXIT
@@ -452,11 +460,10 @@ t_reslist				blank_reslist(t_obj *o, double res);
 
 int						arg(t_env *e, int argc, char **argv);
 void					free_scene(t_scene *s);
+void					free_obj(t_obj *obj);
 void					error(t_env *e, const char *msg);
 void					error_prst(t_prst *p, char *msg);
 void					free_prst(t_prst *p);
-int						my_key(int key, t_env *e);
-void					k_escape(t_env *e);
 void					quit(t_env *e, char *msg);
 
 #endif

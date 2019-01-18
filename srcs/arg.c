@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:32 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/15 16:19:04 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/18 16:35:12 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	parameter_thread_rec(t_env *e, char *argv, int i, int r)
 			e->glb.thread_count = res;
 		else
 			e->glb.rec_lim_file = res;
-		r ? printf("\033[38;5;40mRecursive limit changed to : %d\n\033[0m",
+		r ? ft_putint("\033[38;5;40mRecursive limit changed to : ",
 			e->glb.rec_lim_file)
-			: printf("\033[38;5;40mThreads changed to : %d\n\033[0m",
+			: ft_putint("\033[38;5;40mThreads changed to : ",
 			e->glb.thread_count);
 	}
 	else

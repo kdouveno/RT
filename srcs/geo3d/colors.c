@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 15:49:54 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/11 14:51:12 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/18 16:36:28 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,4 @@ t_color	rgbmid(t_color c1, t_color c2, float mid)
 	g = (signed)c1.p.g + ((signed)c2.p.g - c1.p.g) * mid;
 	b = (signed)c1.p.b + ((signed)c2.p.b - c1.p.b) * mid;
 	return ((t_color){{b, g, r, a}});
-}
-
-double	rgb_litlevel(t_color c)
-{
-	return ((double)((c.p.r + c.p.g + c.p.b) / 3) / 255);
 }
