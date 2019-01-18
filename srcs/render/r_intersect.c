@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:25:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/18 13:54:07 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:30:10 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@ static t_obj			*is_tangible(t_obj *o, t_pt pt, t_obj *last)
 	t_obj	*p;
 
 	d = is_cind(o, pt);
-	pc = 1;
 	p = d && d != last && (!last || o->b.clip) ? is_tangible(d, pt, o) : d;
 	c = o->clips;
-	if (!o->b.clip && !last)
+	if (!o->b.clip && !last && (pc = 1))
 		last = o;
 	while (c)
 	{
@@ -68,7 +67,6 @@ inline static t_reslist	get_touch(t_reslist *list, t_line line)
 {
 	t_reslist	out;
 	t_obj		*tmpobj;
-	double		tmp;
 	t_reslist	*tmplist;
 
 	tmplist = list;
@@ -83,16 +81,15 @@ inline static t_reslist	get_touch(t_reslist *list, t_line line)
 			out.cam = normalise(get_vector(list->pt, line.m));
 			out.tn = normalise(g_ref[list->o->type].norm(rtrans_pt(list->pt,
 				&list->o->m), *list->o));
-			out.n = ((tmp = scalar_product(normalise(out.tn),
-				out.cam)) > 1 || tmp < 0) ? rev_3d(out.tn) : out.tn;
+			out.n = scalar_product(out.tn, out.cam) < 0
+				? rev_3d(out.tn) : out.tn;
 			free_res(tmplist);
 			return (out);
 		}
 		list = list->next;
 	}
 	free_res(tmplist);
-	return ((t_reslist){NULL, NULL, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
-		{0, 0, 0}, 0, NULL});
+	return (blank_reslist(NULL, 0));
 }
 
 t_reslist				intersec(t_rendering *r, t_line line)

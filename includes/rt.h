@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/18 14:26:37 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:15:37 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -444,6 +444,7 @@ t_polyres				solve_polynome(double a, double b, double c);
 double					dist(t_pt a, t_pt b);
 void					add_res(t_env *e, t_reslist **cur, t_reslist t);
 void					free_res(t_reslist *list);
+t_reslist				blank_reslist(t_obj *o, double res);
 
 /*
 **	ATEXIT

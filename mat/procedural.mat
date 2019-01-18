@@ -3,4 +3,5 @@ procedural{
 	txt_bm:grains.bmp
 	diff:0.9
 	spec:0.2
+	b_lvl:4.5
 }

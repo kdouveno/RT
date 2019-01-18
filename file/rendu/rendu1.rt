@@ -43,7 +43,35 @@ light{
 }
 
 
+cuboid{
+	pos: 100, 50, 0
+	mat: procedural.mat
+	v1:10
+	v2:10
+	v3:10
+}
+cuboid{
+	pos: 100, -50, 0
+	mat: procedural.mat
+	v1:10
+	v2:10
+	v3:10
+}
+cuboid{
+	pos: 100, 0, 50
+	mat: procedural.mat
+	v1:10
+	v2:10
+	v3:10
+}
 
+cuboid{
+	pos: 100, 0, -50
+	mat: procedural.mat
+	v1:10
+	v2:10
+	v3:10
+}
 
 sphere{
 	pos: 100, 0, 0
@@ -136,4 +164,8 @@ plane{
 	pos: ~, ~, -500
 	rot: ~, 90, ~
 	reflexion: 1
+	offx:50
+	offy:50
+	scale:30
+	txt:harry.bmp
 }
