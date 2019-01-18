@@ -1,0 +1,86 @@
+camera{
+	pos: -300, 0, 0
+	rotx:100
+	roty:0
+	rotz:0
+	fov: 60
+	r:0
+}
+
+light{
+	pos: -150, -170, 25
+}
+
+cuboid{
+	pos: 100, 0, 0
+	v1:40
+	v2:40
+	v3:40
+	roty:-44
+	rotz:180
+	txt:harry.bmp
+}
+
+sphere{
+	pos: 100, 150, 150
+	rotz:200
+	v1:40
+	txt:harry.bmp
+}
+
+cone{
+	id: 101
+	pos: 100, -150, 0
+	rotz:160
+	v1:40
+	scale:.7
+	txt:harry.bmp
+	clip: 111
+	clip: 112
+}
+plane{
+	id: 111
+	pos: ~, ~, 150
+	roty: -90
+	link: 101
+}
+
+plane{
+	id: 112
+	pos: ~, ~, -160
+	roty: 90
+	link: 101
+}
+
+
+
+cylinder{
+	pos: 100, 150, -100
+	rotz:200
+	v1:40
+	clip:2
+	clip:3
+	txt:harry.bmp
+	id:1
+}
+plane{
+	id:2
+	link:1
+	pos:~,~,~
+	roty:90
+}
+plane{
+	id:3
+	link:1
+	pos:~,~,140
+	roty:-90
+}
+
+
+plane{
+	pos: 2000, ~, ~
+	txt:harry.bmp
+	scale:40
+	offx:50
+	offy:50
+}
