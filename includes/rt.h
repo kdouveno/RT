@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/18 14:26:37 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/18 16:29:49 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "libft.h"
 # include "gnl.h"
 # include "X.h"
-# include "ft_printf.h"
 # include "rtui.h"
 # include <stdlib.h>
 # include "SDL.h"
