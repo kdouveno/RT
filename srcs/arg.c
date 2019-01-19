@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:32 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/19 16:34:04 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/19 19:01:36 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int			arg(t_env *e, int argc, char **argv)
 
 	i = 2;
 	d = 0;
-	*e = (t_env){e->ui, (t_global){0, 3, -1, THRD_CNT, 0, (t_color){(t_rgb){0, 0, 0, 0}}, NULL},
+	*e = (t_env){e->ui, (t_global){0, 3, -1, THRD_CNT, 0,
+		(t_color){(t_rgb){0, 0, 0, 0}}, NULL},
 		{0, 0}, {NULL, NULL, NULL, NULL, NULL, 0,
 		(t_color){(t_rgb){0, 0, 0, 0}}, (t_color){(t_rgb){0, 0, 0, 0}}}};
 	while (i < argc)
@@ -88,7 +89,8 @@ int			arg(t_env *e, int argc, char **argv)
 	}
 	if (check_file_ext(argv[1], ".rt"))
 		error(e, EXT_ERROR);
-	if (!(e->glb.thds = (pthread_t*)malloc(sizeof(pthread_t) * (e->glb.thread_count))))
+	if (!(e->glb.thds = (pthread_t*)ft_memalloc(sizeof(pthread_t)
+		* (e->glb.thread_count))))
 		error(e, MALLOC_ERROR);
 	parse(e, argv[1], 0);
 	return (d);

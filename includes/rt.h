@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/19 18:31:13 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/19 19:03:35 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
-# include "mlx.h"
 # include "geo3d.h"
 # include "libft.h"
 # include "gnl.h"
 # include "rtui.h"
-# include <stdlib.h>
 # include "SDL.h"
 # include <pthread.h>
 # include <fcntl.h>

@@ -90,7 +90,7 @@ char		**ft_strsplit(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	count_words(s, c, &len, &b);
-	if (!(out = (char **)malloc(sizeof(void*) * (len + 1))))
+	if (!(out = (char **)ft_memalloc(sizeof(void*) * (len + 1))))
 		return (NULL);
 	out[len] = NULL;
 	malloc_split_cells(out, s, c);

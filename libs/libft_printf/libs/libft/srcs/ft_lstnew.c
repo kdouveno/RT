@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 16:39:32 by kdouveno          #+#    #+#             */
-/*   Updated: 2017/11/21 17:40:18 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/19 18:53:05 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 
 	if (!content)
 		content_size = 0;
-	out = (t_list*)malloc(sizeof(t_list));
+	out = (t_list*)ft_memalloc(sizeof(t_list));
 	if (!out)
 		return (NULL);
 	cont = ft_memalloc(content_size);

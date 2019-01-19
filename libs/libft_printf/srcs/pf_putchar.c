@@ -16,7 +16,7 @@ static char		*widen(char *old, int pos)
 {
 	char *out;
 
-	if (!(out = (char*)malloc((pos / BS + 1) * BS + 1)))
+	if (!(out = (char*)ft_memalloc((pos / BS + 1) * BS + 1)))
 		return (NULL);
 	ft_bzero(out, (pos / BS + 1) * BS + 1);
 	if (old)

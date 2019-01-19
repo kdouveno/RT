@@ -33,7 +33,7 @@ void		add_res(t_env *e, t_reslist **cur, t_reslist t)
 		tmp = tmp->next;
 	}
 	t.next = tmp;
-	if (!(tmp = (t_reslist*)malloc(sizeof(t_reslist))))
+	if (!(tmp = (t_reslist*)ft_memalloc(sizeof(t_reslist))))
 		error(e, MALLOC_ERROR);
 	*tmp = t;
 	if (last)

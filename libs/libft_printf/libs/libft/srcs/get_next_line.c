@@ -28,7 +28,7 @@ static t_sline	*gnl_remain(t_sline **remain, int fd)
 			return (cpy);
 		cpy = cpy->next;
 	}
-	if ((new = (t_sline*)malloc(sizeof(t_sline))) == NULL)
+	if ((new = (t_sline*)ft_memalloc(sizeof(t_sline))) == NULL)
 		return (NULL);
 	new->content = NULL;
 	new->fd = fd;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 17:36:22 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/19 14:56:36 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/19 19:00:42 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 int					get_next_line(const int fd, char **line);
 char				*ft_strjoin_free(char const *s1, char const *s2);
 
-typedef struct 		s_sline
+typedef struct		s_sline
 {
 	int				fd;
 	char			*content;
