@@ -81,7 +81,7 @@ void		parse_prst(t_env *e, int type, int fd, t_scene *s)
 
 	(void)type;
 	(void)s;
-	if (!(prst = malloc(sizeof(t_prst))))
+	if (!(prst = ft_memalloc(sizeof(t_prst))))
 		error(e, MALLOC_ERROR);
 	parse_prst_2(e, prst);
 	*prst = (t_prst){{0, 0, 0}, {0, 0, 0}, 1, {NULL, NULL, NULL, NULL, NULL, 0,

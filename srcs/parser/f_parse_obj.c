@@ -56,7 +56,7 @@ t_obj			*parse_obj_2(t_env *e, int type, int fd)
 	char	*l2;
 	t_obj	*obj;
 
-	if (!(obj = malloc(sizeof(t_obj))))
+	if (!(obj = ft_memalloc(sizeof(t_obj))))
 		error(e, MALLOC_ERROR);
 	*obj = (t_obj){NULL, zero_matrix(), -1, type, {0, 0, 0, 0},
 		(t_mat){(t_color){(t_rgb){255, 255, 255, 255}}, 1, 0, 0, 0, 1, 0, 0,

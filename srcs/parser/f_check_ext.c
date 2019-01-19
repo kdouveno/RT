@@ -54,7 +54,7 @@ char	*file_name(char *str)
 	out = NULL;
 	if (len > 4)
 	{
-		if (!(out = malloc(sizeof(char) * len - last - 4 + 1)))
+		if (!(out = ft_memalloc(sizeof(char) * len - last - 4 + 1)))
 			return (NULL);
 		i = 0;
 		while (last + 1 < len - 4)

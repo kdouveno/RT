@@ -88,7 +88,7 @@ t_cam			*parse_cam_2(t_env *e, int fd)
 	char	*l2;
 	t_cam	*cam;
 
-	if (!(cam = malloc(sizeof(t_cam))))
+	if (!(cam = ft_memalloc(sizeof(t_cam))))
 		error(e, MALLOC_ERROR);
 	*cam = (t_cam){NULL, zero_matrix(), -1,
 		{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, FOV, NULL, 0,

@@ -16,7 +16,7 @@ void		creat_clips(t_env *e, t_obj *obj, char *l2)
 {
 	t_clip	*new;
 
-	if (!(new = malloc(sizeof(t_clip))))
+	if (!(new = ft_memalloc(sizeof(t_clip))))
 		error(e, MALLOC_ERROR);
 	*new = (t_clip){ft_atoi(l2), NULL, obj->clips};
 	obj->clips = new;
