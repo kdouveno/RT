@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/18 17:07:09 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 16:20:05 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ typedef struct			s_global
 	int					rec_lim_file;
 	int					rec_nb_file;
 	int					thread_count;
+	int					quit_signal;
 	t_color				amb_l;
+	pthread_t			*thds;
 }						t_global;
 
 typedef struct			s_wininfo

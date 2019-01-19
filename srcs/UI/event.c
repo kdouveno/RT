@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 13:19:24 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/15 15:02:17 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 18:14:15 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ static void			s_event_window(t_env *e)
 	if (e->ui.event.window.event == SDL_WINDOWEVENT_CLOSE)
 	{
 		if (e->ui.event.window.windowID == e->ui.id_main_win)
-		{
-			if (!e->ui.is_rendering)
-				rt_exit(e);
-		}
+			rt_exit(e);
 		else
 			list_win_delone(&(e->ui.list_win),
 				list_win_get(e->ui.list_win, e->ui.event.window.windowID));
@@ -44,10 +41,7 @@ static void			s_event_keys(t_env *e)
 		if (e->ui.focus_win)
 		{
 			if (e->ui.focus_win->id == e->ui.id_main_win)
-			{
-				if (!e->ui.is_rendering)
-					rt_exit(e);
-			}
+				rt_exit(e);
 			else
 				list_win_delone(&(e->ui.list_win), e->ui.focus_win);
 		}

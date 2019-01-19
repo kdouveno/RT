@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_render.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/14 12:34:36 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/19 16:40:50 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		*render(void *r)
 	while (1)
 	{
 		pthread_mutex_lock(&((t_rendering*)r)->lock);
-		if (d->iy >= d->dimy)
+		if (d->iy >= d->dimy || ((t_rendering*)r)->e->glb.quit_signal)
 			break ;
 		ix = d->ix++;
 		iy = d->iy;
@@ -59,7 +59,6 @@ void		*render(void *r)
 t_cam		*render_cam(t_env *e, int ncam)
 {
 	t_rendering		r;
-	pthread_t		thds[e->glb.thread_count];
 	int				i;
 	t_cam			*c;
 
@@ -74,11 +73,13 @@ t_cam		*render_cam(t_env *e, int ncam)
 		return (c);
 	i = 0;
 	while (i < e->glb.thread_count)
-		if (pthread_create(thds + i++, NULL, &render, &r))
+		if (pthread_create(e->glb.thds + i++, NULL, &render, &r))
 			error(e, PTHR_ERROR);
 	i = 0;
 	while (i < e->glb.thread_count)
-		pthread_join(thds[i++], NULL);
+		pthread_join(e->glb.thds[i++], NULL);
+	if (e->glb.quit_signal)
+		return (NULL);
 	c->data.ssaa > 1 ? aaa(&r) : 0;
 	return (c);
 }
