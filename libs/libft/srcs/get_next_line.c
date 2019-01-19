@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:16:46 by kdouveno          #+#    #+#             */
-/*   Updated: 2018/12/14 15:37:22 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/19 14:56:47 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gnl.h"
-
 #include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 static t_sline	*gnl_remain(t_sline **remain, int fd)
 {

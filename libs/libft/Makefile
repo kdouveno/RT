@@ -6,7 +6,6 @@ NAME = libft.a
 SRCS = srcs/ft_atod.c \
         srcs/ft_atoi.c \
         srcs/ft_bzero.c \
-        srcs/ft_extoi.c \
         srcs/ft_free_tab.c \
         srcs/ft_isalnum.c \
         srcs/ft_isalpha.c \

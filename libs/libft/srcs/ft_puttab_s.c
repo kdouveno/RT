@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_puttab_s.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 21:38:47 by gperez            #+#    #+#             */
-/*   Updated: 2018/02/26 14:51:34 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 14:25:05 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "libft.h"
 
 void	ft_puttab_s(char **tab, int space)
 {
