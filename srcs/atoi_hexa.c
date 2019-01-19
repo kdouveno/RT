@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 18:17:07 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/19 16:33:56 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 17:42:47 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int				atoi_hexa(char const *str)
 	int		i;
 	int		len;
 
-	len = strlen(str) - 1;
+	len = ft_strlen(str) - 1;
 	if (len > 6)
 		len = 6;
 	n = 0;

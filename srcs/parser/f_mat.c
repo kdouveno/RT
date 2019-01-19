@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:18:00 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 15:17:55 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 17:43:56 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	parse_line(t_env *e, t_obj *obj, char *line, t_fd fd)
 	l_type = ft_str_tolower(type);
 	ft_memdel((void**)&type);
 	name = file_name(fd.file);
-	if (!(strcmp(l_type, name)))
+	if (!(ft_strcmp(l_type, name)))
 	{
 		link_obj_mat(e, obj, fd.fd);
 	}
