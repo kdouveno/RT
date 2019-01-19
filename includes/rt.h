@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/18 17:07:09 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 16:23:57 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "geo3d.h"
 # include "libft.h"
 # include "gnl.h"
-# include "X.h"
 # include "rtui.h"
 # include <stdlib.h>
 # include "SDL.h"
