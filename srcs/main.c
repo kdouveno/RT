@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 15:21:17 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/19 19:18:12 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int					main(int argc, char **argv)
 		ft_putendl("\033[38;5;203m"USAGE);
 		return (0);
 	}
+	s_init_ptrs(&e);
 	e.glb.d = arg(&e, argc, argv);
 	e.ui.file_name = get_file_name(argv[1]);
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		return (0);
-	s_init_ptrs(&e);
 	init(&e);
 	rtui_init(&e);
 	sdl_loop(&e);
