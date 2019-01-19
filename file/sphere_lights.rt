@@ -1,0 +1,42 @@
+scene
+{
+}
+
+camera
+{
+	pos: -150,0,30
+	rot: 100,0,0
+	r: 0
+	fov: 30
+	dimx: 640
+	dimy: 480
+	ssaa: 4
+}
+
+sphere
+{
+	pos: 100,0,0
+	v: 20
+	color: #ffffff
+	diff: 1
+}
+
+light
+{
+	pos: 0,30,30
+	color: #0000ff
+}
+
+light
+{
+	pos: 0,-30,30
+	color: #ff0000
+}
+
+plane
+{
+	pos: 0,0,-20
+	rot: 0,90,0
+	color: #ffffff
+	diff: 0.7
+}

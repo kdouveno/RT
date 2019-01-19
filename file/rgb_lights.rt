@@ -1,0 +1,79 @@
+scene
+{
+	amb_l: #aaaaaa
+}
+
+camera
+{
+	fov: 70
+	pos: 0,20,0
+	rot: 200,0,-200
+	r: 0
+	dimx: 640
+	dimy: 360
+	ssaa: 4
+}
+
+plane
+{
+	pos: 200,0,0
+	color: #cccccc
+}
+
+plane
+{
+	pos: 0,0,-200
+	rot: 0,90,0
+	color: #cccccc
+}
+
+light
+{
+	pos: 70,-140,20
+	c: #eeeeee
+}
+
+sphere
+{
+	pos: 140,0,-180
+	v: 20
+	color: #ff0000
+	spec: 10
+	reflexion: 0.08
+}
+
+sphere
+{
+	pos: 140,-45,-180
+	v: 20
+	color: #00ff00
+	spec: 10
+	reflexion: 0.08
+}
+
+sphere
+{
+	pos: 140,45,-180
+	v: 20
+	color: #0000ff
+	spec: 10
+	reflexion: 0.08
+}
+
+light
+{
+	pos: 170,120,-180
+	color: #00ff00
+}
+
+light
+{
+	pos: 170,0,-180
+	color: #0000ff
+}
+
+light
+{
+	pos: 170,-120,-180
+	color: #ff0000
+}

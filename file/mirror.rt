@@ -1,0 +1,92 @@
+camera
+{
+	fov: 70
+	ssaa: 4
+	dimx: 640
+	dimy: 480
+	rot: 0,20,0
+}
+
+light
+{
+	pos: 0,50,50
+	color: #ffffff
+}
+
+plane
+{
+	texture: none
+	scale: 6
+	color: #ffffff
+	pos: 0,0,-50
+	rot: 0,90,0
+	reflexion: 0.2
+}
+
+plane
+{
+	pos: -50,0,0
+	color: #22aaff
+	diff: 0.5
+}
+
+plane
+{
+	pos: 500,0,0
+	color: #22aaff
+	diff: 0.5
+}
+
+cuboid
+{
+	pos: 80,0,-38
+	rot: 0,0,50
+	v1: 12
+	v2: 12
+	v3: 12
+	color: #00ff00
+	reflexion: 0.3
+}
+
+cuboid
+{
+	pos: 75,30,-45
+	rot: 0,0,-10
+	v1: 5
+	v2: 5
+	v3: 5
+	color: #0033ff
+	reflexion: 0.5
+}
+
+cuboid
+{
+	pos: 200,50,0
+	rot: 0,0,10
+	v1: 3
+	v2: 50
+	v3: 50
+	clip: 12
+	color: #ff5555
+}
+
+cuboid
+{
+	pos: 202,50,0
+	rot: 0,0,10
+	v1: 1.5
+	v2: 47
+	v3: 47
+	color: #ffffff
+	reflexion: 1
+}
+
+cuboid
+{
+	pos: 200,50,0
+	rot: 0,0,10
+	v1: 10
+	v2: 47
+	v3: 47
+	id: 12
+}
