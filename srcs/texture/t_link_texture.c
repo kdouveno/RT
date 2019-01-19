@@ -6,13 +6,13 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:41 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/11 17:03:54 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 16:33:20 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-SDL_Surface	*type_text(SDL_Surface *txt, char *file)
+static SDL_Surface	*type_text(SDL_Surface *txt, char *file)
 {
 	if (!(txt = SDL_LoadBMP(file)))
 	{
@@ -29,7 +29,7 @@ SDL_Surface	*type_text(SDL_Surface *txt, char *file)
 	return (txt);
 }
 
-void		link_texture(t_env *e, t_obj *obj, char *file, char type)
+void				link_texture(t_env *e, t_obj *obj, char *file, char type)
 {
 	if (!file)
 	{

@@ -6,13 +6,13 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 18:17:07 by gperez            #+#    #+#             */
-/*   Updated: 2018/11/20 17:49:44 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/19 17:42:47 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		hexa_dic(char c)
+static int		hexa_dic(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (c - '0');
@@ -23,13 +23,13 @@ int		hexa_dic(char c)
 	return (0);
 }
 
-int		atoi_hexa(char const *str)
+int				atoi_hexa(char const *str)
 {
 	long	n;
 	int		i;
 	int		len;
 
-	len = strlen(str) - 1;
+	len = ft_strlen(str) - 1;
 	if (len > 6)
 		len = 6;
 	n = 0;

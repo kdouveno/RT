@@ -6,13 +6,14 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 14:21:48 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/15 15:43:54 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 16:28:00 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_color		cast_light(t_rendering *r, t_lit *l, t_reslist *res, t_line line)
+static t_color	cast_light(t_rendering *r, t_lit *l, t_reslist *res,
+	t_line line)
 {
 	t_reslist	rl;
 	t_color		tmp;
@@ -33,7 +34,7 @@ t_color		cast_light(t_rendering *r, t_lit *l, t_reslist *res, t_line line)
 		return (t_color){{0, 0, 0, 1}};
 }
 
-t_color		catch_light(t_rendering *r, t_lit *l, t_reslist *res)
+t_color			catch_light(t_rendering *r, t_lit *l, t_reslist *res)
 {
 	return (cast_light(r, l, res, get_line(l->cpt, res->pt)));
 }

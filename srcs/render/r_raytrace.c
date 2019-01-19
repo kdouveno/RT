@@ -6,13 +6,13 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 14:58:11 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 16:30:32 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
+static t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 {
 	t_lit		*l;
 	t_color		out;
@@ -45,7 +45,7 @@ t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 **	renvoie la couleur du pixel a afficher pour un rayon (une droite)
 */
 
-t_color		raytrace(t_rendering *r, t_line l, int bounce, t_ri ri)
+t_color				raytrace(t_rendering *r, t_line l, int bounce, t_ri ri)
 {
 	t_reslist	res;
 	t_color		out;

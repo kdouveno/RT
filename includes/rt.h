@@ -6,7 +6,11 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/01/19 16:20:05 by kdouveno         ###   ########.fr       */
+=======
+/*   Updated: 2019/01/19 16:23:57 by gperez           ###   ########.fr       */
+>>>>>>> de29574e741818acc09c095e76e50f992719d658
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +20,6 @@
 # include "geo3d.h"
 # include "libft.h"
 # include "gnl.h"
-# include "X.h"
 # include "rtui.h"
 # include <stdlib.h>
 # include "SDL.h"
