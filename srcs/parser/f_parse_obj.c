@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 16:28:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/15 15:42:55 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 14:14:40 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@ static int		check_arg(t_env *e, t_obj *obj, char *l1, char *l2)
 		creat_clips(e, obj, l2);
 	else if (!(ft_strcmp(l1, "scale")))
 		obj->m.scale = ft_atod(l2);
-	else if (!ft_strcmp(l1, "n") || !ft_strcmp(l1, "refraction_index"))
-	{
-		obj->mat.n = ft_atod(l2);
-		obj->mat.n = obj->mat.n >= 1 ? obj->mat.n : 1;
-	}
-	else if (!ft_strcmp(l1, "tr") || !ft_strcmp(l1, "transparency"))
-		obj->mat.tr = get_coef(ft_atod(l2));
 	else
 		return (1);
 	return (0);

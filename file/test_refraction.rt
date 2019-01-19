@@ -23,12 +23,14 @@ camera{
 sphere{
     id: 2
     v: 20
-    link: 3
-    refl: .6
-    b_lvl: 1
     tr: .5
-    n: 1.5
-    txt_bm: test2.bmp
+    n: 1
+}
+
+cylinder{
+    roty: 90
+    v: 5
+    color: #ffdada
 }
 
 light{

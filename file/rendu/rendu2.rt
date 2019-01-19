@@ -21,6 +21,17 @@ camera{
 }
 
 camera{
+	pos: -200, 20, 0
+	rotx:100
+	roty:0
+	rotz:0
+	fov: 60
+	para: 1
+	fov : 150
+	r:0
+}
+
+camera{
 	pos: 200, 0, 0
 	rotx:100
 	roty:0

@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 12:57:00 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/13 14:57:05 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 15:03:32 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static void	compute_n(t_ri *ri, t_reslist res)
 	r = ri;
 	while (r && r->c != '.')
 	{
-		if (r->c == '+' && i++)
+		if (r->c == '+' && (i++ | 1))
 			ri->n += r->o->mat.n;
-		else if (r->c == '-' && i--)
+		else if (r->c == '-' && (i-- | 1))
 			ri->n -= r->o->mat.n;
 		r = r->next;
 	}
@@ -63,7 +63,7 @@ t_color		refraction(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 	compute_n(&out, res);
 	res.n = res.pert.x == 0 && res.pert.y == 0 && res.pert.z == 0
 		? res.n : rot(res.pert, get_rot(res.n, 0));
-	n = (ri->o ? ri->n : 1) / out.o->mat.n;
+	n = (ri->o || out.c == '.' ? ri->n : 1) / out.o->mat.n;
 	c[0] = scalar_product(res.cam, res.n);
 	c[1] = sqrt(1 - sq(n) * (1 - sq(c[0])));
 	t = apply(rev_3d(vecpro(res.cam, n)), vecpro(res.n, n * c[0] - c[1]));

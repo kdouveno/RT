@@ -24,6 +24,7 @@ plane
 {
 	pos: 0,0,-200
 	rot: 0,90,0
+	refl: .3
 	color: #cccccc
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_check_mat.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 15:14:11 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/18 16:38:51 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/19 12:55:40 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ int		check_mat(t_env *e, t_obj *obj, char *l1, char *l2)
 		obj->mat.spec = ft_atod(l2);
 	else if (!(ft_strcmp(l1, "diff")))
 		obj->mat.diff = ft_atod(l2);
+	else if (!ft_strcmp(l1, "n") || !ft_strcmp(l1, "refraction_index"))
+	{
+		obj->mat.n = ft_atod(l2);
+		obj->mat.n = obj->mat.n >= 1 ? obj->mat.n : 1;
+	}
+	else if (!ft_strcmp(l1, "tr") || !ft_strcmp(l1, "transparency"))
+		obj->mat.tr = get_coef(ft_atod(l2));
 	else
 		return (check_mat2(e, obj, l1, l2));
 	return (0);
