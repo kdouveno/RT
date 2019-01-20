@@ -24,13 +24,7 @@ sphere{
     id: 2
     v: 20
     tr: .5
-    n: 1
-}
-
-cylinder{
-    roty: 90
-    v: 5
-    color: #ffdada
+    n: 1.33
 }
 
 light{
