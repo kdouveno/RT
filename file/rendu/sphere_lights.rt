@@ -1,5 +1,6 @@
 scene
 {
+	amb_l: #000000
 }
 
 camera
@@ -8,8 +9,8 @@ camera
 	rot: 100,0,0
 	r: 0
 	fov: 30
-	dimx: 640
-	dimy: 480
+	dimx: 1440
+	dimy: 1080
 	ssaa: 4
 }
 

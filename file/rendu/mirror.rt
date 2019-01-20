@@ -1,9 +1,9 @@
 camera
 {
 	fov: 70
-	ssaa: 4
-	dimx: 640
-	dimy: 480
+	ssaa: 2
+	dimx: 1440
+	dimy: 1080
 	rot: 0,20,0
 }
 
@@ -56,7 +56,8 @@ cuboid
 	v2: 5
 	v3: 5
 	color: #0033ff
-	reflexion: 0.5
+	n: 1.3
+	tr: 0.8
 }
 
 cuboid

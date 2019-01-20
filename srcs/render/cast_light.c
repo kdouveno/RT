@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_light.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 14:21:48 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/19 16:28:00 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 18:03:50 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@ static t_color	cast_light(t_rendering *r, t_lit *l, t_reslist *res,
 {
 	t_reslist	rl;
 	t_color		tmp;
-
 	rl = intersec(r, line);
-	if (rl.t > 1 - PRE)
-	{
+	if (rl.t > 1.0 - PRE || get_norm(line.v) < PRE)
 		return (l->color);
-	}
 	else if (rl.o && rl.o->mat.tr > 0)
 	{
 		tmp = cast_light(r, l, res, get_line(rl.pt, res->pt));

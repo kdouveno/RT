@@ -3,6 +3,6 @@ iron{
 	diff:1
 	spec:1
 	reflexion: 0.7
-	txt_bm: test2.bmp
+	txt_bm: grains.bmp
 	b_lvl:6
 }

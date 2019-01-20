@@ -1,0 +1,54 @@
+camera
+{
+	pos: 0,0,0
+	fov: 70
+	dimx: 1920
+	dimy: 1080
+	ssaa: 4
+}
+
+plane
+{
+	pos: 0,0,-50
+	rot: 0,90,0
+	c: #ffffff
+	texture: none
+	scale: 5
+	reflexion: 0.25
+}
+
+light
+{
+	pos: 0,100,100
+}
+
+sphere
+{
+	pos: 250,75,0
+	v: 50
+	c: #ff0000
+	spec: 1
+	diff: 1.2
+	reflexion: 0.3
+}
+
+sphere
+{
+	pos: 300,0,0
+	v: 50
+	c: #00ff00
+	spec: 1
+	diff: 1.2
+	reflexion: 0.3
+}
+
+sphere
+{
+	pos: 350,-75,0
+	v: 50
+	c: #0000ff
+	spec: 1
+	diff: 1.2
+	reflexion: 0.3
+	
+}

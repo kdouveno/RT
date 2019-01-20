@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_raytrace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/19 16:30:32 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 16:07:18 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_color		lites(t_rendering *r, t_reslist res, int bounce, t_ri *ri)
 				2 * scalar_product(res.cam, n)))}, bounce + 1, *ri),
 				res.o->mat.refl);
 		}
-		if (res.o->mat.tr)
+		if (res.o->mat.tr && bounce < REC_BOUNCE)
 		{
 			out = rgbmid(out, refraction(r, res, bounce, ri), res.o->mat.tr);
 		}
