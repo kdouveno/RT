@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/19 16:40:50 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/20 13:15:41 by kdouveno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		*render(void *r)
 		render_next_line(d);
 		((int*)d->render->pixels)[iy * d->dimx + ix] = rec_raytrace(r,
 			l, !d->aaa).i;
-		((t_rendering*)r)->e->ui.pbar.value = ((double)iy
+		((t_rendering*)r)->e->ui.pbar.value = ((double)d->iy
 			/ (double)d->dimy);
 	}
 	pthread_mutex_unlock(&((t_rendering*)r)->lock);
