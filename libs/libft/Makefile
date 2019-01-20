@@ -1,7 +1,7 @@
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
 
-NAME = libft.a
+NAME = ../libft.a
 
 SRCS = srcs/ft_atod.c \
         srcs/ft_atoi.c \
@@ -89,8 +89,8 @@ all:
 	@make $(NAME)
 
 $(NAME): $(ARCH) $(OBJS)
-	@ar rc ../$@ $^
-	@ranlib ../$@
+	@ar rc $@ $^
+	@ranlib $@
 	@printf "$(VIOLET)%15s : $(GREEN)succesfuly made! %10.0d\n" $@ 0
 
 objs/%.o: srcs/%.c $(INCSFILE)
