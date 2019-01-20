@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:32 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/19 19:01:36 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 12:32:00 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int			arg(t_env *e, int argc, char **argv)
 	*e = (t_env){e->ui, (t_global){0, 3, -1, THRD_CNT, 0,
 		(t_color){(t_rgb){0, 0, 0, 0}}, NULL},
 		{0, 0}, {NULL, NULL, NULL, NULL, NULL, 0,
-		(t_color){(t_rgb){0, 0, 0, 0}}, (t_color){(t_rgb){0, 0, 0, 0}}}};
+		(t_color){(t_rgb){0, 0, 0, 0}}}};
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')

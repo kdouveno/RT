@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/28 18:54:01 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/13 16:08:12 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 12:32:35 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void		parse_prst(t_env *e, int type, int fd, t_scene *s)
 		error(e, MALLOC_ERROR);
 	parse_prst_2(e, prst);
 	*prst = (t_prst){{0, 0, 0}, {0, 0, 0}, 1, {NULL, NULL, NULL, NULL, NULL, 0,
-		(t_color){(t_rgb){0, 0, 0, 0}}, (t_color){(t_rgb){0, 0, 0, 0}}}, NULL};
+		(t_color){(t_rgb){0, 0, 0, 0}}}, NULL};
 	while ((res = get_next_line(fd, &line)) > 0
 		&& get_prop(e, line, &l1, &l2) != 1)
 	{

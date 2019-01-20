@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/19 19:03:35 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 12:31:19 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define THRD_CNT 1
 # define REC_FILE 15
 # define REC_BOUNCE 10
-# define AMB_L 0.075
+# define AMB_L 0.15
 # define CONE 4
 # define AAA_THRESH 35
 # define BMP_LEVEL 1.5
@@ -216,7 +216,6 @@ typedef struct			s_scene
 	struct s_prst		*prsts;
 	int					auto_l;
 	t_color				amb_lit_c;
-	t_color				amb_lit_sh;
 }						t_scene;
 
 typedef struct			s_prst
