@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/15 15:46:14 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 18:10:39 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ t_color					rec_raytrace(t_rendering *r, t_line l, int m)
 	t_cam_render	*d;
 	t_line			ls[4];
 
-	if (m <= 1)
-		pthread_mutex_unlock(&r->lock);
 	d = &r->c->data;
 	if (m < d->ssaa && m)
 	{
@@ -109,6 +107,8 @@ void					aaa(t_rendering *r)
 	i = 0;
 	while (i < max)
 	{
+		if (r->e->glb.quit_signal)
+			return ;
 		if ((i > d->dimx && aaacolor(p[i], p[i - d->dimx]))
 			|| ((i + 1) % d->dimx != 1 && aaacolor(p[i], p[i - 1]))
 			|| ((i + 1) % d->dimx && aaacolor(p[i], p[i + 1]))

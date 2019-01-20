@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:51:19 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/20 16:07:18 by schaaban         ###   ########.fr       */
+/*   Updated: 2019/01/20 18:16:05 by schaaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_color				raytrace(t_rendering *r, t_line l, int bounce, t_ri ri)
 
 	out = (t_color)(unsigned)AMASK;
 	res = intersec(r, l);
+	if (((t_rendering*)r)->e->glb.quit_signal)
+		return (out);
 	if (res.o)
 		out.i |= lites(r, res, bounce, &ri).i;
 	return (out);

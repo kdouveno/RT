@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:28:33 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/20 12:53:34 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 17:53:22 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ int					main(int argc, char **argv)
 		return (0);
 	}
 	s_init_ptrs(&e);
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-		return (0);
 	e.glb.d = arg(&e, argc, argv);
 	e.ui.file_name = get_file_name(argv[1]);
 	init(&e);
