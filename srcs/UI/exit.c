@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 00:27:13 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/19 16:43:39 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/20 12:40:23 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void				rt_exit(t_env *e)
 		list_btn_del(e->ui.gui.menu_cam->list_btn);
 		ft_memdel((void**)&(e->ui.gui.menu_cam));
 	}
-	free(e->glb.thds);
+	ft_memdel((void**)&(e->glb.thds));
 	SDL_Quit();
 	free_scene(&(e->s));
 	exit(0);

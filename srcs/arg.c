@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:20:32 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/20 12:32:00 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 12:40:09 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ int			arg(t_env *e, int argc, char **argv)
 		(t_color){(t_rgb){0, 0, 0, 0}}, NULL},
 		{0, 0}, {NULL, NULL, NULL, NULL, NULL, 0,
 		(t_color){(t_rgb){0, 0, 0, 0}}}};
+	if (!(e->glb.thds = (pthread_t*)ft_memalloc(sizeof(pthread_t)
+		* (e->glb.thread_count))))
+		error(e, MALLOC_ERROR);
 	while (i < argc)
 	{
 		if (argv[i][0] == '-')
@@ -89,9 +92,6 @@ int			arg(t_env *e, int argc, char **argv)
 	}
 	if (check_file_ext(argv[1], ".rt"))
 		error(e, EXT_ERROR);
-	if (!(e->glb.thds = (pthread_t*)ft_memalloc(sizeof(pthread_t)
-		* (e->glb.thread_count))))
-		error(e, MALLOC_ERROR);
 	parse(e, argv[1], 0);
 	return (d);
 }
