@@ -38,7 +38,6 @@ void				rt_exit(t_env *e)
 	e->glb.quit_signal = 1;
 	while (i < e->glb.thread_count)
 		pthread_join(e->glb.thds[i++], NULL);
-	free_scene(&(e->s));
 	s_free_sdl(e);
 	e->ui.list_win ? list_win_del(e->ui.list_win) : 0;
 	if (e->ui.gui.menu_main)
@@ -53,5 +52,6 @@ void				rt_exit(t_env *e)
 	}
 	free(e->glb.thds);
 	SDL_Quit();
+	free_scene(&(e->s));
 	exit(0);
 }

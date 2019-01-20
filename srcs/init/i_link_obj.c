@@ -16,7 +16,7 @@ void		add_objlist(t_env *e, t_objlist **list, t_obj *ajout)
 {
 	t_objlist	*add;
 
-	if (!(add = (t_objlist*)malloc(sizeof(t_objlist))))
+	if (!(add = (t_objlist*)ft_memalloc(sizeof(t_objlist))))
 		error(e, MALLOC_ERROR);
 	*add = (t_objlist){ajout, *list};
 	*list = add;

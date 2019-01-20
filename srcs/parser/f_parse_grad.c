@@ -58,7 +58,7 @@ t_grad			*parse_grad_2(t_env *e, int fd)
 	char	*l2;
 	t_grad	*grad;
 
-	if (!(grad = malloc(sizeof(t_grad))))
+	if (!(grad = ft_memalloc(sizeof(t_grad))))
 		error(e, MALLOC_ERROR);
 	*grad = (t_grad){NULL, zero_matrix(), -1, {0, 0, 0}, {0, 0, 0},
 		(t_color){(t_rgb){255, 255, 255, 255}},

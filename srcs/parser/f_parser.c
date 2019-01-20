@@ -45,7 +45,7 @@ char		*get_name(t_env *e, char *line, int i, int *l)
 	}
 	i = 0;
 	i_cp = 0;
-	if (!(cp = malloc(sizeof(char) * *l + 1)))
+	if (!(cp = ft_memalloc(sizeof(char) * *l + 1)))
 	{
 		ft_memdel((void**)&line);
 		error(e, MALLOC_ERROR);

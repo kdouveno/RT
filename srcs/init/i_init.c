@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 14:13:40 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/18 16:59:24 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 12:31:42 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,4 @@ void		init(t_env *e)
 		init_lit_scene(e, &(e->s), &l);
 		e->s.amb_lit_c = e->glb.amb_l;
 	}
-	if (l != 0)
-	{
-		e->s.amb_lit_sh.p.r = e->s.amb_lit_c.p.r / l;
-		e->s.amb_lit_sh.p.g = e->s.amb_lit_c.p.g / l;
-		e->s.amb_lit_sh.p.b = e->s.amb_lit_c.p.b / l;
-	}
-	else
-		e->s.amb_lit_sh = e->s.amb_lit_c;
 }

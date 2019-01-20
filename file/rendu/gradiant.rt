@@ -3,14 +3,6 @@ scene{
 }
 
 camera{
-	t: 60, 30, 60
-	r: 0
-	fov: 85
-	rotx: -100
-	para:
-}
-
-camera{
 	r: 0
 	rotx: -100
 	ssaa: 4
@@ -25,7 +17,6 @@ camera{
 light{
 	id: 12
 	t: ~, -100, 100
-	radius: 10
 }
 
 light{

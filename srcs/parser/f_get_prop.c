@@ -62,8 +62,8 @@ int			get_prop(t_env *e, char *line, char **l1, char **l2)
 	}
 	if ((!trio[0] || !trio[1]) && (trio[2] || trio[0]))
 		wrong_type(e, line, 0, 0);
-	if (!(*l1 = (char*)malloc(sizeof(char) * (trio[0] + 1)))
-	|| !(*l2 = (char*)malloc(sizeof(char) * (trio[1] + 1))))
+	if (!(*l1 = (char*)ft_memalloc(sizeof(char) * (trio[0] + 1)))
+	|| !(*l2 = (char*)ft_memalloc(sizeof(char) * (trio[1] + 1))))
 		error(e, MALLOC_ERROR);
 	get_prop2(line, *l1, *l2, trio);
 	return (0);

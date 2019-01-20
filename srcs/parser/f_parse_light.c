@@ -69,7 +69,7 @@ t_lit	*parse_light_2(t_env *e, int fd)
 	char	*l2;
 	t_lit	*lit;
 
-	if (!(lit = malloc(sizeof(t_lit))))
+	if (!(lit = ft_memalloc(sizeof(t_lit))))
 		error(e, MALLOC_ERROR);
 	*lit = (t_lit){NULL, zero_matrix(), -1, 1.0f, 0.0f, {0, 0, 0},
 		(t_color){(t_rgb){255, 255, 255, 255}}, {0, 0, 0, 0}};
