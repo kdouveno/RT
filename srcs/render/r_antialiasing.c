@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/20 16:04:12 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 18:10:39 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void					aaa(t_rendering *r)
 	i = 0;
 	while (i < max)
 	{
+		if (r->e->glb.quit_signal)
+			return ;
 		if ((i > d->dimx && aaacolor(p[i], p[i - d->dimx]))
 			|| ((i + 1) % d->dimx != 1 && aaacolor(p[i], p[i - 1]))
 			|| ((i + 1) % d->dimx && aaacolor(p[i], p[i + 1]))
