@@ -6,7 +6,7 @@
 /*   By: schaaban <schaaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 00:27:13 by schaaban          #+#    #+#             */
-/*   Updated: 2019/01/20 12:51:42 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 17:56:28 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,8 @@ static void			s_free_sdl(t_env *e)
 
 void				rt_exit(t_env *e)
 {
-	int i;
-
-	i = 0;
 	e->glb.quit_signal = 1;
-	while (i < e->glb.thread_count)
-		pthread_join(e->glb.thds[i++], NULL);
+	pthread_join(e->ui.th_pb, NULL);
 	s_free_sdl(e);
 	e->ui.list_win ? list_win_del(e->ui.list_win) : 0;
 	if (e->ui.gui.menu_main)

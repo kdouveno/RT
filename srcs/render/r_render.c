@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_render.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 17:19:08 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/20 13:15:41 by kdouveno         ###   ########.fr       */
+/*   Updated: 2019/01/20 17:02:05 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ void		*render(void *r)
 	d = &((t_rendering*)r)->c->data;
 	while (1)
 	{
-		pthread_mutex_lock(&((t_rendering*)r)->lock);
 		if (d->iy >= d->dimy || ((t_rendering*)r)->e->glb.quit_signal)
-			break ;
+			return (NULL);
 		ix = d->ix++;
 		iy = d->iy;
 		l = (t_line){d->pt_ul, d->vp_ul};
@@ -51,8 +50,6 @@ void		*render(void *r)
 		((t_rendering*)r)->e->ui.pbar.value = ((double)d->iy
 			/ (double)d->dimy);
 	}
-	pthread_mutex_unlock(&((t_rendering*)r)->lock);
-	pthread_exit(NULL);
 	return (NULL);
 }
 
@@ -71,13 +68,7 @@ t_cam		*render_cam(t_env *e, int ncam)
 	r = (t_rendering){PTHREAD_MUTEX_INITIALIZER, e, c};
 	if (r.c->data.iy >= r.c->data.dimy)
 		return (c);
-	i = 0;
-	while (i < e->glb.thread_count)
-		if (pthread_create(e->glb.thds + i++, NULL, &render, &r))
-			error(e, PTHR_ERROR);
-	i = 0;
-	while (i < e->glb.thread_count)
-		pthread_join(e->glb.thds[i++], NULL);
+	render(&r);
 	if (e->glb.quit_signal)
 		return (NULL);
 	c->data.ssaa > 1 ? aaa(&r) : 0;

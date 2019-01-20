@@ -6,7 +6,7 @@
 /*   By: kdouveno <kdouveno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 11:33:50 by kdouveno          #+#    #+#             */
-/*   Updated: 2019/01/15 15:46:14 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/20 16:04:12 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ t_color					rec_raytrace(t_rendering *r, t_line l, int m)
 	t_cam_render	*d;
 	t_line			ls[4];
 
-	if (m <= 1)
-		pthread_mutex_unlock(&r->lock);
 	d = &r->c->data;
 	if (m < d->ssaa && m)
 	{
