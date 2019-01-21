@@ -33,7 +33,6 @@ static void			s_free_sdl(t_env *e)
 void				rt_exit(t_env *e)
 {
 	e->glb.quit_signal = 1;
-	pthread_join(e->ui.th_pb, NULL);
 	s_free_sdl(e);
 	e->ui.list_win ? list_win_del(e->ui.list_win) : 0;
 	if (e->ui.gui.menu_main)
