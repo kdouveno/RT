@@ -44,7 +44,7 @@ static t_obj			*is_tangible(t_obj *o, t_pt pt, t_obj *last)
 	d = is_cind(o, pt);
 	p = d && d != last && (!last || o->b.clip) ? is_tangible(d, pt, o) : d;
 	c = o->clips;
-	if (!o->b.clip && !last && (pc = 1))
+	if ((pc = 1) && !o->b.clip && !last)
 		last = o;
 	while (c)
 	{
