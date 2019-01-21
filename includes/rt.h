@@ -47,7 +47,6 @@ typedef struct			s_global
 	int					thread_count;
 	int					quit_signal;
 	t_color				amb_l;
-	pthread_t			*thds;
 }						t_global;
 
 typedef struct			s_wininfo

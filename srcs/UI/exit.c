@@ -46,7 +46,6 @@ void				rt_exit(t_env *e)
 		ft_memdel((void**)&(e->ui.gui.menu_cam));
 	}
 	SDL_Quit();
-	ft_memdel((void**)&(e->glb.thds));
 	free_scene(&(e->s));
 	exit(0);
 }

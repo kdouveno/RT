@@ -76,7 +76,7 @@ int			arg(t_env *e, int argc, char **argv)
 	i = 2;
 	d = 0;
 	*e = (t_env){e->ui, (t_global){0, 3, -1, THRD_CNT, 0,
-		(t_color){(t_rgb){0, 0, 0, 0}}, NULL},
+		(t_color){(t_rgb){0, 0, 0, 0}}},
 		{0, 0}, {NULL, NULL, NULL, NULL, NULL, 0,
 		(t_color){(t_rgb){0, 0, 0, 0}}}};
 	while (i < argc)
