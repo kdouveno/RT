@@ -99,13 +99,14 @@ t_color	get_pt_color(t_obj obj, t_pt pt, t_vec *pert)
 {
 	t_color	out;
 
+	out.i = 0;
 	if (obj.mat.txt)
 	{
 		if (!(ft_strcmp(obj.mat.txt->userdata, "none")))
 			out = texture_none(obj, pt);
 		else if (!(ft_strcmp(obj.mat.txt->userdata, "perlin")))
 			out = perlin_noise(pt);
-		else
+		else if (!(ft_strcmp(obj.mat.txt->userdata, "fill")))
 			out = texture_color(obj, pt, NULL, obj.mat.txt);
 	}
 	else if (obj.grad)
@@ -113,11 +114,7 @@ t_color	get_pt_color(t_obj obj, t_pt pt, t_vec *pert)
 	else
 		out = obj.mat.color;
 	if (obj.mat.txt_bm)
-	{
-		if (!(ft_strcmp(obj.mat.txt_bm->userdata, "none")))
-			texture_none(obj, pt);
-		else
+		if (!(ft_strcmp(obj.mat.txt_bm->userdata, "fill")))
 			texture_color(obj, pt, pert, obj.mat.txt_bm);
-	}
 	return (out);
 }
