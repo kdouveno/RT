@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 16:49:52 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/18 16:49:34 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/24 09:16:53 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int		check_dimx_dimy(t_cam *cam, char *l1, char *l2)
 {
 	if (!(ft_strcmp(l1, "dimx")))
-		cam->data.dimx = ft_atoi(l2) < 0 ? -ft_atoi(l2) : ft_atoi(l2);
+		cam->data.dimx = ft_atoi(l2) <= 0 ? 100 : ft_atoi(l2);
 	else if (!(ft_strcmp(l1, "dimy")))
-		cam->data.dimy = ft_atoi(l2) < 0 ? -ft_atoi(l2) : ft_atoi(l2);
+		cam->data.dimy = ft_atoi(l2) <= 0 ? 100 : ft_atoi(l2);
 	else if (!(ft_strcmp(l1, "filter")))
 	{
 		if (!(ft_strcmp(l2, "black")))
