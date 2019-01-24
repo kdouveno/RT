@@ -1,0 +1,62 @@
+camera
+{
+	pos: -100,-100,50
+	rot: 0, 0, -25
+	r: 0
+	ssaa: 4
+	fov: 60
+	dimx: 1024
+	dimy: 768
+}
+
+light
+{
+	pos: 250,50,50
+	power: 1.2
+}
+
+light
+{
+	pos: -200, -30, 300
+	power: 1.2
+}
+
+plane
+{
+	pos: 0,0,-25
+	rot: 0,90,0
+	c: #0044ff
+	spec: 1
+	diff: 1.5
+	reflexion: 0.3
+}
+
+sphere
+{
+	pos: 0, 0, 0
+	v: 25
+	c: #ff9500
+	spec: 1
+	diff: 1.5
+	reflexion: 0.3
+}
+
+sphere
+{
+	pos: -55, 0, -10
+	v: 15
+	c: #ff2222
+	spec: 1
+	diff: 1.5
+	reflexion: 0.3
+}
+
+sphere
+{
+	pos: 0, -50, -12.5
+	v: 12.5
+	c: #33ffff
+	spec: 1
+	diff: 1.5
+	reflexion: 0.3
+}

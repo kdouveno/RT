@@ -1,0 +1,141 @@
+camera
+{
+	fov: 80
+	dimx: 800
+	dimy: 600
+	ssaa: 4
+	pos: 50, -300, 120
+	rot: 350,0,25
+	r: 0
+}
+
+plane
+{
+	pos: 0,0,-50
+	rot: 0,90,0
+	texture_bump: grains.bmp
+	b_lvl: 4
+	reflexion: 0.7
+	c: #ffffff
+}
+
+
+
+
+cuboid
+{
+	pos: 200,0,-25
+	v1: 25
+	v2: 25
+	v3: 25
+	c: #ff00ff
+}
+cuboid
+{
+	pos: 250,-50,-25
+	v1: 25
+	v2: 25
+	v3: 25
+	c: #00ffff
+}
+cuboid
+{
+	pos: 300,-100,-25
+	v1:25
+	v2:25
+	v3:25
+	c: #ffff00
+}
+cuboid
+{
+	pos: 350,-150,-25
+	v1:25
+	v2:25
+	v3:25
+	c: #8b4513
+}
+
+
+
+
+cuboid
+{
+	pos: 250,0,25
+	v1:25
+	v2:25
+	v3:25
+	c: #ff0000
+}
+cuboid
+{
+	pos: 300,-50,25
+	v1:25
+	v2:25
+	v3:25
+	c: #00ff00
+}
+cuboid
+{
+	pos: 350,-100,25
+	v1:25
+	v2:25
+	v3:25
+	c: #0000ff
+}
+
+
+
+
+cuboid
+{
+	pos: 300,0,75
+	v1:25
+	v2:25
+	v3:25
+	c: #ffff00
+}
+cuboid
+{
+	pos: 350,-50,75
+	v1:25
+	v2:25
+	v3:25
+	c: #00ffff
+}
+
+
+
+
+cuboid
+{
+	pos: 350,0,125
+	v1:25
+	v2:25
+	v3:25
+	c: #000000
+}
+
+cylinder
+{
+	pos: 350,0,0
+	v1: 800
+	clip: 12
+	c: #ffffff
+	diff: 0.8
+}
+
+cylinder
+{
+	pos: 350, 0, 0
+	v1: 700
+	id: 12
+}
+
+light
+{
+	pos: 0,-100,150
+}
+light
+{
+	pos: 250,-350,150
+}

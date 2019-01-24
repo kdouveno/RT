@@ -1,0 +1,110 @@
+camera
+{
+	fov: 80
+	dimx: 600
+	dimy: 450
+	ssaa: 1
+	rot: 0,30,0
+	pos: -75, 0, 60
+}
+
+camera
+{
+	fov: 80
+	dimx: 1024
+	dimy: 768
+	ssaa: 1
+	rot: 0,30,0
+	pos: -75, 0, 60
+}
+
+camera
+{
+	fov: 80
+	dimx: 1024
+	dimy: 768
+	ssaa: 4
+	rot: 0,30,0
+	pos: -75, 0, 60
+}
+
+camera
+{
+	fov: 80
+	dimx: 1440
+	dimy: 1080
+	ssaa: 4
+	aaa: 0
+	rot: 0,30,0
+	pos: -75, 0, 60
+}
+
+plane
+{
+	pos: 0,0,-100
+	rot: 0,90,0
+	texture: none
+	clip: 12
+}
+
+cuboid
+{
+	pos: 250,0,-150
+	v1: 130
+	v2: 200
+	v3: 53
+	c: #cccccc
+	clip: 12
+}
+
+cuboid
+{
+	id: 12
+	pos: 250, 0, 0
+	v1: 120
+	v2: 190
+	v3: 200
+}
+
+plane
+{
+	pos: 250, 0, -101
+	rot: 0,90,0
+	c: #00AFFF
+	texture_bump: water1.bmp
+	b_lvl: 12
+	tr: 0.8
+	n: 1.33
+}
+
+cylinder
+{
+	id: 15
+	clip: 14
+	clip: 16
+	pos: 250,0,-100
+	rot: 30,0,0
+	v: 15
+	texture: frite.bmp
+	texture_bump: frite.bmp
+	b_lvl: 1
+}
+
+plane
+{
+	id: 14
+	pos: 250, 0, -40
+	rot: 0,-120,90
+}
+
+plane
+{
+	id: 16
+	pos: 250, 0, -180
+	rot: 0, 60, 90
+}
+
+light
+{
+	pos: 100,0,100
+}

@@ -1,9 +1,9 @@
 camera
 {
 	fov: 70
-	ssaa: 2
-	dimx: 1440
-	dimy: 1080
+	ssaa: 4
+	dimx: 1280
+	dimy: 960
 	rot: 0,20,0
 }
 
