@@ -5,12 +5,23 @@ scene
 
 camera
 {
+    ssaa: 1
+    fov: 80
+    rot: 27,0,-50
+    pos: 0,0,0
+    dimx: 800
+	dimy: 600
+	r: 0
+}
+
+camera
+{
     ssaa: 4
     fov: 80
     rot: 27,0,-50
     pos: 0,0,0
-    dimx: 1440
-	dimy: 1080
+    dimx: 1600
+	dimy: 1200
 	r: 0
 }
 

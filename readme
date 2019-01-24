@@ -5,7 +5,7 @@ ID:
 	(int)
 triplet:
 	[(double) | '~'], [(double) | '~'], [(double) | '~']
-loc:
+pos:
 	[(tripet) | (ID)]
 HEX6:
 	A 6 Bytes hex number preceded by '#'; ex: "#0A5E3F", "#Aa5bF7"
@@ -19,7 +19,6 @@ ________________________________________________________________________________
                                 [PROPERTIES]
 ________________________________________________________________________________
 scene{
-	lights: auto
 	amb_l: (HEX6)
 }
 

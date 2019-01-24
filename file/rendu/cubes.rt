@@ -1,8 +1,19 @@
 camera
 {
 	fov: 80
-	dimx: 800
-	dimy: 600
+	dimx: 80
+	dimy: 60
+	ssaa: 1
+	pos: 50, -300, 120
+	rot: 350,0,25
+	r: 0
+}
+
+camera
+{
+	fov: 80
+	dimx: 1600
+	dimy: 1200
 	ssaa: 4
 	pos: 50, -300, 120
 	rot: 350,0,25
@@ -115,19 +126,24 @@ cuboid
 	c: #000000
 }
 
-cylinder
+cuboid
 {
 	pos: 350,0,0
 	v1: 800
+	v2: 800
+	v3: 800
 	clip: 12
 	c: #ffffff
 	diff: 0.8
+	reflexion: 0.3
 }
 
-cylinder
+cuboid
 {
 	pos: 350, 0, 0
 	v1: 700
+	v2: 700
+	v3: 700
 	id: 12
 }
 

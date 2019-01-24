@@ -1,8 +1,8 @@
 camera
 {
 	fov: 80
-	dimx: 600
-	dimy: 450
+	dimx: 800
+	dimy: 600
 	ssaa: 1
 	rot: 0,30,0
 	pos: -75, 0, 60
@@ -11,8 +11,8 @@ camera
 camera
 {
 	fov: 80
-	dimx: 1024
-	dimy: 768
+	dimx: 1920
+	dimy: 1080
 	ssaa: 1
 	rot: 0,30,0
 	pos: -75, 0, 60
@@ -21,17 +21,7 @@ camera
 camera
 {
 	fov: 80
-	dimx: 1024
-	dimy: 768
-	ssaa: 4
-	rot: 0,30,0
-	pos: -75, 0, 60
-}
-
-camera
-{
-	fov: 80
-	dimx: 1440
+	dimx: 1920
 	dimy: 1080
 	ssaa: 4
 	aaa: 0
@@ -68,11 +58,12 @@ cuboid
 
 plane
 {
-	pos: 250, 0, -101
+	pos: -50, 150, -101
 	rot: 0,90,0
-	c: #00AFFF
-	texture_bump: water1.bmp
-	b_lvl: 12
+	texture: water.bmp
+	texture_bump: water.bmp
+	scale: 3
+	b_lvl: 4
 	tr: 0.8
 	n: 1.33
 }

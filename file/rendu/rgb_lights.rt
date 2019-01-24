@@ -11,6 +11,17 @@ camera
 	r: 0
 	dimx: 800
 	dimy: 600
+	ssaa: 1
+}
+
+camera
+{
+	fov: 70
+	pos: 0,20,0
+	rot: 200,0,-200
+	r: 0
+	dimx: 1600
+	dimy: 1200
 	ssaa: 4
 }
 

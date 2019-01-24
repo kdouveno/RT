@@ -3,10 +3,21 @@ camera
 	pos: -100,-100,50
 	rot: 0, 0, -25
 	r: 0
+	ssaa: 1
+	fov: 60
+	dimx: 800
+	dimy: 600
+}
+
+camera
+{
+	pos: -100,-100,50
+	rot: 0, 0, -25
+	r: 0
 	ssaa: 4
 	fov: 60
-	dimx: 1024
-	dimy: 768
+	dimx: 1600
+	dimy: 1200
 }
 
 light

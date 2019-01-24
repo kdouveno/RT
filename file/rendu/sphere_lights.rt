@@ -9,8 +9,19 @@ camera
 	rot: 100,0,0
 	r: 0
 	fov: 30
-	dimx: 1440
-	dimy: 1080
+	dimx: 800
+	dimy: 600
+	ssaa: 1
+}
+
+camera
+{
+	pos: -150,0,30
+	rot: 100,0,0
+	r: 0
+	fov: 30
+	dimx: 1600
+	dimy: 1200
 	ssaa: 4
 }
 
