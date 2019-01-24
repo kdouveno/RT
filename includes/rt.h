@@ -6,7 +6,7 @@
 /*   By: gperez <gperez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 13:30:12 by gperez            #+#    #+#             */
-/*   Updated: 2019/01/20 12:31:19 by gperez           ###   ########.fr       */
+/*   Updated: 2019/01/24 09:53:08 by gperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # include "geo3d.h"
 # include "libft.h"
 # include "gnl.h"
+# include "msgs.h"
 # include "rtui.h"
-# include "SDL.h"
 # include <pthread.h>
 # include <fcntl.h>
 # define PRE 0.000000001

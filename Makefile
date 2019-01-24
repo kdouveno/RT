@@ -100,7 +100,6 @@ INCS = \
 
 MKES = libs/libft/
 ARCH = libs/libft.a
-ARCF = libs/libmlx.a
 INCSDIR = $(addprefix -I,$(INCS))
 INCSFILE = $(foreach d,$(INCS),$(wildcard $d/*.h))
 OBJS = $(patsubst srcs/%.c,objs/%.o,$(SRCS))
@@ -118,7 +117,7 @@ all:
 	@make $(NAME)
 
 $(NAME): $(OBJS) $(ARCH)
-	@$(CC) $(FLAGS) $(FWL) $(DLLIST) $(ARCF) $^ -o $@
+	@$(CC) $(FLAGS) $(FWL) $(DLLIST) $^ -o $@
 	@printf "$(VIOLET)%15s : $(GREEN)succesfuly made!%20.0d\n" $(NAME) 0
 
 objs/%.o: srcs/%.c $(INCSFILE)
